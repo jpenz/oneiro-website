@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="en" data-palette="detroit" data-display="bigshoulders" data-density="standard" data-motion="on">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Oneiro — Live Greek Entertainment</title>
+<meta name="description" content="Oneiro — four Greek-American musicians out of Detroit. Live Greek entertainment for weddings, baptisms, glendia, panigíria, restaurants — anywhere your people want to dance." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800;900&family=Anton&family=Oswald:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Geist:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    /* AEGEAN — black, aegean blue, ivory, brass */
+    --ink:        oklch(0.95 0.012 80);
+    --ink-soft:   oklch(0.78 0.015 80);
+    --ink-mute:   oklch(0.55 0.012 80);
+    --bg:         oklch(0.13 0.012 250);
+    --bg-elev:    oklch(0.18 0.018 250);
+    --bg-deep:    oklch(0.08 0.01 250);
+    --blue:       oklch(0.45 0.13 245);
+    --blue-deep:  oklch(0.32 0.12 245);
+    --gold:       oklch(0.78 0.13 80);
+    --gold-deep:  oklch(0.62 0.13 75);
+    --red:        oklch(0.55 0.18 28);
+    --rule:       oklch(0.30 0.018 250);
+    --accent:     var(--gold);
+
+    --display: "Big Shoulders Display", "Anton", "Oswald", Impact, sans-serif;
+    --display-alt: "Anton", Impact, sans-serif;
+    --sans:    "Geist", ui-sans-serif, -apple-system, system-ui, sans-serif;
+    --mono:    "JetBrains Mono", ui-monospace, Menlo, monospace;
+    --script:  "Cormorant Garamond", Georgia, serif;
+
+    --gut: clamp(20px, 3vw, 48px);
+    --maxw: 1640px;
+  }
+
+  /* DETROIT — black & gold, no blue (default) */
+  [data-palette="detroit"] {
+    --bg:         oklch(0.10 0.005 80);
+    --bg-elev:    oklch(0.15 0.008 80);
+    --bg-deep:    oklch(0.05 0.005 80);
+    --blue:       oklch(0.30 0.02 80);
+    --blue-deep:  oklch(0.20 0.015 80);
+    --gold:       oklch(0.78 0.14 75);
+    --gold-deep:  oklch(0.62 0.13 70);
+    --rule:       oklch(0.25 0.012 80);
+  }
+
+  /* SMOKE — desaturated charcoal */
+  [data-palette="smoke"] {
+    --bg:         oklch(0.16 0.005 250);
+    --bg-elev:    oklch(0.21 0.008 250);
+    --bg-deep:    oklch(0.10 0.004 250);
+    --blue:       oklch(0.40 0.05 245);
+    --gold:       oklch(0.72 0.06 80);
+    --rule:       oklch(0.30 0.008 250);
+  }
+
+  [data-display="anton"]   { --display: "Anton", Impact, sans-serif; }
+  [data-display="oswald"]  { --display: "Oswald", Impact, sans-serif; }
+
+  [data-density="loose"]    { --gut: clamp(28px, 4vw, 64px); }
+  [data-density="tight"]    { --gut: clamp(14px, 2vw, 28px); }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    transition: background-color .4s ease, color .4s ease;
+  }
+
+  ::selection { background: var(--gold); color: var(--bg-deep); }
+  a { color: inherit; text-decoration: none; }
+  html { scroll-behavior: smooth; }
+
+  /* Type primitives */
+  .mono { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); font-weight: 500; }
+  .display { font-family: var(--display); font-weight: 800; letter-spacing: -0.005em; text-transform: uppercase; line-height: 0.86; }
+  .display-tight { font-family: var(--display); font-weight: 900; line-height: 0.82; letter-spacing: -0.01em; text-transform: uppercase; }
+  .script-it { font-family: var(--script); font-style: italic; font-weight: 500; letter-spacing: 0; }
+
+  .container { max-width: var(--maxw); margin: 0 auto; padding-left: var(--gut); padding-right: var(--gut); }
+  .rule { height: 1px; background: var(--rule); width: 100%; }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase;
+    font-weight: 600;
+    padding: 14px 22px;
+    border: 1px solid var(--ink);
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    transition: all .2s ease;
+  }
+  .btn:hover { background: var(--ink); color: var(--bg); }
+  .btn--gold { background: var(--gold); color: var(--bg-deep); border-color: var(--gold); }
+  .btn--gold:hover { background: var(--ink); color: var(--bg-deep); border-color: var(--ink); }
+  .btn--lg { padding: 18px 28px; font-size: 0.82rem; }
+
+  /* Greek meander border */
+  .meander {
+    height: 28px;
+    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 28' preserveAspectRatio='xMinYMin'><g fill='none' stroke='black' stroke-width='2.5' stroke-linecap='square'><path d='M0 22 L0 6 L20 6 L20 22 L8 22 L8 14 L26 14 L26 6 L42 6 L42 22 L14 22'/><path d='M28 22 L28 6 L48 6 L48 22 L36 22 L36 14 L54 14 L54 6 L56 6'/></g></svg>");
+    -webkit-mask-repeat: repeat-x;
+    -webkit-mask-size: auto 28px;
+    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 28' preserveAspectRatio='xMinYMin'><g fill='none' stroke='black' stroke-width='2.5' stroke-linecap='square'><path d='M0 22 L0 6 L20 6 L20 22 L8 22 L8 14 L26 14 L26 6 L42 6 L42 22 L14 22'/><path d='M28 22 L28 6 L48 6 L48 22 L36 22 L36 14 L54 14 L54 6 L56 6'/></g></svg>");
+    mask-repeat: repeat-x;
+    mask-size: auto 28px;
+    background-color: currentColor;
+  }
+  .meander--gold { color: var(--gold); }
+  .meander--blue { color: var(--blue); }
+  .meander--ink  { color: var(--ink); }
+
+  /* Photo placeholder (gradient + halftone) */
+  .photo {
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-elev);
+    isolation: isolate;
+  }
+  .photo::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(60% 40% at 30% 20%, color-mix(in oklch, var(--gold) 25%, transparent), transparent 70%),
+      radial-gradient(80% 60% at 80% 80%, color-mix(in oklch, var(--blue) 35%, transparent), transparent 70%),
+      repeating-linear-gradient(90deg, transparent 0 2px, color-mix(in oklch, #000 18%, transparent) 2px 3px);
+    mix-blend-mode: screen;
+  }
+  .photo::after {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle at 50% 50%, color-mix(in oklch, var(--ink) 15%, transparent) 0.5px, transparent 1px);
+    background-size: 3px 3px;
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+  }
+  .photo__tag {
+    position: absolute; left: 14px; top: 14px;
+    font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: color-mix(in oklch, var(--ink) 70%, transparent);
+    background: color-mix(in oklch, var(--bg-deep) 70%, transparent);
+    padding: 4px 8px;
+  }
+  .photo__caption {
+    position: absolute; right: 14px; bottom: 14px;
+    font-family: var(--script); font-style: italic;
+    color: color-mix(in oklch, var(--ink) 80%, transparent);
+    font-size: 1.1rem;
+  }
+
+  /* Photo with hue variation (used in crew & feed) */
+  .photo[data-hue="75"]  { background: radial-gradient(60% 40% at 30% 20%, oklch(0.55 0.10 75 / 0.55), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 135 / 0.45), transparent 70%), var(--bg-elev); }
+  .photo[data-hue="245"] { background: radial-gradient(60% 40% at 30% 20%, oklch(0.55 0.10 245 / 0.55), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 305 / 0.45), transparent 70%), var(--bg-elev); }
+  .photo[data-hue="28"]  { background: radial-gradient(60% 40% at 30% 20%, oklch(0.55 0.10 28 / 0.55), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 88 / 0.45), transparent 70%), var(--bg-elev); }
+  .photo[data-hue="145"] { background: radial-gradient(60% 40% at 30% 20%, oklch(0.55 0.10 145 / 0.55), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 205 / 0.45), transparent 70%), var(--bg-elev); }
+
+  /* Reduce motion */
+  [data-motion="off"] *, [data-motion="off"] *::before, [data-motion="off"] *::after {
+    animation-play-state: paused !important;
+    transition: none !important;
+  }
+
+  /* ─── Nav ─── */
+  .nav { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); background: color-mix(in oklch, var(--bg) 88%, transparent); }
+  .nav__inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; gap: 24px; }
+  .nav__brand { display: flex; align-items: center; gap: 12px; }
+  .nav__mark { font-size: 18px; color: var(--gold); }
+  .nav__word { font-size: 1.15rem; font-weight: 800; letter-spacing: 0.02em; }
+  .nav__tag { display: inline-block; margin-left: 4px; }
+  .nav__list { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; }
+  .nav__link { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); font-weight: 500; }
+  .nav__link:hover { color: var(--ink); }
+
+  /* ─── Marquee ─── */
+  .marq { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 14px 0; overflow: hidden; background: var(--bg-deep); }
+  .marq__track { white-space: nowrap; overflow: hidden; }
+  .marq__run { display: inline-block; padding-left: 100%; animation: bz-marquee 50s linear infinite; font-family: var(--mono); font-size: 0.82rem; letter-spacing: 0.14em; color: var(--gold); font-weight: 600; }
+  @keyframes bz-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ─── Hero ─── */
+  .hero { padding-top: clamp(40px, 5vw, 72px); padding-bottom: clamp(40px, 5vw, 72px); }
+  .hero__kicker { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; flex-wrap: wrap; }
+  .hero__dot { color: var(--gold); font-size: 8px; }
+  .hero__lockup { margin-bottom: 8px; }
+  .hero__huge { font-size: clamp(64px, 13vw, 240px); line-height: 0.82; letter-spacing: -0.02em; word-spacing: 0.02em; }
+  .hero__lower { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(28px, 4vw, 64px); align-items: start; }
+  .hero__lowerL { display: flex; flex-direction: column; gap: 22px; }
+  .hero__tag { font-size: clamp(36px, 5vw, 80px); margin: 0; font-weight: 800; line-height: 0.92; }
+  .hero__script { font-size: clamp(22px, 2vw, 32px); color: var(--ink-soft); line-height: 1.2; }
+  .hero__lede { font-size: clamp(15px, 1.05vw, 18px); color: var(--ink-soft); max-width: 580px; line-height: 1.55; margin: 0; }
+  .hero__btns { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+  .hero__services { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 12px; padding-top: 18px; border-top: 1px solid var(--rule); }
+  .hero__pill { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 12px; border: 1px solid var(--rule); color: var(--ink); }
+  .hero__lowerR { display: flex; flex-direction: column; gap: 18px; }
+  .hero__facts { display: grid; grid-template-columns: 1fr 1fr; gap: 0 18px; }
+  .fact { display: flex; flex-direction: column; gap: 4px; padding: 14px 0; border-top: 1px solid var(--rule); }
+  .fact__n { font-family: var(--display); font-weight: 800; font-size: 1.7rem; line-height: 0.86; text-transform: uppercase; }
+  .fact__l { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); font-weight: 500; }
+
+  /* ─── Section heads ─── */
+  .sec { padding-top: clamp(60px, 8vw, 120px); padding-bottom: clamp(40px, 6vw, 80px); border-top: 1px solid var(--rule); }
+  .sec--deep { background: var(--bg-deep); }
+  .sec--xpad { padding-bottom: clamp(60px, 8vw, 120px); }
+  .head2 { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(20px, 3vw, 60px); align-items: end; margin-bottom: 60px; }
+  .head2--12 { grid-template-columns: 1.2fr 1fr; }
+  .head2--13 { grid-template-columns: 1.3fr 1fr; }
+  .head2--14 { grid-template-columns: 1.4fr 1fr; }
+  .h2 { font-size: clamp(56px, 9vw, 156px); margin: 12px 0 0; letter-spacing: -0.02em; }
+  .h2--md { font-size: clamp(48px, 8vw, 132px); line-height: 0.9; }
+  .h2--mus { font-size: clamp(56px, 8vw, 144px); }
+  .intro { font-size: clamp(15px, 1.1vw, 19px); color: var(--ink-soft); max-width: 540px; line-height: 1.55; margin: 0; }
+
+  /* ─── What we play ─── */
+  .styles__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(16px, 1.5vw, 24px); }
+  .style-card { padding: clamp(24px, 3vw, 40px); border: 1px solid var(--rule); background: var(--bg-elev); display: flex; flex-direction: column; gap: 14px; }
+  .style-card__head { display: flex; justify-content: space-between; }
+  .style-card__gr { font-size: clamp(56px, 7vw, 108px); color: var(--gold); letter-spacing: -0.01em; margin: 8px 0 0; font-family: var(--display); font-weight: 800; line-height: 0.86; text-transform: uppercase; }
+  .style-card__en { font-size: clamp(22px, 2vw, 32px); color: var(--ink-soft); }
+  .style-card__blurb { font-size: 1rem; color: var(--ink); line-height: 1.55; margin: 8px 0 4px; max-width: 480px; }
+  .style-card__note { font-size: clamp(18px, 1.4vw, 22px); color: var(--ink); line-height: 1.35; margin: 4px 0 0; padding: 12px 0 0; border-top: 1px dashed color-mix(in oklch, var(--gold) 60%, transparent); }
+  .style-card__icons { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 8px 0 0; }
+  .style-card__chip { padding: 6px 10px; border: 1px solid var(--rule); color: var(--ink); }
+  .style-card__foot { display: flex; align-items: baseline; gap: 12px; margin-top: 12px; padding-top: 16px; border-top: 1px solid var(--rule); flex-wrap: wrap; }
+  .style-card__artists { font-family: var(--script); font-style: italic; color: var(--ink-soft); font-size: 1rem; }
+
+  /* ─── Crew ─── */
+  .crew__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(14px, 1.5vw, 24px); }
+  .crew__card { display: flex; flex-direction: column; gap: 18px; transition: transform .25s ease; }
+  .crew__card:hover { transform: translateY(-6px); }
+  .crew__body { display: flex; flex-direction: column; gap: 6px; }
+  .crew__no { color: var(--gold); }
+  .crew__name { font-size: clamp(20px, 1.7vw, 26px); margin: 8px 0 0; font-weight: 800; }
+  .crew__role { color: var(--ink-soft); font-size: 1.05rem; }
+  .crew__bio { font-size: 0.92rem; color: var(--ink-soft); line-height: 1.5; margin: 8px 0 4px; }
+  .crew__stats { margin: 8px 0 0; padding: 0; }
+  .stat { display: flex; justify-content: space-between; padding: 10px 0; border-top: 1px dashed var(--rule); font-family: var(--mono); font-size: 0.78rem; }
+  .stat dt { color: var(--ink-mute); text-transform: uppercase; letter-spacing: 0.08em; }
+  .stat dd { color: var(--ink); margin: 0; }
+
+  /* ─── Music / albums ─── */
+  .mus__head { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(20px, 3vw, 60px); align-items: end; margin-bottom: 60px; }
+  .mus__platforms { display: flex; flex-direction: column; gap: 14px; }
+  .mus__platLinks { display: flex; flex-wrap: wrap; gap: 8px; }
+  .mus__list { display: flex; flex-direction: column; }
+  .album { display: grid; grid-template-columns: 260px 1fr auto; gap: clamp(20px, 3vw, 48px); align-items: center; padding: 32px 0; border-top: 1px solid var(--rule); position: relative; }
+  .album__cover { width: 260px; aspect-ratio: 1 / 1; position: relative; overflow: hidden; }
+  .album__cover[data-hue="245"] { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 245 / 0.55), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 305 / 0.6), transparent 70%), var(--bg-elev); }
+  .album__cover[data-hue="75"]  { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 75 / 0.55), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 135 / 0.6), transparent 70%), var(--bg-elev); }
+  .album__cover[data-hue="28"]  { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 28 / 0.55), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 88 / 0.6), transparent 70%), var(--bg-elev); }
+  .album__cover[data-hue="145"] { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 145 / 0.55), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 205 / 0.6), transparent 70%), var(--bg-elev); }
+  .album__cat { position: absolute; top: 14px; left: 14px; color: color-mix(in oklch, var(--ink) 70%, transparent); font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; }
+  .album__yr { position: absolute; bottom: 14px; right: 14px; font-size: 2.4rem; color: color-mix(in oklch, var(--ink) 60%, transparent); font-family: var(--display); font-weight: 800; line-height: 0.86; text-transform: uppercase; }
+  .album__meta { display: flex; flex-direction: column; gap: 10px; }
+  .album__title { font-size: clamp(28px, 3.5vw, 56px); margin: 4px 0; letter-spacing: -0.01em; font-weight: 800; }
+  .album__sub { color: var(--ink-soft); font-size: 1.15rem; }
+  .album__note { font-size: 1rem; color: var(--ink-soft); max-width: 480px; margin: 8px 0 4px; line-height: 1.5; }
+  .album__links { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .album__bigCat { font-size: clamp(40px, 6vw, 96px); color: var(--ink-mute); opacity: 0.4; letter-spacing: -0.02em; }
+  .mus__upload { padding: 32px 0; border-top: 1px solid var(--rule); margin-top: 24px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap; justify-content: space-between; }
+
+  /* ─── Where we play ─── */
+  .where__list { list-style: none; margin: 0; padding: 0; }
+  .where__row { display: flex; align-items: baseline; gap: 18px; padding: 22px 0; border-bottom: 1px solid var(--rule); }
+  .where__num { width: 36px; }
+  .where__region { font-size: clamp(28px, 3vw, 44px); flex-shrink: 0; }
+  .where__spacer { flex: 1; height: 1px; background: var(--rule); margin: 0 8px; align-self: center; }
+  .where__places { color: var(--ink-soft); font-size: 0.95rem; max-width: 44%; text-align: right; }
+  .where__note { color: var(--gold); min-width: 200px; text-align: right; }
+  .testimonials { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 2vw, 32px); margin-top: 60px; }
+  .tcard { padding: 28px; border: 1px solid var(--rule); margin: 0; background: var(--bg); }
+  .tcard__quote { font-size: clamp(22px, 2vw, 30px); color: var(--ink); line-height: 1.25; margin: 0 0 18px; }
+  .tcard__cite { display: flex; flex-direction: column; gap: 4px; }
+
+  /* ─── Events ─── */
+  .ev__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 1.5vw, 24px); margin-bottom: 60px; }
+  .ev__card { padding: clamp(20px, 2.5vw, 32px); border: 1px solid var(--rule); background: var(--bg-elev); display: flex; flex-direction: column; gap: 10px; }
+  .ev__head { display: flex; justify-content: space-between; }
+  .ev__gr { font-size: clamp(36px, 4vw, 56px); color: var(--gold); letter-spacing: -0.005em; margin: 8px 0 0; line-height: 0.9; font-family: var(--display); font-weight: 800; text-transform: uppercase; }
+  .ev__label { font-size: clamp(20px, 1.6vw, 24px); margin: 2px 0 0; font-weight: 800; }
+  .ev__blurb { font-size: 0.95rem; color: var(--ink-soft); line-height: 1.55; margin: 6px 0 0; }
+  .ev__moments { list-style: none; padding: 0; margin: 8px 0 0; display: flex; flex-direction: column; gap: 4px; }
+  .ev__moment { font-size: 0.85rem; color: var(--ink); font-family: var(--mono); letter-spacing: 0.04em; }
+  .ev__cta { padding: clamp(28px, 4vw, 48px); border: 1px solid var(--gold); background: color-mix(in oklch, var(--gold) 5%, transparent); display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: 60px; }
+  .ev__ctaText { font-size: clamp(24px, 2.6vw, 38px); color: var(--ink); line-height: 1.15; }
+
+  /* ─── Forms ─── */
+  .fm { padding: clamp(28px, 4vw, 56px); border: 1px solid var(--rule); background: var(--bg-deep); display: flex; flex-direction: column; gap: 24px; }
+  .fm--gold { border-color: var(--gold); background: var(--bg); }
+  .fm__head { display: flex; flex-direction: column; gap: 8px; padding-bottom: 12px; border-bottom: 1px solid var(--rule); }
+  .fm__h { font-size: clamp(30px, 4vw, 56px); margin: 0; font-weight: 800; }
+  .fm__grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 32px; }
+  .fm__row { display: flex; flex-direction: column; gap: 8px; }
+  .fm__lbl { color: var(--ink-mute); }
+  .fm__pills { display: flex; gap: 6px; flex-wrap: wrap; }
+  .pill { padding: 10px 16px; border: 1px solid var(--rule); background: transparent; color: var(--ink-soft); cursor: pointer; letter-spacing: 0.08em; font-family: var(--mono); font-size: 0.74rem; text-transform: uppercase; font-weight: 500; transition: all .15s ease; }
+  .pill:hover { color: var(--ink); border-color: var(--ink); }
+  .pill[aria-pressed="true"] { background: var(--gold); color: var(--bg-deep); border-color: var(--gold); }
+  .fm__field { display: flex; flex-direction: column; gap: 6px; }
+  .fm__input { background: transparent; border: none; border-bottom: 1px solid var(--ink); color: var(--ink); font-family: var(--script); font-style: italic; font-size: clamp(18px, 1.6vw, 24px); padding: 10px 0; outline: none; width: 100%; }
+  .fm__input:focus { border-bottom-color: var(--gold); }
+  .fm__input::placeholder { color: color-mix(in oklch, var(--ink-mute) 70%, transparent); }
+  textarea.fm__input { resize: vertical; min-height: 84px; font-family: var(--script); }
+  .fm__submit { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; justify-content: space-between; padding-top: 14px; border-top: 1px solid var(--rule); }
+
+  /* ─── Social feed ─── */
+  .feed__head { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(20px, 3vw, 60px); align-items: end; margin-bottom: 50px; }
+  .feed__h { font-size: clamp(48px, 8vw, 132px); margin: 12px 0 8px; letter-spacing: -0.02em; }
+  .feed__script { font-size: clamp(20px, 1.8vw, 28px); color: var(--ink-soft); }
+  .feed__platforms { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--rule); }
+  .feed__platRow { display: grid; grid-template-columns: 1fr 1.5fr auto; gap: 14px; padding: 16px 18px; align-items: center; border-bottom: 1px solid var(--rule); color: var(--ink); transition: background .2s ease; }
+  .feed__platRow:last-child { border-bottom: none; }
+  .feed__platRow:hover { background: var(--bg-elev); }
+  .feed__platHandle { font-size: 1.15rem; color: var(--ink); font-family: var(--script); font-style: italic; }
+  .feed__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(8px, 0.8vw, 14px); }
+  .feed__tile { display: block; color: inherit; }
+  .feed__art { aspect-ratio: 1 / 1; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; padding: 14px; transition: transform .3s ease; }
+  .feed__tile:hover .feed__art { transform: scale(1.02); }
+  .feed__art[data-hue="75"]  { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 75 / 0.6), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 135 / 0.55), transparent 70%), var(--bg-elev); }
+  .feed__art[data-hue="245"] { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 245 / 0.6), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 305 / 0.55), transparent 70%), var(--bg-elev); }
+  .feed__art[data-hue="28"]  { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 28 / 0.6), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 88 / 0.55), transparent 70%), var(--bg-elev); }
+  .feed__art[data-hue="145"] { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 145 / 0.6), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 205 / 0.55), transparent 70%), var(--bg-elev); }
+  .feed__art[data-hue="285"] { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 285 / 0.6), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 345 / 0.55), transparent 70%), var(--bg-elev); }
+  .feed__art[data-hue="200"] { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 200 / 0.6), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 260 / 0.55), transparent 70%), var(--bg-elev); }
+  .feed__art[data-hue="60"]  { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 60 / 0.6), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 120 / 0.55), transparent 70%), var(--bg-elev); }
+  .feed__art[data-hue="220"] { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 220 / 0.6), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 280 / 0.55), transparent 70%), var(--bg-elev); }
+  .feed__top { display: flex; justify-content: space-between; }
+  .feed__kind { padding: 3px 8px; background: rgba(0,0,0,0.6); color: var(--gold); letter-spacing: 0.1em; }
+  .feed__time { color: rgba(255,255,255,0.7); }
+  .feed__mid { flex: 1; display: grid; place-items: center; }
+  .feed__play { font-size: 38px; color: rgba(255,255,255,0.85); text-shadow: 0 2px 12px rgba(0,0,0,0.5); }
+  .feed__bot { display: flex; flex-direction: column; gap: 4px; }
+  .feed__likes { color: var(--gold); }
+  .feed__cap { font-size: 0.92rem; color: rgba(255,255,255,0.92); line-height: 1.25; text-shadow: 0 1px 6px rgba(0,0,0,0.5); font-family: var(--script); font-style: italic; }
+  .feed__foot { padding: 32px 0 0; margin-top: 32px; border-top: 1px solid var(--rule); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+
+  /* ─── Remake ─── */
+  .rm__head { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(20px, 4vw, 60px); align-items: start; margin-bottom: 40px; }
+  .rm__script { font-size: clamp(28px, 3vw, 44px); color: var(--gold); margin-top: 8px; }
+  .rm__price { padding: clamp(20px, 2.5vw, 36px); border: 1px dashed var(--gold); background: color-mix(in oklch, var(--gold) 5%, transparent); display: flex; flex-direction: column; gap: 6px; align-self: start; }
+  .rm__bigPrice { font-size: clamp(56px, 8vw, 110px); color: var(--gold); line-height: 0.9; font-weight: 900; font-family: var(--display); text-transform: uppercase; }
+  .rm__trade { font-size: clamp(20px, 2vw, 30px); color: var(--ink); margin-top: 4px; }
+  .rm__fine { color: var(--ink-mute); font-size: 0.7rem; margin-top: 14px; line-height: 1.4; }
+  .rm__ast { color: var(--gold); }
+  .rm__intro { font-size: clamp(16px, 1.2vw, 20px); color: var(--ink-soft); max-width: 760px; line-height: 1.6; margin: 8px 0 60px; }
+  .rm__process { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(14px, 1.5vw, 24px); margin-bottom: 60px; }
+  .rm__step { padding: 20px 22px; border: 1px solid var(--rule); background: var(--bg); display: flex; flex-direction: column; gap: 8px; }
+  .rm__stepN { font-size: 1.2rem; color: var(--gold); font-weight: 800; font-family: var(--display); }
+  .rm__stepT { font-size: 1.1rem; margin: 4px 0 4px; font-weight: 800; }
+  .rm__stepB { font-size: 0.92rem; color: var(--ink-soft); margin: 0; line-height: 1.5; }
+  .rm__dropzone { padding: clamp(20px, 2.5vw, 32px); border: 1px dashed var(--rule); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+  /* ─── Footer ─── */
+  .ft { padding-top: clamp(40px, 6vw, 80px); padding-bottom: 40px; border-top: 1px solid var(--rule); }
+  .ft__socials { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--rule); }
+  .ft__social { display: flex; align-items: center; justify-content: space-between; padding: 22px 24px; border-bottom: 1px solid var(--rule); border-right: 1px solid var(--rule); color: var(--ink); transition: background .2s ease; }
+  .ft__social:hover { background: var(--bg-elev); }
+  .ft__social:nth-child(3n) { border-right: none; }
+  .ft__social:nth-last-child(-n+3) { border-bottom: none; }
+  .ft__sP { color: var(--gold); font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; }
+  .ft__sH { font-family: var(--script); font-style: italic; font-size: 1.3rem; color: var(--ink); }
+  .ft__sA { color: var(--ink-mute); }
+  .ft__huge { font-size: clamp(60px, 14vw, 240px); letter-spacing: -0.03em; color: var(--gold); line-height: 0.85; margin-bottom: 40px; font-family: var(--display); font-weight: 900; text-transform: uppercase; }
+  .ft__cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; padding-top: 30px; border-top: 1px solid var(--rule); }
+  .ft__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .ft__li { font-size: 0.95rem; color: var(--ink-soft); }
+  .ft__fine { display: flex; justify-content: space-between; padding-top: 28px; margin-top: 60px; border-top: 1px solid var(--rule); color: var(--ink-mute); flex-wrap: wrap; gap: 8px; }
+
+  /* ─── Tweaks toolbar (simplified) ─── */
+  .twk { position: fixed; right: 16px; bottom: 16px; z-index: 100; display: flex; flex-direction: column; gap: 6px; padding: 12px; background: rgba(20,18,12,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--rule); border-radius: 10px; min-width: 220px; }
+  .twk__title { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 4px; }
+  .twk__row { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 4px 0; }
+  .twk__lbl { font-family: var(--mono); font-size: 0.7rem; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.06em; }
+  .twk__seg { display: flex; gap: 0; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
+  .twk__seg button { appearance: none; border: none; background: transparent; color: var(--ink-soft); font-family: var(--mono); font-size: 0.66rem; padding: 4px 8px; cursor: pointer; text-transform: uppercase; letter-spacing: 0.06em; }
+  .twk__seg button[aria-pressed="true"] { background: var(--gold); color: var(--bg-deep); }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 1100px) {
+    .crew__grid { grid-template-columns: repeat(2, 1fr); }
+    .ev__grid { grid-template-columns: repeat(2, 1fr); }
+    .feed__grid { grid-template-columns: repeat(2, 1fr); }
+    .rm__process { grid-template-columns: repeat(2, 1fr); }
+    .ft__cols { grid-template-columns: repeat(2, 1fr); }
+    .ft__socials { grid-template-columns: repeat(2, 1fr); }
+    .ft__social:nth-child(3n) { border-right: 1px solid var(--rule); }
+    .ft__social:nth-child(2n) { border-right: none; }
+  }
+  @media (max-width: 860px) {
+    :root { --gut: 20px; }
+    .nav__list { display: none; }
+    .hero__lower { grid-template-columns: 1fr; }
+    .head2, .mus__head, .feed__head, .rm__head { grid-template-columns: 1fr !important; }
+    .styles__grid { grid-template-columns: 1fr; }
+    .crew__grid { grid-template-columns: 1fr; }
+    .ev__grid { grid-template-columns: 1fr; }
+    .feed__grid { grid-template-columns: repeat(2, 1fr); }
+    .album { grid-template-columns: 1fr; }
+    .album__cover { width: 100%; max-width: 360px; }
+    .album__bigCat { display: none; }
+    .testimonials { grid-template-columns: 1fr; }
+    .where__row { flex-wrap: wrap; }
+    .where__places, .where__note { text-align: left; max-width: none; min-width: 0; }
+    .where__spacer { display: none; }
+    .fm__grid2, .rm__process, .ft__cols, .ft__socials { grid-template-columns: 1fr; }
+    .ft__social { border-right: none !important; }
+  }
+</style>
+</head>
+<body id="top">
+
+  <!-- ═══ NAV ═══ -->
+  <nav class="nav">
+    <div class="container nav__inner">
+      <a href="#top" class="nav__brand">
+        <span class="nav__mark">◉</span>
+        <span class="display nav__word">Oneiro</span>
+        <span class="mono nav__tag">EST. 2008 · DETROIT</span>
+      </a>
+      <ul class="nav__list">
+        <li><a href="#styles" class="nav__link">What we play</a></li>
+        <li><a href="#crew" class="nav__link">The crew</a></li>
+        <li><a href="#music" class="nav__link">Listen</a></li>
+        <li><a href="#where" class="nav__link">Where we go</a></li>
+        <li><a href="#hire" class="nav__link">Hire us</a></li>
+      </ul>
+      <a href="#hire" class="btn btn--gold">Book a date →</a>
+    </div>
+    <div class="rule"></div>
+  </nav>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero" data-screen-label="Hero">
+    <div class="container">
+      <div class="hero__kicker">
+        <span class="mono">EST. 2008 · DETROIT</span>
+        <span class="hero__dot">●</span>
+        <span class="mono" style="color: var(--gold);">NOW BOOKING — 2026 · Greece tour open · 14 dates left</span>
+      </div>
+
+      <div class="hero__lockup">
+        <span class="mono" style="color: var(--gold);">LIVE GREEK ENTERTAINMENT</span>
+      </div>
+
+      <div class="hero__huge display-tight" data-brand-en data-brand-gr="ΟΝΕΙΡΟ">ONEIRO</div>
+
+      <div class="meander meander--gold" style="margin: 16px 0 32px;"></div>
+
+      <div class="hero__lower">
+        <div class="hero__lowerL">
+          <h2 class="hero__tag display">
+            THE BEST IN<br/>
+            <span style="color: var(--gold);">LIVE GREEK</span><br/>
+            ENTERTAINMENT.
+          </h2>
+          <div class="script-it hero__script">
+            Weddings, baptisms, glendia, panigíria, restaurants — anywhere your people want to dance.
+          </div>
+          <p class="hero__lede">
+            Four Greek-American musicians out of Detroit. Bouzouki, clarino, lyra, vocals — laïka, dimotika, nisiótika, paradosiaká. We're a band, a wedding act, a glendi night, a residency, a studio. Whatever your event needs to feel Greek.
+          </p>
+          <div class="hero__btns">
+            <a href="#hire" class="btn btn--gold btn--lg">Book us for an event →</a>
+            <a href="#music" class="btn btn--lg">Listen ▸</a>
+            <a href="#feed" class="btn btn--lg">Watch us live ▸</a>
+          </div>
+          <div class="hero__services">
+            <span class="mono" style="color: var(--ink-mute);">WE PLAY</span>
+            <span class="hero__pill">Weddings</span>
+            <span class="hero__pill">Baptisms</span>
+            <span class="hero__pill">Glendia</span>
+            <span class="hero__pill">Panigíria</span>
+            <span class="hero__pill">Tavernas</span>
+            <span class="hero__pill">Private</span>
+          </div>
+        </div>
+
+        <div class="hero__lowerR">
+          <div class="photo" data-hue="75" style="aspect-ratio: 3 / 4;">
+            <div class="photo__tag">LIVE · 03·2025</div>
+            <div class="photo__caption">Hellenic Center, Detroit</div>
+          </div>
+          <div class="hero__facts">
+            <div class="fact"><div class="fact__n">270+</div><div class="fact__l">Events played</div></div>
+            <div class="fact"><div class="fact__n">18</div><div class="fact__l">Years on the road</div></div>
+            <div class="fact"><div class="fact__n">04</div><div class="fact__l">Countries</div></div>
+            <div class="fact"><div class="fact__n">04</div><div class="fact__l">A.M. average end</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ MARQUEE ═══ -->
+  <section class="marq">
+    <div class="marq__track">
+      <div class="marq__run">ΓΛΕΝΤΙ &nbsp;&nbsp; ✦ &nbsp;&nbsp; ΩΠΑ &nbsp;&nbsp; ✦ &nbsp;&nbsp; DETROIT · BAHAMAS · ATHENS &nbsp;&nbsp; ✦ &nbsp;&nbsp; BOUZOUKI · CLARINO · LYRA &nbsp;&nbsp; ✦ &nbsp;&nbsp; WEDDINGS · BAPTISMS · NAME DAYS &nbsp;&nbsp; ✦ &nbsp;&nbsp; ΖΗΤΩ ΟΙ ΝΕΟΝΥΜΦΟΙ &nbsp;&nbsp; ✦ &nbsp;&nbsp; BOOK 2026 · LIMITED DATES &nbsp;&nbsp; ✦ &nbsp;&nbsp; ΜΕΧΡΙ ΤΟ ΠΡΩΙ &nbsp;&nbsp; ✦ &nbsp;&nbsp; ΓΛΕΝΤΙ &nbsp;&nbsp; ✦ &nbsp;&nbsp; ΩΠΑ &nbsp;&nbsp; ✦ &nbsp;&nbsp; DETROIT · BAHAMAS · ATHENS &nbsp;&nbsp; ✦ &nbsp;&nbsp; BOUZOUKI · CLARINO · LYRA &nbsp;&nbsp; ✦ &nbsp;&nbsp; WEDDINGS · BAPTISMS · NAME DAYS &nbsp;&nbsp; ✦ &nbsp;&nbsp; ΖΗΤΩ ΟΙ ΝΕΟΝΥΜΦΟΙ &nbsp;&nbsp; ✦ &nbsp;&nbsp; BOOK 2026 · LIMITED DATES &nbsp;&nbsp; ✦ &nbsp;&nbsp; ΜΕΧΡΙ ΤΟ ΠΡΩΙ &nbsp;&nbsp; ✦ &nbsp;&nbsp;</div>
+    </div>
+  </section>
+
+  <!-- ═══ §01 — WHAT WE PLAY ═══ -->
+  <section id="styles" class="sec sec--xpad">
+    <div class="container">
+      <header class="head2">
+        <div>
+          <span class="mono">§01 — REPERTOIRE</span>
+          <h2 class="h2 display-tight">FOUR<br/>STYLES.<br/>ONE NIGHT.</h2>
+        </div>
+        <p class="intro">We open with kalamatianó, push into laïka by ten, slow it down with the nisiótika after dinner, and close with the dimotika nobody's got the legs for. The room decides the order.</p>
+      </header>
+
+      <div class="styles__grid">
+        <article class="style-card">
+          <div class="style-card__head"><span class="mono">No. 01</span><span class="mono">4 pcs</span></div>
+          <div class="style-card__gr">ΛΑΪΚΑ</div>
+          <div class="script-it style-card__en">Laïka</div>
+          <p class="style-card__blurb">The big-room stuff. Sweaty bouzouki, tsiftetelia until 4 a.m., songs everyone in the room knows the words to.</p>
+          <ul class="style-card__icons">
+            <li class="mono style-card__chip">Bouzouki</li><li class="mono style-card__chip">Vocals</li><li class="mono style-card__chip">Drums</li><li class="mono style-card__chip">Keys</li>
+          </ul>
+          <div class="style-card__foot">
+            <span class="mono" style="color: var(--ink-mute);">WE PLAY</span>
+            <span class="style-card__artists">Kazantzidis · Dalaras · Tsaligopoulou · Mitropanos</span>
+          </div>
+        </article>
+
+        <article class="style-card">
+          <div class="style-card__head"><span class="mono">No. 02</span><span class="mono">4 pcs</span></div>
+          <div class="style-card__gr">ΔΗΜΟΤΙΚΑ</div>
+          <div class="script-it style-card__en">Dimotiká</div>
+          <p class="style-card__blurb">Mainland folk. Heavy clarino, heavy footwork. The dances your yiayia taught you — kalamatianó, tsamikó, syrtó.</p>
+          <p class="style-card__note script-it"><span class="mono" style="color: var(--gold); letter-spacing: 0.1em; margin-right: 8px;">P.S.</span>Our drummer bounces so hard during a tsamikó you can't tell if he's fucking or getting fucked.</p>
+          <ul class="style-card__icons">
+            <li class="mono style-card__chip">Clarino</li><li class="mono style-card__chip">Laoúto</li><li class="mono style-card__chip">Violí</li><li class="mono style-card__chip">Defi</li>
+          </ul>
+          <div class="style-card__foot">
+            <span class="mono" style="color: var(--ink-mute);">WE PLAY</span>
+            <span class="style-card__artists">Aidonidis · Samiou · Pyrgaki · Chalkias</span>
+          </div>
+        </article>
+
+        <article class="style-card">
+          <div class="style-card__head"><span class="mono">No. 03</span><span class="mono">4 pcs</span></div>
+          <div class="style-card__gr">ΝΗΣΙΩΤΙΚΑ</div>
+          <div class="script-it style-card__en">Nisiótika</div>
+          <p class="style-card__blurb">Island music from the Cyclades and Dodecanese. Violin, laoúto, the kind of set that ends with everyone in a circle.</p>
+          <ul class="style-card__icons">
+            <li class="mono style-card__chip">Violí</li><li class="mono style-card__chip">Laoúto</li><li class="mono style-card__chip">Tsampoúna</li><li class="mono style-card__chip">Santoúri</li>
+          </ul>
+          <div class="style-card__foot">
+            <span class="mono" style="color: var(--ink-mute);">WE PLAY</span>
+            <span class="style-card__artists">Parios · Konitopoulou · Mariza Koch · Oikonomidis</span>
+          </div>
+        </article>
+
+        <article class="style-card">
+          <div class="style-card__head"><span class="mono">No. 04</span><span class="mono">4 pcs</span></div>
+          <div class="style-card__gr">ΠΑΡΑΔΟΣΙΑΚΑ</div>
+          <div class="script-it style-card__en">Paradosiaká</div>
+          <p class="style-card__blurb">The umbrella. Greek traditional music in the broadest sense — the dimotiká tragoúdia of mainland and islands, dating back to Byzantine times. Where every other category on this list comes from before it had a name.</p>
+          <ul class="style-card__icons">
+            <li class="mono style-card__chip">Voice</li><li class="mono style-card__chip">Laoúto</li><li class="mono style-card__chip">Outi</li><li class="mono style-card__chip">Daoúli</li>
+          </ul>
+          <div class="style-card__foot">
+            <span class="mono" style="color: var(--ink-mute);">WE PLAY</span>
+            <span class="style-card__artists">Pontian · Epirote · Mikrasiátiko · Smyrnaiko</span>
+          </div>
+        </article>
+
+        <article class="style-card">
+          <div class="style-card__head"><span class="mono">No. 05</span><span class="mono">4 pcs</span></div>
+          <div class="style-card__gr">ΣΚΥΛΑΔΙΚΟ</div>
+          <div class="script-it style-card__en">Skiládiko</div>
+          <p class="style-card__blurb">The decadent branch of laïko — the music of the cheap, smoky, shady night clubs on the edge of town. Heavily amplified bouzouki and electric guitar on a raised stage. Karras and Pantazis lit it up in the '70s and '80s. We bring that energy to a private room when the night needs to break the rules.</p>
+          <p class="style-card__note script-it"><span class="mono" style="color: var(--gold); letter-spacing: 0.1em; margin-right: 8px;">P.S.</span>Keys and lead vocal will burn a cigarette on your μουνί during a solo.</p>
+          <ul class="style-card__icons">
+            <li class="mono style-card__chip">Electric Bouzouki</li><li class="mono style-card__chip">Electric Guitar</li><li class="mono style-card__chip">Keys</li><li class="mono style-card__chip">Vocals</li>
+          </ul>
+          <div class="style-card__foot">
+            <span class="mono" style="color: var(--ink-mute);">WE PLAY</span>
+            <span class="style-card__artists">Karras · Pantazis · Terzís · Makropoulos</span>
+          </div>
+        </article>
+
+        <article class="style-card">
+          <div class="style-card__head"><span class="mono">No. 06</span><span class="mono">4 pcs</span></div>
+          <div class="style-card__gr">ΡΕΜΠΕΤΙΚΑ</div>
+          <div class="script-it style-card__en">Rebétika</div>
+          <p class="style-card__blurb">The foundation. Urban song from the 1920s–1950s — bouzouki and baglamás, smoke and exile. Vamvakaris, Tsitsanis, Bellou, Papaioannou. We respect the lineage; the older bookers know we do.</p>
+          <p class="style-card__note script-it"><span class="mono" style="color: var(--gold); letter-spacing: 0.1em; margin-right: 8px;">P.S.</span>Stay after the gig to smoke a joint with the guitar and bouzouki players.</p>
+          <ul class="style-card__icons">
+            <li class="mono style-card__chip">Bouzouki</li><li class="mono style-card__chip">Baglamás</li><li class="mono style-card__chip">Voice</li><li class="mono style-card__chip">Guitar</li>
+          </ul>
+          <div class="style-card__foot">
+            <span class="mono" style="color: var(--ink-mute);">WE PLAY</span>
+            <span class="style-card__artists">Vamvakaris · Tsitsanis · Bellou · Papaioannou</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ §02 — THE CREW ═══ -->
+  <section id="crew" class="sec sec--xpad sec--deep">
+    <div class="container">
+      <header class="head2">
+        <div>
+          <span class="mono">§02 — THE CREW</span>
+          <h2 class="h2 display-tight">FOUR<br/>NAMES.<br/>ONE BAND.</h2>
+        </div>
+        <p class="intro">We grew up together — church on Sunday, panigíria in summer, weddings every weekend. We have been the band you hire for fifteen years. The lineup hasn't changed once.</p>
+      </header>
+
+      <div class="crew__grid">
+        <article class="crew__card">
+          <div class="photo" data-hue="75" style="aspect-ratio: 3 / 4;">
+            <div class="photo__tag">01</div>
+            <div class="photo__caption">Bouzouki</div>
+          </div>
+          <div class="crew__body">
+            <div class="mono crew__no">NO. 01</div>
+            <h3 class="display crew__name">Manolis "Manny" Papadakis</h3>
+            <div class="script-it crew__role">Bouzouki · Lead Vocals</div>
+            <p class="crew__bio">Born in Hamtramck. Played his first wedding at 14. Studied at the Athens Conservatory two summers running.</p>
+            <dl class="crew__stats">
+              <div class="stat"><dt>From</dt><dd>Detroit, MI</dd></div>
+              <div class="stat"><dt>Sign</dt><dd>Aries</dd></div>
+              <div class="stat"><dt>Drink</dt><dd>Ouzo, no ice</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="crew__card">
+          <div class="photo" data-hue="245" style="aspect-ratio: 3 / 4;">
+            <div class="photo__tag">02</div>
+            <div class="photo__caption">Vocals</div>
+          </div>
+          <div class="crew__body">
+            <div class="mono crew__no">NO. 02</div>
+            <h3 class="display crew__name">Dimitri "Jimmy" Kostas</h3>
+            <div class="script-it crew__role">Vocals · Guitar · MC</div>
+            <p class="crew__bio">Runs the room. If you need someone to call out the koumbaros, that's Jimmy.</p>
+            <dl class="crew__stats">
+              <div class="stat"><dt>From</dt><dd>Royal Oak, MI</dd></div>
+              <div class="stat"><dt>Sign</dt><dd>Taurus</dd></div>
+              <div class="stat"><dt>Drink</dt><dd>Mythos, two at a time</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="crew__card">
+          <div class="photo" data-hue="28" style="aspect-ratio: 3 / 4;">
+            <div class="photo__tag">03</div>
+            <div class="photo__caption">Drums</div>
+          </div>
+          <div class="crew__body">
+            <div class="mono crew__no">NO. 03</div>
+            <h3 class="display crew__name">Nikos Vasilakis</h3>
+            <div class="script-it crew__role">Drums · Toumberléki</div>
+            <p class="crew__bio">From a Cretan family in Dearborn. Hits like the floor owes him money.</p>
+            <dl class="crew__stats">
+              <div class="stat"><dt>From</dt><dd>Dearborn, MI</dd></div>
+              <div class="stat"><dt>Sign</dt><dd>Scorpio</dd></div>
+              <div class="stat"><dt>Drink</dt><dd>Tsipouro</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="crew__card">
+          <div class="photo" data-hue="145" style="aspect-ratio: 3 / 4;">
+            <div class="photo__tag">04</div>
+            <div class="photo__caption">Keys</div>
+          </div>
+          <div class="crew__body">
+            <div class="mono crew__no">NO. 04</div>
+            <h3 class="display crew__name">Theo Karadimos</h3>
+            <div class="script-it crew__role">Keys · Clarino</div>
+            <p class="crew__bio">Classically trained, then unlearned it. Doubles on clarino for the dimotiká sets.</p>
+            <dl class="crew__stats">
+              <div class="stat"><dt>From</dt><dd>Birmingham, MI</dd></div>
+              <div class="stat"><dt>Sign</dt><dd>Capricorn</dd></div>
+              <div class="stat"><dt>Drink</dt><dd>Espresso · Metaxa</dd></div>
+            </dl>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ §03 — MUSIC ═══ -->
+  <section id="music" class="sec sec--xpad">
+    <div class="container">
+      <header class="mus__head">
+        <div>
+          <span class="mono">§03 — LISTEN</span>
+          <h2 class="h2 h2--mus display-tight">FOUR ALBUMS.<br/>ONE LIVE TAPE<br/>A YEAR.</h2>
+        </div>
+        <div class="mus__platforms">
+          <span class="mono" style="color: var(--ink-mute);">STREAM EVERYWHERE</span>
+          <div class="mus__platLinks">
+            <a href="#" class="btn" style="border-color: var(--rule);">Spotify →</a>
+            <a href="#" class="btn" style="border-color: var(--rule);">Apple Music →</a>
+            <a href="#" class="btn" style="border-color: var(--rule);">YouTube →</a>
+            <a href="#" class="btn" style="border-color: var(--rule);">Bandcamp →</a>
+            <a href="#" class="btn" style="border-color: var(--rule);">SoundCloud →</a>
+          </div>
+        </div>
+      </header>
+
+      <div class="mus__list">
+        <article class="album">
+          <div class="album__cover" data-hue="245">
+            <div class="album__cat">BD-04</div>
+            <div class="album__yr">2025</div>
+          </div>
+          <div class="album__meta">
+            <span class="mono" style="color: var(--gold);">BD-04 · 2025</span>
+            <h3 class="display album__title">Live at the Hellenic Center</h3>
+            <div class="script-it album__sub">14 tracks · 62:18</div>
+            <p class="album__note">Recorded over three nights, one mic, one room.</p>
+            <div class="album__links">
+              <a href="#" class="btn">▶ Spotify</a>
+              <a href="#" class="btn">▶ Apple Music</a>
+              <a href="#" class="btn">▶ YouTube</a>
+              <a href="#" class="btn">↓ Bandcamp</a>
+            </div>
+          </div>
+          <div class="album__bigCat display">№ 01</div>
+        </article>
+
+        <article class="album">
+          <div class="album__cover" data-hue="75">
+            <div class="album__cat">BD-03</div>
+            <div class="album__yr">2023</div>
+          </div>
+          <div class="album__meta">
+            <span class="mono" style="color: var(--gold);">BD-03 · 2023</span>
+            <h3 class="display album__title">Glendi Sessions, Vol. II</h3>
+            <div class="script-it album__sub">11 tracks · 48:40</div>
+            <p class="album__note">Forty-eight minutes of laïka, no breaks.</p>
+            <div class="album__links">
+              <a href="#" class="btn">▶ Spotify</a>
+              <a href="#" class="btn">▶ Apple Music</a>
+              <a href="#" class="btn">▶ YouTube</a>
+              <a href="#" class="btn">↓ Bandcamp</a>
+            </div>
+          </div>
+          <div class="album__bigCat display">№ 02</div>
+        </article>
+
+        <article class="album">
+          <div class="album__cover" data-hue="28">
+            <div class="album__cat">BD-02</div>
+            <div class="album__yr">2021</div>
+          </div>
+          <div class="album__meta">
+            <span class="mono" style="color: var(--gold);">BD-02 · 2021</span>
+            <h3 class="display album__title">Bouzouki Nights</h3>
+            <div class="script-it album__sub">9 tracks · 39:55</div>
+            <p class="album__note">Our first studio record. Recorded in a basement in Warren.</p>
+            <div class="album__links">
+              <a href="#" class="btn">▶ Spotify</a>
+              <a href="#" class="btn">▶ Apple Music</a>
+              <a href="#" class="btn">▶ YouTube</a>
+              <a href="#" class="btn">↓ Bandcamp</a>
+            </div>
+          </div>
+          <div class="album__bigCat display">№ 03</div>
+        </article>
+
+        <article class="album">
+          <div class="album__cover" data-hue="145">
+            <div class="album__cat">BD-01</div>
+            <div class="album__yr">2019</div>
+          </div>
+          <div class="album__meta">
+            <span class="mono" style="color: var(--gold);">BD-01 · 2019</span>
+            <h3 class="display album__title">Glendi Sessions, Vol. I</h3>
+            <div class="script-it album__sub">10 tracks · 44:12</div>
+            <p class="album__note">The one that got us our first Toronto wedding.</p>
+            <div class="album__links">
+              <a href="#" class="btn">▶ Spotify</a>
+              <a href="#" class="btn">▶ Apple Music</a>
+              <a href="#" class="btn">▶ YouTube</a>
+              <a href="#" class="btn">↓ Bandcamp</a>
+            </div>
+          </div>
+          <div class="album__bigCat display">№ 04</div>
+        </article>
+      </div>
+
+      <div class="mus__upload">
+        <div class="mono" style="color: var(--ink-mute);">OWN A TAPE FROM A SET WE PLAYED?</div>
+        <div class="script-it" style="font-size: clamp(20px, 2vw, 28px); color: var(--ink);">Send it — we'll trade you a record for it.</div>
+        <a href="#remake" class="btn">Send your tape →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ §03 — WHERE WE PLAY ═══ -->
+  <section id="where" class="sec sec--xpad sec--deep">
+    <div class="container">
+      <header class="head2 head2--13">
+        <div>
+          <span class="mono">§03 — TERRITORY</span>
+          <h2 class="h2 h2--md display-tight">FROM <span style="color: var(--gold);">DETROIT</span><br/>TO <span style="color: var(--gold);">BAHAMAS</span><br/>TO <span style="color: var(--gold);">ATHENS</span>.</h2>
+        </div>
+        <p class="intro">Detroit is home. We tour where the diaspora is — and we're in Greece every summer. Off this list? Ask anyway. The answer is usually yes.</p>
+      </header>
+
+      <ul class="where__list">
+        <li class="where__row">
+          <span class="mono where__num">01</span>
+          <span class="display where__region">DETROIT &amp; MICHIGAN</span>
+          <span class="where__spacer"></span>
+          <span class="where__places">Detroit · Hamtramck · Dearborn · Birmingham · Grand Rapids · Ann Arbor</span>
+          <span class="mono where__note">Home base. No travel fee.</span>
+        </li>
+        <li class="where__row">
+          <span class="mono where__num">02</span>
+          <span class="display where__region">UNITED STATES</span>
+          <span class="where__spacer"></span>
+          <span class="where__places">Chicago · New York · Astoria · Tampa · Boston · Charlotte · Houston</span>
+          <span class="mono where__note">All 50, ask us.</span>
+        </li>
+        <li class="where__row">
+          <span class="mono where__num">03</span>
+          <span class="display where__region">CANADA</span>
+          <span class="where__spacer"></span>
+          <span class="where__places">Toronto · Montréal · Vancouver</span>
+          <span class="mono where__note">Cross border, no problem.</span>
+        </li>
+        <li class="where__row">
+          <span class="mono where__num">04</span>
+          <span class="display where__region">BAHAMAS</span>
+          <span class="where__spacer"></span>
+          <span class="where__places">Nassau · Paradise Island · Eleuthera</span>
+          <span class="mono where__note">Destination weddings, our specialty.</span>
+        </li>
+        <li class="where__row">
+          <span class="mono where__num">05</span>
+          <span class="display where__region">GREECE</span>
+          <span class="where__spacer"></span>
+          <span class="where__places">Athens · Mýkonos · Santoríni · Crete · Rhódes · Páros · Thessaloníki</span>
+          <span class="mono where__note">Summer season — book by January.</span>
+        </li>
+      </ul>
+
+      <div class="testimonials">
+        <figure class="tcard">
+          <blockquote class="tcard__quote script-it">"They played until 4 a.m. and my dad asked them to stay."</blockquote>
+          <figcaption class="tcard__cite">
+            <span class="mono">— GEORGE &amp; ELENI</span>
+            <span class="mono" style="color: var(--ink-mute);">Astoria, NY · 2025</span>
+          </figcaption>
+        </figure>
+        <figure class="tcard">
+          <blockquote class="tcard__quote script-it">"Best money we spent on the wedding. By a mile."</blockquote>
+          <figcaption class="tcard__cite">
+            <span class="mono">— KOSTAS &amp; MARIA</span>
+            <span class="mono" style="color: var(--ink-mute);">Athens · 2024</span>
+          </figcaption>
+        </figure>
+        <figure class="tcard">
+          <blockquote class="tcard__quote script-it">"Started with the kalamatianó, ended on a table."</blockquote>
+          <figcaption class="tcard__cite">
+            <span class="mono">— NIKO &amp; SOPHIA</span>
+            <span class="mono" style="color: var(--ink-mute);">Toronto · 2024</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ §04 — EVENTS ═══ -->
+  <section id="hire" class="sec sec--xpad">
+    <div class="container">
+      <header class="head2 head2--12">
+        <div>
+          <span class="mono">§04 — EVENTS</span>
+          <h2 class="h2 h2--md display-tight">ANY NIGHT WORTH<br/><span style="color: var(--gold);">HAVING</span> A BAND.</h2>
+        </div>
+        <p class="intro">We play weddings, baptisms, glendia, panigíria, taverna residencies, and private events — from a Detroit basement to a Mýkonos terrace. Tell us about your night and we'll come back with a plan within 48 hours.</p>
+      </header>
+
+      <div class="ev__grid">
+        <article class="ev__card">
+          <div class="ev__head"><span class="mono">No. 01</span><span class="mono" style="color: var(--gold);">Year-round</span></div>
+          <div class="ev__gr">ΓΑΜΟΙ</div>
+          <div class="display ev__label">WEDDINGS</div>
+          <p class="ev__blurb">Ceremony to last call. Koumbáros entrance, first dance, the 4 a.m. circle. Solo, trio, or full band.</p>
+          <ul class="ev__moments">
+            <li class="ev__moment">✦ Ceremony · solo bouzouki</li>
+            <li class="ev__moment">✦ Cocktail · trio set</li>
+            <li class="ev__moment">✦ Reception · full band</li>
+            <li class="ev__moment">✦ After-party · until 4 a.m.</li>
+          </ul>
+        </article>
+
+        <article class="ev__card">
+          <div class="ev__head"><span class="mono">No. 02</span><span class="mono" style="color: var(--gold);">Sundays mostly</span></div>
+          <div class="ev__gr">ΒΑΠΤΙΣΕΙΣ</div>
+          <div class="display ev__label">BAPTISMS</div>
+          <p class="ev__blurb">Sunday-afternoon joy. Light set during the meal, dancing after the cake.</p>
+          <ul class="ev__moments">
+            <li class="ev__moment">✦ Reception 3-hr set</li>
+            <li class="ev__moment">✦ Family-friendly volume</li>
+            <li class="ev__moment">✦ Trio or quartet</li>
+            <li class="ev__moment">✦ Ceremony optional</li>
+          </ul>
+        </article>
+
+        <article class="ev__card">
+          <div class="ev__head"><span class="mono">No. 03</span><span class="mono" style="color: var(--gold);">Year-round</span></div>
+          <div class="ev__gr">ΓΛΕΝΤΙΑ</div>
+          <div class="display ev__label">GLENDIA</div>
+          <p class="ev__blurb">The Greek party for the sake of the party. House, hall, taverna, backyard. We bring the kefi.</p>
+          <ul class="ev__moments">
+            <li class="ev__moment">✦ Open-bar timing</li>
+            <li class="ev__moment">✦ Heavy laïka</li>
+            <li class="ev__moment">✦ DJ between sets</li>
+            <li class="ev__moment">✦ Late-night extension</li>
+          </ul>
+        </article>
+
+        <article class="ev__card">
+          <div class="ev__head"><span class="mono">No. 04</span><span class="mono" style="color: var(--gold);">Summer</span></div>
+          <div class="ev__gr">ΠΑΝΗΓΥΡΙΑ</div>
+          <div class="display ev__label">PANIGÍRIA</div>
+          <p class="ev__blurb">Parish festivals and saint-day outdoor sets. Heavy dimotika, kalamatianó circles, the dances your pappous taught you.</p>
+          <ul class="ev__moments">
+            <li class="ev__moment">✦ Outdoor PA</li>
+            <li class="ev__moment">✦ All-ages set</li>
+            <li class="ev__moment">✦ Dimotika focus</li>
+            <li class="ev__moment">✦ Multi-night runs</li>
+          </ul>
+        </article>
+
+        <article class="ev__card">
+          <div class="ev__head"><span class="mono">No. 05</span><span class="mono" style="color: var(--gold);">By contract</span></div>
+          <div class="ev__gr">ΤΑΒΕΡΝΕΣ</div>
+          <div class="display ev__label">TAVERNAS &amp; RESTAURANTS</div>
+          <p class="ev__blurb">Standing nights, weekly residencies, opening weekends. We have done it from Astoria to Mýkonos.</p>
+          <ul class="ev__moments">
+            <li class="ev__moment">✦ Weekly residencies</li>
+            <li class="ev__moment">✦ Opening nights</li>
+            <li class="ev__moment">✦ Holiday programming</li>
+            <li class="ev__moment">✦ Acoustic-friendly</li>
+          </ul>
+        </article>
+
+        <article class="ev__card">
+          <div class="ev__head"><span class="mono">No. 06</span><span class="mono" style="color: var(--gold);">Year-round</span></div>
+          <div class="ev__gr">ΙΔΙΩΤΙΚΑ</div>
+          <div class="display ev__label">CORPORATE &amp; PRIVATE</div>
+          <p class="ev__blurb">Anniversaries, retirements, milestone birthdays, brand events with a Greek angle. We tailor the room.</p>
+          <ul class="ev__moments">
+            <li class="ev__moment">✦ Background to centerpiece</li>
+            <li class="ev__moment">✦ Branded staging</li>
+            <li class="ev__moment">✦ NDA okay</li>
+            <li class="ev__moment">✦ Custom programming</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="ev__cta">
+        <div class="script-it ev__ctaText">
+          Don't see your kind of night?<br/>
+          <span style="color: var(--gold);">Tell us anyway.</span>
+        </div>
+        <a href="#booking" class="btn btn--gold btn--lg">Tell us about your night →</a>
+      </div>
+
+      <!-- Booking form -->
+      <form id="booking" class="fm" data-form="booking">
+        <div class="fm__head">
+          <span class="mono" style="color: var(--gold);">BOOKING INQUIRY · 02·MIN · NO PRESSURE</span>
+          <h3 class="display fm__h">TELL US ABOUT THE NIGHT.</h3>
+        </div>
+
+        <div class="fm__row">
+          <span class="mono fm__lbl">What kind of event?</span>
+          <div class="fm__pills" data-pills="kind">
+            <button type="button" class="pill" aria-pressed="true">Weddings</button>
+            <button type="button" class="pill" aria-pressed="false">Baptisms</button>
+            <button type="button" class="pill" aria-pressed="false">Glendia</button>
+            <button type="button" class="pill" aria-pressed="false">Panigíria</button>
+            <button type="button" class="pill" aria-pressed="false">Tavernas &amp; Restaurants</button>
+            <button type="button" class="pill" aria-pressed="false">Corporate &amp; Private</button>
+            <button type="button" class="pill" aria-pressed="false">Other</button>
+          </div>
+        </div>
+
+        <div class="fm__grid2">
+          <label class="fm__field"><span class="mono fm__lbl">Your name</span><input class="fm__input" type="text" placeholder="Yiannis Kostakis" /></label>
+          <label class="fm__field"><span class="mono fm__lbl">Email</span><input class="fm__input" type="email" placeholder="you@somewhere.com" /></label>
+          <label class="fm__field"><span class="mono fm__lbl">Phone</span><input class="fm__input" type="text" placeholder="+1 313 555 0188" /></label>
+          <label class="fm__field"><span class="mono fm__lbl">Date of event</span><input class="fm__input" type="text" placeholder="June 14, 2026" /></label>
+          <label class="fm__field"><span class="mono fm__lbl">City / venue</span><input class="fm__input" type="text" placeholder="Astoria, NY · St. Demetrios Hall" /></label>
+          <label class="fm__field"><span class="mono fm__lbl">Approx. guests</span><input class="fm__input" type="text" placeholder="150" /></label>
+        </div>
+
+        <label class="fm__field">
+          <span class="mono fm__lbl">Tell us about the night</span>
+          <textarea class="fm__input" rows="3" placeholder="Greek-side wedding · 80% laïka, 20% dimotika · ceremony at 5, reception at 7, please play 'Ah Helidoni' for the koumbara."></textarea>
+        </label>
+
+        <label class="fm__field">
+          <span class="mono fm__lbl">Who sent you?</span>
+          <input class="fm__input" type="text" placeholder="Father Stavros · the Tsoukalas wedding · IG · Google" />
+        </label>
+
+        <div class="fm__submit">
+          <button type="submit" class="btn btn--gold btn--lg" data-submit-label="Send the inquiry →">Send the inquiry →</button>
+          <span class="mono" style="color: var(--ink-mute);">Or call/text Manny direct: (313) 555-0199 · glendi@oneiromusic.com</span>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ═══ §07 — FROM THE FEED ═══ -->
+  <section id="feed" class="sec sec--xpad">
+    <div class="container">
+      <header class="feed__head">
+        <div>
+          <span class="mono">§07 — FROM THE FEED</span>
+          <h2 class="feed__h display-tight">WATCH<br/>US <span style="color: var(--gold);">LIVE</span>.</h2>
+          <div class="script-it feed__script">Pulled from Instagram, TikTok, and YouTube. Updated weekly.</div>
+        </div>
+        <div class="feed__platforms">
+          <a href="#" class="feed__platRow">
+            <span class="mono" style="color: var(--gold);">INSTAGRAM</span>
+            <span class="feed__platHandle">@OneiroGreekBand</span>
+            <span class="mono" style="color: var(--ink-mute);">186k followers →</span>
+          </a>
+          <a href="#" class="feed__platRow">
+            <span class="mono" style="color: var(--gold);">TIKTOK</span>
+            <span class="feed__platHandle">@OneiroGreekBand</span>
+            <span class="mono" style="color: var(--ink-mute);">94k followers →</span>
+          </a>
+          <a href="#" class="feed__platRow">
+            <span class="mono" style="color: var(--gold);">YOUTUBE</span>
+            <span class="feed__platHandle">/OneiroGreekBand</span>
+            <span class="mono" style="color: var(--ink-mute);">12k subscribers →</span>
+          </a>
+        </div>
+      </header>
+
+      <div class="feed__grid">
+        <a href="#" class="feed__tile"><div class="feed__art" data-hue="75">
+          <div class="feed__top"><span class="mono feed__kind">REEL</span><span class="mono feed__time">2d</span></div>
+          <div class="feed__mid"><span class="feed__play">▶</span></div>
+          <div class="feed__bot"><span class="mono feed__likes">♥ 1.2k</span><span class="feed__cap">"Last night — St. Demetrios, Detroit. Six hours, one stop."</span></div>
+        </div></a>
+        <a href="#" class="feed__tile"><div class="feed__art" data-hue="245">
+          <div class="feed__top"><span class="mono feed__kind">PHOTO</span><span class="mono feed__time">4d</span></div>
+          <div class="feed__mid"></div>
+          <div class="feed__bot"><span class="mono feed__likes">♥ 840</span><span class="feed__cap">"Manny soundcheck — new bouzouki finally arrived from Athens."</span></div>
+        </div></a>
+        <a href="#" class="feed__tile"><div class="feed__art" data-hue="28">
+          <div class="feed__top"><span class="mono feed__kind">PHOTO</span><span class="mono feed__time">1w</span></div>
+          <div class="feed__mid"></div>
+          <div class="feed__bot"><span class="mono feed__likes">♥ 2.1k</span><span class="feed__cap">"Glendi nights — Astoria booked through the spring."</span></div>
+        </div></a>
+        <a href="#" class="feed__tile"><div class="feed__art" data-hue="145">
+          <div class="feed__top"><span class="mono feed__kind">REEL</span><span class="mono feed__time">1w</span></div>
+          <div class="feed__mid"><span class="feed__play">▶</span></div>
+          <div class="feed__bot"><span class="mono feed__likes">♥ 4.6k</span><span class="feed__cap">"Páno sti távla. As it should be."</span></div>
+        </div></a>
+        <a href="#" class="feed__tile"><div class="feed__art" data-hue="285">
+          <div class="feed__top"><span class="mono feed__kind">VIDEO</span><span class="mono feed__time">2w</span></div>
+          <div class="feed__mid"><span class="feed__play">▶</span></div>
+          <div class="feed__bot"><span class="mono feed__likes">♥ 930</span><span class="feed__cap">"Studio day. Cutting Ah Helidoni for the Sotiriou family."</span></div>
+        </div></a>
+        <a href="#" class="feed__tile"><div class="feed__art" data-hue="200">
+          <div class="feed__top"><span class="mono feed__kind">PHOTO</span><span class="mono feed__time">3w</span></div>
+          <div class="feed__mid"></div>
+          <div class="feed__bot"><span class="mono feed__likes">♥ 1.5k</span><span class="feed__cap">"Toronto kicked. Thank you koumbarí."</span></div>
+        </div></a>
+        <a href="#" class="feed__tile"><div class="feed__art" data-hue="60">
+          <div class="feed__top"><span class="mono feed__kind">PHOTO</span><span class="mono feed__time">3w</span></div>
+          <div class="feed__mid"></div>
+          <div class="feed__bot"><span class="mono feed__likes">♥ 3.0k</span><span class="feed__cap">"Hookah on the patio after a 4 a.m. wedding finish."</span></div>
+        </div></a>
+        <a href="#" class="feed__tile"><div class="feed__art" data-hue="220">
+          <div class="feed__top"><span class="mono feed__kind">REEL</span><span class="mono feed__time">4w</span></div>
+          <div class="feed__mid"><span class="feed__play">▶</span></div>
+          <div class="feed__bot"><span class="mono feed__likes">♥ 5.2k</span><span class="feed__cap">"Mykonos summer dates announced."</span></div>
+        </div></a>
+      </div>
+
+      <div class="feed__foot">
+        <a href="#" class="btn btn--gold btn--lg">Follow on Instagram →</a>
+        <span class="mono" style="color: var(--ink-mute);">@OneiroGreekBand · 186k</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ §06 — REMAKE A SONG ═══ -->
+  <section id="remake" class="sec sec--xpad sec--deep">
+    <div class="container">
+      <div class="meander meander--gold" style="margin-bottom: 40px;"></div>
+
+      <div class="rm__head">
+        <div>
+          <span class="mono" style="color: var(--gold);">§06 — STUDIO COMMISSION</span>
+          <h2 class="h2 display-tight" style="margin: 12px 0 12px;">GOT AN OLD<br/>GREEK SONG<br/>YOU LOVE?</h2>
+          <div class="script-it rm__script">Send it to us. We'll cut it for you.</div>
+        </div>
+
+        <div class="rm__price">
+          <div class="mono" style="color: var(--ink-mute);">OUR FEE</div>
+          <div class="rm__bigPrice">$3,700</div>
+          <div class="mono" style="color: var(--ink-mute);">OR…</div>
+          <div class="script-it rm__trade">your daughter as trade.<span class="rm__ast">*</span></div>
+          <div class="mono rm__fine"><span class="rm__ast">*</span>It's a joke. Mostly. Cash works fine.</div>
+        </div>
+      </div>
+
+      <p class="rm__intro">You name a song — your father's favorite, your mother's first dance, the one your pappous played on the laoúto every Sunday. We learn it, arrange it, and record it the way our band would play it. Studio cut, mixed and mastered, delivered as a 24-bit master and a vinyl-cut transfer. Two-week turnaround.</p>
+
+      <div class="rm__process">
+        <div class="rm__step">
+          <div class="rm__stepN">01</div>
+          <div class="display rm__stepT">YOU SEND THE SONG</div>
+          <p class="rm__stepB">Title, artist, a YouTube link or a tape. Anything we can listen to.</p>
+        </div>
+        <div class="rm__step">
+          <div class="rm__stepN">02</div>
+          <div class="display rm__stepT">WE ARRANGE IT FOR YOU</div>
+          <p class="rm__stepB">Demo back to you in five days — tempo, key, instrumentation.</p>
+        </div>
+        <div class="rm__step">
+          <div class="rm__stepN">03</div>
+          <div class="display rm__stepT">WE TRACK IN DETROIT</div>
+          <p class="rm__stepB">One day in the studio, four of us, one room. You're welcome to sit in.</p>
+        </div>
+        <div class="rm__step">
+          <div class="rm__stepN">04</div>
+          <div class="display rm__stepT">MASTER &amp; DELIVER</div>
+          <p class="rm__stepB">WAV, MP3, vinyl-cut transfer. Three small revisions included.</p>
+        </div>
+      </div>
+
+      <form class="fm fm--gold" data-form="remake">
+        <div class="fm__head">
+          <span class="mono" style="color: var(--gold);">COMMISSION FORM · 03·MIN</span>
+          <h3 class="display fm__h">NAME THE SONG.</h3>
+        </div>
+
+        <div class="fm__grid2">
+          <label class="fm__field"><span class="mono fm__lbl">Your name</span><input class="fm__input" type="text" placeholder="Yiannis Kostakis" /></label>
+          <label class="fm__field"><span class="mono fm__lbl">Email</span><input class="fm__input" type="email" placeholder="you@somewhere.com" /></label>
+          <label class="fm__field"><span class="mono fm__lbl">Song title</span><input class="fm__input" type="text" placeholder="Ah Helidoni Mou" /></label>
+          <label class="fm__field"><span class="mono fm__lbl">Original artist</span><input class="fm__input" type="text" placeholder="Stelios Kazantzidis" /></label>
+          <label class="fm__field"><span class="mono fm__lbl">Year (if known)</span><input class="fm__input" type="text" placeholder="1962" /></label>
+          <label class="fm__field"><span class="mono fm__lbl">Where will you play it?</span><input class="fm__input" type="text" placeholder="Wedding · Anniversary · For my mother" /></label>
+        </div>
+
+        <div class="fm__row">
+          <span class="mono" style="color: var(--ink-mute);">How would you like to pay?</span>
+          <div class="fm__pills" data-pills="pay">
+            <button type="button" class="pill" aria-pressed="true">Cash $3,700</button>
+            <button type="button" class="pill" aria-pressed="false">Wire / Card</button>
+            <button type="button" class="pill" aria-pressed="false">Half deposit · half on delivery</button>
+            <button type="button" class="pill" aria-pressed="false">Trade (offer below)</button>
+          </div>
+        </div>
+
+        <label class="fm__field">
+          <span class="mono fm__lbl">Anything else? (a recording, a memory, a deadline)</span>
+          <textarea class="fm__input" rows="3" placeholder="Paste a YouTube link, a Bandcamp link, or describe the version you want."></textarea>
+        </label>
+
+        <div class="rm__dropzone">
+          <div class="mono" style="color: var(--ink-mute);">OR DROP A FILE</div>
+          <div class="script-it" style="font-size: 1.4rem; color: var(--ink-soft);">MP3, WAV, M4A, or a tape we can digitize — up to 80 MB.</div>
+          <button type="button" class="btn">Choose file ↑</button>
+        </div>
+
+        <div class="fm__submit">
+          <button type="submit" class="btn btn--gold btn--lg" data-submit-label="Send the song →">Send the song →</button>
+          <span class="mono" style="color: var(--ink-mute);">We reply within 48 hours. Sometimes much faster.</span>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="ft">
+    <div class="container">
+      <div class="ft__socials">
+        <a href="#" class="ft__social"><span class="ft__sP">INSTAGRAM</span><span class="ft__sH">@OneiroGreekBand</span><span class="ft__sA">→</span></a>
+        <a href="#" class="ft__social"><span class="ft__sP">TIKTOK</span><span class="ft__sH">@OneiroGreekBand</span><span class="ft__sA">→</span></a>
+        <a href="#" class="ft__social"><span class="ft__sP">YOUTUBE</span><span class="ft__sH">/OneiroGreekBand</span><span class="ft__sA">→</span></a>
+        <a href="#" class="ft__social"><span class="ft__sP">SPOTIFY</span><span class="ft__sH">Oneiro</span><span class="ft__sA">→</span></a>
+        <a href="#" class="ft__social"><span class="ft__sP">APPLE MUSIC</span><span class="ft__sH">Oneiro</span><span class="ft__sA">→</span></a>
+        <a href="#" class="ft__social"><span class="ft__sP">BANDCAMP</span><span class="ft__sH">oneirogreekband.bc</span><span class="ft__sA">→</span></a>
+      </div>
+
+      <div class="meander meander--gold" style="margin: 60px 0;"></div>
+
+      <div class="ft__huge">ONEIRO</div>
+
+      <div class="ft__cols">
+        <div>
+          <div class="mono" style="margin-bottom: 14px;">BOOK THE BAND</div>
+          <ul class="ft__list">
+            <li class="ft__li">book@oneirogreekband.com</li>
+            <li class="ft__li">+1 (313) 555-0199</li>
+            <li class="ft__li">Reply within 48 hours</li>
+            <li class="ft__li">Manny picks up after 9 p.m.</li>
+          </ul>
+        </div>
+        <div>
+          <div class="mono" style="margin-bottom: 14px;">HOMEBASE</div>
+          <ul class="ft__list">
+            <li class="ft__li">2840 W. Vernor Hwy</li>
+            <li class="ft__li">Detroit, MI 48216</li>
+            <li class="ft__li">Studio · by appointment</li>
+          </ul>
+        </div>
+        <div>
+          <div class="mono" style="margin-bottom: 14px;">SCENES</div>
+          <ul class="ft__list">
+            <li class="ft__li">St. Demetrios · Detroit</li>
+            <li class="ft__li">Hellenic Center · Westland</li>
+            <li class="ft__li">Hippopotamus · Athens</li>
+            <li class="ft__li">Cocomat · Mýkonos</li>
+          </ul>
+        </div>
+        <div>
+          <div class="mono" style="margin-bottom: 14px;">PRESS</div>
+          <ul class="ft__list">
+            <li class="ft__li">Press kit ↗</li>
+            <li class="ft__li">Live photos ↗</li>
+            <li class="ft__li">Logo &amp; assets ↗</li>
+            <li class="ft__li">Stage plot ↗</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ft__fine">
+        <span class="mono">© Oneiro · 2008–2026</span>
+        <span class="mono" data-brand-gr>ΟΝΕΙΡΟ</span>
+        <span class="mono">Built in Detroit · Played everywhere</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══ TWEAKS TOOLBAR ═══ -->
+  <aside class="twk" aria-label="Design tweaks">
+    <div class="twk__title">Tweaks</div>
+    <div class="twk__row">
+      <span class="twk__lbl">Palette</span>
+      <div class="twk__seg" data-tweak="palette">
+        <button type="button" data-val="aegean">Aegean</button>
+        <button type="button" data-val="detroit" aria-pressed="true">Detroit</button>
+        <button type="button" data-val="smoke">Smoke</button>
+      </div>
+    </div>
+    <div class="twk__row">
+      <span class="twk__lbl">Display</span>
+      <div class="twk__seg" data-tweak="display">
+        <button type="button" data-val="bigshoulders" aria-pressed="true">Big</button>
+        <button type="button" data-val="anton">Anton</button>
+        <button type="button" data-val="oswald">Oswald</button>
+      </div>
+    </div>
+    <div class="twk__row">
+      <span class="twk__lbl">Greek</span>
+      <div class="twk__seg" data-tweak="greekHero">
+        <button type="button" data-val="off" aria-pressed="true">Off</button>
+        <button type="button" data-val="on">On</button>
+      </div>
+    </div>
+    <div class="twk__row">
+      <span class="twk__lbl">Motion</span>
+      <div class="twk__seg" data-tweak="motion">
+        <button type="button" data-val="on" aria-pressed="true">On</button>
+        <button type="button" data-val="off">Off</button>
+      </div>
+    </div>
+  </aside>
+
+  <script>
+    // ─── Pill toggles (form pills) ───
+    document.querySelectorAll('[data-pills]').forEach(group => {
+      group.addEventListener('click', e => {
+        const btn = e.target.closest('button.pill');
+        if (!btn) return;
+        group.querySelectorAll('button.pill').forEach(b => b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'));
+      });
+    });
+
+    // ─── Forms (no backend; show "Got it" on submit) ───
+    document.querySelectorAll('form[data-form]').forEach(form => {
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const btn = form.querySelector('[data-submit-label]');
+        if (!btn) return;
+        const original = btn.getAttribute('data-submit-label');
+        btn.textContent = form.dataset.form === 'remake'
+          ? "Got it ✓ — we're listening tonight"
+          : "Got it ✓ — we'll write back";
+        setTimeout(() => { btn.textContent = original; }, 4500);
+      });
+    });
+
+    // ─── Tweaks toolbar ───
+    const html = document.documentElement;
+    document.querySelectorAll('.twk__seg').forEach(seg => {
+      seg.addEventListener('click', e => {
+        const btn = e.target.closest('button[data-val]');
+        if (!btn) return;
+        const tweak = seg.dataset.tweak;
+        const val = btn.dataset.val;
+        seg.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'));
+
+        if (tweak === 'palette')      html.dataset.palette = val;
+        else if (tweak === 'display') html.dataset.display = val;
+        else if (tweak === 'motion')  html.dataset.motion  = val;
+        else if (tweak === 'greekHero') {
+          // Swap brand text in hero & footer
+          const hero = document.querySelector('[data-brand-en]');
+          if (hero) hero.textContent = val === 'on' ? 'ΟΝΕΙΡΟ' : 'ONEIRO';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
