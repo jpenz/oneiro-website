@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-palette="detroit" data-display="bigshoulders" data-density="standard" data-motion="on">
+<html lang="en" data-palette="aegean" data-display="bigshoulders" data-density="standard" data-motion="on">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,19 +12,20 @@
 
 <style>
   :root {
-    /* AEGEAN — black, aegean blue, ivory, brass */
-    --ink:        oklch(0.95 0.012 80);
-    --ink-soft:   oklch(0.78 0.015 80);
-    --ink-mute:   oklch(0.55 0.012 80);
-    --bg:         oklch(0.13 0.012 250);
-    --bg-elev:    oklch(0.18 0.018 250);
-    --bg-deep:    oklch(0.08 0.01 250);
+    /* AEGEAN — black, ivory, cerulean accent (default) */
+    --ink:        oklch(0.95 0.012 240);
+    --ink-soft:   oklch(0.78 0.015 240);
+    --ink-mute:   oklch(0.55 0.012 240);
+    --bg:         oklch(0.10 0.008 245);
+    --bg-elev:    oklch(0.15 0.012 245);
+    --bg-deep:    oklch(0.05 0.006 245);
     --blue:       oklch(0.45 0.13 245);
     --blue-deep:  oklch(0.32 0.12 245);
-    --gold:       oklch(0.78 0.13 80);
-    --gold-deep:  oklch(0.62 0.13 75);
+    /* Variable name kept as --gold for compatibility; value is now Aegean blue */
+    --gold:       oklch(0.68 0.17 245);
+    --gold-deep:  oklch(0.52 0.18 248);
     --red:        oklch(0.55 0.18 28);
-    --rule:       oklch(0.30 0.018 250);
+    --rule:       oklch(0.25 0.015 245);
     --accent:     var(--gold);
 
     --display: "Big Shoulders Display", "Anton", "Oswald", Impact, sans-serif;
@@ -37,7 +38,7 @@
     --maxw: 1640px;
   }
 
-  /* DETROIT — black & gold, no blue (default) */
+  /* DETROIT — warm black, original gold (for comparison) */
   [data-palette="detroit"] {
     --bg:         oklch(0.10 0.005 80);
     --bg-elev:    oklch(0.15 0.008 80);
@@ -49,13 +50,13 @@
     --rule:       oklch(0.25 0.012 80);
   }
 
-  /* SMOKE — desaturated charcoal */
+  /* SMOKE — desaturated charcoal + muted blue */
   [data-palette="smoke"] {
     --bg:         oklch(0.16 0.005 250);
     --bg-elev:    oklch(0.21 0.008 250);
     --bg-deep:    oklch(0.10 0.004 250);
     --blue:       oklch(0.40 0.05 245);
-    --gold:       oklch(0.72 0.06 80);
+    --gold:       oklch(0.62 0.10 245);
     --rule:       oklch(0.30 0.008 250);
   }
 
@@ -130,6 +131,18 @@
     background: var(--bg-elev);
     isolation: isolate;
   }
+  .photo > img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    display: block;
+  }
+  /* Hide the synthetic gradient/halftone layers when a real image is present */
+  .photo:has(> img)::before,
+  .photo:has(> img)::after { display: none; }
+  .photo > img + .photo__tag, .photo > img ~ .photo__tag,
+  .photo > img + .photo__caption, .photo > img ~ .photo__caption { z-index: 2; }
   .photo::before {
     content: "";
     position: absolute; inset: 0;
@@ -376,6 +389,8 @@
   .ft__cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; padding-top: 30px; border-top: 1px solid var(--rule); }
   .ft__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
   .ft__li { font-size: 0.95rem; color: var(--ink-soft); }
+  .ft__li a { color: var(--ink-soft); text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 3px; }
+  .ft__li a:hover { color: var(--gold); text-decoration-color: var(--gold); }
   .ft__fine { display: flex; justify-content: space-between; padding-top: 28px; margin-top: 60px; border-top: 1px solid var(--rule); color: var(--ink-mute); flex-wrap: wrap; gap: 8px; }
 
   /* ─── Tweaks toolbar (simplified) ─── */
@@ -427,7 +442,7 @@
       <a href="#top" class="nav__brand">
         <span class="nav__mark">◉</span>
         <span class="display nav__word">Oneiro</span>
-        <span class="mono nav__tag">EST. 2008 · DETROIT</span>
+        <span class="mono nav__tag">LIVE GREEK · DETROIT</span>
       </a>
       <ul class="nav__list">
         <li><a href="#styles" class="nav__link">What we play</a></li>
@@ -445,9 +460,9 @@
   <section class="hero" data-screen-label="Hero">
     <div class="container">
       <div class="hero__kicker">
-        <span class="mono">EST. 2008 · DETROIT</span>
+        <span class="mono">METRO DETROIT · MICHIGAN</span>
         <span class="hero__dot">●</span>
-        <span class="mono" style="color: var(--gold);">NOW BOOKING — 2026 · Greece tour open · 14 dates left</span>
+        <span class="mono" style="color: var(--gold);">NOW BOOKING — WEDDINGS · FESTIVALS · GLENDIA</span>
       </div>
 
       <div class="hero__lockup">
@@ -466,10 +481,10 @@
             ENTERTAINMENT.
           </h2>
           <div class="script-it hero__script">
-            Weddings, baptisms, glendia, panigíria, restaurants — anywhere your people want to dance.
+            Bring us the event. We'll bring you the <em>kefi</em>.
           </div>
           <p class="hero__lede">
-            Four Greek-American musicians out of Detroit. Bouzouki, clarino, lyra, vocals — laïka, dimotika, nisiótika, paradosiaká. We're a band, a wedding act, a glendi night, a residency, a studio. Whatever your event needs to feel Greek.
+            Four musicians out of metro Detroit — bouzouki, keys, guitar, drums, two lead vocals. Laïka, dimotika, nisiótika, paradosiaká. The best Greek band across North America: weddings, festivals, glendia, baptisms, private events. We customize the set, the staging, and the night around your room.
           </p>
           <div class="hero__btns">
             <a href="#hire" class="btn btn--gold btn--lg">Book us for an event →</a>
@@ -488,15 +503,16 @@
         </div>
 
         <div class="hero__lowerR">
-          <div class="photo" data-hue="75" style="aspect-ratio: 3 / 4;">
-            <div class="photo__tag">LIVE · 03·2025</div>
-            <div class="photo__caption">Hellenic Center, Detroit</div>
+          <div class="photo" data-hue="245" style="aspect-ratio: 3 / 4;">
+            <img src="images/group.jpg" alt="Oneiro — live performance" loading="eager" />
+            <div class="photo__tag">LIVE · OΝΕΙΡΟ</div>
+            <div class="photo__caption">Metro Detroit · Michigan</div>
           </div>
           <div class="hero__facts">
-            <div class="fact"><div class="fact__n">270+</div><div class="fact__l">Events played</div></div>
-            <div class="fact"><div class="fact__n">18</div><div class="fact__l">Years on the road</div></div>
-            <div class="fact"><div class="fact__n">04</div><div class="fact__l">Countries</div></div>
-            <div class="fact"><div class="fact__n">04</div><div class="fact__l">A.M. average end</div></div>
+            <div class="fact"><div class="fact__n">04</div><div class="fact__l">Musicians</div></div>
+            <div class="fact"><div class="fact__n">02</div><div class="fact__l">Lead vocalists</div></div>
+            <div class="fact"><div class="fact__n">02</div><div class="fact__l">Studio albums</div></div>
+            <div class="fact"><div class="fact__n">N.A.</div><div class="fact__l">Touring radius</div></div>
           </div>
         </div>
       </div>
@@ -620,78 +636,82 @@
           <span class="mono">§02 — THE CREW</span>
           <h2 class="h2 display-tight">FOUR<br/>NAMES.<br/>ONE BAND.</h2>
         </div>
-        <p class="intro">We grew up together — church on Sunday, panigíria in summer, weddings every weekend. We have been the band you hire for fifteen years. The lineup hasn't changed once.</p>
+        <p class="intro">Four musicians who came up through the church halls, the festivals, and the late nights. The lineup is two lead vocalists, bouzouki, keys, guitar, and drums.</p>
       </header>
 
       <div class="crew__grid">
         <article class="crew__card">
-          <div class="photo" data-hue="75" style="aspect-ratio: 3 / 4;">
+          <div class="photo" data-hue="245" style="aspect-ratio: 3 / 4;">
+            <img src="images/andreas.jpg" alt="Andreas Karantsinides — Bouzouki & Vocals" loading="lazy" />
             <div class="photo__tag">01</div>
             <div class="photo__caption">Bouzouki</div>
           </div>
           <div class="crew__body">
             <div class="mono crew__no">NO. 01</div>
-            <h3 class="display crew__name">Manolis "Manny" Papadakis</h3>
-            <div class="script-it crew__role">Bouzouki · Lead Vocals</div>
-            <p class="crew__bio">Born in Hamtramck. Played his first wedding at 14. Studied at the Athens Conservatory two summers running.</p>
+            <h3 class="display crew__name">Andreas Karantsinides</h3>
+            <div class="script-it crew__role">Bouzouki · Vocals</div>
+            <p class="crew__bio">Started as a classical pianist — Chopin, Rachmaninoff, Gershwin — then taught himself bouzouki by ear. Reveals the beauty of Greek music, and of Greek culture, by means of the bouzouki.</p>
             <dl class="crew__stats">
-              <div class="stat"><dt>From</dt><dd>Detroit, MI</dd></div>
-              <div class="stat"><dt>Sign</dt><dd>Aries</dd></div>
-              <div class="stat"><dt>Drink</dt><dd>Ouzo, no ice</dd></div>
+              <div class="stat"><dt>Plays</dt><dd>Bouzouki · Vocals</dd></div>
+              <div class="stat"><dt>Started</dt><dd>Classical piano</dd></div>
+              <div class="stat"><dt>Influences</dt><dd>Chiotis · Karandinis · Tsitsanis</dd></div>
             </dl>
           </div>
         </article>
 
         <article class="crew__card">
           <div class="photo" data-hue="245" style="aspect-ratio: 3 / 4;">
+            <img src="images/yianni.jpg" alt="Yianni Shafkalis — Keyboards & Vocals" loading="lazy" />
             <div class="photo__tag">02</div>
-            <div class="photo__caption">Vocals</div>
+            <div class="photo__caption">Keys · Vocals</div>
           </div>
           <div class="crew__body">
             <div class="mono crew__no">NO. 02</div>
-            <h3 class="display crew__name">Dimitri "Jimmy" Kostas</h3>
-            <div class="script-it crew__role">Vocals · Guitar · MC</div>
-            <p class="crew__bio">Runs the room. If you need someone to call out the koumbaros, that's Jimmy.</p>
+            <h3 class="display crew__name">Yianni Shafkalis</h3>
+            <div class="script-it crew__role">Keyboards · Vocals · Founding member</div>
+            <p class="crew__bio">Introduced to music by his father, also a keyboard player. Grounded in theory with a fondness for Greek and jazz. Has conducted jazz orchestras and taught over 150 students across multiple instruments.</p>
             <dl class="crew__stats">
-              <div class="stat"><dt>From</dt><dd>Royal Oak, MI</dd></div>
-              <div class="stat"><dt>Sign</dt><dd>Taurus</dd></div>
-              <div class="stat"><dt>Drink</dt><dd>Mythos, two at a time</dd></div>
+              <div class="stat"><dt>Plays</dt><dd>Keys · Vocals</dd></div>
+              <div class="stat"><dt>Role</dt><dd>Founding member</dd></div>
+              <div class="stat"><dt>Teaches</dt><dd>150+ students</dd></div>
             </dl>
           </div>
         </article>
 
         <article class="crew__card">
-          <div class="photo" data-hue="28" style="aspect-ratio: 3 / 4;">
+          <div class="photo" data-hue="245" style="aspect-ratio: 3 / 4;">
+            <img src="images/dimitris.jpg" alt="Dimitris Penz — Acoustic & Electric Guitar" loading="lazy" />
             <div class="photo__tag">03</div>
-            <div class="photo__caption">Drums</div>
+            <div class="photo__caption">Guitar</div>
           </div>
           <div class="crew__body">
             <div class="mono crew__no">NO. 03</div>
-            <h3 class="display crew__name">Nikos Vasilakis</h3>
-            <div class="script-it crew__role">Drums · Toumberléki</div>
-            <p class="crew__bio">From a Cretan family in Dearborn. Hits like the floor owes him money.</p>
+            <h3 class="display crew__name">Dimitris Penz</h3>
+            <div class="script-it crew__role">Acoustic · Electric Guitar</div>
+            <p class="crew__bio">Learned guitar from his father. Built a lively, smooth style of rhythm guitar inside Oneiro. Treats timing and rhythm as the cornerstones — the room moves when the pocket is right.</p>
             <dl class="crew__stats">
-              <div class="stat"><dt>From</dt><dd>Dearborn, MI</dd></div>
-              <div class="stat"><dt>Sign</dt><dd>Scorpio</dd></div>
-              <div class="stat"><dt>Drink</dt><dd>Tsipouro</dd></div>
+              <div class="stat"><dt>Plays</dt><dd>Guitar (acoustic + electric)</dd></div>
+              <div class="stat"><dt>Style</dt><dd>Rhythm-forward</dd></div>
+              <div class="stat"><dt>Lineage</dt><dd>Family-taught</dd></div>
             </dl>
           </div>
         </article>
 
         <article class="crew__card">
-          <div class="photo" data-hue="145" style="aspect-ratio: 3 / 4;">
+          <div class="photo" data-hue="245" style="aspect-ratio: 3 / 4;">
+            <img src="images/theofanis.jpg" alt="Theofanis Chalogianis — Drums & Percussion" loading="lazy" />
             <div class="photo__tag">04</div>
-            <div class="photo__caption">Keys</div>
+            <div class="photo__caption">Drums</div>
           </div>
           <div class="crew__body">
             <div class="mono crew__no">NO. 04</div>
-            <h3 class="display crew__name">Theo Karadimos</h3>
-            <div class="script-it crew__role">Keys · Clarino</div>
-            <p class="crew__bio">Classically trained, then unlearned it. Doubles on clarino for the dimotiká sets.</p>
+            <h3 class="display crew__name">Theofanis Chalogianis</h3>
+            <div class="script-it crew__role">Drums · Percussion</div>
+            <p class="crew__bio">First performance at age 12 — Detroit, with the Prevas Brothers. Worked the Greek venue circuit through the 1980s and Los Angeles studios through the 1990s. Influences: Rush, U2, and Greek rhythm.</p>
             <dl class="crew__stats">
-              <div class="stat"><dt>From</dt><dd>Birmingham, MI</dd></div>
-              <div class="stat"><dt>Sign</dt><dd>Capricorn</dd></div>
-              <div class="stat"><dt>Drink</dt><dd>Espresso · Metaxa</dd></div>
+              <div class="stat"><dt>Plays</dt><dd>Drums · Percussion</dd></div>
+              <div class="stat"><dt>Debut</dt><dd>Age 12 · Detroit</dd></div>
+              <div class="stat"><dt>Influences</dt><dd>Rush · U2 · Greek rhythm</dd></div>
             </dl>
           </div>
         </article>
@@ -705,106 +725,60 @@
       <header class="mus__head">
         <div>
           <span class="mono">§03 — LISTEN</span>
-          <h2 class="h2 h2--mus display-tight">FOUR ALBUMS.<br/>ONE LIVE TAPE<br/>A YEAR.</h2>
+          <h2 class="h2 h2--mus display-tight">TWO STUDIO<br/>ALBUMS.<br/>ONE BAND.</h2>
         </div>
         <div class="mus__platforms">
           <span class="mono" style="color: var(--ink-mute);">STREAM EVERYWHERE</span>
           <div class="mus__platLinks">
+            <a href="https://music.apple.com/us/artist/oneiro/677017168" target="_blank" rel="noopener" class="btn" style="border-color: var(--rule);">Apple Music →</a>
+            <a href="https://www.youtube.com/channel/UCBuQAA2ZBjqUM-FQss4Z8Mw" target="_blank" rel="noopener" class="btn" style="border-color: var(--rule);">YouTube →</a>
             <a href="#" class="btn" style="border-color: var(--rule);">Spotify →</a>
-            <a href="#" class="btn" style="border-color: var(--rule);">Apple Music →</a>
-            <a href="#" class="btn" style="border-color: var(--rule);">YouTube →</a>
-            <a href="#" class="btn" style="border-color: var(--rule);">Bandcamp →</a>
-            <a href="#" class="btn" style="border-color: var(--rule);">SoundCloud →</a>
           </div>
         </div>
       </header>
 
       <div class="mus__list">
         <article class="album">
-          <div class="album__cover" data-hue="245">
-            <div class="album__cat">BD-04</div>
-            <div class="album__yr">2025</div>
+          <div class="album__cover">
+            <img src="images/album-glendi.jpg" alt="Glendi (2014) — Oneiro" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
           </div>
           <div class="album__meta">
-            <span class="mono" style="color: var(--gold);">BD-04 · 2025</span>
-            <h3 class="display album__title">Live at the Hellenic Center</h3>
-            <div class="script-it album__sub">14 tracks · 62:18</div>
-            <p class="album__note">Recorded over three nights, one mic, one room.</p>
+            <span class="mono" style="color: var(--gold);">ON-02 · 2014</span>
+            <h3 class="display album__title">Glendi</h3>
+            <div class="script-it album__sub">11 tracks · Studio</div>
+            <p class="album__note">Our second record. Eleven sides of laïka and dimotika — the songs the room asks for.</p>
             <div class="album__links">
+              <a href="https://geo.itunes.apple.com/us/album/glendi/id908536784?mt=1&amp;app=music" target="_blank" rel="noopener" class="btn">▶ Apple Music</a>
               <a href="#" class="btn">▶ Spotify</a>
-              <a href="#" class="btn">▶ Apple Music</a>
-              <a href="#" class="btn">▶ YouTube</a>
-              <a href="#" class="btn">↓ Bandcamp</a>
-            </div>
-          </div>
-          <div class="album__bigCat display">№ 01</div>
-        </article>
-
-        <article class="album">
-          <div class="album__cover" data-hue="75">
-            <div class="album__cat">BD-03</div>
-            <div class="album__yr">2023</div>
-          </div>
-          <div class="album__meta">
-            <span class="mono" style="color: var(--gold);">BD-03 · 2023</span>
-            <h3 class="display album__title">Glendi Sessions, Vol. II</h3>
-            <div class="script-it album__sub">11 tracks · 48:40</div>
-            <p class="album__note">Forty-eight minutes of laïka, no breaks.</p>
-            <div class="album__links">
-              <a href="#" class="btn">▶ Spotify</a>
-              <a href="#" class="btn">▶ Apple Music</a>
-              <a href="#" class="btn">▶ YouTube</a>
-              <a href="#" class="btn">↓ Bandcamp</a>
+              <a href="https://www.youtube.com/channel/UCBuQAA2ZBjqUM-FQss4Z8Mw" target="_blank" rel="noopener" class="btn">▶ YouTube</a>
             </div>
           </div>
           <div class="album__bigCat display">№ 02</div>
         </article>
 
         <article class="album">
-          <div class="album__cover" data-hue="28">
-            <div class="album__cat">BD-02</div>
-            <div class="album__yr">2021</div>
+          <div class="album__cover">
+            <img src="images/album-kainouria.jpg" alt="Kainouria Epohi (2012) — Oneiro" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
           </div>
           <div class="album__meta">
-            <span class="mono" style="color: var(--gold);">BD-02 · 2021</span>
-            <h3 class="display album__title">Bouzouki Nights</h3>
-            <div class="script-it album__sub">9 tracks · 39:55</div>
-            <p class="album__note">Our first studio record. Recorded in a basement in Warren.</p>
+            <span class="mono" style="color: var(--gold);">ON-01 · 2012</span>
+            <h3 class="display album__title">Kainouria Epohi</h3>
+            <div class="script-it album__sub">10 tracks · Studio</div>
+            <p class="album__note">"A new era." Our debut studio record. The album that introduced Oneiro to the diaspora.</p>
             <div class="album__links">
+              <a href="https://geo.itunes.apple.com/us/album/kainouria-epohi/id663804017?mt=1&amp;app=music" target="_blank" rel="noopener" class="btn">▶ Apple Music</a>
               <a href="#" class="btn">▶ Spotify</a>
-              <a href="#" class="btn">▶ Apple Music</a>
-              <a href="#" class="btn">▶ YouTube</a>
-              <a href="#" class="btn">↓ Bandcamp</a>
+              <a href="https://www.youtube.com/channel/UCBuQAA2ZBjqUM-FQss4Z8Mw" target="_blank" rel="noopener" class="btn">▶ YouTube</a>
             </div>
           </div>
-          <div class="album__bigCat display">№ 03</div>
-        </article>
-
-        <article class="album">
-          <div class="album__cover" data-hue="145">
-            <div class="album__cat">BD-01</div>
-            <div class="album__yr">2019</div>
-          </div>
-          <div class="album__meta">
-            <span class="mono" style="color: var(--gold);">BD-01 · 2019</span>
-            <h3 class="display album__title">Glendi Sessions, Vol. I</h3>
-            <div class="script-it album__sub">10 tracks · 44:12</div>
-            <p class="album__note">The one that got us our first Toronto wedding.</p>
-            <div class="album__links">
-              <a href="#" class="btn">▶ Spotify</a>
-              <a href="#" class="btn">▶ Apple Music</a>
-              <a href="#" class="btn">▶ YouTube</a>
-              <a href="#" class="btn">↓ Bandcamp</a>
-            </div>
-          </div>
-          <div class="album__bigCat display">№ 04</div>
+          <div class="album__bigCat display">№ 01</div>
         </article>
       </div>
 
       <div class="mus__upload">
-        <div class="mono" style="color: var(--ink-mute);">OWN A TAPE FROM A SET WE PLAYED?</div>
-        <div class="script-it" style="font-size: clamp(20px, 2vw, 28px); color: var(--ink);">Send it — we'll trade you a record for it.</div>
-        <a href="#remake" class="btn">Send your tape →</a>
+        <div class="mono" style="color: var(--ink-mute);">WANT A SONG WE HAVEN'T RECORDED YET?</div>
+        <div class="script-it" style="font-size: clamp(20px, 2vw, 28px); color: var(--ink);">Commission a studio cut — see below.</div>
+        <a href="#remake" class="btn">Commission a song →</a>
       </div>
     </div>
   </section>
@@ -1024,7 +998,7 @@
 
         <div class="fm__submit">
           <button type="submit" class="btn btn--gold btn--lg" data-submit-label="Send the inquiry →">Send the inquiry →</button>
-          <span class="mono" style="color: var(--ink-mute);">Or call/text Manny direct: (313) 555-0199 · glendi@oneiromusic.com</span>
+          <span class="mono" style="color: var(--ink-mute);">Or reach us direct: <a href="tel:+15869432710" style="color: var(--ink); text-decoration: underline; text-decoration-color: var(--rule);">586.943.2710</a> · <a href="mailto:Booking@OneiroMusic.com" style="color: var(--ink); text-decoration: underline; text-decoration-color: var(--rule);">Booking@OneiroMusic.com</a></span>
         </div>
       </form>
     </div>
@@ -1040,70 +1014,70 @@
           <div class="script-it feed__script">Pulled from Instagram, TikTok, and YouTube. Updated weekly.</div>
         </div>
         <div class="feed__platforms">
-          <a href="#" class="feed__platRow">
+          <a href="https://www.instagram.com/oneiromusic" target="_blank" rel="noopener" class="feed__platRow">
             <span class="mono" style="color: var(--gold);">INSTAGRAM</span>
-            <span class="feed__platHandle">@OneiroGreekBand</span>
-            <span class="mono" style="color: var(--ink-mute);">186k followers →</span>
+            <span class="feed__platHandle">@oneiromusic</span>
+            <span class="mono" style="color: var(--ink-mute);">Follow →</span>
           </a>
-          <a href="#" class="feed__platRow">
-            <span class="mono" style="color: var(--gold);">TIKTOK</span>
-            <span class="feed__platHandle">@OneiroGreekBand</span>
-            <span class="mono" style="color: var(--ink-mute);">94k followers →</span>
+          <a href="https://www.facebook.com/OneiroMusicGroup/" target="_blank" rel="noopener" class="feed__platRow">
+            <span class="mono" style="color: var(--gold);">FACEBOOK</span>
+            <span class="feed__platHandle">/OneiroMusicGroup</span>
+            <span class="mono" style="color: var(--ink-mute);">Like →</span>
           </a>
-          <a href="#" class="feed__platRow">
+          <a href="https://www.youtube.com/channel/UCBuQAA2ZBjqUM-FQss4Z8Mw" target="_blank" rel="noopener" class="feed__platRow">
             <span class="mono" style="color: var(--gold);">YOUTUBE</span>
-            <span class="feed__platHandle">/OneiroGreekBand</span>
-            <span class="mono" style="color: var(--ink-mute);">12k subscribers →</span>
+            <span class="feed__platHandle">/OneiroMusicGroup</span>
+            <span class="mono" style="color: var(--ink-mute);">Subscribe →</span>
           </a>
         </div>
       </header>
 
       <div class="feed__grid">
-        <a href="#" class="feed__tile"><div class="feed__art" data-hue="75">
-          <div class="feed__top"><span class="mono feed__kind">REEL</span><span class="mono feed__time">2d</span></div>
+        <a href="https://www.instagram.com/oneiromusic" target="_blank" rel="noopener" class="feed__tile"><div class="feed__art" data-hue="245">
+          <div class="feed__top"><span class="mono feed__kind">FESTIVAL</span><span class="mono feed__time">JUN</span></div>
           <div class="feed__mid"><span class="feed__play">▶</span></div>
-          <div class="feed__bot"><span class="mono feed__likes">♥ 1.2k</span><span class="feed__cap">"Last night — St. Demetrios, Detroit. Six hours, one stop."</span></div>
+          <div class="feed__bot"><span class="mono feed__likes">♥ LIVE</span><span class="feed__cap">"St. Nicholas Greek Festival · Troy, MI"</span></div>
         </div></a>
-        <a href="#" class="feed__tile"><div class="feed__art" data-hue="245">
-          <div class="feed__top"><span class="mono feed__kind">PHOTO</span><span class="mono feed__time">4d</span></div>
+        <a href="https://www.instagram.com/oneiromusic" target="_blank" rel="noopener" class="feed__tile"><div class="feed__art" data-hue="220">
+          <div class="feed__top"><span class="mono feed__kind">FESTIVAL</span><span class="mono feed__time">AUG</span></div>
           <div class="feed__mid"></div>
-          <div class="feed__bot"><span class="mono feed__likes">♥ 840</span><span class="feed__cap">"Manny soundcheck — new bouzouki finally arrived from Athens."</span></div>
+          <div class="feed__bot"><span class="mono feed__likes">♥ LIVE</span><span class="feed__cap">"Holy Trinity Greek Festival · Grand Rapids, MI"</span></div>
         </div></a>
-        <a href="#" class="feed__tile"><div class="feed__art" data-hue="28">
-          <div class="feed__top"><span class="mono feed__kind">PHOTO</span><span class="mono feed__time">1w</span></div>
+        <a href="https://www.instagram.com/oneiromusic" target="_blank" rel="noopener" class="feed__tile"><div class="feed__art" data-hue="200">
+          <div class="feed__top"><span class="mono feed__kind">FESTIVAL</span><span class="mono feed__time">AUG</span></div>
           <div class="feed__mid"></div>
-          <div class="feed__bot"><span class="mono feed__likes">♥ 2.1k</span><span class="feed__cap">"Glendi nights — Astoria booked through the spring."</span></div>
+          <div class="feed__bot"><span class="mono feed__likes">♥ LIVE</span><span class="feed__cap">"Nativity of the Virgin Mary · Plymouth, MI"</span></div>
         </div></a>
-        <a href="#" class="feed__tile"><div class="feed__art" data-hue="145">
-          <div class="feed__top"><span class="mono feed__kind">REEL</span><span class="mono feed__time">1w</span></div>
+        <a href="https://www.instagram.com/oneiromusic" target="_blank" rel="noopener" class="feed__tile"><div class="feed__art" data-hue="245">
+          <div class="feed__top"><span class="mono feed__kind">FESTIVAL</span><span class="mono feed__time">SEP</span></div>
           <div class="feed__mid"><span class="feed__play">▶</span></div>
-          <div class="feed__bot"><span class="mono feed__likes">♥ 4.6k</span><span class="feed__cap">"Páno sti távla. As it should be."</span></div>
+          <div class="feed__bot"><span class="mono feed__likes">♥ LIVE</span><span class="feed__cap">"Holy Trinity Greek Festival · Salt Lake City, UT"</span></div>
         </div></a>
-        <a href="#" class="feed__tile"><div class="feed__art" data-hue="285">
-          <div class="feed__top"><span class="mono feed__kind">VIDEO</span><span class="mono feed__time">2w</span></div>
-          <div class="feed__mid"><span class="feed__play">▶</span></div>
-          <div class="feed__bot"><span class="mono feed__likes">♥ 930</span><span class="feed__cap">"Studio day. Cutting Ah Helidoni for the Sotiriou family."</span></div>
-        </div></a>
-        <a href="#" class="feed__tile"><div class="feed__art" data-hue="200">
-          <div class="feed__top"><span class="mono feed__kind">PHOTO</span><span class="mono feed__time">3w</span></div>
+        <a href="https://www.instagram.com/oneiromusic" target="_blank" rel="noopener" class="feed__tile"><div class="feed__art" data-hue="220">
+          <div class="feed__top"><span class="mono feed__kind">CONFERENCE</span><span class="mono feed__time">OCT</span></div>
           <div class="feed__mid"></div>
-          <div class="feed__bot"><span class="mono feed__likes">♥ 1.5k</span><span class="feed__cap">"Toronto kicked. Thank you koumbarí."</span></div>
+          <div class="feed__bot"><span class="mono feed__likes">♥ LIVE</span><span class="feed__cap">"YAL Pittsburgh Conference · Pittsburgh, PA"</span></div>
         </div></a>
-        <a href="#" class="feed__tile"><div class="feed__art" data-hue="60">
-          <div class="feed__top"><span class="mono feed__kind">PHOTO</span><span class="mono feed__time">3w</span></div>
+        <a href="https://www.instagram.com/oneiromusic" target="_blank" rel="noopener" class="feed__tile"><div class="feed__art" data-hue="200">
+          <div class="feed__top"><span class="mono feed__kind">STUDIO</span><span class="mono feed__time">2014</span></div>
           <div class="feed__mid"></div>
-          <div class="feed__bot"><span class="mono feed__likes">♥ 3.0k</span><span class="feed__cap">"Hookah on the patio after a 4 a.m. wedding finish."</span></div>
+          <div class="feed__bot"><span class="mono feed__likes">♥ ALBUM</span><span class="feed__cap">"Glendi — out now on Apple Music."</span></div>
         </div></a>
-        <a href="#" class="feed__tile"><div class="feed__art" data-hue="220">
-          <div class="feed__top"><span class="mono feed__kind">REEL</span><span class="mono feed__time">4w</span></div>
+        <a href="https://www.instagram.com/oneiromusic" target="_blank" rel="noopener" class="feed__tile"><div class="feed__art" data-hue="245">
+          <div class="feed__top"><span class="mono feed__kind">STUDIO</span><span class="mono feed__time">2012</span></div>
+          <div class="feed__mid"></div>
+          <div class="feed__bot"><span class="mono feed__likes">♥ ALBUM</span><span class="feed__cap">"Kainouria Epohi — our debut record."</span></div>
+        </div></a>
+        <a href="https://www.instagram.com/oneiromusic" target="_blank" rel="noopener" class="feed__tile"><div class="feed__art" data-hue="220">
+          <div class="feed__top"><span class="mono feed__kind">LIVE</span><span class="mono feed__time">ALWAYS</span></div>
           <div class="feed__mid"><span class="feed__play">▶</span></div>
-          <div class="feed__bot"><span class="mono feed__likes">♥ 5.2k</span><span class="feed__cap">"Mykonos summer dates announced."</span></div>
+          <div class="feed__bot"><span class="mono feed__likes">♥ HIRE</span><span class="feed__cap">"Bring us the event. We'll bring you the kefi."</span></div>
         </div></a>
       </div>
 
       <div class="feed__foot">
-        <a href="#" class="btn btn--gold btn--lg">Follow on Instagram →</a>
-        <span class="mono" style="color: var(--ink-mute);">@OneiroGreekBand · 186k</span>
+        <a href="https://www.instagram.com/oneiromusic" target="_blank" rel="noopener" class="btn btn--gold btn--lg">Follow on Instagram →</a>
+        <span class="mono" style="color: var(--ink-mute);">@oneiromusic</span>
       </div>
     </div>
   </section>
@@ -1202,12 +1176,12 @@
   <footer class="ft">
     <div class="container">
       <div class="ft__socials">
-        <a href="#" class="ft__social"><span class="ft__sP">INSTAGRAM</span><span class="ft__sH">@OneiroGreekBand</span><span class="ft__sA">→</span></a>
-        <a href="#" class="ft__social"><span class="ft__sP">TIKTOK</span><span class="ft__sH">@OneiroGreekBand</span><span class="ft__sA">→</span></a>
-        <a href="#" class="ft__social"><span class="ft__sP">YOUTUBE</span><span class="ft__sH">/OneiroGreekBand</span><span class="ft__sA">→</span></a>
-        <a href="#" class="ft__social"><span class="ft__sP">SPOTIFY</span><span class="ft__sH">Oneiro</span><span class="ft__sA">→</span></a>
-        <a href="#" class="ft__social"><span class="ft__sP">APPLE MUSIC</span><span class="ft__sH">Oneiro</span><span class="ft__sA">→</span></a>
-        <a href="#" class="ft__social"><span class="ft__sP">BANDCAMP</span><span class="ft__sH">oneirogreekband.bc</span><span class="ft__sA">→</span></a>
+        <a href="https://www.instagram.com/oneiromusic" target="_blank" rel="noopener" class="ft__social"><span class="ft__sP">INSTAGRAM</span><span class="ft__sH">@oneiromusic</span><span class="ft__sA">→</span></a>
+        <a href="https://www.facebook.com/OneiroMusicGroup/" target="_blank" rel="noopener" class="ft__social"><span class="ft__sP">FACEBOOK</span><span class="ft__sH">/OneiroMusicGroup</span><span class="ft__sA">→</span></a>
+        <a href="https://www.youtube.com/channel/UCBuQAA2ZBjqUM-FQss4Z8Mw" target="_blank" rel="noopener" class="ft__social"><span class="ft__sP">YOUTUBE</span><span class="ft__sH">/OneiroMusicGroup</span><span class="ft__sA">→</span></a>
+        <a href="https://music.apple.com/us/artist/oneiro/677017168" target="_blank" rel="noopener" class="ft__social"><span class="ft__sP">APPLE MUSIC</span><span class="ft__sH">Oneiro</span><span class="ft__sA">→</span></a>
+        <a href="mailto:Booking@OneiroMusic.com" class="ft__social"><span class="ft__sP">EMAIL</span><span class="ft__sH">Booking@OneiroMusic.com</span><span class="ft__sA">→</span></a>
+        <a href="tel:+15869432710" class="ft__social"><span class="ft__sP">PHONE</span><span class="ft__sH">586.943.2710</span><span class="ft__sA">→</span></a>
       </div>
 
       <div class="meander meander--gold" style="margin: 60px 0;"></div>
@@ -1218,44 +1192,44 @@
         <div>
           <div class="mono" style="margin-bottom: 14px;">BOOK THE BAND</div>
           <ul class="ft__list">
-            <li class="ft__li">book@oneirogreekband.com</li>
-            <li class="ft__li">+1 (313) 555-0199</li>
+            <li class="ft__li"><a href="mailto:Booking@OneiroMusic.com">Booking@OneiroMusic.com</a></li>
+            <li class="ft__li"><a href="tel:+15869432710">+1 (586) 943-2710</a></li>
             <li class="ft__li">Reply within 48 hours</li>
-            <li class="ft__li">Manny picks up after 9 p.m.</li>
+            <li class="ft__li">Weddings · Festivals · Glendia</li>
           </ul>
         </div>
         <div>
           <div class="mono" style="margin-bottom: 14px;">HOMEBASE</div>
           <ul class="ft__list">
-            <li class="ft__li">2840 W. Vernor Hwy</li>
-            <li class="ft__li">Detroit, MI 48216</li>
-            <li class="ft__li">Studio · by appointment</li>
+            <li class="ft__li">Metro Detroit, Michigan</li>
+            <li class="ft__li">North America &amp; beyond</li>
+            <li class="ft__li">Travel-ready quartet</li>
           </ul>
         </div>
         <div>
-          <div class="mono" style="margin-bottom: 14px;">SCENES</div>
+          <div class="mono" style="margin-bottom: 14px;">SERVICES</div>
           <ul class="ft__list">
-            <li class="ft__li">St. Demetrios · Detroit</li>
-            <li class="ft__li">Hellenic Center · Westland</li>
-            <li class="ft__li">Hippopotamus · Athens</li>
-            <li class="ft__li">Cocomat · Mýkonos</li>
+            <li class="ft__li">Live Greek entertainment</li>
+            <li class="ft__li">Wedding ceremonies + receptions</li>
+            <li class="ft__li">Greek festivals + glendia</li>
+            <li class="ft__li">Up-lighting for events</li>
           </ul>
         </div>
         <div>
-          <div class="mono" style="margin-bottom: 14px;">PRESS</div>
+          <div class="mono" style="margin-bottom: 14px;">REPERTOIRE</div>
           <ul class="ft__list">
-            <li class="ft__li">Press kit ↗</li>
-            <li class="ft__li">Live photos ↗</li>
-            <li class="ft__li">Logo &amp; assets ↗</li>
-            <li class="ft__li">Stage plot ↗</li>
+            <li class="ft__li">Laïka</li>
+            <li class="ft__li">Dimotika</li>
+            <li class="ft__li">Nisiótika</li>
+            <li class="ft__li">Paradosiaká</li>
           </ul>
         </div>
       </div>
 
       <div class="ft__fine">
-        <span class="mono">© Oneiro · 2008–2026</span>
+        <span class="mono">© Oneiro Music</span>
         <span class="mono" data-brand-gr>ΟΝΕΙΡΟ</span>
-        <span class="mono">Built in Detroit · Played everywhere</span>
+        <span class="mono">Live Greek Entertainment · Built in Detroit</span>
       </div>
     </div>
   </footer>
@@ -1266,8 +1240,8 @@
     <div class="twk__row">
       <span class="twk__lbl">Palette</span>
       <div class="twk__seg" data-tweak="palette">
-        <button type="button" data-val="aegean">Aegean</button>
-        <button type="button" data-val="detroit" aria-pressed="true">Detroit</button>
+        <button type="button" data-val="aegean" aria-pressed="true">Aegean</button>
+        <button type="button" data-val="detroit">Detroit</button>
         <button type="button" data-val="smoke">Smoke</button>
       </div>
     </div>
