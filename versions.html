@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" data-palette="aegean" data-display="bigshoulders" data-density="standard" data-motion="on">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0a0a0e" />
+<title>Hero Video Versions · Oneiro</title>
+<meta name="description" content="Side-by-side preview of every hero-video iteration generated for Oneiro." />
+<meta name="robots" content="noindex" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230a0a0e'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Impact, Arial Black, sans-serif' font-weight='900' font-size='42' fill='%234a9eff'%3EΟ%3C/text%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800;900&family=Geist:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --ink: oklch(0.95 0.012 240);
+    --ink-soft: oklch(0.78 0.015 240);
+    --ink-mute: oklch(0.55 0.012 240);
+    --bg: oklch(0.10 0.008 245);
+    --bg-elev: oklch(0.15 0.012 245);
+    --bg-deep: oklch(0.05 0.006 245);
+    --gold: oklch(0.68 0.17 245);
+    --rule: oklch(0.25 0.015 245);
+    --display: "Big Shoulders Display", Impact, sans-serif;
+    --sans: "Geist", ui-sans-serif, -apple-system, system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    --script: "Cormorant Garamond", Georgia, serif;
+    --gut: clamp(20px, 3vw, 48px);
+    --maxw: 1640px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  .container { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gut); }
+
+  /* Nav */
+  .nav { padding: 18px 0; border-bottom: 1px solid var(--rule); position: sticky; top: 0; z-index: 50; backdrop-filter: blur(20px); background: color-mix(in oklch, var(--bg) 88%, transparent); }
+  .nav__inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .nav__brand { display: flex; align-items: center; gap: 12px; font-family: var(--display); font-weight: 800; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.02em; }
+  .nav__mark { color: var(--gold); font-size: 18px; }
+  .nav__tag { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--ink-mute); text-transform: uppercase; }
+  .nav__back { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); padding: 10px 18px; border-radius: 4px; transition: background .2s ease, color .2s ease; }
+  .nav__back:hover { background: var(--bg-elev); color: var(--ink); }
+
+  /* Head */
+  .head { padding: clamp(48px, 6vw, 96px) 0 clamp(32px, 4vw, 56px); }
+  .head__kicker { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); }
+  .head__h1 { font-family: var(--display); font-weight: 800; font-size: clamp(40px, 6vw, 88px); line-height: 0.95; letter-spacing: -0.02em; margin: 12px 0 18px; }
+  .head__lede { font-size: clamp(15px, 1.1vw, 18px); color: var(--ink-soft); line-height: 1.65; max-width: 720px; }
+
+  /* Video tiles */
+  .tiles { display: flex; flex-direction: column; gap: clamp(48px, 6vw, 96px); padding-bottom: clamp(80px, 10vw, 140px); }
+  .tile { display: grid; grid-template-columns: 1fr; gap: clamp(20px, 2.5vw, 40px); }
+  .tile__media {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: var(--bg-elev);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .tile__media video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .tile__badge {
+    position: absolute; top: 16px; left: 16px;
+    background: rgba(0,0,0,0.65);
+    backdrop-filter: blur(8px);
+    color: var(--gold);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .tile__badge--live { background: var(--gold); color: var(--bg-deep); }
+  .tile__body { display: grid; grid-template-columns: 1fr; gap: 8px; }
+  .tile__title { font-family: var(--display); font-weight: 800; font-size: clamp(22px, 2.4vw, 32px); line-height: 1.0; margin: 0; letter-spacing: -0.01em; }
+  .tile__model { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--ink-mute); text-transform: uppercase; }
+  .tile__note { font-size: clamp(14px, 1vw, 16px); color: var(--ink-soft); line-height: 1.65; margin: 6px 0 0; max-width: 720px; }
+  .tile__note em { font-family: var(--script); font-style: italic; color: var(--ink); }
+  .tile__details {
+    display: flex; gap: 20px; flex-wrap: wrap; padding-top: 10px;
+    font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute);
+  }
+  .tile__details span strong { color: var(--ink-soft); font-weight: 500; }
+
+  /* Footer */
+  .ft { padding: clamp(32px, 4vw, 56px) 0; border-top: 1px solid var(--rule); color: var(--ink-mute); font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; }
+  .ft a { color: var(--ink-soft); }
+  .ft a:hover { color: var(--gold); }
+</style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="container nav__inner">
+      <a href="/" class="nav__brand">
+        <span class="nav__mark">◉</span>
+        <span>Oneiro</span>
+        <span class="nav__tag">· Hero video archive</span>
+      </a>
+      <a href="/" class="nav__back">← Back to site</a>
+    </div>
+  </nav>
+
+  <header class="head">
+    <div class="container">
+      <span class="head__kicker">Internal preview · not indexed</span>
+      <h1 class="head__h1">Every hero video, side by side.</h1>
+      <p class="head__lede">Every iteration of the hero clip that was generated during the build, in the order they were made. The version currently live on <a href="/" style="color: var(--gold); text-decoration: underline;">oneiromusic.com</a> is marked LIVE. Each clip is muted and loops on hover or click.</p>
+    </div>
+  </header>
+
+  <section class="tiles">
+    <div class="container">
+      <article class="tile">
+        <div class="tile__media">
+          <span class="tile__badge">V1 · ORIGINAL</span>
+          <video controls muted loop preload="metadata" playsinline>
+            <source src="/video/versions/v1-original-bouzouki-crowd.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="tile__body">
+          <h2 class="tile__title">First take — bouzouki player + crowd</h2>
+          <span class="tile__model">Veo 3 Fast · image-to-video · seeded on the live photo</span>
+          <p class="tile__note">Image-to-video off the original Oneiro performance photo. Same bouzouki player, animated crowd dancing below, single pyrotechnic burst, smoke. Pretty atmospheric but no specific scene direction beyond "make this come to life."</p>
+          <div class="tile__details">
+            <span><strong>Model</strong> veo3_fast</span>
+            <span><strong>Length</strong> 8s</span>
+            <span><strong>Quality</strong> 720p</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="tile">
+        <div class="tile__media">
+          <span class="tile__badge">V2 · GENERATED CAST</span>
+          <video controls muted loop preload="metadata" playsinline>
+            <source src="/video/versions/v2-multi-member-textgen.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="tile__body">
+          <h2 class="tile__title">Text-to-video — all four members on stage</h2>
+          <span class="tile__model">Veo 3 Fast · text-to-video · no seed image</span>
+          <p class="tile__note">First attempt at showing the whole band. Pure text-to-video, so the model invented its own musicians. Camera reveals bouzouki → keys → guitar → drums in sequence. HDR look is great, but the faces aren't recognizable as the real band.</p>
+          <div class="tile__details">
+            <span><strong>Model</strong> veo3_fast</span>
+            <span><strong>Length</strong> 8s</span>
+            <span><strong>Quality</strong> 720p</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="tile">
+        <div class="tile__media">
+          <span class="tile__badge">V3 · FACE CONTINUITY</span>
+          <video controls muted loop preload="metadata" playsinline>
+            <source src="/video/versions/v3-face-continuity-new-energy.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="tile__body">
+          <h2 class="tile__title">Face continuity + the new energy</h2>
+          <span class="tile__model">Veo 3 full · image-to-video · seeded on the live photo</span>
+          <p class="tile__note">Upgrade to full Veo 3 (10× the credits) for higher quality. Seeded on the real Oneiro photo, with a richer prompt: champagne glasses raised across the dance floor, gold confetti, rose petals, pyrotechnics. Same bouzouki player's face preserved.</p>
+          <div class="tile__details">
+            <span><strong>Model</strong> veo3 (full)</span>
+            <span><strong>Length</strong> 8s</span>
+            <span><strong>Quality</strong> 720p</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="tile">
+        <div class="tile__media">
+          <span class="tile__badge">V4 · KISS (HETERO)</span>
+          <video controls muted loop preload="metadata" playsinline>
+            <source src="/video/versions/v4-hetero-kiss.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="tile__body">
+          <h2 class="tile__title">"Passion of girls kissing" — first attempt</h2>
+          <span class="tile__model">Veo 3 full · image-to-video</span>
+          <p class="tile__note">Prompted explicitly for two women kissing center-frame, but Veo defaulted to a man-and-woman couple even with "two women" in the prompt. Otherwise on-brand: confetti, rose petals, pyrotechnics, bouzouki in shot.</p>
+          <div class="tile__details">
+            <span><strong>Model</strong> veo3 (full)</span>
+            <span><strong>Length</strong> 8s</span>
+            <span><strong>Quality</strong> 720p</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="tile">
+        <div class="tile__media">
+          <span class="tile__badge tile__badge--live">V5 · LIVE</span>
+          <video controls muted loop preload="metadata" playsinline>
+            <source src="/video/versions/v5-two-women-kiss.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="tile__body">
+          <h2 class="tile__title">Two women, sustained kiss — the current hero</h2>
+          <span class="tile__model">Veo 3 full · image-to-video</span>
+          <p class="tile__note">More explicit prompt ("both feminine, both in dresses, female-female couple, lesbian kiss") finally landed. Two women in red and champagne-gold dresses kissing center-frame for several seconds. Bouzouki player visible behind them. A tiny rainbow bracelet appears on one of the raised hands.</p>
+          <div class="tile__details">
+            <span><strong>Model</strong> veo3 (full)</span>
+            <span><strong>Length</strong> 8s</span>
+            <span><strong>Quality</strong> 720p</span>
+            <span><strong>Status</strong> currently live</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="tile" id="v6">
+        <div class="tile__media">
+          <span class="tile__badge">V6 · ALL 4 FACES</span>
+          <video controls muted loop preload="metadata" playsinline poster="/video/versions/v6-poster.jpg">
+            <source src="/video/versions/v6-all-four-members.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="tile__body">
+          <h2 class="tile__title">All four members with their actual faces</h2>
+          <span class="tile__model">Nano Banana Edit (composite) → Veo 3 full (animation)</span>
+          <p class="tile__note">Two-step pipeline. Step 1: Google Nano Banana Edit composited the four real band portraits — Andreas, Yianni, Dimitris, Sotirios — into a single club-stage scene preserving each man's face. Step 2: the composite seeded Veo 3 image-to-video to bring it to life — guitar strumming, keys playing, drums hitting, bouzouki picking — with red &amp; blue stage lights, confetti, a smoke burst, and the dance floor of women in front raising champagne flutes.</p>
+          <div class="tile__details">
+            <span><strong>Composite</strong> nano-banana-edit</span>
+            <span><strong>Animation</strong> veo3 (full)</span>
+            <span><strong>Length</strong> 8s</span>
+            <span><strong>Quality</strong> 720p</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <footer class="ft">
+    <div class="container">
+      <span>© Oneiro · video archive · <a href="/">main site →</a></span>
+    </div>
+  </footer>
+
+</body>
+</html>
