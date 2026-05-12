@@ -307,7 +307,7 @@
   [data-motion="off"] .hero-cinematic__video { display: none; }
 
   /* ─── Section heads ─── */
-  .sec { padding-top: clamp(80px, 10vw, 140px); padding-bottom: clamp(56px, 7vw, 96px); border-top: 1px solid var(--rule); }
+  .sec { padding-top: clamp(80px, 10vw, 140px); padding-bottom: clamp(56px, 7vw, 96px); }
   .sec--deep { background: var(--bg-deep); }
   .sec--xpad { padding-bottom: clamp(80px, 10vw, 140px); }
   .head2 { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 3.5vw, 64px); align-items: end; margin-bottom: clamp(40px, 5vw, 64px); }
@@ -321,29 +321,33 @@
 
   /* ─── What we play ─── */
   .styles__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(16px, 1.6vw, 28px); }
-  .style-card { padding: clamp(28px, 3vw, 44px); border: 1px solid var(--rule); background: var(--bg-elev); display: flex; flex-direction: column; gap: 16px; }
+  .style-card { padding: clamp(28px, 3vw, 44px); background: var(--bg-elev); display: flex; flex-direction: column; gap: 16px; border-radius: 4px; transition: background .25s ease, transform .25s ease; }
+  .style-card:hover { background: color-mix(in oklch, var(--bg-elev) 80%, var(--ink) 20%); transform: translateY(-2px); }
   .style-card__head { display: flex; justify-content: space-between; }
   .style-card__gr { font-size: clamp(36px, 4.5vw, 64px); color: var(--gold); letter-spacing: -0.005em; margin: 6px 0 0; font-family: var(--display); font-weight: 800; line-height: 0.95; text-transform: uppercase; }
   .style-card__en { font-size: clamp(20px, 1.8vw, 28px); color: var(--ink-soft); }
   .style-card__blurb { font-size: 0.95rem; color: var(--ink); line-height: 1.65; margin: 6px 0 4px; max-width: 460px; }
   .style-card__note { font-size: clamp(15px, 1.1vw, 17px); color: var(--ink); line-height: 1.55; margin: 4px 0 0; padding: 14px 0 0; border-top: 1px dashed color-mix(in oklch, var(--gold) 50%, transparent); font-style: italic; }
   .style-card__icons { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 8px 0 0; }
-  .style-card__chip { padding: 5px 10px; border: 1px solid var(--rule); color: var(--ink-soft); font-size: 0.68rem; }
+  .style-card__chip { padding: 5px 10px; background: color-mix(in oklch, var(--ink) 6%, transparent); color: var(--ink-soft); font-size: 0.68rem; border-radius: 999px; }
   .style-card__foot { display: flex; align-items: baseline; gap: 12px; margin-top: 8px; padding-top: 18px; border-top: 1px solid var(--rule); flex-wrap: wrap; }
   .style-card__artists { font-family: var(--script); font-style: italic; color: var(--ink-soft); font-size: 1rem; }
 
   /* ─── Crew ─── */
   .crew__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(16px, 1.8vw, 28px); }
-  .crew__card { display: flex; flex-direction: column; gap: 20px; transition: transform .25s ease; }
-  .crew__card:hover { transform: translateY(-4px); }
-  .crew__body { display: flex; flex-direction: column; gap: 6px; }
-  .crew__name { font-size: clamp(20px, 1.6vw, 24px); margin: 0; font-weight: 800; line-height: 1.05; }
-  .crew__role { color: var(--ink-soft); font-size: 1rem; }
-  .crew__bio { font-size: 0.92rem; color: var(--ink-soft); line-height: 1.6; margin: 10px 0 4px; }
-  .crew__stats { margin: 10px 0 0; padding: 0; }
-  .stat { display: flex; justify-content: space-between; padding: 10px 0; border-top: 1px dashed var(--rule); font-family: var(--mono); font-size: 0.72rem; }
-  .stat dt { color: var(--ink-mute); text-transform: uppercase; letter-spacing: 0.08em; }
-  .stat dd { color: var(--ink); margin: 0; text-align: right; }
+  .crew__card { display: flex; flex-direction: column; gap: 18px; }
+  .crew__card .photo { border-radius: 4px; overflow: hidden; }
+  .crew__card .photo > img { transition: transform .5s ease; }
+  .crew__card:hover .photo > img { transform: scale(1.03); }
+  .crew__body { display: flex; flex-direction: column; gap: 4px; }
+  .crew__name { font-size: clamp(20px, 1.6vw, 26px); margin: 0; font-weight: 800; line-height: 1.05; letter-spacing: -0.005em; }
+  .crew__role { color: var(--gold); font-size: 0.95rem; margin-bottom: 8px; }
+  .crew__bio { font-size: 0.92rem; color: var(--ink-soft); line-height: 1.65; margin: 4px 0 0; }
+  /* Stats become a small meta line at the bottom, monospace, no borders */
+  .crew__stats { margin: 14px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 14px 18px; }
+  .stat { display: flex; flex-direction: column; gap: 2px; font-family: var(--mono); font-size: 0.68rem; }
+  .stat dt { color: var(--ink-mute); text-transform: uppercase; letter-spacing: 0.1em; }
+  .stat dd { color: var(--ink); margin: 0; font-size: 0.78rem; }
 
   /* ─── Music / albums ─── */
   .mus__head { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(24px, 3.5vw, 64px); align-items: end; margin-bottom: clamp(40px, 5vw, 64px); }
@@ -375,13 +379,14 @@
   .where__places { color: var(--ink-soft); font-size: 0.9rem; max-width: 44%; text-align: right; }
   .where__note { color: var(--gold); min-width: 200px; text-align: right; font-size: 0.7rem; }
   .testimonials { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(18px, 2vw, 36px); margin-top: clamp(48px, 6vw, 72px); }
-  .tcard { padding: 32px; border: 1px solid var(--rule); margin: 0; background: var(--bg); }
+  .tcard { padding: 36px 32px; margin: 0; background: var(--bg-elev); border-radius: 4px; }
   .tcard__quote { font-size: clamp(18px, 1.7vw, 24px); color: var(--ink); line-height: 1.4; margin: 0 0 22px; }
   .tcard__cite { display: flex; flex-direction: column; gap: 4px; }
 
   /* ─── Events ─── */
   .ev__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 1.6vw, 28px); margin-bottom: clamp(48px, 6vw, 80px); }
-  .ev__card { padding: clamp(24px, 2.5vw, 36px); border: 1px solid var(--rule); background: var(--bg-elev); display: flex; flex-direction: column; gap: 10px; }
+  .ev__card { padding: clamp(24px, 2.5vw, 36px); background: var(--bg-elev); display: flex; flex-direction: column; gap: 10px; border-radius: 4px; transition: background .25s ease, transform .25s ease; }
+  .ev__card:hover { background: color-mix(in oklch, var(--bg-elev) 80%, var(--ink) 20%); transform: translateY(-2px); }
   .ev__head { display: flex; justify-content: space-between; }
   .ev__gr { font-size: clamp(28px, 3.2vw, 44px); color: var(--gold); letter-spacing: -0.005em; margin: 6px 0 0; line-height: 0.95; font-family: var(--display); font-weight: 800; text-transform: uppercase; }
   .ev__label { font-size: clamp(18px, 1.4vw, 20px); margin: 2px 0 0; font-weight: 800; }
@@ -392,17 +397,17 @@
   .ev__ctaText { font-size: clamp(20px, 2vw, 28px); color: var(--ink); line-height: 1.25; }
 
   /* ─── Forms ─── */
-  .fm { padding: clamp(28px, 4vw, 56px); border: 1px solid var(--rule); background: var(--bg-deep); display: flex; flex-direction: column; gap: 28px; }
-  .fm--gold { border-color: var(--gold); background: var(--bg); }
+  .fm { padding: clamp(28px, 4vw, 56px); background: var(--bg-elev); display: flex; flex-direction: column; gap: 28px; border-radius: 4px; }
+  .fm--gold { background: color-mix(in oklch, var(--gold) 5%, var(--bg-elev)); }
   .fm__head { display: flex; flex-direction: column; gap: 8px; padding-bottom: 14px; border-bottom: 1px solid var(--rule); }
   .fm__h { font-size: clamp(22px, 2.6vw, 36px); margin: 0; font-weight: 800; letter-spacing: -0.01em; line-height: 1.05; }
   .fm__grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 32px; }
   .fm__row { display: flex; flex-direction: column; gap: 8px; }
   .fm__lbl { color: var(--ink-mute); }
   .fm__pills { display: flex; gap: 6px; flex-wrap: wrap; }
-  .pill { padding: 10px 16px; border: 1px solid var(--rule); background: transparent; color: var(--ink-soft); cursor: pointer; letter-spacing: 0.08em; font-family: var(--mono); font-size: 0.74rem; text-transform: uppercase; font-weight: 500; transition: all .15s ease; }
-  .pill:hover { color: var(--ink); border-color: var(--ink); }
-  .pill[aria-pressed="true"] { background: var(--gold); color: var(--bg-deep); border-color: var(--gold); }
+  .pill { padding: 10px 16px; background: color-mix(in oklch, var(--ink) 6%, transparent); color: var(--ink-soft); cursor: pointer; letter-spacing: 0.08em; font-family: var(--mono); font-size: 0.74rem; text-transform: uppercase; font-weight: 500; border: none; border-radius: 999px; transition: all .15s ease; }
+  .pill:hover { color: var(--ink); background: color-mix(in oklch, var(--ink) 12%, transparent); }
+  .pill[aria-pressed="true"] { background: var(--gold); color: var(--bg-deep); }
   .fm__field { display: flex; flex-direction: column; gap: 6px; }
   .fm__input { background: transparent; border: none; border-bottom: 1px solid var(--ink); color: var(--ink); font-family: var(--script); font-style: italic; font-size: clamp(18px, 1.6vw, 24px); padding: 10px 0; outline: none; width: 100%; }
   .fm__input:focus { border-bottom-color: var(--gold); }
@@ -438,7 +443,7 @@
   .rm__ast { color: var(--gold); }
   .rm__intro { font-size: clamp(15px, 1.1vw, 18px); color: var(--ink-soft); max-width: 680px; line-height: 1.7; margin: 8px 0 clamp(48px, 6vw, 72px); }
   .rm__process { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(14px, 1.6vw, 24px); margin-bottom: clamp(48px, 6vw, 72px); }
-  .rm__step { padding: 22px 24px; border: 1px solid var(--rule); background: var(--bg); display: flex; flex-direction: column; gap: 8px; }
+  .rm__step { padding: 22px 24px; background: var(--bg-elev); display: flex; flex-direction: column; gap: 8px; border-radius: 4px; }
   .rm__stepN { font-size: 1rem; color: var(--gold); font-weight: 800; font-family: var(--display); }
   .rm__stepT { font-size: 1rem; margin: 4px 0 4px; font-weight: 800; }
   .rm__stepB { font-size: 0.88rem; color: var(--ink-soft); margin: 0; line-height: 1.6; }
@@ -446,11 +451,9 @@
 
   /* ─── Footer ─── */
   .ft { padding-top: clamp(40px, 6vw, 80px); padding-bottom: 40px; border-top: 1px solid var(--rule); }
-  .ft__socials { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--rule); }
-  .ft__social { display: flex; align-items: center; justify-content: space-between; padding: 22px 24px; border-bottom: 1px solid var(--rule); border-right: 1px solid var(--rule); color: var(--ink); transition: background .2s ease; }
-  .ft__social:hover { background: var(--bg-elev); }
-  .ft__social:nth-child(3n) { border-right: none; }
-  .ft__social:nth-last-child(-n+3) { border-bottom: none; }
+  .ft__socials { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+  .ft__social { display: flex; align-items: center; justify-content: space-between; padding: 22px 24px; background: var(--bg-elev); color: var(--ink); transition: background .2s ease, transform .2s ease; border-radius: 4px; }
+  .ft__social:hover { background: color-mix(in oklch, var(--gold) 14%, var(--bg-elev)); transform: translateX(2px); }
   .ft__sP { color: var(--gold); font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; }
   .ft__sH { font-family: var(--script); font-style: italic; font-size: 1.3rem; color: var(--ink); }
   .ft__sA { color: var(--ink-mute); }
@@ -478,8 +481,6 @@
     .rm__process { grid-template-columns: repeat(2, 1fr); }
     .ft__cols { grid-template-columns: repeat(2, 1fr); }
     .ft__socials { grid-template-columns: repeat(2, 1fr); }
-    .ft__social:nth-child(3n) { border-right: 1px solid var(--rule); }
-    .ft__social:nth-child(2n) { border-right: none; }
   }
   @media (max-width: 860px) {
     :root { --gut: 20px; }
@@ -496,7 +497,6 @@
     .where__places, .where__note { text-align: left; max-width: none; min-width: 0; }
     .where__spacer { display: none; }
     .fm__grid2, .ft__cols, .ft__socials { grid-template-columns: 1fr; }
-    .ft__social { border-right: none !important; }
   }
 </style>
 </head>
@@ -527,7 +527,7 @@
     <div class="hero-cinematic__media">
       <video class="hero-cinematic__video"
              autoplay muted loop playsinline preload="auto"
-             poster="images/group.jpg"
+             poster="images/hero-poster.jpg"
              aria-hidden="true">
         <source src="video/hero.mp4" type="video/mp4" />
       </video>
@@ -560,12 +560,12 @@
     <div class="hero-cinematic__scrollhint mono" aria-hidden="true">SCROLL ↓</div>
   </section>
 
-  <!-- ═══ §01 — WHAT WE PLAY ═══ -->
+  <!-- ═══ WHAT WE PLAY ═══ -->
   <section id="styles" class="sec sec--xpad">
     <div class="container">
       <header class="head2">
         <div>
-          <span class="mono">§01 — REPERTOIRE</span>
+          <span class="mono">REPERTOIRE</span>
           <h2 class="h2 display-tight">FOUR<br/>STYLES.<br/>ONE NIGHT.</h2>
         </div>
         <p class="intro">We open with kalamatianó, push into laïka by ten, slow it down with the nisiótika after dinner, and close with the dimotika nobody's got the legs for. The room decides the order.</p>
@@ -662,12 +662,12 @@
     </div>
   </section>
 
-  <!-- ═══ §02 — THE CREW ═══ -->
+  <!-- ═══ THE CREW ═══ -->
   <section id="crew" class="sec sec--xpad sec--deep">
     <div class="container">
       <header class="head2">
         <div>
-          <span class="mono">§02 — THE CREW</span>
+          <span class="mono">THE CREW</span>
           <h2 class="h2 display-tight">FOUR<br/>NAMES.<br/>ONE BAND.</h2>
         </div>
         <p class="intro">Four musicians who came up through the church halls, the festivals, and the late nights. The lineup is two lead vocalists, bouzouki, keys, guitar, and drums.</p>
@@ -745,12 +745,12 @@
     </div>
   </section>
 
-  <!-- ═══ §03 — MUSIC ═══ -->
+  <!-- ═══ MUSIC ═══ -->
   <section id="music" class="sec sec--xpad">
     <div class="container">
       <header class="mus__head">
         <div>
-          <span class="mono">§03 — LISTEN</span>
+          <span class="mono">LISTEN</span>
           <h2 class="h2 h2--mus display-tight">TWO STUDIO<br/>ALBUMS.<br/>ONE BAND.</h2>
         </div>
         <div class="mus__platforms">
@@ -809,12 +809,12 @@
     </div>
   </section>
 
-  <!-- ═══ §03 — WHERE WE PLAY ═══ -->
+  <!-- ═══ WHERE WE PLAY ═══ -->
   <section id="where" class="sec sec--xpad sec--deep">
     <div class="container">
       <header class="head2 head2--13">
         <div>
-          <span class="mono">§04 — TERRITORY</span>
+          <span class="mono">TERRITORY</span>
           <h2 class="h2 h2--md display-tight">FROM <span style="color: var(--gold);">DETROIT</span><br/>TO <span style="color: var(--gold);">BAHAMAS</span><br/>TO <span style="color: var(--gold);">ATHENS</span>.</h2>
         </div>
         <p class="intro">Detroit is home. We tour where the diaspora is — and we're in Greece every summer. Off this list? Ask anyway. The answer is usually yes.</p>
@@ -884,12 +884,12 @@
     </div>
   </section>
 
-  <!-- ═══ §05 — EVENTS ═══ -->
+  <!-- ═══ EVENTS ═══ -->
   <section id="hire" class="sec sec--xpad">
     <div class="container">
       <header class="head2 head2--12">
         <div>
-          <span class="mono">§05 — EVENTS</span>
+          <span class="mono">EVENTS</span>
           <h2 class="h2 h2--md display-tight">ANY NIGHT WORTH<br/><span style="color: var(--gold);">HAVING</span> A BAND.</h2>
         </div>
         <p class="intro">We play weddings, baptisms, glendia, panigíria, taverna residencies, and private events — from a Detroit basement to a Mýkonos terrace. Tell us about your night and we'll come back with a plan within 48 hours.</p>
