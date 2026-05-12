@@ -109,20 +109,39 @@
   .btn--gold:hover { background: var(--ink); color: var(--bg-deep); border-color: var(--ink); }
   .btn--lg { padding: 18px 28px; font-size: 0.82rem; }
 
-  /* Greek meander border */
-  .meander {
-    height: 28px;
-    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 28' preserveAspectRatio='xMinYMin'><g fill='none' stroke='black' stroke-width='2.5' stroke-linecap='square'><path d='M0 22 L0 6 L20 6 L20 22 L8 22 L8 14 L26 14 L26 6 L42 6 L42 22 L14 22'/><path d='M28 22 L28 6 L48 6 L48 22 L36 22 L36 14 L54 14 L54 6 L56 6'/></g></svg>");
-    -webkit-mask-repeat: repeat-x;
-    -webkit-mask-size: auto 28px;
-    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 28' preserveAspectRatio='xMinYMin'><g fill='none' stroke='black' stroke-width='2.5' stroke-linecap='square'><path d='M0 22 L0 6 L20 6 L20 22 L8 22 L8 14 L26 14 L26 6 L42 6 L42 22 L14 22'/><path d='M28 22 L28 6 L48 6 L48 22 L36 22 L36 14 L54 14 L54 6 L56 6'/></g></svg>");
-    mask-repeat: repeat-x;
-    mask-size: auto 28px;
-    background-color: currentColor;
+  /* Refined divider — hairline rules fade to transparent, centered Aegean-sun glyph in accent */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 1.6vw, 22px);
+    color: var(--gold);
   }
-  .meander--gold { color: var(--gold); }
-  .meander--blue { color: var(--blue); }
-  .meander--ink  { color: var(--ink); }
+  .divider__line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, color-mix(in oklch, var(--ink) 22%, transparent) 25%, color-mix(in oklch, var(--ink) 22%, transparent) 75%, transparent);
+  }
+  .divider__line--rev {
+    background: linear-gradient(to left, transparent, color-mix(in oklch, var(--ink) 22%, transparent) 25%, color-mix(in oklch, var(--ink) 22%, transparent) 75%, transparent);
+  }
+  .divider__mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .divider__glyph {
+    width: 22px; height: 22px;
+    flex-shrink: 0;
+    color: var(--gold);
+  }
+  .divider__label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
 
   /* Photo placeholder (gradient + halftone) */
   .photo {
@@ -359,21 +378,6 @@
   .feed__cap { font-size: 0.92rem; color: rgba(255,255,255,0.92); line-height: 1.25; text-shadow: 0 1px 6px rgba(0,0,0,0.5); font-family: var(--script); font-style: italic; }
   .feed__foot { padding: 32px 0 0; margin-top: 32px; border-top: 1px solid var(--rule); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
 
-  /* ─── Remake ─── */
-  .rm__head { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(24px, 4vw, 72px); align-items: start; margin-bottom: clamp(32px, 4vw, 56px); }
-  .rm__script { font-size: clamp(20px, 2.2vw, 30px); color: var(--gold); margin-top: 10px; line-height: 1.25; }
-  .rm__price { padding: clamp(24px, 2.5vw, 40px); border: 1px dashed var(--gold); background: color-mix(in oklch, var(--gold) 5%, transparent); display: flex; flex-direction: column; gap: 8px; align-self: start; }
-  .rm__bigPrice { font-size: clamp(40px, 5.5vw, 80px); color: var(--gold); line-height: 0.95; font-weight: 900; font-family: var(--display); text-transform: uppercase; letter-spacing: -0.01em; }
-  .rm__trade { font-size: clamp(16px, 1.6vw, 22px); color: var(--ink); margin-top: 6px; line-height: 1.3; }
-  .rm__fine { color: var(--ink-mute); font-size: 0.7rem; margin-top: 14px; line-height: 1.45; }
-  .rm__ast { color: var(--gold); }
-  .rm__intro { font-size: clamp(15px, 1.1vw, 18px); color: var(--ink-soft); max-width: 680px; line-height: 1.7; margin: 8px 0 clamp(48px, 6vw, 72px); }
-  .rm__process { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(14px, 1.6vw, 24px); margin-bottom: clamp(48px, 6vw, 72px); }
-  .rm__step { padding: 22px 24px; border: 1px solid var(--rule); background: var(--bg); display: flex; flex-direction: column; gap: 8px; }
-  .rm__stepN { font-size: 1rem; color: var(--gold); font-weight: 800; font-family: var(--display); }
-  .rm__stepT { font-size: 1rem; margin: 4px 0 4px; font-weight: 800; }
-  .rm__stepB { font-size: 0.88rem; color: var(--ink-soft); margin: 0; line-height: 1.6; }
-  .rm__dropzone { padding: clamp(24px, 2.5vw, 36px); border: 1px dashed var(--rule); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
 
   /* ─── Footer ─── */
   .ft { padding-top: clamp(40px, 6vw, 80px); padding-bottom: 40px; border-top: 1px solid var(--rule); }
@@ -407,7 +411,6 @@
     .crew__grid { grid-template-columns: repeat(2, 1fr); }
     .ev__grid { grid-template-columns: repeat(2, 1fr); }
     .feed__grid { grid-template-columns: repeat(2, 1fr); }
-    .rm__process { grid-template-columns: repeat(2, 1fr); }
     .ft__cols { grid-template-columns: repeat(2, 1fr); }
     .ft__socials { grid-template-columns: repeat(2, 1fr); }
     .ft__social:nth-child(3n) { border-right: 1px solid var(--rule); }
@@ -417,7 +420,7 @@
     :root { --gut: 20px; }
     .nav__list { display: none; }
     .hero__lower { grid-template-columns: 1fr; }
-    .head2, .mus__head, .feed__head, .rm__head { grid-template-columns: 1fr !important; }
+    .head2, .mus__head, .feed__head { grid-template-columns: 1fr !important; }
     .styles__grid { grid-template-columns: 1fr; }
     .crew__grid { grid-template-columns: 1fr; }
     .ev__grid { grid-template-columns: 1fr; }
@@ -429,7 +432,7 @@
     .where__row { flex-wrap: wrap; }
     .where__places, .where__note { text-align: left; max-width: none; min-width: 0; }
     .where__spacer { display: none; }
-    .fm__grid2, .rm__process, .ft__cols, .ft__socials { grid-template-columns: 1fr; }
+    .fm__grid2, .ft__cols, .ft__socials { grid-template-columns: 1fr; }
     .ft__social { border-right: none !important; }
   }
 </style>
@@ -471,7 +474,19 @@
 
       <div class="hero__huge display-tight" data-brand-en data-brand-gr="ΟΝΕΙΡΟ">ONEIRO</div>
 
-      <div class="meander meander--gold" style="margin: 16px 0 32px;"></div>
+      <div class="divider" role="separator" aria-hidden="true" style="margin: 18px 0 36px;">
+        <div class="divider__line divider__line--rev"></div>
+        <div class="divider__mark">
+          <svg class="divider__glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="1" y1="12" x2="5" y2="12"/>
+            <line x1="19" y1="12" x2="23" y2="12"/>
+            <circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/>
+          </svg>
+          <span class="divider__label">ΟΝΕΙΡΟ</span>
+        </div>
+        <div class="divider__line"></div>
+      </div>
 
       <div class="hero__lower">
         <div class="hero__lowerL">
@@ -707,11 +722,11 @@
             <div class="mono crew__no">NO. 04</div>
             <h3 class="display crew__name">Sotirios Raphtis</h3>
             <div class="script-it crew__role">Drums · Percussion</div>
-            <p class="crew__bio">Newest in the chair. Greek-American, Detroit-based, classically trained on percussion and steeped in the laïka pocket from a young age. Locks the room down before the first chorus.</p>
+            <p class="crew__bio">Newest and youngest. Grew up — unfortunately — with the other three as role models, who groomed him in every direction a Greek band knows how to. But he was conceived for the job: his father is a dimotika guitar player. The pocket was waiting for him.</p>
             <dl class="crew__stats">
               <div class="stat"><dt>Plays</dt><dd>Drums · Percussion</dd></div>
-              <div class="stat"><dt>Based</dt><dd>Metro Detroit</dd></div>
-              <div class="stat"><dt>Pocket</dt><dd>Laïka · dimotika · modern</dd></div>
+              <div class="stat"><dt>Raised by</dt><dd>The other three (badly)</dd></div>
+              <div class="stat"><dt>Pedigree</dt><dd>Son of a dimotika guitarist</dd></div>
             </dl>
           </div>
         </article>
@@ -776,9 +791,9 @@
       </div>
 
       <div class="mus__upload">
-        <div class="mono" style="color: var(--ink-mute);">WANT A SONG WE HAVEN'T RECORDED YET?</div>
-        <div class="script-it" style="font-size: clamp(20px, 2vw, 28px); color: var(--ink);">Commission a studio cut — see below.</div>
-        <a href="#remake" class="btn">Commission a song →</a>
+        <div class="mono" style="color: var(--ink-mute);">MORE COMING SOON</div>
+        <div class="script-it" style="font-size: clamp(20px, 2vw, 28px); color: var(--ink);">New record in the works — sign up below for the first listen.</div>
+        <a href="#hire" class="btn">Get in touch →</a>
       </div>
     </div>
   </section>
@@ -1082,96 +1097,6 @@
     </div>
   </section>
 
-  <!-- ═══ §06 — REMAKE A SONG ═══ -->
-  <section id="remake" class="sec sec--xpad sec--deep">
-    <div class="container">
-      <div class="meander meander--gold" style="margin-bottom: 40px;"></div>
-
-      <div class="rm__head">
-        <div>
-          <span class="mono" style="color: var(--gold);">§07 — STUDIO COMMISSION</span>
-          <h2 class="h2 display-tight" style="margin: 12px 0 12px;">GOT AN OLD<br/>GREEK SONG<br/>YOU LOVE?</h2>
-          <div class="script-it rm__script">Send it to us. We'll cut it for you.</div>
-        </div>
-
-        <div class="rm__price">
-          <div class="mono" style="color: var(--ink-mute);">OUR FEE</div>
-          <div class="rm__bigPrice">$3,700</div>
-          <div class="mono" style="color: var(--ink-mute);">OR…</div>
-          <div class="script-it rm__trade">your daughter as trade.<span class="rm__ast">*</span></div>
-          <div class="mono rm__fine"><span class="rm__ast">*</span>It's a joke. Mostly. Cash works fine.</div>
-        </div>
-      </div>
-
-      <p class="rm__intro">You name a song — your father's favorite, your mother's first dance, the one your pappous played on the laoúto every Sunday. We learn it, arrange it, and record it the way our band would play it. Studio cut, mixed and mastered, delivered as a 24-bit master and a vinyl-cut transfer. Two-week turnaround.</p>
-
-      <div class="rm__process">
-        <div class="rm__step">
-          <div class="rm__stepN">01</div>
-          <div class="display rm__stepT">YOU SEND THE SONG</div>
-          <p class="rm__stepB">Title, artist, a YouTube link or a tape. Anything we can listen to.</p>
-        </div>
-        <div class="rm__step">
-          <div class="rm__stepN">02</div>
-          <div class="display rm__stepT">WE ARRANGE IT FOR YOU</div>
-          <p class="rm__stepB">Demo back to you in five days — tempo, key, instrumentation.</p>
-        </div>
-        <div class="rm__step">
-          <div class="rm__stepN">03</div>
-          <div class="display rm__stepT">WE TRACK IN DETROIT</div>
-          <p class="rm__stepB">One day in the studio, four of us, one room. You're welcome to sit in.</p>
-        </div>
-        <div class="rm__step">
-          <div class="rm__stepN">04</div>
-          <div class="display rm__stepT">MASTER &amp; DELIVER</div>
-          <p class="rm__stepB">WAV, MP3, vinyl-cut transfer. Three small revisions included.</p>
-        </div>
-      </div>
-
-      <form class="fm fm--gold" data-form="remake">
-        <div class="fm__head">
-          <span class="mono" style="color: var(--gold);">COMMISSION FORM · 03·MIN</span>
-          <h3 class="display fm__h">NAME THE SONG.</h3>
-        </div>
-
-        <div class="fm__grid2">
-          <label class="fm__field"><span class="mono fm__lbl">Your name</span><input class="fm__input" type="text" placeholder="Yiannis Kostakis" /></label>
-          <label class="fm__field"><span class="mono fm__lbl">Email</span><input class="fm__input" type="email" placeholder="you@somewhere.com" /></label>
-          <label class="fm__field"><span class="mono fm__lbl">Song title</span><input class="fm__input" type="text" placeholder="Ah Helidoni Mou" /></label>
-          <label class="fm__field"><span class="mono fm__lbl">Original artist</span><input class="fm__input" type="text" placeholder="Stelios Kazantzidis" /></label>
-          <label class="fm__field"><span class="mono fm__lbl">Year (if known)</span><input class="fm__input" type="text" placeholder="1962" /></label>
-          <label class="fm__field"><span class="mono fm__lbl">Where will you play it?</span><input class="fm__input" type="text" placeholder="Wedding · Anniversary · For my mother" /></label>
-        </div>
-
-        <div class="fm__row">
-          <span class="mono" style="color: var(--ink-mute);">How would you like to pay?</span>
-          <div class="fm__pills" data-pills="pay">
-            <button type="button" class="pill" aria-pressed="true">Cash $3,700</button>
-            <button type="button" class="pill" aria-pressed="false">Wire / Card</button>
-            <button type="button" class="pill" aria-pressed="false">Half deposit · half on delivery</button>
-            <button type="button" class="pill" aria-pressed="false">Trade (offer below)</button>
-          </div>
-        </div>
-
-        <label class="fm__field">
-          <span class="mono fm__lbl">Anything else? (a recording, a memory, a deadline)</span>
-          <textarea class="fm__input" rows="3" placeholder="Paste a YouTube link, a Bandcamp link, or describe the version you want."></textarea>
-        </label>
-
-        <div class="rm__dropzone">
-          <div class="mono" style="color: var(--ink-mute);">OR DROP A FILE</div>
-          <div class="script-it" style="font-size: 1.4rem; color: var(--ink-soft);">MP3, WAV, M4A, or a tape we can digitize — up to 80 MB.</div>
-          <button type="button" class="btn">Choose file ↑</button>
-        </div>
-
-        <div class="fm__submit">
-          <button type="submit" class="btn btn--gold btn--lg" data-submit-label="Send the song →">Send the song →</button>
-          <span class="mono" style="color: var(--ink-mute);">We reply within 48 hours. Sometimes much faster.</span>
-        </div>
-      </form>
-    </div>
-  </section>
-
   <!-- ═══ FOOTER ═══ -->
   <footer class="ft">
     <div class="container">
@@ -1184,7 +1109,19 @@
         <a href="tel:+15869432710" class="ft__social"><span class="ft__sP">PHONE</span><span class="ft__sH">586.943.2710</span><span class="ft__sA">→</span></a>
       </div>
 
-      <div class="meander meander--gold" style="margin: 60px 0;"></div>
+      <div class="divider" role="separator" aria-hidden="true" style="margin: 60px 0;">
+        <div class="divider__line divider__line--rev"></div>
+        <div class="divider__mark">
+          <svg class="divider__glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="1" y1="12" x2="5" y2="12"/>
+            <line x1="19" y1="12" x2="23" y2="12"/>
+            <circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/>
+          </svg>
+          <span class="divider__label">ΟΝΕΙΡΟ</span>
+        </div>
+        <div class="divider__line"></div>
+      </div>
 
       <div class="ft__huge">ONEIRO</div>
 
@@ -1286,9 +1223,7 @@
         const btn = form.querySelector('[data-submit-label]');
         if (!btn) return;
         const original = btn.getAttribute('data-submit-label');
-        btn.textContent = form.dataset.form === 'remake'
-          ? "Got it ✓ — we're listening tonight"
-          : "Got it ✓ — we'll write back";
+        btn.textContent = "Got it ✓ — we'll write back";
         setTimeout(() => { btn.textContent = original; }, 4500);
       });
     });
