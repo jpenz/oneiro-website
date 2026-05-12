@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en" data-palette="aegean" data-display="bigshoulders" data-density="standard" data-motion="on">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Studio Commission · Oneiro</title>
+<meta name="description" content="Oneiro — four Greek-American musicians out of Detroit. Live Greek entertainment for weddings, baptisms, glendia, panigíria, restaurants — anywhere your people want to dance." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800;900&family=Anton&family=Oswald:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Geist:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    /* AEGEAN — black, ivory, cerulean accent (default) */
+    --ink:        oklch(0.95 0.012 240);
+    --ink-soft:   oklch(0.78 0.015 240);
+    --ink-mute:   oklch(0.55 0.012 240);
+    --bg:         oklch(0.10 0.008 245);
+    --bg-elev:    oklch(0.15 0.012 245);
+    --bg-deep:    oklch(0.05 0.006 245);
+    --blue:       oklch(0.45 0.13 245);
+    --blue-deep:  oklch(0.32 0.12 245);
+    /* Variable name kept as --gold for compatibility; value is now Aegean blue */
+    --gold:       oklch(0.68 0.17 245);
+    --gold-deep:  oklch(0.52 0.18 248);
+    --red:        oklch(0.55 0.18 28);
+    --rule:       oklch(0.25 0.015 245);
+    --accent:     var(--gold);
+
+    --display: "Big Shoulders Display", "Anton", "Oswald", Impact, sans-serif;
+    --display-alt: "Anton", Impact, sans-serif;
+    --sans:    "Geist", ui-sans-serif, -apple-system, system-ui, sans-serif;
+    --mono:    "JetBrains Mono", ui-monospace, Menlo, monospace;
+    --script:  "Cormorant Garamond", Georgia, serif;
+
+    --gut: clamp(20px, 3vw, 48px);
+    --maxw: 1640px;
+  }
+
+  /* DETROIT — warm black, original gold (for comparison) */
+  [data-palette="detroit"] {
+    --bg:         oklch(0.10 0.005 80);
+    --bg-elev:    oklch(0.15 0.008 80);
+    --bg-deep:    oklch(0.05 0.005 80);
+    --blue:       oklch(0.30 0.02 80);
+    --blue-deep:  oklch(0.20 0.015 80);
+    --gold:       oklch(0.78 0.14 75);
+    --gold-deep:  oklch(0.62 0.13 70);
+    --rule:       oklch(0.25 0.012 80);
+  }
+
+  /* SMOKE — desaturated charcoal + muted blue */
+  [data-palette="smoke"] {
+    --bg:         oklch(0.16 0.005 250);
+    --bg-elev:    oklch(0.21 0.008 250);
+    --bg-deep:    oklch(0.10 0.004 250);
+    --blue:       oklch(0.40 0.05 245);
+    --gold:       oklch(0.62 0.10 245);
+    --rule:       oklch(0.30 0.008 250);
+  }
+
+  [data-display="anton"]   { --display: "Anton", Impact, sans-serif; }
+  [data-display="oswald"]  { --display: "Oswald", Impact, sans-serif; }
+
+  [data-density="loose"]    { --gut: clamp(28px, 4vw, 64px); }
+  [data-density="tight"]    { --gut: clamp(14px, 2vw, 28px); }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    transition: background-color .4s ease, color .4s ease;
+  }
+
+  ::selection { background: var(--gold); color: var(--bg-deep); }
+  a { color: inherit; text-decoration: none; }
+  html { scroll-behavior: smooth; }
+
+  /* Type primitives */
+  .mono { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); font-weight: 500; }
+  .display { font-family: var(--display); font-weight: 800; letter-spacing: -0.005em; text-transform: uppercase; line-height: 0.86; }
+  .display-tight { font-family: var(--display); font-weight: 900; line-height: 0.82; letter-spacing: -0.01em; text-transform: uppercase; }
+  .script-it { font-family: var(--script); font-style: italic; font-weight: 500; letter-spacing: 0; }
+
+  .container { max-width: var(--maxw); margin: 0 auto; padding-left: var(--gut); padding-right: var(--gut); }
+  .rule { height: 1px; background: var(--rule); width: 100%; }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase;
+    font-weight: 600;
+    padding: 14px 22px;
+    border: 1px solid var(--ink);
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    transition: all .2s ease;
+  }
+  .btn:hover { background: var(--ink); color: var(--bg); }
+  .btn--gold { background: var(--gold); color: var(--bg-deep); border-color: var(--gold); }
+  .btn--gold:hover { background: var(--ink); color: var(--bg-deep); border-color: var(--ink); }
+  .btn--lg { padding: 18px 28px; font-size: 0.82rem; }
+
+  /* Refined divider — hairline rules fade to transparent, centered Aegean-sun glyph in accent */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 1.6vw, 22px);
+    color: var(--gold);
+  }
+  .divider__line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, color-mix(in oklch, var(--ink) 22%, transparent) 25%, color-mix(in oklch, var(--ink) 22%, transparent) 75%, transparent);
+  }
+  .divider__line--rev {
+    background: linear-gradient(to left, transparent, color-mix(in oklch, var(--ink) 22%, transparent) 25%, color-mix(in oklch, var(--ink) 22%, transparent) 75%, transparent);
+  }
+  .divider__mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .divider__glyph {
+    width: 22px; height: 22px;
+    flex-shrink: 0;
+    color: var(--gold);
+  }
+  .divider__label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+
+  /* Photo placeholder (gradient + halftone) */
+  .photo {
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-elev);
+    isolation: isolate;
+  }
+  .photo > img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    display: block;
+  }
+  /* Hide the synthetic gradient/halftone layers when a real image is present */
+  .photo:has(> img)::before,
+  .photo:has(> img)::after { display: none; }
+  .photo > img + .photo__tag, .photo > img ~ .photo__tag,
+  .photo > img + .photo__caption, .photo > img ~ .photo__caption { z-index: 2; }
+  .photo::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(60% 40% at 30% 20%, color-mix(in oklch, var(--gold) 25%, transparent), transparent 70%),
+      radial-gradient(80% 60% at 80% 80%, color-mix(in oklch, var(--blue) 35%, transparent), transparent 70%),
+      repeating-linear-gradient(90deg, transparent 0 2px, color-mix(in oklch, #000 18%, transparent) 2px 3px);
+    mix-blend-mode: screen;
+  }
+  .photo::after {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle at 50% 50%, color-mix(in oklch, var(--ink) 15%, transparent) 0.5px, transparent 1px);
+    background-size: 3px 3px;
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+  }
+  .photo__tag {
+    position: absolute; left: 14px; top: 14px;
+    font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: color-mix(in oklch, var(--ink) 70%, transparent);
+    background: color-mix(in oklch, var(--bg-deep) 70%, transparent);
+    padding: 4px 8px;
+  }
+  .photo__caption {
+    position: absolute; right: 14px; bottom: 14px;
+    font-family: var(--script); font-style: italic;
+    color: color-mix(in oklch, var(--ink) 80%, transparent);
+    font-size: 1.1rem;
+  }
+
+  /* Photo with hue variation (used in crew & feed) */
+  .photo[data-hue="75"]  { background: radial-gradient(60% 40% at 30% 20%, oklch(0.55 0.10 75 / 0.55), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 135 / 0.45), transparent 70%), var(--bg-elev); }
+  .photo[data-hue="245"] { background: radial-gradient(60% 40% at 30% 20%, oklch(0.55 0.10 245 / 0.55), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 305 / 0.45), transparent 70%), var(--bg-elev); }
+  .photo[data-hue="28"]  { background: radial-gradient(60% 40% at 30% 20%, oklch(0.55 0.10 28 / 0.55), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 88 / 0.45), transparent 70%), var(--bg-elev); }
+  .photo[data-hue="145"] { background: radial-gradient(60% 40% at 30% 20%, oklch(0.55 0.10 145 / 0.55), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 205 / 0.45), transparent 70%), var(--bg-elev); }
+
+  /* Reduce motion */
+  [data-motion="off"] *, [data-motion="off"] *::before, [data-motion="off"] *::after {
+    animation-play-state: paused !important;
+    transition: none !important;
+  }
+
+  /* ─── Nav ─── */
+  .nav { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); background: color-mix(in oklch, var(--bg) 88%, transparent); }
+  .nav__inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; gap: 24px; }
+  .nav__brand { display: flex; align-items: center; gap: 12px; }
+  .nav__mark { font-size: 18px; color: var(--gold); }
+  .nav__word { font-size: 1.15rem; font-weight: 800; letter-spacing: 0.02em; }
+  .nav__tag { display: inline-block; margin-left: 4px; }
+  .nav__list { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; }
+  .nav__link { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); font-weight: 500; }
+  .nav__link:hover { color: var(--ink); }
+
+  /* ─── Marquee ─── */
+  .marq { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 12px 0; overflow: hidden; background: var(--bg-deep); }
+  .marq__track { white-space: nowrap; overflow: hidden; }
+  .marq__run { display: inline-block; padding-left: 100%; animation: bz-marquee 65s linear infinite; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.16em; color: var(--gold); font-weight: 500; }
+  @keyframes bz-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ─── Hero ─── */
+  .hero { padding-top: clamp(48px, 6vw, 96px); padding-bottom: clamp(64px, 8vw, 120px); }
+  .hero__kicker { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; flex-wrap: wrap; }
+  .hero__dot { color: var(--gold); font-size: 8px; }
+  .hero__lockup { margin-bottom: 10px; }
+  .hero__huge { font-size: clamp(56px, 10vw, 168px); line-height: 0.85; letter-spacing: -0.02em; word-spacing: 0.02em; }
+  .hero__lower { display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(32px, 5vw, 80px); align-items: start; margin-top: clamp(24px, 3vw, 40px); }
+  .hero__lowerL { display: flex; flex-direction: column; gap: 28px; }
+  .hero__tag { font-size: clamp(28px, 3.8vw, 60px); margin: 0; font-weight: 800; line-height: 1.0; }
+  .hero__script { font-size: clamp(18px, 1.6vw, 24px); color: var(--ink-soft); line-height: 1.35; max-width: 540px; }
+  .hero__lede { font-size: clamp(15px, 1.05vw, 17px); color: var(--ink-soft); max-width: 540px; line-height: 1.65; margin: 0; }
+  .hero__btns { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 4px; }
+  .hero__services { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 8px; padding-top: 22px; border-top: 1px solid var(--rule); }
+  .hero__pill { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 12px; border: 1px solid var(--rule); color: var(--ink-soft); }
+  .hero__lowerR { display: flex; flex-direction: column; gap: 22px; }
+  .hero__facts { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
+  .fact { display: flex; flex-direction: column; gap: 6px; padding: 16px 0; border-top: 1px solid var(--rule); }
+  .fact__n { font-family: var(--display); font-weight: 800; font-size: 1.4rem; line-height: 0.86; text-transform: uppercase; }
+  .fact__l { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); font-weight: 500; }
+
+  /* ─── Section heads ─── */
+  .sec { padding-top: clamp(80px, 10vw, 140px); padding-bottom: clamp(56px, 7vw, 96px); border-top: 1px solid var(--rule); }
+  .sec--deep { background: var(--bg-deep); }
+  .sec--xpad { padding-bottom: clamp(80px, 10vw, 140px); }
+  .head2 { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 3.5vw, 64px); align-items: end; margin-bottom: clamp(40px, 5vw, 64px); }
+  .head2--12 { grid-template-columns: 1.2fr 1fr; }
+  .head2--13 { grid-template-columns: 1.3fr 1fr; }
+  .head2--14 { grid-template-columns: 1.4fr 1fr; }
+  .h2 { font-size: clamp(40px, 6vw, 96px); margin: 16px 0 0; letter-spacing: -0.02em; line-height: 0.95; }
+  .h2--md { font-size: clamp(36px, 5vw, 80px); line-height: 0.98; }
+  .h2--mus { font-size: clamp(40px, 5.5vw, 88px); }
+  .intro { font-size: clamp(15px, 1.1vw, 17px); color: var(--ink-soft); max-width: 480px; line-height: 1.65; margin: 0; }
+
+  /* ─── What we play ─── */
+  .styles__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(16px, 1.6vw, 28px); }
+  .style-card { padding: clamp(28px, 3vw, 44px); border: 1px solid var(--rule); background: var(--bg-elev); display: flex; flex-direction: column; gap: 16px; }
+  .style-card__head { display: flex; justify-content: space-between; }
+  .style-card__gr { font-size: clamp(36px, 4.5vw, 64px); color: var(--gold); letter-spacing: -0.005em; margin: 6px 0 0; font-family: var(--display); font-weight: 800; line-height: 0.95; text-transform: uppercase; }
+  .style-card__en { font-size: clamp(20px, 1.8vw, 28px); color: var(--ink-soft); }
+  .style-card__blurb { font-size: 0.95rem; color: var(--ink); line-height: 1.65; margin: 6px 0 4px; max-width: 460px; }
+  .style-card__note { font-size: clamp(15px, 1.1vw, 17px); color: var(--ink); line-height: 1.55; margin: 4px 0 0; padding: 14px 0 0; border-top: 1px dashed color-mix(in oklch, var(--gold) 50%, transparent); font-style: italic; }
+  .style-card__icons { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 8px 0 0; }
+  .style-card__chip { padding: 5px 10px; border: 1px solid var(--rule); color: var(--ink-soft); font-size: 0.68rem; }
+  .style-card__foot { display: flex; align-items: baseline; gap: 12px; margin-top: 8px; padding-top: 18px; border-top: 1px solid var(--rule); flex-wrap: wrap; }
+  .style-card__artists { font-family: var(--script); font-style: italic; color: var(--ink-soft); font-size: 1rem; }
+
+  /* ─── Crew ─── */
+  .crew__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(16px, 1.8vw, 28px); }
+  .crew__card { display: flex; flex-direction: column; gap: 20px; transition: transform .25s ease; }
+  .crew__card:hover { transform: translateY(-4px); }
+  .crew__body { display: flex; flex-direction: column; gap: 6px; }
+  .crew__name { font-size: clamp(20px, 1.6vw, 24px); margin: 0; font-weight: 800; line-height: 1.05; }
+  .crew__role { color: var(--ink-soft); font-size: 1rem; }
+  .crew__bio { font-size: 0.92rem; color: var(--ink-soft); line-height: 1.6; margin: 10px 0 4px; }
+  .crew__stats { margin: 10px 0 0; padding: 0; }
+  .stat { display: flex; justify-content: space-between; padding: 10px 0; border-top: 1px dashed var(--rule); font-family: var(--mono); font-size: 0.72rem; }
+  .stat dt { color: var(--ink-mute); text-transform: uppercase; letter-spacing: 0.08em; }
+  .stat dd { color: var(--ink); margin: 0; text-align: right; }
+
+  /* ─── Music / albums ─── */
+  .mus__head { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(24px, 3.5vw, 64px); align-items: end; margin-bottom: clamp(40px, 5vw, 64px); }
+  .mus__platforms { display: flex; flex-direction: column; gap: 14px; }
+  .mus__platLinks { display: flex; flex-wrap: wrap; gap: 8px; }
+  .mus__list { display: flex; flex-direction: column; }
+  .album { display: grid; grid-template-columns: 260px 1fr auto; gap: clamp(20px, 3vw, 48px); align-items: center; padding: 32px 0; border-top: 1px solid var(--rule); position: relative; }
+  .album__cover { width: 260px; aspect-ratio: 1 / 1; position: relative; overflow: hidden; }
+  .album__cover[data-hue="245"] { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 245 / 0.55), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 305 / 0.6), transparent 70%), var(--bg-elev); }
+  .album__cover[data-hue="75"]  { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 75 / 0.55), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 135 / 0.6), transparent 70%), var(--bg-elev); }
+  .album__cover[data-hue="28"]  { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 28 / 0.55), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 88 / 0.6), transparent 70%), var(--bg-elev); }
+  .album__cover[data-hue="145"] { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 145 / 0.55), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 205 / 0.6), transparent 70%), var(--bg-elev); }
+  .album__cat { position: absolute; top: 14px; left: 14px; color: color-mix(in oklch, var(--ink) 70%, transparent); font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; }
+  .album__yr { position: absolute; bottom: 14px; right: 14px; font-size: 2.4rem; color: color-mix(in oklch, var(--ink) 60%, transparent); font-family: var(--display); font-weight: 800; line-height: 0.86; text-transform: uppercase; }
+  .album__meta { display: flex; flex-direction: column; gap: 10px; }
+  .album__title { font-size: clamp(24px, 2.8vw, 40px); margin: 4px 0; letter-spacing: -0.01em; font-weight: 800; line-height: 1.0; }
+  .album__sub { color: var(--ink-soft); font-size: 1.15rem; }
+  .album__note { font-size: 1rem; color: var(--ink-soft); max-width: 480px; margin: 8px 0 4px; line-height: 1.5; }
+  .album__links { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .album__bigCat { font-size: clamp(40px, 6vw, 96px); color: var(--ink-mute); opacity: 0.4; letter-spacing: -0.02em; }
+  .mus__upload { padding: 32px 0; border-top: 1px solid var(--rule); margin-top: 24px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap; justify-content: space-between; }
+
+  /* ─── Where we play ─── */
+  .where__list { list-style: none; margin: 0; padding: 0; }
+  .where__row { display: flex; align-items: baseline; gap: 18px; padding: 22px 0; border-bottom: 1px solid var(--rule); }
+  .where__num { width: 36px; }
+  .where__region { font-size: clamp(22px, 2.4vw, 32px); flex-shrink: 0; }
+  .where__spacer { flex: 1; height: 1px; background: var(--rule); margin: 0 8px; align-self: center; }
+  .where__places { color: var(--ink-soft); font-size: 0.9rem; max-width: 44%; text-align: right; }
+  .where__note { color: var(--gold); min-width: 200px; text-align: right; font-size: 0.7rem; }
+  .testimonials { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(18px, 2vw, 36px); margin-top: clamp(48px, 6vw, 72px); }
+  .tcard { padding: 32px; border: 1px solid var(--rule); margin: 0; background: var(--bg); }
+  .tcard__quote { font-size: clamp(18px, 1.7vw, 24px); color: var(--ink); line-height: 1.4; margin: 0 0 22px; }
+  .tcard__cite { display: flex; flex-direction: column; gap: 4px; }
+
+  /* ─── Events ─── */
+  .ev__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 1.6vw, 28px); margin-bottom: clamp(48px, 6vw, 80px); }
+  .ev__card { padding: clamp(24px, 2.5vw, 36px); border: 1px solid var(--rule); background: var(--bg-elev); display: flex; flex-direction: column; gap: 10px; }
+  .ev__head { display: flex; justify-content: space-between; }
+  .ev__gr { font-size: clamp(28px, 3.2vw, 44px); color: var(--gold); letter-spacing: -0.005em; margin: 6px 0 0; line-height: 0.95; font-family: var(--display); font-weight: 800; text-transform: uppercase; }
+  .ev__label { font-size: clamp(18px, 1.4vw, 20px); margin: 2px 0 0; font-weight: 800; }
+  .ev__blurb { font-size: 0.92rem; color: var(--ink-soft); line-height: 1.65; margin: 6px 0 0; }
+  .ev__moments { list-style: none; padding: 0; margin: 10px 0 0; display: flex; flex-direction: column; gap: 5px; }
+  .ev__moment { font-size: 0.78rem; color: var(--ink-soft); font-family: var(--mono); letter-spacing: 0.04em; }
+  .ev__cta { padding: clamp(32px, 4vw, 56px); border: 1px solid var(--gold); background: color-mix(in oklch, var(--gold) 5%, transparent); display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: clamp(48px, 6vw, 80px); }
+  .ev__ctaText { font-size: clamp(20px, 2vw, 28px); color: var(--ink); line-height: 1.25; }
+
+  /* ─── Forms ─── */
+  .fm { padding: clamp(28px, 4vw, 56px); border: 1px solid var(--rule); background: var(--bg-deep); display: flex; flex-direction: column; gap: 28px; }
+  .fm--gold { border-color: var(--gold); background: var(--bg); }
+  .fm__head { display: flex; flex-direction: column; gap: 8px; padding-bottom: 14px; border-bottom: 1px solid var(--rule); }
+  .fm__h { font-size: clamp(22px, 2.6vw, 36px); margin: 0; font-weight: 800; letter-spacing: -0.01em; line-height: 1.05; }
+  .fm__grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 32px; }
+  .fm__row { display: flex; flex-direction: column; gap: 8px; }
+  .fm__lbl { color: var(--ink-mute); }
+  .fm__pills { display: flex; gap: 6px; flex-wrap: wrap; }
+  .pill { padding: 10px 16px; border: 1px solid var(--rule); background: transparent; color: var(--ink-soft); cursor: pointer; letter-spacing: 0.08em; font-family: var(--mono); font-size: 0.74rem; text-transform: uppercase; font-weight: 500; transition: all .15s ease; }
+  .pill:hover { color: var(--ink); border-color: var(--ink); }
+  .pill[aria-pressed="true"] { background: var(--gold); color: var(--bg-deep); border-color: var(--gold); }
+  .fm__field { display: flex; flex-direction: column; gap: 6px; }
+  .fm__input { background: transparent; border: none; border-bottom: 1px solid var(--ink); color: var(--ink); font-family: var(--script); font-style: italic; font-size: clamp(18px, 1.6vw, 24px); padding: 10px 0; outline: none; width: 100%; }
+  .fm__input:focus { border-bottom-color: var(--gold); }
+  .fm__input::placeholder { color: color-mix(in oklch, var(--ink-mute) 70%, transparent); }
+  textarea.fm__input { resize: vertical; min-height: 84px; font-family: var(--script); }
+  .fm__submit { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; justify-content: space-between; padding-top: 14px; border-top: 1px solid var(--rule); }
+
+  /* ─── Social feed ─── */
+  .feed__head { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(24px, 3.5vw, 64px); align-items: end; margin-bottom: clamp(40px, 5vw, 64px); }
+  .feed__h { font-size: clamp(36px, 5.5vw, 88px); margin: 14px 0 10px; letter-spacing: -0.02em; line-height: 0.95; }
+  .feed__script { font-size: clamp(16px, 1.4vw, 20px); color: var(--ink-soft); line-height: 1.45; }
+  .feed__platforms { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--rule); }
+  .feed__platRow { display: grid; grid-template-columns: 1fr 1.5fr auto; gap: 14px; padding: 16px 18px; align-items: center; border-bottom: 1px solid var(--rule); color: var(--ink); transition: background .2s ease; }
+  .feed__platRow:last-child { border-bottom: none; }
+  .feed__platRow:hover { background: var(--bg-elev); }
+  .feed__platHandle { font-size: 1.15rem; color: var(--ink); font-family: var(--script); font-style: italic; }
+  .feed__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(8px, 0.8vw, 14px); }
+  .feed__tile { display: block; color: inherit; }
+  .feed__art { aspect-ratio: 1 / 1; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; padding: 14px; transition: transform .3s ease; }
+  .feed__tile:hover .feed__art { transform: scale(1.02); }
+  .feed__art[data-hue="75"]  { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 75 / 0.6), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 135 / 0.55), transparent 70%), var(--bg-elev); }
+  .feed__art[data-hue="245"] { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 245 / 0.6), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 305 / 0.55), transparent 70%), var(--bg-elev); }
+  .feed__art[data-hue="28"]  { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 28 / 0.6), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 88 / 0.55), transparent 70%), var(--bg-elev); }
+  .feed__art[data-hue="145"] { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 145 / 0.6), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 205 / 0.55), transparent 70%), var(--bg-elev); }
+  .feed__art[data-hue="285"] { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 285 / 0.6), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 345 / 0.55), transparent 70%), var(--bg-elev); }
+  .feed__art[data-hue="200"] { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 200 / 0.6), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 260 / 0.55), transparent 70%), var(--bg-elev); }
+  .feed__art[data-hue="60"]  { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 60 / 0.6), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 120 / 0.55), transparent 70%), var(--bg-elev); }
+  .feed__art[data-hue="220"] { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 220 / 0.6), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 280 / 0.55), transparent 70%), var(--bg-elev); }
+  .feed__top { display: flex; justify-content: space-between; }
+  .feed__kind { padding: 3px 8px; background: rgba(0,0,0,0.6); color: var(--gold); letter-spacing: 0.1em; }
+  .feed__time { color: rgba(255,255,255,0.7); }
+  .feed__mid { flex: 1; display: grid; place-items: center; }
+  .feed__play { font-size: 38px; color: rgba(255,255,255,0.85); text-shadow: 0 2px 12px rgba(0,0,0,0.5); }
+  .feed__bot { display: flex; flex-direction: column; gap: 4px; }
+  .feed__likes { color: var(--gold); }
+  .feed__cap { font-size: 0.92rem; color: rgba(255,255,255,0.92); line-height: 1.25; text-shadow: 0 1px 6px rgba(0,0,0,0.5); font-family: var(--script); font-style: italic; }
+  .feed__foot { padding: 32px 0 0; margin-top: 32px; border-top: 1px solid var(--rule); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+
+
+  /* ─── Remake / Studio Commission ─── */
+  .rm__head { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(24px, 4vw, 72px); align-items: start; margin-bottom: clamp(32px, 4vw, 56px); }
+  .rm__script { font-size: clamp(20px, 2.2vw, 30px); color: var(--gold); margin-top: 10px; line-height: 1.25; }
+  .rm__price { padding: clamp(24px, 2.5vw, 40px); border: 1px dashed var(--gold); background: color-mix(in oklch, var(--gold) 5%, transparent); display: flex; flex-direction: column; gap: 8px; align-self: start; }
+  .rm__bigPrice { font-size: clamp(40px, 5.5vw, 80px); color: var(--gold); line-height: 0.95; font-weight: 900; font-family: var(--display); text-transform: uppercase; letter-spacing: -0.01em; }
+  .rm__trade { font-size: clamp(16px, 1.6vw, 22px); color: var(--ink); margin-top: 6px; line-height: 1.3; }
+  .rm__fine { color: var(--ink-mute); font-size: 0.7rem; margin-top: 14px; line-height: 1.45; }
+  .rm__ast { color: var(--gold); }
+  .rm__intro { font-size: clamp(15px, 1.1vw, 18px); color: var(--ink-soft); max-width: 680px; line-height: 1.7; margin: 8px 0 clamp(48px, 6vw, 72px); }
+  .rm__process { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(14px, 1.6vw, 24px); margin-bottom: clamp(48px, 6vw, 72px); }
+  .rm__step { padding: 22px 24px; border: 1px solid var(--rule); background: var(--bg); display: flex; flex-direction: column; gap: 8px; }
+  .rm__stepN { font-size: 1rem; color: var(--gold); font-weight: 800; font-family: var(--display); }
+  .rm__stepT { font-size: 1rem; margin: 4px 0 4px; font-weight: 800; }
+  .rm__stepB { font-size: 0.88rem; color: var(--ink-soft); margin: 0; line-height: 1.6; }
+  .rm__dropzone { padding: clamp(24px, 2.5vw, 36px); border: 1px dashed var(--rule); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+  /* ─── Footer ─── */
+  .ft { padding-top: clamp(40px, 6vw, 80px); padding-bottom: 40px; border-top: 1px solid var(--rule); }
+  .ft__socials { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--rule); }
+  .ft__social { display: flex; align-items: center; justify-content: space-between; padding: 22px 24px; border-bottom: 1px solid var(--rule); border-right: 1px solid var(--rule); color: var(--ink); transition: background .2s ease; }
+  .ft__social:hover { background: var(--bg-elev); }
+  .ft__social:nth-child(3n) { border-right: none; }
+  .ft__social:nth-last-child(-n+3) { border-bottom: none; }
+  .ft__sP { color: var(--gold); font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; }
+  .ft__sH { font-family: var(--script); font-style: italic; font-size: 1.3rem; color: var(--ink); }
+  .ft__sA { color: var(--ink-mute); }
+  .ft__huge { font-size: clamp(50px, 10vw, 168px); letter-spacing: -0.03em; color: var(--gold); line-height: 0.85; margin-bottom: clamp(32px, 4vw, 56px); font-family: var(--display); font-weight: 900; text-transform: uppercase; }
+  .ft__cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; padding-top: 30px; border-top: 1px solid var(--rule); }
+  .ft__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .ft__li { font-size: 0.95rem; color: var(--ink-soft); }
+  .ft__li a { color: var(--ink-soft); text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 3px; }
+  .ft__li a:hover { color: var(--gold); text-decoration-color: var(--gold); }
+  .ft__fine { display: flex; justify-content: space-between; padding-top: 28px; margin-top: 60px; border-top: 1px solid var(--rule); color: var(--ink-mute); flex-wrap: wrap; gap: 8px; }
+
+  /* ─── Tweaks toolbar (simplified) ─── */
+  .twk { position: fixed; right: 16px; bottom: 16px; z-index: 100; display: flex; flex-direction: column; gap: 6px; padding: 12px; background: rgba(20,18,12,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--rule); border-radius: 10px; min-width: 220px; }
+  .twk__title { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 4px; }
+  .twk__row { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 4px 0; }
+  .twk__lbl { font-family: var(--mono); font-size: 0.7rem; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.06em; }
+  .twk__seg { display: flex; gap: 0; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
+  .twk__seg button { appearance: none; border: none; background: transparent; color: var(--ink-soft); font-family: var(--mono); font-size: 0.66rem; padding: 4px 8px; cursor: pointer; text-transform: uppercase; letter-spacing: 0.06em; }
+  .twk__seg button[aria-pressed="true"] { background: var(--gold); color: var(--bg-deep); }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 1100px) {
+    .crew__grid { grid-template-columns: repeat(2, 1fr); }
+    .ev__grid { grid-template-columns: repeat(2, 1fr); }
+    .feed__grid { grid-template-columns: repeat(2, 1fr); }
+    .rm__process { grid-template-columns: repeat(2, 1fr); }
+    .ft__cols { grid-template-columns: repeat(2, 1fr); }
+    .ft__socials { grid-template-columns: repeat(2, 1fr); }
+    .ft__social:nth-child(3n) { border-right: 1px solid var(--rule); }
+    .ft__social:nth-child(2n) { border-right: none; }
+  }
+  @media (max-width: 860px) {
+    :root { --gut: 20px; }
+    .nav__list { display: none; }
+    .hero__lower { grid-template-columns: 1fr; }
+    .head2, .mus__head, .feed__head { grid-template-columns: 1fr !important; }
+    .styles__grid { grid-template-columns: 1fr; }
+    .crew__grid { grid-template-columns: 1fr; }
+    .ev__grid { grid-template-columns: 1fr; }
+    .feed__grid { grid-template-columns: repeat(2, 1fr); }
+    .album { grid-template-columns: 1fr; }
+    .album__cover { width: 100%; max-width: 360px; }
+    .album__bigCat { display: none; }
+    .testimonials { grid-template-columns: 1fr; }
+    .where__row { flex-wrap: wrap; }
+    .where__places, .where__note { text-align: left; max-width: none; min-width: 0; }
+    .where__spacer { display: none; }
+    .fm__grid2, .ft__cols, .ft__socials { grid-template-columns: 1fr; }
+    .ft__social { border-right: none !important; }
+  }
+</style>
+</head>
+<body id="top">
+<!-- ═══ NAV ═══ -->
+  <nav class="nav">
+    <div class="container nav__inner">
+      <a href="#top" class="nav__brand">
+        <span class="nav__mark">◉</span>
+        <span class="display nav__word">Oneiro</span>
+        <span class="mono nav__tag">LIVE GREEK · DETROIT</span>
+      </a>
+      <ul class="nav__list">
+        <li><a href="#styles" class="nav__link">What we play</a></li>
+        <li><a href="#crew" class="nav__link">The crew</a></li>
+        <li><a href="#music" class="nav__link">Listen</a></li>
+        <li><a href="#where" class="nav__link">Where we go</a></li>
+        <li><a href="#hire" class="nav__link">Hire us</a></li>
+      </ul>
+      <a href="#hire" class="btn btn--gold">Book a date →</a>
+    </div>
+    <div class="rule"></div>
+  </nav>
+
+  
+<!-- ═══ §06 — REMAKE A SONG ═══ -->
+  <section id="remake" class="sec sec--xpad sec--deep">
+    <div class="container">
+      <div class="rm__head">
+        <div>
+          <span class="mono" style="color: var(--gold);">§07 — STUDIO COMMISSION</span>
+          <h2 class="h2 display-tight" style="margin: 12px 0 12px;">GOT AN OLD<br/>GREEK SONG<br/>YOU LOVE?</h2>
+          <div class="script-it rm__script">Send it to us. We'll cut it for you.</div>
+        </div>
+
+        <div class="rm__price">
+          <div class="mono" style="color: var(--ink-mute);">OUR FEE</div>
+          <div class="rm__bigPrice">$3,700</div>
+          <div class="mono" style="color: var(--ink-mute);">OR…</div>
+          <div class="script-it rm__trade">your daughter as trade.<span class="rm__ast">*</span></div>
+          <div class="mono rm__fine"><span class="rm__ast">*</span>It's a joke. Mostly. Cash works fine.</div>
+        </div>
+      </div>
+
+      <p class="rm__intro">You name a song — your father's favorite, your mother's first dance, the one your pappous played on the laoúto every Sunday. We learn it, arrange it, and record it the way our band would play it. Studio cut, mixed and mastered, delivered as a 24-bit master and a vinyl-cut transfer. Two-week turnaround.</p>
+
+      <div class="rm__process">
+        <div class="rm__step">
+          <div class="rm__stepN">01</div>
+          <div class="display rm__stepT">YOU SEND THE SONG</div>
+          <p class="rm__stepB">Title, artist, a YouTube link or a tape. Anything we can listen to.</p>
+        </div>
+        <div class="rm__step">
+          <div class="rm__stepN">02</div>
+          <div class="display rm__stepT">WE ARRANGE IT FOR YOU</div>
+          <p class="rm__stepB">Demo back to you in five days — tempo, key, instrumentation.</p>
+        </div>
+        <div class="rm__step">
+          <div class="rm__stepN">03</div>
+          <div class="display rm__stepT">WE TRACK IN DETROIT</div>
+          <p class="rm__stepB">One day in the studio, four of us, one room. You're welcome to sit in.</p>
+        </div>
+        <div class="rm__step">
+          <div class="rm__stepN">04</div>
+          <div class="display rm__stepT">MASTER &amp; DELIVER</div>
+          <p class="rm__stepB">WAV, MP3, vinyl-cut transfer. Three small revisions included.</p>
+        </div>
+      </div>
+
+      <form class="fm fm--gold" data-form="remake">
+        <div class="fm__head">
+          <span class="mono" style="color: var(--gold);">COMMISSION FORM · 03·MIN</span>
+          <h3 class="display fm__h">NAME THE SONG.</h3>
+        </div>
+
+        <div class="fm__grid2">
+          <label class="fm__field"><span class="mono fm__lbl">Your name</span><input class="fm__input" type="text" placeholder="Yiannis Kostakis" /></label>
+          <label class="fm__field"><span class="mono fm__lbl">Email</span><input class="fm__input" type="email" placeholder="you@somewhere.com" /></label>
+          <label class="fm__field"><span class="mono fm__lbl">Song title</span><input class="fm__input" type="text" placeholder="Ah Helidoni Mou" /></label>
+          <label class="fm__field"><span class="mono fm__lbl">Original artist</span><input class="fm__input" type="text" placeholder="Stelios Kazantzidis" /></label>
+          <label class="fm__field"><span class="mono fm__lbl">Year (if known)</span><input class="fm__input" type="text" placeholder="1962" /></label>
+          <label class="fm__field"><span class="mono fm__lbl">Where will you play it?</span><input class="fm__input" type="text" placeholder="Wedding · Anniversary · For my mother" /></label>
+        </div>
+
+        <div class="fm__row">
+          <span class="mono" style="color: var(--ink-mute);">How would you like to pay?</span>
+          <div class="fm__pills" data-pills="pay">
+            <button type="button" class="pill" aria-pressed="true">Cash $3,700</button>
+            <button type="button" class="pill" aria-pressed="false">Wire / Card</button>
+            <button type="button" class="pill" aria-pressed="false">Half deposit · half on delivery</button>
+            <button type="button" class="pill" aria-pressed="false">Trade (offer below)</button>
+          </div>
+        </div>
+
+        <label class="fm__field">
+          <span class="mono fm__lbl">Anything else? (a recording, a memory, a deadline)</span>
+          <textarea class="fm__input" rows="3" placeholder="Paste a YouTube link, a Bandcamp link, or describe the version you want."></textarea>
+        </label>
+
+        <div class="rm__dropzone">
+          <div class="mono" style="color: var(--ink-mute);">OR DROP A FILE</div>
+          <div class="script-it" style="font-size: 1.4rem; color: var(--ink-soft);">MP3, WAV, M4A, or a tape we can digitize — up to 80 MB.</div>
+          <button type="button" class="btn">Choose file ↑</button>
+        </div>
+
+        <div class="fm__submit">
+          <button type="submit" class="btn btn--gold btn--lg" data-submit-label="Send the song →">Send the song →</button>
+          <span class="mono" style="color: var(--ink-mute);">We reply within 48 hours. Sometimes much faster.</span>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  
+<!-- ═══ FOOTER ═══ -->
+  <footer class="ft">
+    <div class="container">
+      <div class="ft__socials">
+        <a href="https://www.instagram.com/oneiromusic" target="_blank" rel="noopener" class="ft__social"><span class="ft__sP">INSTAGRAM</span><span class="ft__sH">@oneiromusic</span><span class="ft__sA">→</span></a>
+        <a href="https://www.facebook.com/OneiroMusicGroup/" target="_blank" rel="noopener" class="ft__social"><span class="ft__sP">FACEBOOK</span><span class="ft__sH">/OneiroMusicGroup</span><span class="ft__sA">→</span></a>
+        <a href="https://www.youtube.com/channel/UCBuQAA2ZBjqUM-FQss4Z8Mw" target="_blank" rel="noopener" class="ft__social"><span class="ft__sP">YOUTUBE</span><span class="ft__sH">/OneiroMusicGroup</span><span class="ft__sA">→</span></a>
+        <a href="https://music.apple.com/us/artist/oneiro/677017168" target="_blank" rel="noopener" class="ft__social"><span class="ft__sP">APPLE MUSIC</span><span class="ft__sH">Oneiro</span><span class="ft__sA">→</span></a>
+        <a href="mailto:Booking@OneiroMusic.com" class="ft__social"><span class="ft__sP">EMAIL</span><span class="ft__sH">Booking@OneiroMusic.com</span><span class="ft__sA">→</span></a>
+        <a href="tel:+15869432710" class="ft__social"><span class="ft__sP">PHONE</span><span class="ft__sH">586.943.2710</span><span class="ft__sA">→</span></a>
+      </div>
+
+      <div class="divider" role="separator" aria-hidden="true" style="margin: 60px 0;">
+        <div class="divider__line divider__line--rev"></div>
+        <div class="divider__mark">
+          <svg class="divider__glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="1" y1="12" x2="5" y2="12"/>
+            <line x1="19" y1="12" x2="23" y2="12"/>
+            <circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/>
+          </svg>
+          <span class="divider__label">ΟΝΕΙΡΟ</span>
+        </div>
+        <div class="divider__line"></div>
+      </div>
+
+      <div class="ft__huge">ONEIRO</div>
+
+      <div class="ft__cols">
+        <div>
+          <div class="mono" style="margin-bottom: 14px;">BOOK THE BAND</div>
+          <ul class="ft__list">
+            <li class="ft__li"><a href="mailto:Booking@OneiroMusic.com">Booking@OneiroMusic.com</a></li>
+            <li class="ft__li"><a href="tel:+15869432710">+1 (586) 943-2710</a></li>
+            <li class="ft__li">Reply within 48 hours</li>
+            <li class="ft__li">Weddings · Festivals · Glendia</li>
+          </ul>
+        </div>
+        <div>
+          <div class="mono" style="margin-bottom: 14px;">HOMEBASE</div>
+          <ul class="ft__list">
+            <li class="ft__li">Metro Detroit, Michigan</li>
+            <li class="ft__li">North America &amp; beyond</li>
+            <li class="ft__li">Travel-ready quartet</li>
+          </ul>
+        </div>
+        <div>
+          <div class="mono" style="margin-bottom: 14px;">SERVICES</div>
+          <ul class="ft__list">
+            <li class="ft__li">Live Greek entertainment</li>
+            <li class="ft__li">Wedding ceremonies + receptions</li>
+            <li class="ft__li">Greek festivals + glendia</li>
+            <li class="ft__li">Up-lighting for events</li>
+          </ul>
+        </div>
+        <div>
+          <div class="mono" style="margin-bottom: 14px;">REPERTOIRE</div>
+          <ul class="ft__list">
+            <li class="ft__li">Laïka</li>
+            <li class="ft__li">Dimotika</li>
+            <li class="ft__li">Nisiótika</li>
+            <li class="ft__li">Paradosiaká</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ft__fine">
+        <span class="mono">© Oneiro Music</span>
+        <span class="mono" data-brand-gr>ΟΝΕΙΡΟ</span>
+        <span class="mono">Live Greek Entertainment · Built in Detroit</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══ TWEAKS TOOLBAR ═══ -->
+  <aside class="twk" aria-label="Design tweaks">
+    <div class="twk__title">Tweaks</div>
+    <div class="twk__row">
+      <span class="twk__lbl">Palette</span>
+      <div class="twk__seg" data-tweak="palette">
+        <button type="button" data-val="aegean" aria-pressed="true">Aegean</button>
+        <button type="button" data-val="detroit">Detroit</button>
+        <button type="button" data-val="smoke">Smoke</button>
+      </div>
+    </div>
+    <div class="twk__row">
+      <span class="twk__lbl">Display</span>
+      <div class="twk__seg" data-tweak="display">
+        <button type="button" data-val="bigshoulders" aria-pressed="true">Big</button>
+        <button type="button" data-val="anton">Anton</button>
+        <button type="button" data-val="oswald">Oswald</button>
+      </div>
+    </div>
+    <div class="twk__row">
+      <span class="twk__lbl">Greek</span>
+      <div class="twk__seg" data-tweak="greekHero">
+        <button type="button" data-val="off" aria-pressed="true">Off</button>
+        <button type="button" data-val="on">On</button>
+      </div>
+    </div>
+    <div class="twk__row">
+      <span class="twk__lbl">Motion</span>
+      <div class="twk__seg" data-tweak="motion">
+        <button type="button" data-val="on" aria-pressed="true">On</button>
+        <button type="button" data-val="off">Off</button>
+      </div>
+    </div>
+  </aside>
+
+  <script>
+    // ─── Pill toggles (form pills) ───
+    document.querySelectorAll('[data-pills]').forEach(group => {
+      group.addEventListener('click', e => {
+        const btn = e.target.closest('button.pill');
+        if (!btn) return;
+        group.querySelectorAll('button.pill').forEach(b => b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'));
+      });
+    });
+
+    // ─── Forms (no backend; show "Got it" on submit) ───
+    document.querySelectorAll('form[data-form]').forEach(form => {
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const btn = form.querySelector('[data-submit-label]');
+        if (!btn) return;
+        const original = btn.getAttribute('data-submit-label');
+        btn.textContent = form.dataset.form === 'remake'
+          ? "Got it ✓ — we're listening tonight"
+          : "Got it ✓ — we'll write back";
+        setTimeout(() => { btn.textContent = original; }, 4500);
+      });
+    });
+
+    // ─── Tweaks toolbar ───
+    const html = document.documentElement;
+    document.querySelectorAll('.twk__seg').forEach(seg => {
+      seg.addEventListener('click', e => {
+        const btn = e.target.closest('button[data-val]');
+        if (!btn) return;
+        const tweak = seg.dataset.tweak;
+        const val = btn.dataset.val;
+        seg.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'));
+
+        if (tweak === 'palette')      html.dataset.palette = val;
+        else if (tweak === 'display') html.dataset.display = val;
+        else if (tweak === 'motion')  html.dataset.motion  = val;
+        else if (tweak === 'greekHero') {
+          // Swap brand text in hero & footer
+          const hero = document.querySelector('[data-brand-en]');
+          if (hero) hero.textContent = val === 'on' ? 'ΟΝΕΙΡΟ' : 'ONEIRO';
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

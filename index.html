@@ -216,31 +216,95 @@
   .nav__link { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); font-weight: 500; }
   .nav__link:hover { color: var(--ink); }
 
-  /* ─── Marquee ─── */
-  .marq { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 12px 0; overflow: hidden; background: var(--bg-deep); }
-  .marq__track { white-space: nowrap; overflow: hidden; }
-  .marq__run { display: inline-block; padding-left: 100%; animation: bz-marquee 65s linear infinite; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.16em; color: var(--gold); font-weight: 500; }
-  @keyframes bz-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-  /* ─── Hero ─── */
-  .hero { padding-top: clamp(48px, 6vw, 96px); padding-bottom: clamp(64px, 8vw, 120px); }
-  .hero__kicker { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; flex-wrap: wrap; }
-  .hero__dot { color: var(--gold); font-size: 8px; }
-  .hero__lockup { margin-bottom: 10px; }
-  .hero__huge { font-size: clamp(56px, 10vw, 168px); line-height: 0.85; letter-spacing: -0.02em; word-spacing: 0.02em; }
-  .hero__lower { display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(32px, 5vw, 80px); align-items: start; margin-top: clamp(24px, 3vw, 40px); }
-  .hero__lowerL { display: flex; flex-direction: column; gap: 28px; }
-  .hero__tag { font-size: clamp(28px, 3.8vw, 60px); margin: 0; font-weight: 800; line-height: 1.0; }
-  .hero__script { font-size: clamp(18px, 1.6vw, 24px); color: var(--ink-soft); line-height: 1.35; max-width: 540px; }
-  .hero__lede { font-size: clamp(15px, 1.05vw, 17px); color: var(--ink-soft); max-width: 540px; line-height: 1.65; margin: 0; }
-  .hero__btns { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 4px; }
-  .hero__services { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 8px; padding-top: 22px; border-top: 1px solid var(--rule); }
-  .hero__pill { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 12px; border: 1px solid var(--rule); color: var(--ink-soft); }
-  .hero__lowerR { display: flex; flex-direction: column; gap: 22px; }
-  .hero__facts { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
-  .fact { display: flex; flex-direction: column; gap: 6px; padding: 16px 0; border-top: 1px solid var(--rule); }
-  .fact__n { font-family: var(--display); font-weight: 800; font-size: 1.4rem; line-height: 0.86; text-transform: uppercase; }
-  .fact__l { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); font-weight: 500; }
+  /* ─── Hero — cinematic full-bleed ─── */
+  .hero-cinematic {
+    position: relative;
+    min-height: 92vh;
+    min-height: 92svh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    isolation: isolate;
+    margin-top: -65px; /* let video extend behind the sticky nav */
+  }
+  .hero-cinematic__media {
+    position: absolute; inset: 0; z-index: 0;
+  }
+  .hero-cinematic__video {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 35%;
+    display: block;
+    filter: contrast(1.05) saturate(0.9);
+  }
+  /* Bottom-up gradient so the type sits in shadow, photo breathes at top */
+  .hero-cinematic__scrim {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg,
+        color-mix(in oklch, var(--bg-deep) 35%, transparent) 0%,
+        color-mix(in oklch, var(--bg-deep) 20%, transparent) 30%,
+        color-mix(in oklch, var(--bg-deep) 60%, transparent) 65%,
+        color-mix(in oklch, var(--bg-deep) 92%, transparent) 100%);
+  }
+  /* Subtle vignette for cinema feel */
+  .hero-cinematic__vignette {
+    position: absolute; inset: 0;
+    background: radial-gradient(120% 80% at 50% 40%, transparent 40%, color-mix(in oklch, var(--bg-deep) 50%, transparent) 100%);
+  }
+  .hero-cinematic__content {
+    position: relative; z-index: 1;
+    padding-top: clamp(160px, 18vw, 280px);
+    padding-bottom: clamp(56px, 8vw, 120px);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(14px, 1.8vw, 22px);
+    color: #fff;
+  }
+  .hero-cinematic__kicker { display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+  .hero-cinematic__title {
+    font-size: clamp(72px, 14vw, 220px);
+    line-height: 0.86;
+    letter-spacing: -0.025em;
+    margin: 4px 0 6px;
+    color: #fff;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.45);
+  }
+  .hero-cinematic__sub {
+    font-size: clamp(22px, 2.4vw, 36px);
+    color: var(--gold);
+    line-height: 1.25;
+    max-width: 600px;
+    margin: 0;
+  }
+  .hero-cinematic__lede {
+    font-size: clamp(15px, 1.1vw, 18px);
+    line-height: 1.65;
+    color: rgba(255,255,255,0.85);
+    max-width: 520px;
+    margin: 0;
+  }
+  .hero-cinematic__actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+  .hero-cinematic__scrollhint {
+    position: absolute;
+    bottom: clamp(18px, 2vw, 28px);
+    right: clamp(20px, 3vw, 48px);
+    z-index: 2;
+    color: rgba(255,255,255,0.55);
+    font-size: 0.66rem;
+    letter-spacing: 0.3em;
+    pointer-events: none;
+  }
+  @media (max-width: 760px) {
+    .hero-cinematic { min-height: 80vh; min-height: 80svh; }
+    .hero-cinematic__content { padding-top: 120px; }
+  }
+  /* Respect users with reduced motion: pause video */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-cinematic__video { animation-play-state: paused; }
+  }
+  [data-motion="off"] .hero-cinematic__video { display: none; }
 
   /* ─── Section heads ─── */
   .sec { padding-top: clamp(80px, 10vw, 140px); padding-bottom: clamp(56px, 7vw, 96px); border-top: 1px solid var(--rule); }
@@ -346,36 +410,22 @@
   textarea.fm__input { resize: vertical; min-height: 84px; font-family: var(--script); }
   .fm__submit { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; justify-content: space-between; padding-top: 14px; border-top: 1px solid var(--rule); }
 
-  /* ─── Social feed ─── */
-  .feed__head { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(24px, 3.5vw, 64px); align-items: end; margin-bottom: clamp(40px, 5vw, 64px); }
-  .feed__h { font-size: clamp(36px, 5.5vw, 88px); margin: 14px 0 10px; letter-spacing: -0.02em; line-height: 0.95; }
-  .feed__script { font-size: clamp(16px, 1.4vw, 20px); color: var(--ink-soft); line-height: 1.45; }
-  .feed__platforms { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--rule); }
-  .feed__platRow { display: grid; grid-template-columns: 1fr 1.5fr auto; gap: 14px; padding: 16px 18px; align-items: center; border-bottom: 1px solid var(--rule); color: var(--ink); transition: background .2s ease; }
-  .feed__platRow:last-child { border-bottom: none; }
-  .feed__platRow:hover { background: var(--bg-elev); }
-  .feed__platHandle { font-size: 1.15rem; color: var(--ink); font-family: var(--script); font-style: italic; }
-  .feed__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(8px, 0.8vw, 14px); }
-  .feed__tile { display: block; color: inherit; }
-  .feed__art { aspect-ratio: 1 / 1; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; padding: 14px; transition: transform .3s ease; }
-  .feed__tile:hover .feed__art { transform: scale(1.02); }
-  .feed__art[data-hue="75"]  { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 75 / 0.6), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 135 / 0.55), transparent 70%), var(--bg-elev); }
-  .feed__art[data-hue="245"] { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 245 / 0.6), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 305 / 0.55), transparent 70%), var(--bg-elev); }
-  .feed__art[data-hue="28"]  { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 28 / 0.6), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 88 / 0.55), transparent 70%), var(--bg-elev); }
-  .feed__art[data-hue="145"] { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 145 / 0.6), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 205 / 0.55), transparent 70%), var(--bg-elev); }
-  .feed__art[data-hue="285"] { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 285 / 0.6), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 345 / 0.55), transparent 70%), var(--bg-elev); }
-  .feed__art[data-hue="200"] { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 200 / 0.6), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 260 / 0.55), transparent 70%), var(--bg-elev); }
-  .feed__art[data-hue="60"]  { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 60 / 0.6), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 120 / 0.55), transparent 70%), var(--bg-elev); }
-  .feed__art[data-hue="220"] { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 220 / 0.6), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 280 / 0.55), transparent 70%), var(--bg-elev); }
-  .feed__top { display: flex; justify-content: space-between; }
-  .feed__kind { padding: 3px 8px; background: rgba(0,0,0,0.6); color: var(--gold); letter-spacing: 0.1em; }
-  .feed__time { color: rgba(255,255,255,0.7); }
-  .feed__mid { flex: 1; display: grid; place-items: center; }
-  .feed__play { font-size: 38px; color: rgba(255,255,255,0.85); text-shadow: 0 2px 12px rgba(0,0,0,0.5); }
-  .feed__bot { display: flex; flex-direction: column; gap: 4px; }
-  .feed__likes { color: var(--gold); }
-  .feed__cap { font-size: 0.92rem; color: rgba(255,255,255,0.92); line-height: 1.25; text-shadow: 0 1px 6px rgba(0,0,0,0.5); font-family: var(--script); font-style: italic; }
-  .feed__foot { padding: 32px 0 0; margin-top: 32px; border-top: 1px solid var(--rule); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  /* ─── Follow (replaces fake feed grid) ─── */
+  .follow { padding-top: clamp(72px, 9vw, 120px); padding-bottom: clamp(72px, 9vw, 120px); border-top: 1px solid var(--rule); }
+  .follow__inner { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 5vw, 80px); align-items: center; }
+  .follow__left { display: flex; flex-direction: column; gap: 16px; }
+  .follow__h { font-size: clamp(36px, 5vw, 72px); margin: 8px 0 6px; letter-spacing: -0.02em; line-height: 1; }
+  .follow__lede { font-size: clamp(15px, 1.1vw, 17px); color: var(--ink-soft); line-height: 1.65; max-width: 460px; margin: 0; }
+  .follow__right { display: flex; flex-direction: column; gap: 8px; }
+  .follow__btn { display: grid; grid-template-columns: 1fr 1.6fr auto; gap: 18px; padding: 22px 24px; background: var(--bg-elev); color: var(--ink); align-items: center; transition: background .2s ease, color .2s ease, transform .2s ease; }
+  .follow__btn:hover { background: color-mix(in oklch, var(--gold) 14%, var(--bg-elev)); color: var(--ink); transform: translateX(4px); }
+  .follow__platform { color: var(--gold); }
+  .follow__handle { font-family: var(--script); font-style: italic; font-size: 1.15rem; }
+  .follow__arrow { color: var(--ink-mute); font-family: var(--mono); }
+  @media (max-width: 760px) {
+    .follow__inner { grid-template-columns: 1fr; }
+    .follow__btn { grid-template-columns: 1fr 1fr auto; gap: 12px; }
+  }
 
 
   /* ─── Remake / Studio Commission ─── */
@@ -425,7 +475,6 @@
   @media (max-width: 1100px) {
     .crew__grid { grid-template-columns: repeat(2, 1fr); }
     .ev__grid { grid-template-columns: repeat(2, 1fr); }
-    .feed__grid { grid-template-columns: repeat(2, 1fr); }
     .rm__process { grid-template-columns: repeat(2, 1fr); }
     .ft__cols { grid-template-columns: repeat(2, 1fr); }
     .ft__socials { grid-template-columns: repeat(2, 1fr); }
@@ -435,12 +484,10 @@
   @media (max-width: 860px) {
     :root { --gut: 20px; }
     .nav__list { display: none; }
-    .hero__lower { grid-template-columns: 1fr; }
-    .head2, .mus__head, .feed__head { grid-template-columns: 1fr !important; }
+    .head2, .mus__head { grid-template-columns: 1fr !important; }
     .styles__grid { grid-template-columns: 1fr; }
     .crew__grid { grid-template-columns: 1fr; }
     .ev__grid { grid-template-columns: 1fr; }
-    .feed__grid { grid-template-columns: repeat(2, 1fr); }
     .album { grid-template-columns: 1fr; }
     .album__cover { width: 100%; max-width: 360px; }
     .album__bigCat { display: none; }
@@ -475,86 +522,42 @@
     <div class="rule"></div>
   </nav>
 
-  <!-- ═══ HERO ═══ -->
-  <section class="hero" data-screen-label="Hero">
-    <div class="container">
-      <div class="hero__kicker">
-        <span class="mono">METRO DETROIT · MICHIGAN</span>
-        <span class="hero__dot">●</span>
-        <span class="mono" style="color: var(--gold);">NOW BOOKING — WEDDINGS · FESTIVALS · GLENDIA</span>
-      </div>
+  <!-- ═══ HERO (full-bleed video) ═══ -->
+  <section class="hero-cinematic" data-screen-label="Hero">
+    <div class="hero-cinematic__media">
+      <video class="hero-cinematic__video"
+             autoplay muted loop playsinline preload="auto"
+             poster="images/group.jpg"
+             aria-hidden="true">
+        <source src="video/hero.mp4" type="video/mp4" />
+      </video>
+      <div class="hero-cinematic__scrim"></div>
+      <div class="hero-cinematic__vignette"></div>
+    </div>
 
-      <div class="hero__lockup">
+    <div class="container hero-cinematic__content">
+      <div class="hero-cinematic__kicker">
         <span class="mono" style="color: var(--gold);">LIVE GREEK ENTERTAINMENT</span>
+        <span class="mono" style="color: rgba(255,255,255,0.6);">· METRO DETROIT</span>
       </div>
 
-      <div class="hero__huge display-tight" data-brand-en data-brand-gr="ΟΝΕΙΡΟ">ONEIRO</div>
+      <h1 class="hero-cinematic__title display-tight" data-brand-en data-brand-gr="ΟΝΕΙΡΟ">ONEIRO</h1>
 
-      <div class="divider" role="separator" aria-hidden="true" style="margin: 18px 0 36px;">
-        <div class="divider__line divider__line--rev"></div>
-        <div class="divider__mark">
-          <svg class="divider__glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
-            <circle cx="12" cy="12" r="5"/>
-            <line x1="1" y1="12" x2="5" y2="12"/>
-            <line x1="19" y1="12" x2="23" y2="12"/>
-            <circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/>
-          </svg>
-          <span class="divider__label">ΟΝΕΙΡΟ</span>
-        </div>
-        <div class="divider__line"></div>
-      </div>
+      <p class="hero-cinematic__sub script-it">
+        Bring us the event. We'll bring you the <em>kefi</em>.
+      </p>
 
-      <div class="hero__lower">
-        <div class="hero__lowerL">
-          <h2 class="hero__tag display">
-            THE BEST IN<br/>
-            <span style="color: var(--gold);">LIVE GREEK</span><br/>
-            ENTERTAINMENT.
-          </h2>
-          <div class="script-it hero__script">
-            Bring us the event. We'll bring you the <em>kefi</em>.
-          </div>
-          <p class="hero__lede">
-            Four musicians out of metro Detroit. Bouzouki, keys, guitar, drums, two lead vocals. Weddings, festivals, glendia, baptisms — we customize the set around your room.
-          </p>
-          <div class="hero__btns">
-            <a href="#hire" class="btn btn--gold btn--lg">Book us for an event →</a>
-            <a href="#music" class="btn btn--lg">Listen ▸</a>
-            <a href="#feed" class="btn btn--lg">Watch us live ▸</a>
-          </div>
-          <div class="hero__services">
-            <span class="mono" style="color: var(--ink-mute);">WE PLAY</span>
-            <span class="hero__pill">Weddings</span>
-            <span class="hero__pill">Baptisms</span>
-            <span class="hero__pill">Glendia</span>
-            <span class="hero__pill">Panigíria</span>
-            <span class="hero__pill">Tavernas</span>
-            <span class="hero__pill">Private</span>
-          </div>
-        </div>
+      <p class="hero-cinematic__lede">
+        Four musicians out of metro Detroit. Weddings, festivals, glendia, baptisms — anywhere your people want to dance.
+      </p>
 
-        <div class="hero__lowerR">
-          <div class="photo" data-hue="245" style="aspect-ratio: 3 / 4;">
-            <img src="images/group.jpg" alt="Oneiro — live performance" loading="eager" style="object-position: 68% center;" />
-            <div class="photo__tag">LIVE · ΟΝΕΙΡΟ</div>
-            <div class="photo__caption">Until the floor gives out</div>
-          </div>
-          <div class="hero__facts">
-            <div class="fact"><div class="fact__n">04</div><div class="fact__l">Musicians</div></div>
-            <div class="fact"><div class="fact__n">02</div><div class="fact__l">Lead vocalists</div></div>
-            <div class="fact"><div class="fact__n">02</div><div class="fact__l">Studio albums</div></div>
-            <div class="fact"><div class="fact__n">N.A.</div><div class="fact__l">Touring radius</div></div>
-          </div>
-        </div>
+      <div class="hero-cinematic__actions">
+        <a href="#book" class="btn btn--gold btn--lg">Book us →</a>
+        <a href="#listen" class="btn btn--lg" style="border-color: rgba(255,255,255,0.5); color: #fff;">Listen ▸</a>
       </div>
     </div>
-  </section>
 
-  <!-- ═══ MARQUEE ═══ -->
-  <section class="marq">
-    <div class="marq__track">
-      <div class="marq__run">ΓΛΕΝΤΙ &nbsp;&nbsp; ✦ &nbsp;&nbsp; ΩΠΑ &nbsp;&nbsp; ✦ &nbsp;&nbsp; DETROIT · BAHAMAS · ATHENS &nbsp;&nbsp; ✦ &nbsp;&nbsp; BOUZOUKI · CLARINO · LYRA &nbsp;&nbsp; ✦ &nbsp;&nbsp; WEDDINGS · BAPTISMS · NAME DAYS &nbsp;&nbsp; ✦ &nbsp;&nbsp; ΖΗΤΩ ΟΙ ΝΕΟΝΥΜΦΟΙ &nbsp;&nbsp; ✦ &nbsp;&nbsp; BOOK 2026 · LIMITED DATES &nbsp;&nbsp; ✦ &nbsp;&nbsp; ΜΕΧΡΙ ΤΟ ΠΡΩΙ &nbsp;&nbsp; ✦ &nbsp;&nbsp; ΓΛΕΝΤΙ &nbsp;&nbsp; ✦ &nbsp;&nbsp; ΩΠΑ &nbsp;&nbsp; ✦ &nbsp;&nbsp; DETROIT · BAHAMAS · ATHENS &nbsp;&nbsp; ✦ &nbsp;&nbsp; BOUZOUKI · CLARINO · LYRA &nbsp;&nbsp; ✦ &nbsp;&nbsp; WEDDINGS · BAPTISMS · NAME DAYS &nbsp;&nbsp; ✦ &nbsp;&nbsp; ΖΗΤΩ ΟΙ ΝΕΟΝΥΜΦΟΙ &nbsp;&nbsp; ✦ &nbsp;&nbsp; BOOK 2026 · LIMITED DATES &nbsp;&nbsp; ✦ &nbsp;&nbsp; ΜΕΧΡΙ ΤΟ ΠΡΩΙ &nbsp;&nbsp; ✦ &nbsp;&nbsp;</div>
-    </div>
+    <div class="hero-cinematic__scrollhint mono" aria-hidden="true">SCROLL ↓</div>
   </section>
 
   <!-- ═══ §01 — WHAT WE PLAY ═══ -->
@@ -801,7 +804,7 @@
       <div class="mus__upload">
         <div class="mono" style="color: var(--ink-mute);">WANT A SONG WE HAVEN'T RECORDED YET?</div>
         <div class="script-it" style="font-size: clamp(20px, 2vw, 28px); color: var(--ink);">Commission a studio cut — see below.</div>
-        <a href="#remake" class="btn">Commission a song →</a>
+        <a href="/commission.html" class="btn">Commission a song →</a>
       </div>
     </div>
   </section>
@@ -1027,183 +1030,31 @@
     </div>
   </section>
 
-  <!-- ═══ §06 — FROM THE FEED ═══ -->
-  <section id="feed" class="sec sec--xpad">
-    <div class="container">
-      <header class="feed__head">
-        <div>
-          <span class="mono">§06 — FROM THE FEED</span>
-          <h2 class="feed__h display-tight">WATCH<br/>US <span style="color: var(--gold);">LIVE</span>.</h2>
-          <div class="script-it feed__script">Pulled from Instagram, TikTok, and YouTube. Updated weekly.</div>
-        </div>
-        <div class="feed__platforms">
-          <a href="https://www.instagram.com/oneiromusic" target="_blank" rel="noopener" class="feed__platRow">
-            <span class="mono" style="color: var(--gold);">INSTAGRAM</span>
-            <span class="feed__platHandle">@oneiromusic</span>
-            <span class="mono" style="color: var(--ink-mute);">Follow →</span>
-          </a>
-          <a href="https://www.facebook.com/OneiroMusicGroup/" target="_blank" rel="noopener" class="feed__platRow">
-            <span class="mono" style="color: var(--gold);">FACEBOOK</span>
-            <span class="feed__platHandle">/OneiroMusicGroup</span>
-            <span class="mono" style="color: var(--ink-mute);">Like →</span>
-          </a>
-          <a href="https://www.youtube.com/channel/UCBuQAA2ZBjqUM-FQss4Z8Mw" target="_blank" rel="noopener" class="feed__platRow">
-            <span class="mono" style="color: var(--gold);">YOUTUBE</span>
-            <span class="feed__platHandle">/OneiroMusicGroup</span>
-            <span class="mono" style="color: var(--ink-mute);">Subscribe →</span>
-          </a>
-        </div>
-      </header>
-
-      <div class="feed__grid">
-        <a href="https://www.instagram.com/oneiromusic" target="_blank" rel="noopener" class="feed__tile"><div class="feed__art" data-hue="245">
-          <div class="feed__top"><span class="mono feed__kind">FESTIVAL</span><span class="mono feed__time">JUN</span></div>
-          <div class="feed__mid"><span class="feed__play">▶</span></div>
-          <div class="feed__bot"><span class="mono feed__likes">♥ LIVE</span><span class="feed__cap">"St. Nicholas Greek Festival · Troy, MI"</span></div>
-        </div></a>
-        <a href="https://www.instagram.com/oneiromusic" target="_blank" rel="noopener" class="feed__tile"><div class="feed__art" data-hue="220">
-          <div class="feed__top"><span class="mono feed__kind">FESTIVAL</span><span class="mono feed__time">AUG</span></div>
-          <div class="feed__mid"></div>
-          <div class="feed__bot"><span class="mono feed__likes">♥ LIVE</span><span class="feed__cap">"Holy Trinity Greek Festival · Grand Rapids, MI"</span></div>
-        </div></a>
-        <a href="https://www.instagram.com/oneiromusic" target="_blank" rel="noopener" class="feed__tile"><div class="feed__art" data-hue="200">
-          <div class="feed__top"><span class="mono feed__kind">FESTIVAL</span><span class="mono feed__time">AUG</span></div>
-          <div class="feed__mid"></div>
-          <div class="feed__bot"><span class="mono feed__likes">♥ LIVE</span><span class="feed__cap">"Nativity of the Virgin Mary · Plymouth, MI"</span></div>
-        </div></a>
-        <a href="https://www.instagram.com/oneiromusic" target="_blank" rel="noopener" class="feed__tile"><div class="feed__art" data-hue="245">
-          <div class="feed__top"><span class="mono feed__kind">FESTIVAL</span><span class="mono feed__time">SEP</span></div>
-          <div class="feed__mid"><span class="feed__play">▶</span></div>
-          <div class="feed__bot"><span class="mono feed__likes">♥ LIVE</span><span class="feed__cap">"Holy Trinity Greek Festival · Salt Lake City, UT"</span></div>
-        </div></a>
-        <a href="https://www.instagram.com/oneiromusic" target="_blank" rel="noopener" class="feed__tile"><div class="feed__art" data-hue="220">
-          <div class="feed__top"><span class="mono feed__kind">CONFERENCE</span><span class="mono feed__time">OCT</span></div>
-          <div class="feed__mid"></div>
-          <div class="feed__bot"><span class="mono feed__likes">♥ LIVE</span><span class="feed__cap">"YAL Pittsburgh Conference · Pittsburgh, PA"</span></div>
-        </div></a>
-        <a href="https://www.instagram.com/oneiromusic" target="_blank" rel="noopener" class="feed__tile"><div class="feed__art" data-hue="200">
-          <div class="feed__top"><span class="mono feed__kind">STUDIO</span><span class="mono feed__time">2014</span></div>
-          <div class="feed__mid"></div>
-          <div class="feed__bot"><span class="mono feed__likes">♥ ALBUM</span><span class="feed__cap">"Glendi — out now on Apple Music."</span></div>
-        </div></a>
-        <a href="https://www.instagram.com/oneiromusic" target="_blank" rel="noopener" class="feed__tile"><div class="feed__art" data-hue="245">
-          <div class="feed__top"><span class="mono feed__kind">STUDIO</span><span class="mono feed__time">2012</span></div>
-          <div class="feed__mid"></div>
-          <div class="feed__bot"><span class="mono feed__likes">♥ ALBUM</span><span class="feed__cap">"Kainouria Epohi — our debut record."</span></div>
-        </div></a>
-        <a href="https://www.instagram.com/oneiromusic" target="_blank" rel="noopener" class="feed__tile"><div class="feed__art" data-hue="220">
-          <div class="feed__top"><span class="mono feed__kind">LIVE</span><span class="mono feed__time">ALWAYS</span></div>
-          <div class="feed__mid"><span class="feed__play">▶</span></div>
-          <div class="feed__bot"><span class="mono feed__likes">♥ HIRE</span><span class="feed__cap">"Bring us the event. We'll bring you the kefi."</span></div>
-        </div></a>
+  <!-- ═══ FOLLOW ═══ -->
+  <section id="feed" class="follow">
+    <div class="container follow__inner">
+      <div class="follow__left">
+        <span class="mono" style="color: var(--gold);">FOLLOW ALONG</span>
+        <h2 class="follow__h display-tight">Watch us <span style="color: var(--gold);">live</span>.</h2>
+        <p class="follow__lede">Latest sets, festival footage, and the moments that don't make the record — all on Instagram and YouTube.</p>
       </div>
-
-      <div class="feed__foot">
-        <a href="https://www.instagram.com/oneiromusic" target="_blank" rel="noopener" class="btn btn--gold btn--lg">Follow on Instagram →</a>
-        <span class="mono" style="color: var(--ink-mute);">@oneiromusic</span>
+      <div class="follow__right">
+        <a href="https://www.instagram.com/oneiromusic" target="_blank" rel="noopener" class="follow__btn">
+          <span class="mono follow__platform">INSTAGRAM</span>
+          <span class="follow__handle">@oneiromusic</span>
+          <span class="follow__arrow">→</span>
+        </a>
+        <a href="https://www.youtube.com/channel/UCBuQAA2ZBjqUM-FQss4Z8Mw" target="_blank" rel="noopener" class="follow__btn">
+          <span class="mono follow__platform">YOUTUBE</span>
+          <span class="follow__handle">/OneiroMusicGroup</span>
+          <span class="follow__arrow">→</span>
+        </a>
+        <a href="https://www.facebook.com/OneiroMusicGroup/" target="_blank" rel="noopener" class="follow__btn">
+          <span class="mono follow__platform">FACEBOOK</span>
+          <span class="follow__handle">/OneiroMusicGroup</span>
+          <span class="follow__arrow">→</span>
+        </a>
       </div>
-    </div>
-  </section>
-
-  <!-- ═══ §06 — REMAKE A SONG ═══ -->
-  <section id="remake" class="sec sec--xpad sec--deep">
-    <div class="container">
-      <div class="divider" role="separator" aria-hidden="true" style="margin-bottom: 40px;">
-        <div class="divider__line divider__line--rev"></div>
-        <div class="divider__mark">
-          <svg class="divider__glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
-            <circle cx="12" cy="12" r="5"/>
-            <line x1="1" y1="12" x2="5" y2="12"/>
-            <line x1="19" y1="12" x2="23" y2="12"/>
-            <circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/>
-          </svg>
-          <span class="divider__label">ΟΝΕΙΡΟ</span>
-        </div>
-        <div class="divider__line"></div>
-      </div>
-
-      <div class="rm__head">
-        <div>
-          <span class="mono" style="color: var(--gold);">§07 — STUDIO COMMISSION</span>
-          <h2 class="h2 display-tight" style="margin: 12px 0 12px;">GOT AN OLD<br/>GREEK SONG<br/>YOU LOVE?</h2>
-          <div class="script-it rm__script">Send it to us. We'll cut it for you.</div>
-        </div>
-
-        <div class="rm__price">
-          <div class="mono" style="color: var(--ink-mute);">OUR FEE</div>
-          <div class="rm__bigPrice">$3,700</div>
-          <div class="mono" style="color: var(--ink-mute);">OR…</div>
-          <div class="script-it rm__trade">your daughter as trade.<span class="rm__ast">*</span></div>
-          <div class="mono rm__fine"><span class="rm__ast">*</span>It's a joke. Mostly. Cash works fine.</div>
-        </div>
-      </div>
-
-      <p class="rm__intro">You name a song — your father's favorite, your mother's first dance, the one your pappous played on the laoúto every Sunday. We learn it, arrange it, and record it the way our band would play it. Studio cut, mixed and mastered, delivered as a 24-bit master and a vinyl-cut transfer. Two-week turnaround.</p>
-
-      <div class="rm__process">
-        <div class="rm__step">
-          <div class="rm__stepN">01</div>
-          <div class="display rm__stepT">YOU SEND THE SONG</div>
-          <p class="rm__stepB">Title, artist, a YouTube link or a tape. Anything we can listen to.</p>
-        </div>
-        <div class="rm__step">
-          <div class="rm__stepN">02</div>
-          <div class="display rm__stepT">WE ARRANGE IT FOR YOU</div>
-          <p class="rm__stepB">Demo back to you in five days — tempo, key, instrumentation.</p>
-        </div>
-        <div class="rm__step">
-          <div class="rm__stepN">03</div>
-          <div class="display rm__stepT">WE TRACK IN DETROIT</div>
-          <p class="rm__stepB">One day in the studio, four of us, one room. You're welcome to sit in.</p>
-        </div>
-        <div class="rm__step">
-          <div class="rm__stepN">04</div>
-          <div class="display rm__stepT">MASTER &amp; DELIVER</div>
-          <p class="rm__stepB">WAV, MP3, vinyl-cut transfer. Three small revisions included.</p>
-        </div>
-      </div>
-
-      <form class="fm fm--gold" data-form="remake">
-        <div class="fm__head">
-          <span class="mono" style="color: var(--gold);">COMMISSION FORM · 03·MIN</span>
-          <h3 class="display fm__h">NAME THE SONG.</h3>
-        </div>
-
-        <div class="fm__grid2">
-          <label class="fm__field"><span class="mono fm__lbl">Your name</span><input class="fm__input" type="text" placeholder="Yiannis Kostakis" /></label>
-          <label class="fm__field"><span class="mono fm__lbl">Email</span><input class="fm__input" type="email" placeholder="you@somewhere.com" /></label>
-          <label class="fm__field"><span class="mono fm__lbl">Song title</span><input class="fm__input" type="text" placeholder="Ah Helidoni Mou" /></label>
-          <label class="fm__field"><span class="mono fm__lbl">Original artist</span><input class="fm__input" type="text" placeholder="Stelios Kazantzidis" /></label>
-          <label class="fm__field"><span class="mono fm__lbl">Year (if known)</span><input class="fm__input" type="text" placeholder="1962" /></label>
-          <label class="fm__field"><span class="mono fm__lbl">Where will you play it?</span><input class="fm__input" type="text" placeholder="Wedding · Anniversary · For my mother" /></label>
-        </div>
-
-        <div class="fm__row">
-          <span class="mono" style="color: var(--ink-mute);">How would you like to pay?</span>
-          <div class="fm__pills" data-pills="pay">
-            <button type="button" class="pill" aria-pressed="true">Cash $3,700</button>
-            <button type="button" class="pill" aria-pressed="false">Wire / Card</button>
-            <button type="button" class="pill" aria-pressed="false">Half deposit · half on delivery</button>
-            <button type="button" class="pill" aria-pressed="false">Trade (offer below)</button>
-          </div>
-        </div>
-
-        <label class="fm__field">
-          <span class="mono fm__lbl">Anything else? (a recording, a memory, a deadline)</span>
-          <textarea class="fm__input" rows="3" placeholder="Paste a YouTube link, a Bandcamp link, or describe the version you want."></textarea>
-        </label>
-
-        <div class="rm__dropzone">
-          <div class="mono" style="color: var(--ink-mute);">OR DROP A FILE</div>
-          <div class="script-it" style="font-size: 1.4rem; color: var(--ink-soft);">MP3, WAV, M4A, or a tape we can digitize — up to 80 MB.</div>
-          <button type="button" class="btn">Choose file ↑</button>
-        </div>
-
-        <div class="fm__submit">
-          <button type="submit" class="btn btn--gold btn--lg" data-submit-label="Send the song →">Send the song →</button>
-          <span class="mono" style="color: var(--ink-mute);">We reply within 48 hours. Sometimes much faster.</span>
-        </div>
-      </form>
     </div>
   </section>
 
@@ -1260,6 +1111,7 @@
             <li class="ft__li">Wedding ceremonies + receptions</li>
             <li class="ft__li">Greek festivals + glendia</li>
             <li class="ft__li">Up-lighting for events</li>
+            <li class="ft__li"><a href="/commission.html">Studio commission ↗</a></li>
           </ul>
         </div>
         <div>
