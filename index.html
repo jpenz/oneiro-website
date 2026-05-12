@@ -319,19 +319,63 @@
   .h2--mus { font-size: clamp(40px, 5.5vw, 88px); }
   .intro { font-size: clamp(15px, 1.1vw, 17px); color: var(--ink-soft); max-width: 480px; line-height: 1.65; margin: 0; }
 
-  /* ─── What we play ─── */
-  .styles__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(16px, 1.6vw, 28px); }
-  .style-card { padding: clamp(28px, 3vw, 44px); background: var(--bg-elev); display: flex; flex-direction: column; gap: 16px; border-radius: 4px; transition: background .25s ease, transform .25s ease; }
-  .style-card:hover { background: color-mix(in oklch, var(--bg-elev) 80%, var(--ink) 20%); transform: translateY(-2px); }
-  .style-card__head { display: flex; justify-content: space-between; }
-  .style-card__gr { font-size: clamp(36px, 4.5vw, 64px); color: var(--gold); letter-spacing: -0.005em; margin: 6px 0 0; font-family: var(--display); font-weight: 800; line-height: 0.95; text-transform: uppercase; }
-  .style-card__en { font-size: clamp(20px, 1.8vw, 28px); color: var(--ink-soft); }
-  .style-card__blurb { font-size: 0.95rem; color: var(--ink); line-height: 1.65; margin: 6px 0 4px; max-width: 460px; }
-  .style-card__note { font-size: clamp(15px, 1.1vw, 17px); color: var(--ink); line-height: 1.55; margin: 4px 0 0; padding: 14px 0 0; border-top: 1px dashed color-mix(in oklch, var(--gold) 50%, transparent); font-style: italic; }
-  .style-card__icons { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 8px 0 0; }
-  .style-card__chip { padding: 5px 10px; background: color-mix(in oklch, var(--ink) 6%, transparent); color: var(--ink-soft); font-size: 0.68rem; border-radius: 999px; }
-  .style-card__foot { display: flex; align-items: baseline; gap: 12px; margin-top: 8px; padding-top: 18px; border-top: 1px solid var(--rule); flex-wrap: wrap; }
-  .style-card__artists { font-family: var(--script); font-style: italic; color: var(--ink-soft); font-size: 1rem; }
+  /* ─── Repertoire — collapsed list (expand on click) ─── */
+  .styles-list { display: flex; flex-direction: column; }
+  .style-row { border-bottom: 1px solid color-mix(in oklch, var(--ink) 12%, transparent); }
+  .style-row:first-child { border-top: 1px solid color-mix(in oklch, var(--ink) 12%, transparent); }
+  .style-row[open] { background: color-mix(in oklch, var(--ink) 3%, transparent); }
+  .style-row__sum {
+    display: grid;
+    grid-template-columns: minmax(120px, 1.2fr) minmax(100px, 1fr) 3fr 32px;
+    gap: clamp(16px, 2.5vw, 36px);
+    align-items: center;
+    padding: clamp(20px, 2.5vw, 32px) clamp(8px, 1vw, 16px);
+    cursor: pointer;
+    list-style: none;
+    transition: background .2s ease;
+  }
+  .style-row__sum::-webkit-details-marker { display: none; }
+  .style-row__sum:hover { background: color-mix(in oklch, var(--ink) 4%, transparent); }
+  .style-row__gr {
+    font-family: var(--display); font-weight: 800; text-transform: uppercase;
+    color: var(--gold);
+    font-size: clamp(22px, 2.6vw, 36px);
+    letter-spacing: -0.005em;
+    line-height: 1;
+  }
+  .style-row__en {
+    color: var(--ink);
+    font-size: clamp(18px, 1.6vw, 24px);
+  }
+  .style-row__teaser {
+    color: var(--ink-soft);
+    font-size: clamp(13px, 1vw, 15px);
+    line-height: 1.5;
+  }
+  .style-row__arrow {
+    color: var(--ink-mute);
+    font-family: var(--mono);
+    font-size: 1.2rem;
+    transition: transform .25s ease;
+    justify-self: end;
+  }
+  .style-row[open] .style-row__arrow { transform: rotate(45deg); color: var(--gold); }
+  .style-row__body {
+    padding: 0 clamp(8px, 1vw, 16px) clamp(28px, 3vw, 40px);
+    max-width: 720px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    color: var(--ink-soft);
+  }
+  .style-row__body p { margin: 0; font-size: clamp(15px, 1.1vw, 17px); line-height: 1.65; color: var(--ink); }
+  .style-row__meta { display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+  .style-row__meta > span:first-child { min-width: 110px; }
+  @media (max-width: 760px) {
+    .style-row__sum { grid-template-columns: 1fr 24px; gap: 12px; }
+    .style-row__en, .style-row__teaser { grid-column: 1 / -1; }
+    .style-row__arrow { grid-row: 1; grid-column: 2; }
+  }
 
   /* ─── Crew ─── */
   .crew__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(16px, 1.8vw, 28px); }
@@ -349,35 +393,74 @@
   .stat dt { color: var(--ink-mute); text-transform: uppercase; letter-spacing: 0.1em; }
   .stat dd { color: var(--ink); margin: 0; font-size: 0.78rem; }
 
-  /* ─── Music / albums ─── */
-  .mus__head { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(24px, 3.5vw, 64px); align-items: end; margin-bottom: clamp(40px, 5vw, 64px); }
-  .mus__platforms { display: flex; flex-direction: column; gap: 14px; }
-  .mus__platLinks { display: flex; flex-wrap: wrap; gap: 8px; }
-  .mus__list { display: flex; flex-direction: column; }
-  .album { display: grid; grid-template-columns: 260px 1fr auto; gap: clamp(20px, 3vw, 48px); align-items: center; padding: 32px 0; border-top: 1px solid var(--rule); position: relative; }
-  .album__cover { width: 260px; aspect-ratio: 1 / 1; position: relative; overflow: hidden; }
-  .album__cover[data-hue="245"] { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 245 / 0.55), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 305 / 0.6), transparent 70%), var(--bg-elev); }
-  .album__cover[data-hue="75"]  { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 75 / 0.55), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 135 / 0.6), transparent 70%), var(--bg-elev); }
-  .album__cover[data-hue="28"]  { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 28 / 0.55), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 88 / 0.6), transparent 70%), var(--bg-elev); }
-  .album__cover[data-hue="145"] { background: radial-gradient(60% 50% at 30% 30%, oklch(0.55 0.12 145 / 0.55), transparent 70%), radial-gradient(80% 60% at 80% 80%, oklch(0.30 0.10 205 / 0.6), transparent 70%), var(--bg-elev); }
-  .album__cat { position: absolute; top: 14px; left: 14px; color: color-mix(in oklch, var(--ink) 70%, transparent); font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; }
-  .album__yr { position: absolute; bottom: 14px; right: 14px; font-size: 2.4rem; color: color-mix(in oklch, var(--ink) 60%, transparent); font-family: var(--display); font-weight: 800; line-height: 0.86; text-transform: uppercase; }
-  .album__meta { display: flex; flex-direction: column; gap: 10px; }
-  .album__title { font-size: clamp(24px, 2.8vw, 40px); margin: 4px 0; letter-spacing: -0.01em; font-weight: 800; line-height: 1.0; }
-  .album__sub { color: var(--ink-soft); font-size: 1.15rem; }
-  .album__note { font-size: 1rem; color: var(--ink-soft); max-width: 480px; margin: 8px 0 4px; line-height: 1.5; }
-  .album__links { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-  .album__bigCat { font-size: clamp(40px, 6vw, 96px); color: var(--ink-mute); opacity: 0.4; letter-spacing: -0.02em; }
-  .mus__upload { padding: 32px 0; border-top: 1px solid var(--rule); margin-top: 24px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap; justify-content: space-between; }
+  /* ─── Discography — bigger artwork + Apple Music embed ─── */
+  .discog {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(24px, 3vw, 56px);
+  }
+  .record { display: flex; flex-direction: column; gap: clamp(20px, 2vw, 28px); }
+  .record__cover {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 4px;
+    position: relative;
+  }
+  .record__cover img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: transform .5s ease;
+  }
+  .record:hover .record__cover img { transform: scale(1.02); }
+  .record__body { display: flex; flex-direction: column; gap: 10px; }
+  .record__title {
+    font-size: clamp(32px, 4vw, 56px);
+    margin: 4px 0 6px;
+    letter-spacing: -0.015em;
+    line-height: 1.0;
+    font-weight: 800;
+  }
+  .record__note { font-size: clamp(15px, 1.1vw, 17px); color: var(--ink-soft); line-height: 1.6; margin: 0; max-width: 480px; }
+  .record__embed {
+    width: 100%;
+    height: 175px;
+    border: none;
+    border-radius: 12px;
+    background: transparent;
+    overflow: hidden;
+    margin-top: 10px;
+  }
+  .record__links { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 4px; }
+  .record__link {
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    transition: color .15s ease;
+  }
+  .record__link:hover { color: var(--gold); }
+  @media (max-width: 860px) {
+    .discog { grid-template-columns: 1fr; }
+  }
+  .mus__upload { padding: 40px 0 0; margin-top: clamp(48px, 6vw, 72px); border-top: 1px solid color-mix(in oklch, var(--ink) 12%, transparent); display: flex; align-items: center; gap: 24px; flex-wrap: wrap; justify-content: space-between; }
 
-  /* ─── Where we play ─── */
-  .where__list { list-style: none; margin: 0; padding: 0; }
-  .where__row { display: flex; align-items: baseline; gap: 18px; padding: 22px 0; border-bottom: 1px solid var(--rule); }
-  .where__num { width: 36px; }
-  .where__region { font-size: clamp(22px, 2.4vw, 32px); flex-shrink: 0; }
-  .where__spacer { flex: 1; height: 1px; background: var(--rule); margin: 0 8px; align-self: center; }
-  .where__places { color: var(--ink-soft); font-size: 0.9rem; max-width: 44%; text-align: right; }
-  .where__note { color: var(--gold); min-width: 200px; text-align: right; font-size: 0.7rem; }
+  /* ─── Territory — flowing sentence of cities ─── */
+  .territory { display: flex; flex-direction: column; gap: clamp(24px, 3vw, 40px); }
+  .territory__sentence {
+    font-family: var(--display);
+    font-size: clamp(22px, 2.6vw, 38px);
+    font-weight: 500;
+    text-transform: uppercase;
+    line-height: 1.35;
+    letter-spacing: 0;
+    color: var(--ink);
+    margin: 0;
+    max-width: 100%;
+  }
+  .territory__sentence .script-it { text-transform: none; font-weight: 500; letter-spacing: -0.005em; }
+  .territory__legend { display: flex; gap: clamp(16px, 2vw, 32px); flex-wrap: wrap; padding-top: 4px; }
+  .territory__legend .mono { color: var(--ink-soft); font-size: 0.66rem; }
   .testimonials { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(18px, 2vw, 36px); margin-top: clamp(48px, 6vw, 72px); }
   .tcard { padding: 36px 32px; margin: 0; background: var(--bg-elev); border-radius: 4px; }
   .tcard__quote { font-size: clamp(18px, 1.7vw, 24px); color: var(--ink); line-height: 1.4; margin: 0 0 22px; }
@@ -485,17 +568,10 @@
   @media (max-width: 860px) {
     :root { --gut: 20px; }
     .nav__list { display: none; }
-    .head2, .mus__head { grid-template-columns: 1fr !important; }
-    .styles__grid { grid-template-columns: 1fr; }
+    .head2 { grid-template-columns: 1fr !important; }
     .crew__grid { grid-template-columns: 1fr; }
     .ev__grid { grid-template-columns: 1fr; }
-    .album { grid-template-columns: 1fr; }
-    .album__cover { width: 100%; max-width: 360px; }
-    .album__bigCat { display: none; }
     .testimonials { grid-template-columns: 1fr; }
-    .where__row { flex-wrap: wrap; }
-    .where__places, .where__note { text-align: left; max-width: none; min-width: 0; }
-    .where__spacer { display: none; }
     .fm__grid2, .ft__cols, .ft__socials { grid-template-columns: 1fr; }
   }
 </style>
@@ -563,101 +639,137 @@
   <!-- ═══ WHAT WE PLAY ═══ -->
   <section id="styles" class="sec sec--xpad">
     <div class="container">
-      <header class="head2">
+      <header class="head2 head2--13">
         <div>
           <span class="mono">REPERTOIRE</span>
-          <h2 class="h2 display-tight">FOUR<br/>STYLES.<br/>ONE NIGHT.</h2>
+          <h2 class="h2 display-tight">Six&nbsp;styles.<br/>One&nbsp;<span style="color: var(--gold);">night</span>.</h2>
         </div>
-        <p class="intro">We open with kalamatianó, push into laïka by ten, slow it down with the nisiótika after dinner, and close with the dimotika nobody's got the legs for. The room decides the order.</p>
+        <p class="intro">We open with kalamatianó, push into laïka by ten, slow it down with the nisiótika after dinner, and close with the dimotika nobody's got the legs for. Tap any style to read more — the room decides the order.</p>
       </header>
 
-      <div class="styles__grid">
-        <article class="style-card">
-          <div class="style-card__head"><span class="mono">No. 01</span><span class="mono">4 pcs</span></div>
-          <div class="style-card__gr">ΛΑΪΚΑ</div>
-          <div class="script-it style-card__en">Laïka</div>
-          <p class="style-card__blurb">The big-room stuff. Sweaty bouzouki, tsiftetelia until 4 a.m., songs everyone in the room knows the words to.</p>
-          <ul class="style-card__icons">
-            <li class="mono style-card__chip">Bouzouki</li><li class="mono style-card__chip">Vocals</li><li class="mono style-card__chip">Drums</li><li class="mono style-card__chip">Keys</li>
-          </ul>
-          <div class="style-card__foot">
-            <span class="mono" style="color: var(--ink-mute);">WE PLAY</span>
-            <span class="style-card__artists">Kazantzidis · Dalaras · Tsaligopoulou · Mitropanos</span>
+      <div class="styles-list">
+        <details class="style-row">
+          <summary class="style-row__sum">
+            <span class="style-row__gr">ΛΑΪΚΑ</span>
+            <span class="style-row__en script-it">Laïka</span>
+            <span class="style-row__teaser">The big-room stuff. Sweaty bouzouki, tsiftetelia until 4 a.m.</span>
+            <span class="style-row__arrow" aria-hidden="true">+</span>
+          </summary>
+          <div class="style-row__body">
+            <p>The big-room stuff. Sweaty bouzouki, tsiftetelia until 4 a.m., songs everyone in the room knows the words to.</p>
+            <div class="style-row__meta">
+              <span class="mono" style="color: var(--ink-mute);">Instruments</span>
+              <span>Bouzouki · Vocals · Drums · Keys</span>
+            </div>
+            <div class="style-row__meta">
+              <span class="mono" style="color: var(--ink-mute);">We play</span>
+              <span class="script-it">Kazantzidis · Dalaras · Tsaligopoulou · Mitropanos</span>
+            </div>
           </div>
-        </article>
+        </details>
 
-        <article class="style-card">
-          <div class="style-card__head"><span class="mono">No. 02</span><span class="mono">4 pcs</span></div>
-          <div class="style-card__gr">ΔΗΜΟΤΙΚΑ</div>
-          <div class="script-it style-card__en">Dimotiká</div>
-          <p class="style-card__blurb">Mainland folk. Heavy clarino, heavy footwork. The dances your yiayia taught you — kalamatianó, tsamikó, syrtó.</p>
-          <p class="style-card__note script-it"><span class="mono" style="color: var(--gold); letter-spacing: 0.1em; margin-right: 8px;">P.S.</span>Our drummer bounces so hard during a tsamikó you can't tell if he's fucking or getting fucked.</p>
-          <ul class="style-card__icons">
-            <li class="mono style-card__chip">Clarino</li><li class="mono style-card__chip">Laoúto</li><li class="mono style-card__chip">Violí</li><li class="mono style-card__chip">Defi</li>
-          </ul>
-          <div class="style-card__foot">
-            <span class="mono" style="color: var(--ink-mute);">WE PLAY</span>
-            <span class="style-card__artists">Aidonidis · Samiou · Pyrgaki · Chalkias</span>
+        <details class="style-row">
+          <summary class="style-row__sum">
+            <span class="style-row__gr">ΔΗΜΟΤΙΚΑ</span>
+            <span class="style-row__en script-it">Dimotiká</span>
+            <span class="style-row__teaser">Mainland folk. Heavy clarino, heavy footwork.</span>
+            <span class="style-row__arrow" aria-hidden="true">+</span>
+          </summary>
+          <div class="style-row__body">
+            <p>Mainland folk. Heavy clarino, heavy footwork. The dances your yiayia taught you — kalamatianó, tsamikó, syrtó.</p>
+            <p class="script-it" style="color: var(--ink); font-size: 1.05rem;"><span class="mono" style="color: var(--gold); letter-spacing: 0.1em; margin-right: 8px;">P.S.</span>Our drummer bounces so hard during a tsamikó you can't tell if he's fucking or getting fucked.</p>
+            <div class="style-row__meta">
+              <span class="mono" style="color: var(--ink-mute);">Instruments</span>
+              <span>Clarino · Laoúto · Violí · Defi</span>
+            </div>
+            <div class="style-row__meta">
+              <span class="mono" style="color: var(--ink-mute);">We play</span>
+              <span class="script-it">Aidonidis · Samiou · Pyrgaki · Chalkias</span>
+            </div>
           </div>
-        </article>
+        </details>
 
-        <article class="style-card">
-          <div class="style-card__head"><span class="mono">No. 03</span><span class="mono">4 pcs</span></div>
-          <div class="style-card__gr">ΝΗΣΙΩΤΙΚΑ</div>
-          <div class="script-it style-card__en">Nisiótika</div>
-          <p class="style-card__blurb">Island music from the Cyclades and Dodecanese. Violin, laoúto, the kind of set that ends with everyone in a circle.</p>
-          <ul class="style-card__icons">
-            <li class="mono style-card__chip">Violí</li><li class="mono style-card__chip">Laoúto</li><li class="mono style-card__chip">Tsampoúna</li><li class="mono style-card__chip">Santoúri</li>
-          </ul>
-          <div class="style-card__foot">
-            <span class="mono" style="color: var(--ink-mute);">WE PLAY</span>
-            <span class="style-card__artists">Parios · Konitopoulou · Mariza Koch · Oikonomidis</span>
+        <details class="style-row">
+          <summary class="style-row__sum">
+            <span class="style-row__gr">ΝΗΣΙΩΤΙΚΑ</span>
+            <span class="style-row__en script-it">Nisiótika</span>
+            <span class="style-row__teaser">Island music from the Cyclades and Dodecanese.</span>
+            <span class="style-row__arrow" aria-hidden="true">+</span>
+          </summary>
+          <div class="style-row__body">
+            <p>Island music from the Cyclades and Dodecanese. Violin, laoúto, the kind of set that ends with everyone in a circle.</p>
+            <div class="style-row__meta">
+              <span class="mono" style="color: var(--ink-mute);">Instruments</span>
+              <span>Violí · Laoúto · Tsampoúna · Santoúri</span>
+            </div>
+            <div class="style-row__meta">
+              <span class="mono" style="color: var(--ink-mute);">We play</span>
+              <span class="script-it">Parios · Konitopoulou · Mariza Koch · Oikonomidis</span>
+            </div>
           </div>
-        </article>
+        </details>
 
-        <article class="style-card">
-          <div class="style-card__head"><span class="mono">No. 04</span><span class="mono">4 pcs</span></div>
-          <div class="style-card__gr">ΠΑΡΑΔΟΣΙΑΚΑ</div>
-          <div class="script-it style-card__en">Paradosiaká</div>
-          <p class="style-card__blurb">The umbrella. Greek traditional music in the broadest sense — the dimotiká tragoúdia of mainland and islands, dating back to Byzantine times. Where every other category on this list comes from before it had a name.</p>
-          <ul class="style-card__icons">
-            <li class="mono style-card__chip">Voice</li><li class="mono style-card__chip">Laoúto</li><li class="mono style-card__chip">Outi</li><li class="mono style-card__chip">Daoúli</li>
-          </ul>
-          <div class="style-card__foot">
-            <span class="mono" style="color: var(--ink-mute);">WE PLAY</span>
-            <span class="style-card__artists">Pontian · Epirote · Mikrasiátiko · Smyrnaiko</span>
+        <details class="style-row">
+          <summary class="style-row__sum">
+            <span class="style-row__gr">ΠΑΡΑΔΟΣΙΑΚΑ</span>
+            <span class="style-row__en script-it">Paradosiaká</span>
+            <span class="style-row__teaser">The umbrella. Where every other category on this list comes from.</span>
+            <span class="style-row__arrow" aria-hidden="true">+</span>
+          </summary>
+          <div class="style-row__body">
+            <p>The umbrella. Greek traditional music in the broadest sense — the dimotiká tragoúdia of mainland and islands, dating back to Byzantine times. Where every other category on this list comes from before it had a name.</p>
+            <div class="style-row__meta">
+              <span class="mono" style="color: var(--ink-mute);">Instruments</span>
+              <span>Voice · Laoúto · Outi · Daoúli</span>
+            </div>
+            <div class="style-row__meta">
+              <span class="mono" style="color: var(--ink-mute);">Traditions</span>
+              <span class="script-it">Pontian · Epirote · Mikrasiátiko · Smyrnaiko</span>
+            </div>
           </div>
-        </article>
+        </details>
 
-        <article class="style-card">
-          <div class="style-card__head"><span class="mono">No. 05</span><span class="mono">4 pcs</span></div>
-          <div class="style-card__gr">ΣΚΥΛΑΔΙΚΟ</div>
-          <div class="script-it style-card__en">Skiládiko</div>
-          <p class="style-card__blurb">The decadent branch of laïko — the music of the cheap, smoky, shady night clubs on the edge of town. Heavily amplified bouzouki and electric guitar on a raised stage. Karras and Pantazis lit it up in the '70s and '80s. We bring that energy to a private room when the night needs to break the rules.</p>
-          <p class="style-card__note script-it"><span class="mono" style="color: var(--gold); letter-spacing: 0.1em; margin-right: 8px;">P.S.</span>Keys and lead vocal will burn a cigarette on your μουνί during a solo.</p>
-          <ul class="style-card__icons">
-            <li class="mono style-card__chip">Electric Bouzouki</li><li class="mono style-card__chip">Electric Guitar</li><li class="mono style-card__chip">Keys</li><li class="mono style-card__chip">Vocals</li>
-          </ul>
-          <div class="style-card__foot">
-            <span class="mono" style="color: var(--ink-mute);">WE PLAY</span>
-            <span class="style-card__artists">Karras · Pantazis · Terzís · Makropoulos</span>
+        <details class="style-row">
+          <summary class="style-row__sum">
+            <span class="style-row__gr">ΣΚΥΛΑΔΙΚΟ</span>
+            <span class="style-row__en script-it">Skiládiko</span>
+            <span class="style-row__teaser">The decadent branch of laïko. We bring that energy when the night needs to break the rules.</span>
+            <span class="style-row__arrow" aria-hidden="true">+</span>
+          </summary>
+          <div class="style-row__body">
+            <p>The decadent branch of laïko — the music of the cheap, smoky, shady night clubs on the edge of town. Heavily amplified bouzouki and electric guitar on a raised stage. Karras and Pantazis lit it up in the '70s and '80s. We bring that energy to a private room when the night needs to break the rules.</p>
+            <p class="script-it" style="color: var(--ink); font-size: 1.05rem;"><span class="mono" style="color: var(--gold); letter-spacing: 0.1em; margin-right: 8px;">P.S.</span>Keys and lead vocal will burn a cigarette on your μουνί during a solo.</p>
+            <div class="style-row__meta">
+              <span class="mono" style="color: var(--ink-mute);">Instruments</span>
+              <span>Electric Bouzouki · Electric Guitar · Keys · Vocals</span>
+            </div>
+            <div class="style-row__meta">
+              <span class="mono" style="color: var(--ink-mute);">We play</span>
+              <span class="script-it">Karras · Pantazis · Terzís · Makropoulos</span>
+            </div>
           </div>
-        </article>
+        </details>
 
-        <article class="style-card">
-          <div class="style-card__head"><span class="mono">No. 06</span><span class="mono">4 pcs</span></div>
-          <div class="style-card__gr">ΡΕΜΠΕΤΙΚΑ</div>
-          <div class="script-it style-card__en">Rebétika</div>
-          <p class="style-card__blurb">The foundation. Urban song from the 1920s–1950s — bouzouki and baglamás, smoke and exile. Vamvakaris, Tsitsanis, Bellou, Papaioannou. We respect the lineage; the older bookers know we do.</p>
-          <p class="style-card__note script-it"><span class="mono" style="color: var(--gold); letter-spacing: 0.1em; margin-right: 8px;">P.S.</span>Stay after the gig to smoke a joint with the guitar and bouzouki players.</p>
-          <ul class="style-card__icons">
-            <li class="mono style-card__chip">Bouzouki</li><li class="mono style-card__chip">Baglamás</li><li class="mono style-card__chip">Voice</li><li class="mono style-card__chip">Guitar</li>
-          </ul>
-          <div class="style-card__foot">
-            <span class="mono" style="color: var(--ink-mute);">WE PLAY</span>
-            <span class="style-card__artists">Vamvakaris · Tsitsanis · Bellou · Papaioannou</span>
+        <details class="style-row">
+          <summary class="style-row__sum">
+            <span class="style-row__gr">ΡΕΜΠΕΤΙΚΑ</span>
+            <span class="style-row__en script-it">Rebétika</span>
+            <span class="style-row__teaser">The foundation. We respect the lineage.</span>
+            <span class="style-row__arrow" aria-hidden="true">+</span>
+          </summary>
+          <div class="style-row__body">
+            <p>The foundation. Urban song from the 1920s–1950s — bouzouki and baglamás, smoke and exile. Vamvakaris, Tsitsanis, Bellou, Papaioannou. We respect the lineage; the older bookers know we do.</p>
+            <p class="script-it" style="color: var(--ink); font-size: 1.05rem;"><span class="mono" style="color: var(--gold); letter-spacing: 0.1em; margin-right: 8px;">P.S.</span>Stay after the gig to smoke a joint with the guitar and bouzouki players.</p>
+            <div class="style-row__meta">
+              <span class="mono" style="color: var(--ink-mute);">Instruments</span>
+              <span>Bouzouki · Baglamás · Voice · Guitar</span>
+            </div>
+            <div class="style-row__meta">
+              <span class="mono" style="color: var(--ink-mute);">We play</span>
+              <span class="script-it">Vamvakaris · Tsitsanis · Bellou · Papaioannou</span>
+            </div>
           </div>
-        </article>
+        </details>
       </div>
     </div>
   </section>
@@ -748,62 +860,59 @@
   <!-- ═══ MUSIC ═══ -->
   <section id="music" class="sec sec--xpad">
     <div class="container">
-      <header class="mus__head">
+      <header class="head2 head2--12">
         <div>
           <span class="mono">LISTEN</span>
-          <h2 class="h2 h2--mus display-tight">TWO STUDIO<br/>ALBUMS.<br/>ONE BAND.</h2>
+          <h2 class="h2 display-tight">Two studio records, twelve years of <span style="color: var(--gold);">kefi</span>.</h2>
         </div>
-        <div class="mus__platforms">
-          <span class="mono" style="color: var(--ink-mute);">STREAM EVERYWHERE</span>
-          <div class="mus__platLinks">
-            <a href="https://music.apple.com/us/artist/oneiro/677017168" target="_blank" rel="noopener" class="btn" style="border-color: var(--rule);">Apple Music →</a>
-            <a href="https://www.youtube.com/channel/UCBuQAA2ZBjqUM-FQss4Z8Mw" target="_blank" rel="noopener" class="btn" style="border-color: var(--rule);">YouTube →</a>
-            <a href="#" class="btn" style="border-color: var(--rule);">Spotify →</a>
-          </div>
-        </div>
+        <p class="intro">Tap any cover to listen now. Available on Apple Music, YouTube, and (soon) Spotify.</p>
       </header>
 
-      <div class="mus__list">
-        <article class="album">
-          <div class="album__cover">
-            <img src="images/album-glendi.jpg" alt="Glendi (2014) — Oneiro" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+      <div class="discog">
+        <article class="record">
+          <div class="record__cover">
+            <img src="images/album-glendi.jpg" alt="Glendi (2014) — Oneiro" loading="lazy" />
           </div>
-          <div class="album__meta">
-            <span class="mono" style="color: var(--gold);">ON-02 · 2014</span>
-            <h3 class="display album__title">Glendi</h3>
-            <div class="script-it album__sub">11 tracks · Studio</div>
-            <p class="album__note">Our second record. Eleven sides of laïka and dimotika — the songs the room asks for.</p>
-            <div class="album__links">
-              <a href="https://geo.itunes.apple.com/us/album/glendi/id908536784?mt=1&amp;app=music" target="_blank" rel="noopener" class="btn">▶ Apple Music</a>
-              <a href="#" class="btn">▶ Spotify</a>
-              <a href="https://www.youtube.com/channel/UCBuQAA2ZBjqUM-FQss4Z8Mw" target="_blank" rel="noopener" class="btn">▶ YouTube</a>
+          <div class="record__body">
+            <span class="mono" style="color: var(--gold);">2014 · STUDIO ALBUM</span>
+            <h3 class="record__title display">Glendi</h3>
+            <p class="record__note">Eleven sides of laïka and dimotika — the songs the room asks for.</p>
+            <iframe class="record__embed" allow="autoplay *; encrypted-media *;" frameborder="0"
+                    sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+                    src="https://embed.music.apple.com/us/album/glendi/908536784"
+                    title="Glendi on Apple Music"></iframe>
+            <div class="record__links">
+              <a href="https://geo.itunes.apple.com/us/album/glendi/id908536784?mt=1&amp;app=music" target="_blank" rel="noopener" class="record__link">Apple Music ↗</a>
+              <a href="https://www.youtube.com/channel/UCBuQAA2ZBjqUM-FQss4Z8Mw" target="_blank" rel="noopener" class="record__link">YouTube ↗</a>
+              <a href="#" class="record__link">Spotify ↗</a>
             </div>
           </div>
-          <div class="album__bigCat display">№ 02</div>
         </article>
 
-        <article class="album">
-          <div class="album__cover">
-            <img src="images/album-kainouria.jpg" alt="Kainouria Epohi (2012) — Oneiro" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+        <article class="record">
+          <div class="record__cover">
+            <img src="images/album-kainouria.jpg" alt="Kainouria Epohi (2012) — Oneiro" loading="lazy" />
           </div>
-          <div class="album__meta">
-            <span class="mono" style="color: var(--gold);">ON-01 · 2012</span>
-            <h3 class="display album__title">Kainouria Epohi</h3>
-            <div class="script-it album__sub">10 tracks · Studio</div>
-            <p class="album__note">"A new era." Our debut studio record. The album that introduced Oneiro to the diaspora.</p>
-            <div class="album__links">
-              <a href="https://geo.itunes.apple.com/us/album/kainouria-epohi/id663804017?mt=1&amp;app=music" target="_blank" rel="noopener" class="btn">▶ Apple Music</a>
-              <a href="#" class="btn">▶ Spotify</a>
-              <a href="https://www.youtube.com/channel/UCBuQAA2ZBjqUM-FQss4Z8Mw" target="_blank" rel="noopener" class="btn">▶ YouTube</a>
+          <div class="record__body">
+            <span class="mono" style="color: var(--gold);">2012 · DEBUT ALBUM</span>
+            <h3 class="record__title display">Kainouria Epohi</h3>
+            <p class="record__note"><em class="script-it">"A new era."</em> The record that introduced Oneiro to the diaspora.</p>
+            <iframe class="record__embed" allow="autoplay *; encrypted-media *;" frameborder="0"
+                    sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+                    src="https://embed.music.apple.com/us/album/kainouria-epohi/663804017"
+                    title="Kainouria Epohi on Apple Music"></iframe>
+            <div class="record__links">
+              <a href="https://geo.itunes.apple.com/us/album/kainouria-epohi/id663804017?mt=1&amp;app=music" target="_blank" rel="noopener" class="record__link">Apple Music ↗</a>
+              <a href="https://www.youtube.com/channel/UCBuQAA2ZBjqUM-FQss4Z8Mw" target="_blank" rel="noopener" class="record__link">YouTube ↗</a>
+              <a href="#" class="record__link">Spotify ↗</a>
             </div>
           </div>
-          <div class="album__bigCat display">№ 01</div>
         </article>
       </div>
 
       <div class="mus__upload">
         <div class="mono" style="color: var(--ink-mute);">WANT A SONG WE HAVEN'T RECORDED YET?</div>
-        <div class="script-it" style="font-size: clamp(20px, 2vw, 28px); color: var(--ink);">Commission a studio cut — see below.</div>
+        <div class="script-it" style="font-size: clamp(20px, 2vw, 28px); color: var(--ink);">Commission a studio cut — your father's favorite, your mother's first dance, the one your pappous played.</div>
         <a href="/commission.html" class="btn">Commission a song →</a>
       </div>
     </div>
@@ -815,48 +924,29 @@
       <header class="head2 head2--13">
         <div>
           <span class="mono">TERRITORY</span>
-          <h2 class="h2 h2--md display-tight">FROM <span style="color: var(--gold);">DETROIT</span><br/>TO <span style="color: var(--gold);">BAHAMAS</span><br/>TO <span style="color: var(--gold);">ATHENS</span>.</h2>
+          <h2 class="h2 h2--md display-tight">Detroit, then <span style="color: var(--gold);">anywhere</span> your people can fly to.</h2>
         </div>
         <p class="intro">Detroit is home. We tour where the diaspora is — and we're in Greece every summer. Off this list? Ask anyway. The answer is usually yes.</p>
       </header>
 
-      <ul class="where__list">
-        <li class="where__row">
-          <span class="mono where__num">01</span>
-          <span class="display where__region">DETROIT &amp; MICHIGAN</span>
-          <span class="where__spacer"></span>
-          <span class="where__places">Detroit · Hamtramck · Dearborn · Birmingham · Grand Rapids · Ann Arbor</span>
-          <span class="mono where__note">Home base. No travel fee.</span>
-        </li>
-        <li class="where__row">
-          <span class="mono where__num">02</span>
-          <span class="display where__region">UNITED STATES</span>
-          <span class="where__spacer"></span>
-          <span class="where__places">Chicago · New York · Astoria · Tampa · Boston · Charlotte · Houston</span>
-          <span class="mono where__note">All 50, ask us.</span>
-        </li>
-        <li class="where__row">
-          <span class="mono where__num">03</span>
-          <span class="display where__region">CANADA</span>
-          <span class="where__spacer"></span>
-          <span class="where__places">Toronto · Montréal · Vancouver</span>
-          <span class="mono where__note">Cross border, no problem.</span>
-        </li>
-        <li class="where__row">
-          <span class="mono where__num">04</span>
-          <span class="display where__region">BAHAMAS</span>
-          <span class="where__spacer"></span>
-          <span class="where__places">Nassau · Paradise Island · Eleuthera</span>
-          <span class="mono where__note">Destination weddings, our specialty.</span>
-        </li>
-        <li class="where__row">
-          <span class="mono where__num">05</span>
-          <span class="display where__region">GREECE</span>
-          <span class="where__spacer"></span>
-          <span class="where__places">Athens · Mýkonos · Santoríni · Crete · Rhódes · Páros · Thessaloníki</span>
-          <span class="mono where__note">Summer season — book by January.</span>
-        </li>
-      </ul>
+      <div class="territory">
+        <p class="territory__sentence">
+          <span class="script-it" style="color: var(--gold); font-size: 1.2em;">Detroit</span>
+          ·  Hamtramck  ·  Dearborn  ·  Birmingham  ·  Ann Arbor
+          ·  Chicago  ·  New York  ·  Astoria  ·  Boston  ·  Charlotte  ·  Tampa  ·  Houston
+          ·  <span class="script-it" style="color: var(--gold); font-size: 1.2em;">Toronto</span>
+          ·  Montréal  ·  Vancouver
+          ·  <span class="script-it" style="color: var(--gold); font-size: 1.2em;">Nassau</span>
+          ·  Paradise Island  ·  Eleuthera
+          ·  <span class="script-it" style="color: var(--gold); font-size: 1.2em;">Athens</span>
+          ·  Mýkonos  ·  Santoríni  ·  Crete  ·  Rhódes  ·  Páros  ·  Thessaloníki
+        </p>
+        <div class="territory__legend">
+          <span class="mono"><span style="color: var(--gold);">●</span> Home base — no travel fee</span>
+          <span class="mono"><span style="color: var(--ink-mute);">●</span> Cross-border &amp; destination — ask for a quote</span>
+          <span class="mono"><span style="color: var(--ink-mute);">●</span> Greek summer — book by January</span>
+        </div>
+      </div>
 
       <div class="testimonials">
         <figure class="tcard">
