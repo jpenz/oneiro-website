@@ -3,8 +3,30 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0a0a0e" />
 <title>Oneiro — Live Greek Entertainment</title>
-<meta name="description" content="Oneiro — four Greek-American musicians out of Detroit. Live Greek entertainment for weddings, baptisms, glendia, panigíria, restaurants — anywhere your people want to dance." />
+<meta name="description" content="Oneiro — four Greek-American musicians out of Detroit. Live Greek entertainment for weddings, festivals, glendia, baptisms, and private events across North America and Greece." />
+<link rel="canonical" href="https://oneiromusic.com/" />
+
+<!-- Open Graph / social sharing -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Oneiro" />
+<meta property="og:title" content="Oneiro — Live Greek Entertainment" />
+<meta property="og:description" content="Four Greek-American musicians out of Detroit. Weddings, festivals, glendia, baptisms — anywhere your people want to dance." />
+<meta property="og:image" content="https://oneiromusic.com/images/hero-poster.jpg" />
+<meta property="og:image:width" content="1280" />
+<meta property="og:image:height" content="720" />
+<meta property="og:url" content="https://oneiromusic.com/" />
+<meta property="og:locale" content="en_US" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Oneiro — Live Greek Entertainment" />
+<meta name="twitter:description" content="Bring us the event. We'll bring you the kefi." />
+<meta name="twitter:image" content="https://oneiromusic.com/images/hero-poster.jpg" />
+
+<!-- Favicon (SVG inline — single-letter wordmark in brand color) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230a0a0e'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Impact, Arial Black, sans-serif' font-weight='900' font-size='42' fill='%234a9eff'%3EΟ%3C/text%3E%3C/svg%3E" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -286,16 +308,6 @@
     margin: 0;
   }
   .hero-cinematic__actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
-  .hero-cinematic__scrollhint {
-    position: absolute;
-    bottom: clamp(18px, 2vw, 28px);
-    right: clamp(20px, 3vw, 48px);
-    z-index: 2;
-    color: rgba(255,255,255,0.55);
-    font-size: 0.66rem;
-    letter-spacing: 0.3em;
-    pointer-events: none;
-  }
   @media (max-width: 760px) {
     .hero-cinematic { min-height: 80vh; min-height: 80svh; }
     .hero-cinematic__content { padding-top: 120px; }
@@ -393,13 +405,18 @@
   .stat dt { color: var(--ink-mute); text-transform: uppercase; letter-spacing: 0.1em; }
   .stat dd { color: var(--ink); margin: 0; font-size: 0.78rem; }
 
-  /* ─── Discography — bigger artwork + Apple Music embed ─── */
+  /* ─── Discography — proportioned artwork + Apple Music embed ─── */
   .discog {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: clamp(24px, 3vw, 56px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(36px, 4vw, 56px);
   }
-  .record { display: flex; flex-direction: column; gap: clamp(20px, 2vw, 28px); }
+  .record {
+    display: grid;
+    grid-template-columns: clamp(180px, 22vw, 240px) 1fr;
+    gap: clamp(24px, 3vw, 48px);
+    align-items: start;
+  }
   .record__cover {
     width: 100%;
     aspect-ratio: 1 / 1;
@@ -412,36 +429,38 @@
     transition: transform .5s ease;
   }
   .record:hover .record__cover img { transform: scale(1.02); }
-  .record__body { display: flex; flex-direction: column; gap: 10px; }
+  .record__body { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
   .record__title {
-    font-size: clamp(32px, 4vw, 56px);
-    margin: 4px 0 6px;
+    font-size: clamp(28px, 3.4vw, 44px);
+    margin: 2px 0 4px;
     letter-spacing: -0.015em;
     line-height: 1.0;
     font-weight: 800;
   }
-  .record__note { font-size: clamp(15px, 1.1vw, 17px); color: var(--ink-soft); line-height: 1.6; margin: 0; max-width: 480px; }
+  .record__note { font-size: clamp(14px, 1vw, 16px); color: var(--ink-soft); line-height: 1.6; margin: 0; max-width: 480px; }
   .record__embed {
     width: 100%;
+    max-width: 660px;
     height: 175px;
     border: none;
     border-radius: 12px;
     background: transparent;
     overflow: hidden;
-    margin-top: 10px;
+    margin-top: 8px;
   }
   .record__links { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 4px; }
   .record__link {
     font-family: var(--mono);
-    font-size: 0.74rem;
+    font-size: 0.7rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--ink-soft);
     transition: color .15s ease;
   }
   .record__link:hover { color: var(--gold); }
-  @media (max-width: 860px) {
-    .discog { grid-template-columns: 1fr; }
+  @media (max-width: 640px) {
+    .record { grid-template-columns: 1fr; gap: 18px; }
+    .record__cover { max-width: 280px; }
   }
   .mus__upload { padding: 40px 0 0; margin-top: clamp(48px, 6vw, 72px); border-top: 1px solid color-mix(in oklch, var(--ink) 12%, transparent); display: flex; align-items: center; gap: 24px; flex-wrap: wrap; justify-content: space-between; }
 
@@ -516,22 +535,6 @@
   }
 
 
-  /* ─── Remake / Studio Commission ─── */
-  .rm__head { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(24px, 4vw, 72px); align-items: start; margin-bottom: clamp(32px, 4vw, 56px); }
-  .rm__script { font-size: clamp(20px, 2.2vw, 30px); color: var(--gold); margin-top: 10px; line-height: 1.25; }
-  .rm__price { padding: clamp(24px, 2.5vw, 40px); border: 1px dashed var(--gold); background: color-mix(in oklch, var(--gold) 5%, transparent); display: flex; flex-direction: column; gap: 8px; align-self: start; }
-  .rm__bigPrice { font-size: clamp(40px, 5.5vw, 80px); color: var(--gold); line-height: 0.95; font-weight: 900; font-family: var(--display); text-transform: uppercase; letter-spacing: -0.01em; }
-  .rm__trade { font-size: clamp(16px, 1.6vw, 22px); color: var(--ink); margin-top: 6px; line-height: 1.3; }
-  .rm__fine { color: var(--ink-mute); font-size: 0.7rem; margin-top: 14px; line-height: 1.45; }
-  .rm__ast { color: var(--gold); }
-  .rm__intro { font-size: clamp(15px, 1.1vw, 18px); color: var(--ink-soft); max-width: 680px; line-height: 1.7; margin: 8px 0 clamp(48px, 6vw, 72px); }
-  .rm__process { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(14px, 1.6vw, 24px); margin-bottom: clamp(48px, 6vw, 72px); }
-  .rm__step { padding: 22px 24px; background: var(--bg-elev); display: flex; flex-direction: column; gap: 8px; border-radius: 4px; }
-  .rm__stepN { font-size: 1rem; color: var(--gold); font-weight: 800; font-family: var(--display); }
-  .rm__stepT { font-size: 1rem; margin: 4px 0 4px; font-weight: 800; }
-  .rm__stepB { font-size: 0.88rem; color: var(--ink-soft); margin: 0; line-height: 1.6; }
-  .rm__dropzone { padding: clamp(24px, 2.5vw, 36px); border: 1px dashed var(--rule); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-
   /* ─── Footer ─── */
   .ft { padding-top: clamp(40px, 6vw, 80px); padding-bottom: 40px; border-top: 1px solid var(--rule); }
   .ft__socials { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
@@ -561,7 +564,6 @@
   @media (max-width: 1100px) {
     .crew__grid { grid-template-columns: repeat(2, 1fr); }
     .ev__grid { grid-template-columns: repeat(2, 1fr); }
-    .rm__process { grid-template-columns: repeat(2, 1fr); }
     .ft__cols { grid-template-columns: repeat(2, 1fr); }
     .ft__socials { grid-template-columns: repeat(2, 1fr); }
   }
@@ -628,12 +630,10 @@
       </p>
 
       <div class="hero-cinematic__actions">
-        <a href="#book" class="btn btn--gold btn--lg">Book us →</a>
-        <a href="#listen" class="btn btn--lg" style="border-color: rgba(255,255,255,0.5); color: #fff;">Listen ▸</a>
+        <a href="#hire" class="btn btn--gold btn--lg">Book us →</a>
+        <a href="#music" class="btn btn--lg" style="border-color: rgba(255,255,255,0.5); color: #fff;">Listen ▸</a>
       </div>
     </div>
-
-    <div class="hero-cinematic__scrollhint mono" aria-hidden="true">SCROLL ↓</div>
   </section>
 
   <!-- ═══ WHAT WE PLAY ═══ -->
@@ -980,14 +980,14 @@
       <header class="head2 head2--12">
         <div>
           <span class="mono">EVENTS</span>
-          <h2 class="h2 h2--md display-tight">ANY NIGHT WORTH<br/><span style="color: var(--gold);">HAVING</span> A BAND.</h2>
+          <h2 class="h2 display-tight">Any night worth <span style="color: var(--gold);">having</span> a band.</h2>
         </div>
-        <p class="intro">We play weddings, baptisms, glendia, panigíria, taverna residencies, and private events — from a Detroit basement to a Mýkonos terrace. Tell us about your night and we'll come back with a plan within 48 hours.</p>
+        <p class="intro">Weddings, baptisms, glendia, panigíria, taverna residencies, private events — from a Detroit basement to a Mýkonos terrace. Tell us about your night and we'll come back with a plan within 48 hours.</p>
       </header>
 
       <div class="ev__grid">
         <article class="ev__card">
-          <div class="ev__head"><span class="mono">No. 01</span><span class="mono" style="color: var(--gold);">Year-round</span></div>
+          <div class="ev__head"><span class="mono" style="color: var(--gold);">Year-round</span></div>
           <div class="ev__gr">ΓΑΜΟΙ</div>
           <div class="display ev__label">WEDDINGS</div>
           <p class="ev__blurb">Ceremony to last call. Koumbáros entrance, first dance, the 4 a.m. circle. Solo, trio, or full band.</p>
@@ -1000,7 +1000,7 @@
         </article>
 
         <article class="ev__card">
-          <div class="ev__head"><span class="mono">No. 02</span><span class="mono" style="color: var(--gold);">Sundays mostly</span></div>
+          <div class="ev__head"><span class="mono" style="color: var(--gold);">Sundays mostly</span></div>
           <div class="ev__gr">ΒΑΠΤΙΣΕΙΣ</div>
           <div class="display ev__label">BAPTISMS</div>
           <p class="ev__blurb">Sunday-afternoon joy. Light set during the meal, dancing after the cake.</p>
@@ -1013,7 +1013,7 @@
         </article>
 
         <article class="ev__card">
-          <div class="ev__head"><span class="mono">No. 03</span><span class="mono" style="color: var(--gold);">Year-round</span></div>
+          <div class="ev__head"><span class="mono" style="color: var(--gold);">Year-round</span></div>
           <div class="ev__gr">ΓΛΕΝΤΙΑ</div>
           <div class="display ev__label">GLENDIA</div>
           <p class="ev__blurb">The Greek party for the sake of the party. House, hall, taverna, backyard. We bring the kefi.</p>
@@ -1026,7 +1026,7 @@
         </article>
 
         <article class="ev__card">
-          <div class="ev__head"><span class="mono">No. 04</span><span class="mono" style="color: var(--gold);">Summer</span></div>
+          <div class="ev__head"><span class="mono" style="color: var(--gold);">Summer</span></div>
           <div class="ev__gr">ΠΑΝΗΓΥΡΙΑ</div>
           <div class="display ev__label">PANIGÍRIA</div>
           <p class="ev__blurb">Parish festivals and saint-day outdoor sets. Heavy dimotika, kalamatianó circles, the dances your pappous taught you.</p>
@@ -1039,7 +1039,7 @@
         </article>
 
         <article class="ev__card">
-          <div class="ev__head"><span class="mono">No. 05</span><span class="mono" style="color: var(--gold);">By contract</span></div>
+          <div class="ev__head"><span class="mono" style="color: var(--gold);">By contract</span></div>
           <div class="ev__gr">ΤΑΒΕΡΝΕΣ</div>
           <div class="display ev__label">TAVERNAS &amp; RESTAURANTS</div>
           <p class="ev__blurb">Standing nights, weekly residencies, opening weekends. We have done it from Astoria to Mýkonos.</p>
@@ -1052,7 +1052,7 @@
         </article>
 
         <article class="ev__card">
-          <div class="ev__head"><span class="mono">No. 06</span><span class="mono" style="color: var(--gold);">Year-round</span></div>
+          <div class="ev__head"><span class="mono" style="color: var(--gold);">Year-round</span></div>
           <div class="ev__gr">ΙΔΙΩΤΙΚΑ</div>
           <div class="display ev__label">CORPORATE &amp; PRIVATE</div>
           <p class="ev__blurb">Anniversaries, retirements, milestone birthdays, brand events with a Greek angle. We tailor the room.</p>
@@ -1076,8 +1076,8 @@
       <!-- Booking form -->
       <form id="booking" class="fm" data-form="booking">
         <div class="fm__head">
-          <span class="mono" style="color: var(--gold);">BOOKING INQUIRY · 02·MIN · NO PRESSURE</span>
-          <h3 class="display fm__h">TELL US ABOUT THE NIGHT.</h3>
+          <span class="mono" style="color: var(--gold);">BOOKING INQUIRY · ~2 MIN · NO PRESSURE</span>
+          <h3 class="display fm__h">Tell us about the night.</h3>
         </div>
 
         <div class="fm__row">
@@ -1223,8 +1223,8 @@
     </div>
   </footer>
 
-  <!-- ═══ TWEAKS TOOLBAR ═══ -->
-  <aside class="twk" aria-label="Design tweaks">
+  <!-- ═══ TWEAKS TOOLBAR (dev-only — append ?dev=1 to URL to show) ═══ -->
+  <aside class="twk" aria-label="Design tweaks" hidden>
     <div class="twk__title">Tweaks</div>
     <div class="twk__row">
       <span class="twk__lbl">Palette</span>
@@ -1282,8 +1282,13 @@
       });
     });
 
-    // ─── Tweaks toolbar ───
+    // ─── Tweaks toolbar (dev-only) ───
     const html = document.documentElement;
+    // Reveal only if URL has ?dev=1 (keeps the toolbar out of the live site)
+    if (new URLSearchParams(window.location.search).get('dev') === '1') {
+      const twk = document.querySelector('aside.twk');
+      if (twk) twk.hidden = false;
+    }
     document.querySelectorAll('.twk__seg').forEach(seg => {
       seg.addEventListener('click', e => {
         const btn = e.target.closest('button[data-val]');
