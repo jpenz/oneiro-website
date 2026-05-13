@@ -322,6 +322,19 @@
   .sec { padding-top: clamp(80px, 10vw, 140px); padding-bottom: clamp(56px, 7vw, 96px); }
   .sec--deep { background: var(--bg-deep); }
   .sec--xpad { padding-bottom: clamp(80px, 10vw, 140px); }
+  .sec__kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    line-height: 1;
+  }
+  .sec__icon {
+    width: 18px;
+    height: 18px;
+    color: var(--gold);
+    opacity: 0.75;
+    flex-shrink: 0;
+  }
   .head2 { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 3.5vw, 64px); align-items: end; margin-bottom: clamp(40px, 5vw, 64px); }
   .head2--12 { grid-template-columns: 1.2fr 1fr; }
   .head2--13 { grid-template-columns: 1.3fr 1fr; }
@@ -388,6 +401,132 @@
     .style-row__en, .style-row__teaser { grid-column: 1 / -1; }
     .style-row__arrow { grid-row: 1; grid-column: 2; }
   }
+
+  /* ─── Custom-song callout (below the repertoire) ─── */
+  .custom-song {
+    margin-top: clamp(48px, 6vw, 88px);
+    padding: clamp(28px, 3.5vw, 56px);
+    background:
+      linear-gradient(135deg,
+        color-mix(in oklch, var(--gold) 8%, transparent),
+        color-mix(in oklch, var(--gold) 2%, transparent));
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: clamp(20px, 3vw, 48px);
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  /* Subtle vector flourish — repeating diagonal lines as a watermark */
+  .custom-song::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(45deg,
+        color-mix(in oklch, var(--gold) 4%, transparent) 0px,
+        color-mix(in oklch, var(--gold) 4%, transparent) 1px,
+        transparent 1px,
+        transparent 60px);
+    pointer-events: none;
+    opacity: 0.6;
+  }
+  .custom-song__mark {
+    width: clamp(72px, 9vw, 132px);
+    height: clamp(72px, 9vw, 132px);
+    color: var(--gold);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+  .custom-song__body { display: flex; flex-direction: column; gap: 10px; position: relative; z-index: 1; min-width: 0; }
+  .custom-song__h {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(28px, 3.4vw, 48px);
+    line-height: 1.0;
+    letter-spacing: -0.01em;
+    margin: 4px 0 6px;
+  }
+  .custom-song__copy {
+    font-size: clamp(15px, 1.1vw, 17px);
+    color: var(--ink-soft);
+    line-height: 1.65;
+    max-width: 640px;
+    margin: 0;
+  }
+  .custom-song__actions {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 14px;
+  }
+  .custom-song__link {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    border-bottom: 1px solid color-mix(in oklch, var(--ink) 18%, transparent);
+    padding-bottom: 2px;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .custom-song__link:hover { color: var(--gold); border-color: var(--gold); }
+  @media (max-width: 720px) {
+    .custom-song { grid-template-columns: 1fr; text-align: left; padding: clamp(28px, 6vw, 44px); }
+    .custom-song__mark { width: 72px; height: 72px; }
+  }
+
+  /* ─── Editorial section breather (signature ornament) ─── */
+  .ornament-break {
+    padding: clamp(64px, 9vw, 140px) 0;
+    background:
+      radial-gradient(60% 80% at 50% 50%, color-mix(in oklch, var(--gold) 6%, transparent), transparent 70%),
+      var(--bg);
+  }
+  .ornament-break__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    text-align: center;
+  }
+  .ornament-break__svg {
+    width: clamp(88px, 12vw, 160px);
+    height: clamp(88px, 12vw, 160px);
+    color: var(--gold);
+    opacity: 0.85;
+    transition: transform 1.2s cubic-bezier(.22,.61,.36,1);
+  }
+  [data-reveal].is-revealed .ornament-break__svg { transform: rotate(-2deg); }
+  .ornament-break__caption {
+    font-size: clamp(28px, 3.4vw, 48px);
+    color: var(--ink);
+    letter-spacing: 0.005em;
+    line-height: 1.0;
+    margin-top: 6px;
+  }
+  .ornament-break__sub {
+    color: var(--ink-mute);
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
+  }
+
+  /* ─── Scroll-reveal animation ─── */
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .9s cubic-bezier(.22,.61,.36,1), transform .9s cubic-bezier(.22,.61,.36,1);
+    will-change: opacity, transform;
+  }
+  [data-reveal].is-revealed { opacity: 1; transform: translateY(0); }
+  /* Respect reduced motion — show everything immediately */
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal] { opacity: 1; transform: none; transition: none; }
+  }
+  [data-motion="off"] [data-reveal] { opacity: 1; transform: none; transition: none; }
 
   /* ─── Crew ─── */
   .crew__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(16px, 1.8vw, 28px); }
@@ -462,7 +601,6 @@
     .record { grid-template-columns: 1fr; gap: 18px; }
     .record__cover { max-width: 280px; }
   }
-  .mus__upload { padding: 40px 0 0; margin-top: clamp(48px, 6vw, 72px); border-top: 1px solid color-mix(in oklch, var(--ink) 12%, transparent); display: flex; align-items: center; gap: 24px; flex-wrap: wrap; justify-content: space-between; }
 
   /* ─── Territory — flowing sentence of cities ─── */
   .territory { display: flex; flex-direction: column; gap: clamp(24px, 3vw, 40px); }
@@ -480,9 +618,9 @@
   .territory__sentence .script-it { text-transform: none; font-weight: 500; letter-spacing: -0.005em; }
   .territory__legend { display: flex; gap: clamp(16px, 2vw, 32px); flex-wrap: wrap; padding-top: 4px; }
   .territory__legend .mono { color: var(--ink-soft); font-size: 0.66rem; }
-  .testimonials { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(18px, 2vw, 36px); margin-top: clamp(48px, 6vw, 72px); }
-  .tcard { padding: 36px 32px; margin: 0; background: var(--bg-elev); border-radius: 4px; }
-  .tcard__quote { font-size: clamp(18px, 1.7vw, 24px); color: var(--ink); line-height: 1.4; margin: 0 0 22px; }
+  .testimonials { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(28px, 3vw, 56px); margin-top: clamp(72px, 9vw, 120px); padding-top: clamp(56px, 7vw, 88px); border-top: 1px solid color-mix(in oklch, var(--ink) 12%, transparent); }
+  .tcard { padding: 0; margin: 0; background: transparent; border-radius: 0; }
+  .tcard__quote { font-size: clamp(20px, 1.9vw, 28px); color: var(--ink); line-height: 1.4; margin: 0 0 22px; }
   .tcard__cite { display: flex; flex-direction: column; gap: 4px; }
 
   /* ─── Events ─── */
@@ -495,8 +633,18 @@
   .ev__blurb { font-size: 0.92rem; color: var(--ink-soft); line-height: 1.65; margin: 6px 0 0; }
   .ev__moments { list-style: none; padding: 0; margin: 10px 0 0; display: flex; flex-direction: column; gap: 5px; }
   .ev__moment { font-size: 0.78rem; color: var(--ink-soft); font-family: var(--mono); letter-spacing: 0.04em; }
-  .ev__cta { padding: clamp(32px, 4vw, 56px); border: 1px solid var(--gold); background: color-mix(in oklch, var(--gold) 5%, transparent); display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: clamp(48px, 6vw, 80px); }
-  .ev__ctaText { font-size: clamp(20px, 2vw, 28px); color: var(--ink); line-height: 1.25; }
+  .ev__cta {
+    padding: clamp(40px, 5vw, 72px);
+    background:
+      linear-gradient(135deg,
+        color-mix(in oklch, var(--gold) 14%, var(--bg-elev)),
+        color-mix(in oklch, var(--gold) 6%, var(--bg-elev)));
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 32px; flex-wrap: wrap;
+    margin-bottom: clamp(56px, 7vw, 88px);
+    border-radius: 4px;
+  }
+  .ev__ctaText { font-size: clamp(22px, 2.2vw, 30px); color: var(--ink); line-height: 1.25; max-width: 540px; }
 
   /* ─── Forms ─── */
   .fm { padding: clamp(28px, 4vw, 56px); background: var(--bg-elev); display: flex; flex-direction: column; gap: 28px; border-radius: 4px; }
@@ -580,6 +728,65 @@
 </head>
 <body id="top">
 
+  <!-- ═══ Reusable SVG sprite (icons used throughout the page) ═══ -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <!-- Bouzouki — line-art monoline signature -->
+      <symbol id="i-bouzouki" viewBox="0 0 64 64">
+        <g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <ellipse cx="18" cy="46" rx="13" ry="11" />
+          <circle cx="18" cy="46" r="3.2" />
+          <line x1="28" y1="40" x2="56" y2="12" />
+          <line x1="30" y1="42" x2="58" y2="14" />
+          <path d="M 56 12 L 60 8 L 58 6 L 53 11" />
+          <line x1="18" y1="33" x2="55" y2="10" stroke-width="0.6" opacity="0.55" />
+          <line x1="20" y1="36" x2="57" y2="13" stroke-width="0.6" opacity="0.55" />
+        </g>
+      </symbol>
+      <!-- Lyre / harp -->
+      <symbol id="i-lyre" viewBox="0 0 64 64">
+        <g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M 14 10 C 8 30, 16 50, 32 54 C 48 50, 56 30, 50 10" />
+          <line x1="14" y1="10" x2="14" y2="44" />
+          <line x1="50" y1="10" x2="50" y2="44" />
+          <path d="M 14 44 L 50 44" />
+          <line x1="22" y1="18" x2="22" y2="50" stroke-width="0.7" opacity="0.6" />
+          <line x1="28" y1="14" x2="28" y2="52" stroke-width="0.7" opacity="0.6" />
+          <line x1="34" y1="14" x2="34" y2="52" stroke-width="0.7" opacity="0.6" />
+          <line x1="40" y1="18" x2="40" y2="50" stroke-width="0.7" opacity="0.6" />
+        </g>
+      </symbol>
+      <!-- Champagne flute -->
+      <symbol id="i-flute" viewBox="0 0 64 64">
+        <g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M 22 8 L 42 8 L 38 34 C 38 38, 35 41, 32 41 C 29 41, 26 38, 26 34 Z" />
+          <line x1="32" y1="41" x2="32" y2="54" />
+          <line x1="24" y1="56" x2="40" y2="56" />
+          <circle cx="30" cy="20" r="0.8" fill="currentColor" />
+          <circle cx="34" cy="26" r="0.8" fill="currentColor" />
+          <circle cx="29" cy="30" r="0.8" fill="currentColor" />
+        </g>
+      </symbol>
+      <!-- Microphone -->
+      <symbol id="i-mic" viewBox="0 0 64 64">
+        <g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="22" y="8" width="20" height="32" rx="10" />
+          <path d="M 14 38 C 14 50, 24 56, 32 56 C 40 56, 50 50, 50 38" />
+          <line x1="32" y1="56" x2="32" y2="62" />
+        </g>
+      </symbol>
+      <!-- Bouzouki neck (compact, for inline section labels) -->
+      <symbol id="i-mark" viewBox="0 0 24 24">
+        <g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+          <circle cx="7" cy="17" r="4" />
+          <line x1="10" y1="14" x2="22" y2="2" />
+          <path d="M 22 2 L 23 1" />
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
+
   <!-- ═══ NAV ═══ -->
   <nav class="nav">
     <div class="container nav__inner">
@@ -641,10 +848,10 @@
     <div class="container">
       <header class="head2 head2--13">
         <div>
-          <span class="mono">REPERTOIRE</span>
-          <h2 class="h2 display-tight">Six&nbsp;styles.<br/>One&nbsp;<span style="color: var(--gold);">night</span>.</h2>
+          <span class="sec__kicker"><span class="mono">REPERTOIRE</span> <svg class="sec__icon" aria-hidden="true"><use href="#i-mark"/></svg></span>
+          <h2 class="h2 display-tight">Whatever your night needs — <span style="color: var(--gold);">we know it</span>.</h2>
         </div>
-        <p class="intro">We open with kalamatianó, push into laïka by ten, slow it down with the nisiótika after dinner, and close with the dimotika nobody's got the legs for. Tap any style to read more — the room decides the order.</p>
+        <p class="intro">Six traditions across one set. We open with kalamatianó, push into laïka by ten, slow it down with the nisiótika after dinner, and close with the dimotika nobody's got the legs for. Tap any style to go deeper.</p>
       </header>
 
       <div class="styles-list">
@@ -771,6 +978,29 @@
           </div>
         </details>
       </div>
+
+      <!-- Custom-song callout -->
+      <aside class="custom-song" data-reveal>
+        <svg class="custom-song__mark" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" aria-hidden="true">
+          <!-- Stylized bouzouki line-art -->
+          <ellipse cx="20" cy="44" rx="13" ry="11" />
+          <circle cx="20" cy="44" r="3" />
+          <line x1="30" y1="38" x2="58" y2="12" />
+          <line x1="32" y1="40" x2="60" y2="14" />
+          <path d="M 58 12 L 62 8 L 60 6 L 54 10" stroke-linejoin="round"/>
+          <line x1="20" y1="32" x2="58" y2="9" stroke-width="0.6" opacity="0.55" />
+          <line x1="22" y1="35" x2="60" y2="12" stroke-width="0.6" opacity="0.55" />
+        </svg>
+        <div class="custom-song__body">
+          <span class="mono" style="color: var(--gold);">CUSTOM SONG REQUEST</span>
+          <h3 class="custom-song__h">Don't see the song you want? <span style="color: var(--gold);">Send it.</span></h3>
+          <p class="custom-song__copy">Your mother's first dance, your father's favorite, the one your pappous played on the laoúto every Sunday. Drop a YouTube link, a Spotify track, a cassette we can digitize — we learn it before the date. No extra fee for the live set.</p>
+          <div class="custom-song__actions">
+            <a href="#booking" class="btn btn--gold">Request a song with your booking →</a>
+            <a href="/commission.html" class="custom-song__link">Want it recorded in studio? Commission a cut ↗</a>
+          </div>
+        </div>
+      </aside>
     </div>
   </section>
 
@@ -779,10 +1009,10 @@
     <div class="container">
       <header class="head2">
         <div>
-          <span class="mono">THE CREW</span>
-          <h2 class="h2 display-tight">FOUR<br/>NAMES.<br/>ONE BAND.</h2>
+          <span class="sec__kicker"><span class="mono">THE CREW</span> <svg class="sec__icon" aria-hidden="true"><use href="#i-mark"/></svg></span>
+          <h2 class="h2 display-tight">The four behind the <span style="color: var(--gold);">kefi</span>.</h2>
         </div>
-        <p class="intro">Four musicians who came up through the church halls, the festivals, and the late nights. The lineup is two lead vocalists, bouzouki, keys, guitar, and drums.</p>
+        <p class="intro">Two lead vocalists, bouzouki, keys, guitar, drums. They grew up through the church halls, the festivals, and the late nights — and they've been playing rooms together since before any of you were ready to dance.</p>
       </header>
 
       <div class="crew__grid">
@@ -862,10 +1092,10 @@
     <div class="container">
       <header class="head2 head2--12">
         <div>
-          <span class="mono">LISTEN</span>
-          <h2 class="h2 display-tight">Two studio records, twelve years of <span style="color: var(--gold);">kefi</span>.</h2>
+          <span class="sec__kicker"><span class="mono">LISTEN</span> <svg class="sec__icon" aria-hidden="true"><use href="#i-mark"/></svg></span>
+          <h2 class="h2 display-tight">On the <span style="color: var(--gold);">record</span>.</h2>
         </div>
-        <p class="intro">Tap any cover to listen now. Available on Apple Music, YouTube, and (soon) Spotify.</p>
+        <p class="intro">Two studio albums in the catalog. Tap any cover to listen — available on Apple Music, YouTube, and (soon) Spotify.</p>
       </header>
 
       <div class="discog">
@@ -910,11 +1140,15 @@
         </article>
       </div>
 
-      <div class="mus__upload">
-        <div class="mono" style="color: var(--ink-mute);">WANT A SONG WE HAVEN'T RECORDED YET?</div>
-        <div class="script-it" style="font-size: clamp(20px, 2vw, 28px); color: var(--ink);">Commission a studio cut — your father's favorite, your mother's first dance, the one your pappous played.</div>
-        <a href="/commission.html" class="btn">Commission a song →</a>
-      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Editorial bouzouki ornament — section breather ═══ -->
+  <section class="ornament-break" aria-hidden="true" data-reveal>
+    <div class="container ornament-break__inner">
+      <svg class="ornament-break__svg"><use href="#i-bouzouki"/></svg>
+      <span class="ornament-break__caption script-it">μέχρι το πρωί</span>
+      <span class="ornament-break__sub mono">until morning</span>
     </div>
   </section>
 
@@ -923,7 +1157,7 @@
     <div class="container">
       <header class="head2 head2--13">
         <div>
-          <span class="mono">TERRITORY</span>
+          <span class="sec__kicker"><span class="mono">TERRITORY</span> <svg class="sec__icon" aria-hidden="true"><use href="#i-mark"/></svg></span>
           <h2 class="h2 h2--md display-tight">Detroit, then <span style="color: var(--gold);">anywhere</span> your people can fly to.</h2>
         </div>
         <p class="intro">Detroit is home. We tour where the diaspora is — and we're in Greece every summer. Off this list? Ask anyway. The answer is usually yes.</p>
@@ -979,7 +1213,7 @@
     <div class="container">
       <header class="head2 head2--12">
         <div>
-          <span class="mono">EVENTS</span>
+          <span class="sec__kicker"><span class="mono">EVENTS</span> <svg class="sec__icon" aria-hidden="true"><use href="#i-mark"/></svg></span>
           <h2 class="h2 display-tight">Any night worth <span style="color: var(--gold);">having</span> a band.</h2>
         </div>
         <p class="intro">Weddings, baptisms, glendia, panigíria, taverna residencies, private events — from a Detroit basement to a Mýkonos terrace. Tell us about your night and we'll come back with a plan within 48 hours.</p>
@@ -1281,6 +1515,47 @@
         setTimeout(() => { btn.textContent = original; }, 4500);
       });
     });
+
+    // ─── Scroll-reveal: fade up section heads + key cards when they enter viewport ───
+    (function () {
+      // Auto-tag elements we want to reveal so we don't have to touch every section's HTML.
+      const selectors = [
+        '.head2 > div',
+        '.head2 > p',
+        '.style-row',
+        '.crew__card',
+        '.record',
+        '.territory',
+        '.ev__card',
+        '.ev__cta',
+        '.fm',
+        '.follow__inner',
+        '.ft__socials',
+      ];
+      selectors.forEach(sel => {
+        document.querySelectorAll(sel).forEach((el, i) => {
+          if (el.closest('.hero-cinematic')) return; // never hide the hero
+          el.setAttribute('data-reveal', '');
+          // Tiny stagger so siblings cascade
+          if (i > 0) el.style.transitionDelay = `${Math.min(i * 60, 240)}ms`;
+        });
+      });
+
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-revealed');
+              io.unobserve(entry.target);
+            }
+          }
+        }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
+        document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+      } else {
+        // Fallback for ancient browsers — reveal everything
+        document.querySelectorAll('[data-reveal]').forEach(el => el.classList.add('is-revealed'));
+      }
+    })();
 
     // ─── Tweaks toolbar (dev-only) ───
     const html = document.documentElement;
