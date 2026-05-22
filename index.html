@@ -25,8 +25,9 @@
 <meta name="twitter:description" content="Bring us the event. We'll bring you the kefi." />
 <meta name="twitter:image" content="https://oneiromusic.com/images/hero-poster.jpg" />
 
-<!-- Favicon — brand wordmark O on charcoal (matches the ONEIRO logo) -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23333333'/%3E%3Ccircle cx='32' cy='32' r='15' fill='none' stroke='%23ffffff' stroke-width='7'/%3E%3C/svg%3E" />
+<!-- Favicon — Oneiro dancing-gypsy emblem -->
+<link rel="icon" type="image/png" href="/logos/favicon-emblem.png" />
+<link rel="apple-touch-icon" href="/logos/favicon-emblem.png" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -240,9 +241,12 @@
   .nav { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); background: color-mix(in oklch, var(--bg) 88%, transparent); }
   .nav__inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; gap: 24px; }
   .nav__brand { display: flex; align-items: center; gap: 12px; }
-  .nav__mark { font-size: 18px; color: var(--gold); }
-  .nav__word { font-size: 1.15rem; font-weight: 800; letter-spacing: 0.02em; }
-  .nav__tag { display: inline-block; margin-left: 4px; }
+  .nav__emblem { width: 34px; height: 34px; color: var(--ink); flex-shrink: 0; transition: color .2s ease; }
+  .nav__brand:hover .nav__emblem { color: var(--gold); }
+  .nav__brandtext { display: flex; flex-direction: column; line-height: 1; gap: 3px; }
+  .nav__word { font-family: var(--display); font-size: 1.35rem; font-weight: 900; letter-spacing: 0.06em; line-height: 1; }
+  .nav__tag { font-size: 0.5rem; letter-spacing: 0.18em; color: var(--ink-mute); line-height: 1; }
+  @media (max-width: 520px) { .nav__tag { display: none; } }
   .nav__list { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; }
   .nav__link { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); font-weight: 500; }
   .nav__link:hover { color: var(--ink); }
@@ -317,6 +321,13 @@
     margin: 0;
   }
   .hero-cinematic__actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+  .hero-cinematic__contact { display: flex; align-items: center; gap: 18px; margin-top: 22px; flex-wrap: wrap; }
+  .hero-contact__phone { font-family: var(--display); font-weight: 700; font-size: clamp(18px, 1.8vw, 24px); color: #fff; letter-spacing: 0.01em; transition: color .2s ease; }
+  .hero-contact__phone:hover { color: var(--gold); }
+  .hero-contact__div { width: 1px; height: 20px; background: rgba(255,255,255,0.3); }
+  .hero-contact__socials { display: inline-flex; gap: 14px; }
+  .hero-contact__socials a { color: rgba(255,255,255,0.8); display: inline-flex; transition: color .2s ease, transform .2s ease; }
+  .hero-contact__socials a:hover { color: var(--gold); transform: translateY(-2px); }
   @media (max-width: 760px) {
     .hero-cinematic { min-height: 80vh; min-height: 80svh; }
     .hero-cinematic__content { padding-top: 120px; }
@@ -879,6 +890,75 @@
           <path d="M 22 2 L 23 1" />
         </g>
       </symbol>
+      <symbol id="i-emblem" viewBox="0 0 1024.000000 1024.000000">
+        <g transform="translate(0.000000,1024.000000) scale(0.100000,-0.100000)"
+fill="currentColor" stroke="none">
+<path d="M4705 8496 c-137 -35 -428 -173 -448 -212 -19 -36 -218 -505 -238
+-559 -12 -32 -34 -54 -109 -111 -95 -71 -180 -154 -180 -175 0 -34 108 21 227
+117 38 30 126 84 196 121 148 76 139 62 167 240 26 157 44 232 62 249 10 9 53
+10 178 4 97 -5 169 -4 175 1 19 18 -11 43 -76 64 -71 22 -88 47 -45 66 32 15
+70 0 133 -52 76 -63 117 -58 69 9 -31 44 -29 46 24 32 44 -12 70 -8 70 10 0
+12 -74 50 -157 80 -88 32 -87 34 50 84 100 37 22 62 -98 32z"/>
+<path d="M5078 7739 c-167 -27 -258 -121 -353 -364 -53 -135 -123 -275 -159
+-320 l-24 -30 -35 33 c-19 19 -42 51 -51 73 -9 21 -24 58 -33 81 -10 23 -39
+71 -65 106 l-48 65 0 163 0 163 -52 -36 c-29 -19 -82 -50 -118 -68 -36 -18
+-106 -63 -155 -100 -109 -82 -156 -104 -216 -105 -73 0 -72 -7 16 -123 29 -37
+61 -93 71 -124 24 -70 66 -119 148 -172 58 -38 67 -49 86 -99 31 -87 41 -103
+93 -154 26 -26 47 -53 47 -61 0 -7 -39 -47 -87 -88 -97 -83 -164 -159 -235
+-268 -79 -121 -64 -137 73 -84 66 25 194 31 215 10 4 -4 -13 -51 -39 -105 -53
+-114 -51 -107 -76 -243 -12 -68 -32 -133 -54 -182 -32 -69 -34 -79 -21 -92 20
+-19 3 -24 166 45 225 94 245 106 341 202 48 49 92 86 96 83 22 -13 81 -296 81
+-385 0 -47 -1 -49 -62 -98 -35 -27 -99 -82 -143 -122 -187 -171 -353 -249
+-1000 -470 -543 -185 -876 -367 -1102 -603 -70 -73 -143 -174 -143 -200 0 -4
+28 11 63 35 135 92 279 116 487 83 157 -25 273 -18 415 28 163 52 216 61 365
+61 299 0 480 -67 811 -299 231 -162 394 -224 617 -232 285 -12 480 52 792 257
+267 176 427 241 660 269 232 29 320 56 539 165 303 152 556 203 731 147 l55
+-17 -109 4 c-199 9 -333 -30 -641 -183 -237 -117 -314 -142 -545 -175 -248
+-36 -388 -93 -651 -265 -305 -200 -519 -275 -778 -275 -262 0 -442 65 -736
+265 -320 217 -462 268 -755 269 l-165 1 -155 -44 c-187 -53 -300 -62 -452 -37
+-241 39 -410 1 -528 -119 l-44 -45 12 -47 c52 -191 208 -387 372 -464 36 -17
+98 -47 138 -66 82 -39 107 -67 175 -198 96 -187 255 -285 462 -285 220 -1 356
+-76 521 -287 151 -193 279 -239 513 -183 127 30 197 25 315 -24 57 -24 113
+-39 160 -44 l71 -7 0 -75 c0 -82 -26 -150 -113 -295 -115 -190 -54 -296 136
+-240 96 29 132 74 156 201 19 102 27 122 77 194 52 73 55 120 14 198 -33 63
+-28 72 42 72 143 0 216 -68 272 -255 25 -84 70 -143 145 -185 174 -100 222 46
+95 288 -45 85 -43 89 31 73 156 -33 273 -6 390 90 89 73 128 92 249 120 129
+30 193 74 265 184 85 127 131 155 366 215 166 42 290 102 373 180 99 92 132
+168 157 354 16 119 41 165 171 302 180 191 234 304 234 489 0 87 -4 107 -27
+157 -108 232 -512 415 -1178 533 -580 103 -649 128 -1000 361 -107 72 -224
+147 -259 169 l-64 38 6 111 c8 164 19 202 87 296 56 77 70 113 82 205 4 30 54
+30 172 2 198 -49 322 -76 391 -87 39 -5 95 -17 125 -26 48 -14 219 -26 545
+-37 l50 -2 0 140 c0 115 -15 515 -19 515 -1 0 -35 -9 -76 -21 -41 -11 -147
+-38 -235 -60 -88 -22 -188 -49 -223 -60 l-63 -21 -60 22 c-45 17 -85 23 -167
+25 -115 3 -144 11 -257 68 -102 51 -196 77 -320 87 -60 6 -125 13 -144 16 -31
+6 -33 5 -27 -12 44 -112 39 -155 -26 -221 -40 -41 -41 -44 -48 -132 -8 -91
+-37 -199 -49 -184 -4 4 -30 64 -57 131 -52 134 -55 136 -184 230 -74 54 -130
+130 -153 209 -25 82 -1 81 41 -3 39 -77 99 -141 187 -199 91 -60 94 -64 139
+-188 26 -69 40 -50 33 44 l-5 78 48 40 c71 60 76 126 14 217 -32 46 -42 111
+-24 154 19 46 39 52 114 39 76 -14 116 2 116 46 0 55 42 156 72 171 35 18 35
+22 -1 87 -35 61 -37 75 -27 145 9 62 -8 151 -32 159 -8 4 -25 0 -38 -8 -119
+-74 -214 -119 -214 -101 0 8 193 119 243 140 15 6 27 18 27 26 0 24 -46 71
+-90 91 l-41 18 -40 -39 c-47 -45 -146 -189 -192 -278 -39 -77 -47 -53 -12 39
+34 92 79 167 142 242 60 70 59 72 -32 91 -76 16 -135 20 -187 11z m-69 -714
+c-27 -73 -96 -145 -155 -163 -81 -24 -99 -10 -35 26 51 29 139 116 176 175 37
+58 43 40 14 -38z m-39 -1486 c86 -6 202 -8 260 -4 113 7 122 2 39 -21 -118
+-33 -382 -28 -456 8 -32 16 -45 43 -17 34 11 -3 89 -10 174 -17z m-119 -288
+c-71 -89 -163 -162 -279 -218 -62 -31 -115 -53 -118 -51 -3 3 77 64 178 136
+101 72 197 142 213 155 41 35 44 26 6 -22z m94 -307 c-190 -172 -483 -313
+-861 -414 -43 -12 -109 -30 -146 -40 -38 -10 -68 -15 -68 -9 0 5 5 9 10 9 13
+0 453 174 595 235 153 66 329 157 432 225 49 31 90 55 93 52 3 -2 -22 -29 -55
+-58z m360 -109 c-85 -227 -292 -410 -547 -485 -42 -13 -35 -7 50 42 194 114
+432 355 504 512 25 55 20 1 -7 -69z m610 65 c81 -89 477 -308 690 -381 105
+-36 36 -38 -103 -4 -137 35 -258 87 -365 159 -114 75 -286 246 -249 246 5 0
+17 -9 27 -20z"/>
+<path d="M7140 6674 c-30 -8 -79 -22 -109 -30 l-54 -15 6 -101 c4 -55 8 -102
+10 -105 3 -2 53 23 113 57 125 69 139 71 180 29 16 -17 49 -41 74 -54 25 -13
+69 -42 99 -64 63 -48 81 -51 81 -16 0 17 -16 43 -45 74 -50 53 -47 76 7 60 45
+-12 56 -25 94 -108 55 -119 99 -121 65 -3 -11 38 -2 40 36 8 50 -41 103 -60
+103 -37 0 6 -27 40 -60 78 -33 37 -60 72 -60 76 0 4 32 7 71 5 51 -2 73 1 76
+10 7 19 -46 37 -270 94 -227 57 -326 67 -417 42z"/>
+</g>
+      </symbol>
     </defs>
   </svg>
 
@@ -886,8 +966,12 @@
   <!-- ═══ NAV ═══ -->
   <nav class="nav">
     <div class="container nav__inner">
-      <a href="#top" class="nav__brand" aria-label="Oneiro — home">
-        <img src="/logos/oneiro-white.svg" alt="ONEIRO — The Best in Live Greek Entertainment" class="nav__logo" />
+      <a href="#top" class="nav__brand" aria-label="Oneiro — The Best in Live Greek Entertainment">
+        <svg class="nav__emblem" viewBox="0 0 1024 1024" aria-hidden="true"><use href="#i-emblem"/></svg>
+        <span class="nav__brandtext">
+          <span class="nav__word display">ONEIRO</span>
+          <span class="nav__tag mono">THE BEST IN LIVE GREEK ENTERTAINMENT</span>
+        </span>
       </a>
       <ul class="nav__list">
         <li><a href="#shows" class="nav__link">Shows</a></li>
@@ -936,6 +1020,16 @@
       <div class="hero-cinematic__actions">
         <a href="#booking" class="btn btn--gold btn--lg">Book us →</a>
         <a href="#media" class="btn btn--lg" style="border-color: rgba(255,255,255,0.5); color: #fff;">Watch &amp; listen ▸</a>
+      </div>
+
+      <div class="hero-cinematic__contact">
+        <a href="tel:+15869432710" class="hero-contact__phone">586.943.2710</a>
+        <span class="hero-contact__div" aria-hidden="true"></span>
+        <span class="hero-contact__socials">
+          <a href="https://www.instagram.com/oneiromusic" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://www.youtube.com/channel/UCBuQAA2ZBjqUM-FQss4Z8Mw" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="6" width="19" height="12" rx="3"/><path d="M10 9.5 L15 12 L10 14.5 Z" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://www.facebook.com/OneiroMusicGroup/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 8h-2.5c-.5 0-1 .5-1 1v2H15l-.5 3h-3v7H8.5v-7H6v-3h2.5V8.5C8.5 6 10 4.5 12.3 4.5H15V8z"/></svg></a>
+        </span>
       </div>
     </div>
   </section>
@@ -1189,17 +1283,17 @@
           <span class="sec__kicker"><span class="mono">EVENTS</span> <svg class="sec__icon" aria-hidden="true"><use href="#i-mark"/></svg></span>
           <h2 class="h2 display-tight">Any night worth <span style="color: var(--gold);">having</span> a band.</h2>
         </div>
-        <p class="intro">From black-tie weddings to parish festivals, we read the room and program the night — ceremony to last call.</p>
+        <p class="intro">From black-tie weddings to parish festivals, we read the room and program the night — ceremony to last call. Always the full band. DJ service available by request to keep the floor moving between sets.</p>
       </header>
 
       <div class="ev__grid" data-reveal>
         <article class="ev__card">
           <div class="ev__label display">Weddings</div>
-          <p class="ev__blurb">Ceremony to last call — entrance, first dance, and the late-night circle. Solo, trio, or full band.</p>
+          <p class="ev__blurb">Ceremony to last call — koumbáros entrance, first dance, and the late-night circle. Full band, with optional DJ by request between sets.</p>
         </article>
         <article class="ev__card">
           <div class="ev__label display">Baptisms</div>
-          <p class="ev__blurb">A light set during the meal, dancing after the cake. Family-friendly volume, trio or quartet.</p>
+          <p class="ev__blurb">A lively set during the meal and dancing after the cake. The full band, family-friendly volume.</p>
         </article>
         <article class="ev__card">
           <div class="ev__label display">Dances &amp; Galas</div>
