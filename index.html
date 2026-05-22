@@ -744,13 +744,19 @@
   .nav__social:hover { color: var(--gold); }
   @media (max-width: 860px) { .nav__social { display: none; } }
 
-  /* Upcoming shows */
-  .shows { padding: clamp(56px, 7vw, 96px) 0; border-bottom: 1px solid var(--rule); }
-  .shows__head { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: clamp(28px, 3.5vw, 48px); }
-  .shows__h { font-size: clamp(32px, 4.5vw, 64px); line-height: 0.95; letter-spacing: -0.02em; margin: 8px 0 0; }
-  .shows__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
-  .show { display: grid; grid-template-columns: 140px 1fr auto auto; gap: clamp(16px, 2.5vw, 40px); align-items: center; padding: clamp(18px, 2vw, 26px) 0; border-top: 1px solid var(--rule); }
-  .show:last-child { border-bottom: 1px solid var(--rule); }
+  /* Territory block — cities banner + upcoming shows, tight together at the top */
+  .territory-block { padding: clamp(56px, 7vw, 100px) 0 clamp(40px, 5vw, 64px); }
+  .where__inner { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(24px, 4vw, 64px); align-items: center; margin-bottom: clamp(36px, 4.5vw, 64px); }
+  .where__h { font-size: clamp(26px, 3vw, 42px); line-height: 1.0; letter-spacing: -0.015em; margin: 10px 0 0; }
+  .where__cities { font-size: clamp(16px, 1.4vw, 21px); line-height: 1.7; color: var(--ink-soft); margin: 0; }
+  @media (max-width: 860px) { .where__inner { grid-template-columns: 1fr; } }
+
+  /* Upcoming shows (nested inside territory block) */
+  .shows__head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: clamp(28px, 3.5vw, 44px); border-top: 1px solid var(--rule); }
+  .shows__avail { color: var(--gold); }
+  .shows__list { list-style: none; margin: 18px 0 0; padding: 0; display: flex; flex-direction: column; }
+  .show { display: grid; grid-template-columns: 130px 1fr auto auto; gap: clamp(16px, 2.5vw, 40px); align-items: center; padding: clamp(16px, 1.8vw, 22px) 0; border-top: 1px solid var(--rule); }
+  .show:first-child { border-top: none; }
   .show__date { display: flex; align-items: baseline; gap: 8px; font-family: var(--display); font-weight: 800; }
   .show__mon { color: var(--gold); font-size: 0.9rem; letter-spacing: 0.06em; }
   .show__day { font-size: 1.6rem; line-height: 1; }
@@ -758,20 +764,14 @@
   .show__name { font-size: clamp(16px, 1.5vw, 21px); color: var(--ink); font-weight: 500; }
   .show__city { color: var(--ink-soft); font-size: 0.95rem; }
   .show__tag { color: var(--ink-mute); font-size: 0.64rem; padding: 4px 10px; border: 1px solid var(--rule); border-radius: 999px; }
-  .shows__foot { margin: clamp(24px, 3vw, 36px) 0 0; color: var(--ink-mute); font-size: 0.78rem; }
-  .shows__foot a { color: var(--gold); }
   @media (max-width: 700px) {
-    .show { grid-template-columns: 96px 1fr; gap: 6px 16px; }
+    .show { grid-template-columns: 92px 1fr; gap: 4px 16px; }
     .show__city { grid-column: 2; }
     .show__tag { display: none; }
   }
 
-  /* Where we play — tight banner */
-  .where { padding: clamp(48px, 6vw, 80px) 0; border-bottom: 1px solid var(--rule); }
-  .where__inner { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(24px, 4vw, 64px); align-items: center; }
-  .where__h { font-size: clamp(26px, 3vw, 42px); line-height: 1.0; letter-spacing: -0.015em; margin: 10px 0 0; }
-  .where__cities { font-size: clamp(16px, 1.4vw, 21px); line-height: 1.7; color: var(--ink-soft); margin: 0; }
-  @media (max-width: 860px) { .where__inner { grid-template-columns: 1fr; } }
+  /* Tighten a section's top padding so it reads grouped with the block above */
+  .sec--tight-top { padding-top: clamp(40px, 5vw, 64px); }
 
   /* Crew photo (real portraits) */
   .crew__photo { aspect-ratio: 3 / 4; border-radius: 4px; overflow: hidden; background: var(--bg-elev); }
@@ -939,54 +939,50 @@
     </div>
   </section>
 
-  <!-- ═══ UPCOMING SHOWS ═══ -->
-  <section id="shows" class="shows">
-    <div class="container">
-      <header class="shows__head" data-reveal>
-        <span class="sec__kicker"><span class="mono">UPCOMING PERFORMANCES</span> <svg class="sec__icon" aria-hidden="true"><use href="#i-mark"/></svg></span>
-        <h2 class="shows__h display-tight">Catch us <span style="color: var(--gold);">live</span>.</h2>
-      </header>
-      <ul class="shows__list" data-reveal>
-        <li class="show">
-          <span class="show__date"><span class="show__mon">SEP</span><span class="show__day">25–27</span><span class="show__yr">2026</span></span>
-          <span class="show__name">Las Vegas Greek Festival</span>
-          <span class="show__city">Las Vegas, NV</span>
-          <span class="show__tag mono">Festival</span>
-        </li>
-        <li class="show">
-          <span class="show__date"><span class="show__mon">NOV</span><span class="show__day">7</span><span class="show__yr">2026</span></span>
-          <span class="show__name">Greek Community of Western Nebraska</span>
-          <span class="show__city">Scottsbluff, NE</span>
-          <span class="show__tag mono">Private</span>
-        </li>
-        <li class="show">
-          <span class="show__date"><span class="show__mon">FEB</span><span class="show__day">6–7</span><span class="show__yr">2027</span></span>
-          <span class="show__name">Bahamas Greek Festival</span>
-          <span class="show__city">Nassau, Bahamas</span>
-          <span class="show__tag mono">Festival</span>
-        </li>
-      </ul>
-      <p class="shows__foot mono" data-reveal>Want us at your event? <a href="#booking">Check our availability →</a></p>
-    </div>
-  </section>
-
-  <!-- ═══ WHERE WE PLAY (tight banner) ═══ -->
-  <section id="where" class="where">
+  <!-- ═══ WHERE WE PLAY + UPCOMING SHOWS (territory block) ═══ -->
+  <section id="where" class="territory-block">
     <div class="container">
       <div class="where__inner" data-reveal>
         <div class="where__lead">
-          <span class="mono" style="color: var(--gold);">WHERE WE PLAY</span>
+          <span class="sec__kicker"><span class="mono">WHERE WE PLAY</span> <svg class="sec__icon" aria-hidden="true"><use href="#i-mark"/></svg></span>
           <h2 class="where__h display-tight">Having a wedding out of state? <span style="color: var(--gold);">We travel.</span></h2>
         </div>
         <p class="where__cities">
           Detroit · Chicago · New York · Astoria · Boston · Tampa · Charlotte · Houston · Pittsburgh · Cleveland · Salt Lake City · Las Vegas · Toronto · Montréal · Nassau · Athens · Mýkonos · Santoríni · Crete · Thessaloníki — <span style="color: var(--gold);">and anywhere your people can fly.</span>
         </p>
       </div>
+
+      <div class="shows" data-reveal>
+        <div class="shows__head">
+          <span class="mono" style="color: var(--gold);">UPCOMING PERFORMANCES</span>
+          <a href="#booking" class="shows__avail mono">Check availability →</a>
+        </div>
+        <ul class="shows__list">
+          <li class="show">
+            <span class="show__date"><span class="show__mon">SEP</span><span class="show__day">25–27</span><span class="show__yr">2026</span></span>
+            <span class="show__name">Las Vegas Greek Festival</span>
+            <span class="show__city">Las Vegas, NV</span>
+            <span class="show__tag mono">Festival</span>
+          </li>
+          <li class="show">
+            <span class="show__date"><span class="show__mon">NOV</span><span class="show__day">7</span><span class="show__yr">2026</span></span>
+            <span class="show__name">Greek Community of Western Nebraska</span>
+            <span class="show__city">Scottsbluff, NE</span>
+            <span class="show__tag mono">Private</span>
+          </li>
+          <li class="show">
+            <span class="show__date"><span class="show__mon">FEB</span><span class="show__day">6–7</span><span class="show__yr">2027</span></span>
+            <span class="show__name">Bahamas Greek Festival</span>
+            <span class="show__city">Nassau, Bahamas</span>
+            <span class="show__tag mono">Festival</span>
+          </li>
+        </ul>
+      </div>
     </div>
   </section>
 
-  <!-- ═══ TESTIMONIALS ═══ -->
-  <section id="testimonials" class="sec sec--deep">
+  <!-- ═══ TESTIMONIALS (tight to territory block above) ═══ -->
+  <section id="testimonials" class="sec sec--deep sec--tight-top">
     <div class="container">
       <header class="head2" data-reveal>
         <div>
