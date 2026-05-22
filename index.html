@@ -672,6 +672,7 @@
   .fm__input:focus { border-bottom-color: var(--gold); }
   .fm__input::placeholder { color: color-mix(in oklch, var(--ink-mute) 70%, transparent); }
   textarea.fm__input { resize: vertical; min-height: 84px; font-family: var(--script); }
+  .fm__status { margin: 4px 0 0; font-size: 0.8rem; letter-spacing: 0.04em; }
   .fm__submit { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; justify-content: space-between; padding-top: 14px; border-top: 1px solid var(--rule); }
 
   /* ─── Follow (replaces fake feed grid) ─── */
@@ -1080,10 +1081,20 @@
         <p class="intro">Weddings, baptisms, festivals, private events — anywhere from a Detroit hall to a Mýkonos terrace. Send the details and we'll come back within 48 hours.</p>
       </header>
 
-      <form id="booking-form" class="fm" data-form="booking" data-reveal>
+      <form id="booking-form" class="fm" data-form="booking" data-reveal
+            action="https://api.web3forms.com/submit" method="POST">
+        <!-- Web3Forms config — submissions are emailed to booking@oneiromusic.com.
+             Replace the access_key value with the key from web3forms.com (created against booking@oneiromusic.com). -->
+        <input type="hidden" name="access_key" value="REPLACE_WITH_WEB3FORMS_ACCESS_KEY" />
+        <input type="hidden" name="subject" value="New booking inquiry — OneiroMusic.com" />
+        <input type="hidden" name="from_name" value="Oneiro Website" />
+        <input type="hidden" name="event_type" id="event_type_field" value="Wedding" />
+        <!-- Honeypot (spam trap — bots fill it, humans don't) -->
+        <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true" />
+
         <div class="fm__row">
           <span class="mono fm__lbl">What kind of event?</span>
-          <div class="fm__pills" data-pills="kind">
+          <div class="fm__pills" data-pills="kind" data-target="#event_type_field">
             <button type="button" class="pill" aria-pressed="true">Wedding</button>
             <button type="button" class="pill" aria-pressed="false">Baptism</button>
             <button type="button" class="pill" aria-pressed="false">Dance / Gala</button>
@@ -1095,23 +1106,24 @@
         </div>
 
         <div class="fm__grid2">
-          <label class="fm__field"><span class="mono fm__lbl">Your name</span><input class="fm__input" type="text" placeholder="Yianni Kostakis" /></label>
-          <label class="fm__field"><span class="mono fm__lbl">Email</span><input class="fm__input" type="email" placeholder="you@somewhere.com" /></label>
-          <label class="fm__field"><span class="mono fm__lbl">Phone</span><input class="fm__input" type="tel" placeholder="(586) 943-2710" /></label>
-          <label class="fm__field"><span class="mono fm__lbl">Date of event</span><input class="fm__input" type="text" placeholder="June 14, 2027" /></label>
-          <label class="fm__field"><span class="mono fm__lbl">City / venue</span><input class="fm__input" type="text" placeholder="Chicago, IL · Hilton" /></label>
-          <label class="fm__field"><span class="mono fm__lbl">Approx. guests</span><input class="fm__input" type="text" placeholder="200" /></label>
+          <label class="fm__field"><span class="mono fm__lbl">Your name</span><input class="fm__input" type="text" name="name" autocomplete="name" required placeholder="Yianni Kostakis" /></label>
+          <label class="fm__field"><span class="mono fm__lbl">Email</span><input class="fm__input" type="email" name="email" autocomplete="email" required placeholder="you@somewhere.com" /></label>
+          <label class="fm__field"><span class="mono fm__lbl">Phone</span><input class="fm__input" type="tel" name="phone" autocomplete="tel" placeholder="(586) 943-2710" /></label>
+          <label class="fm__field"><span class="mono fm__lbl">Date of event</span><input class="fm__input" type="text" name="event_date" placeholder="June 14, 2027" /></label>
+          <label class="fm__field"><span class="mono fm__lbl">City / venue</span><input class="fm__input" type="text" name="city_venue" placeholder="Chicago, IL · Hilton" /></label>
+          <label class="fm__field"><span class="mono fm__lbl">Approx. guests</span><input class="fm__input" type="text" name="guests" placeholder="200" /></label>
         </div>
 
         <label class="fm__field">
           <span class="mono fm__lbl">Tell us about the night</span>
-          <textarea class="fm__input" rows="3" placeholder="Greek-side wedding, ceremony at 5, reception at 7. Mix of laïka and dimotika. A specific song we should learn? Drop it here."></textarea>
+          <textarea class="fm__input" name="details" rows="3" placeholder="Greek-side wedding, ceremony at 5, reception at 7. Mix of laïka and dimotika. A specific song we should learn? Drop it here."></textarea>
         </label>
 
         <div class="fm__submit">
           <button type="submit" class="btn btn--gold btn--lg" data-submit-label="Send the inquiry →">Send the inquiry →</button>
           <span class="mono" style="color: var(--ink-mute);">Or reach us direct: <a href="tel:+15869432710">586.943.2710</a> · <a href="mailto:Booking@OneiroMusic.com">Booking@OneiroMusic.com</a></span>
         </div>
+        <p class="fm__status mono" role="status" aria-live="polite" hidden></p>
       </form>
     </div>
   </section>
@@ -1372,26 +1384,56 @@
   </script>
 
   <script>
-    // ─── Pill toggles (form pills) ───
+    // ─── Pill toggles (form pills) — also sync a hidden field if data-target is set ───
     document.querySelectorAll('[data-pills]').forEach(group => {
       group.addEventListener('click', e => {
         const btn = e.target.closest('button.pill');
         if (!btn) return;
         group.querySelectorAll('button.pill').forEach(b => b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'));
+        const targetSel = group.getAttribute('data-target');
+        if (targetSel) {
+          const field = document.querySelector(targetSel);
+          if (field) field.value = btn.textContent.trim();
+        }
       });
     });
 
-    // ─── Forms (no backend; show "Got it" on submit) ───
-    document.querySelectorAll('form[data-form]').forEach(form => {
-      form.addEventListener('submit', e => {
+    // ─── Booking form → Web3Forms (emails booking@oneiromusic.com), AJAX submit ───
+    document.querySelectorAll('form[data-form="booking"]').forEach(form => {
+      const btn = form.querySelector('[data-submit-label]');
+      const status = form.querySelector('.fm__status');
+      const keyField = form.querySelector('input[name="access_key"]');
+      form.addEventListener('submit', async e => {
         e.preventDefault();
-        const btn = form.querySelector('[data-submit-label]');
-        if (!btn) return;
-        const original = btn.getAttribute('data-submit-label');
-        btn.textContent = form.dataset.form === 'remake'
-          ? "Got it ✓ — we're listening tonight"
-          : "Got it ✓ — we'll write back";
-        setTimeout(() => { btn.textContent = original; }, 4500);
+        // If the access key hasn't been set yet, fall back to a mailto so nothing is lost.
+        if (!keyField || keyField.value.indexOf('REPLACE_WITH') === 0) {
+          const data = new FormData(form);
+          const body = [...data.entries()]
+            .filter(([k]) => !['access_key','subject','from_name','botcheck'].includes(k))
+            .map(([k, v]) => `${k}: ${v}`).join('%0D%0A');
+          window.location.href = `mailto:Booking@OneiroMusic.com?subject=Booking%20inquiry%20from%20the%20website&body=${body}`;
+          return;
+        }
+        const original = btn ? btn.textContent : '';
+        if (btn) { btn.textContent = 'Sending…'; btn.disabled = true; }
+        try {
+          const res = await fetch(form.action, {
+            method: 'POST',
+            headers: { 'Accept': 'application/json' },
+            body: new FormData(form),
+          });
+          const json = await res.json();
+          if (res.ok && json.success) {
+            form.reset();
+            if (status) { status.hidden = false; status.style.color = 'var(--gold)'; status.textContent = "✓ Sent — we'll reply within 48 hours."; }
+            if (btn) btn.textContent = 'Sent ✓';
+          } else {
+            throw new Error(json.message || 'Submission failed');
+          }
+        } catch (err) {
+          if (status) { status.hidden = false; status.style.color = 'var(--red)'; status.textContent = "Something went wrong — email Booking@OneiroMusic.com or call 586.943.2710."; }
+          if (btn) { btn.textContent = original; btn.disabled = false; }
+        }
       });
     });
 
