@@ -25,14 +25,23 @@
 <meta name="twitter:description" content="Bring us the event. We'll bring you the kefi." />
 <meta name="twitter:image" content="https://oneiromusic.com/images/hero-poster.jpg" />
 
-<!-- Favicon (SVG inline — single-letter wordmark in brand color) -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230a0a0e'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Impact, Arial Black, sans-serif' font-weight='900' font-size='42' fill='%234a9eff'%3EΟ%3C/text%3E%3C/svg%3E" />
+<!-- Favicon — brand wordmark O on charcoal (matches the ONEIRO logo) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23333333'/%3E%3Ccircle cx='32' cy='32' r='15' fill='none' stroke='%23ffffff' stroke-width='7'/%3E%3C/svg%3E" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800;900&family=Anton&family=Oswald:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Geist:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
 
 <style>
+  /* ─── Neuwelt — brand typeface (self-hosted) ─── */
+  @font-face { font-family: "Neuwelt"; src: url("/fonts/Neuwelt-Light.woff2") format("woff2"); font-weight: 300; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Neuwelt"; src: url("/fonts/Neuwelt-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Neuwelt"; src: url("/fonts/Neuwelt-Medium.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Neuwelt"; src: url("/fonts/Neuwelt-Bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Neuwelt"; src: url("/fonts/Neuwelt-Black.woff2") format("woff2"); font-weight: 900; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Neuwelt"; src: url("/fonts/Neuwelt-Italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+  @font-face { font-family: "Neuwelt"; src: url("/fonts/Neuwelt-ExtraLightItalic.woff2") format("woff2"); font-weight: 200; font-style: italic; font-display: swap; }
+
   :root {
     /* AEGEAN — black, ivory, cerulean accent (default) */
     --ink:        oklch(0.95 0.012 240);
@@ -50,11 +59,11 @@
     --rule:       oklch(0.25 0.015 245);
     --accent:     var(--gold);
 
-    --display: "Big Shoulders Display", "Anton", "Oswald", Impact, sans-serif;
-    --display-alt: "Anton", Impact, sans-serif;
-    --sans:    "Geist", ui-sans-serif, -apple-system, system-ui, sans-serif;
+    --display: "Big Shoulders Display", "Neuwelt", Impact, sans-serif;
+    --display-alt: "Neuwelt", Impact, sans-serif;
+    --sans:    "Neuwelt", ui-sans-serif, -apple-system, system-ui, sans-serif;
     --mono:    "JetBrains Mono", ui-monospace, Menlo, monospace;
-    --script:  "Cormorant Garamond", Georgia, serif;
+    --script:  "Neuwelt", Georgia, serif;
 
     --gut: clamp(20px, 3vw, 48px);
     --maxw: 1640px;
@@ -701,6 +710,7 @@
 
   /* ─── Tweaks toolbar (simplified) ─── */
   .twk { position: fixed; right: 16px; bottom: 16px; z-index: 100; display: flex; flex-direction: column; gap: 6px; padding: 12px; background: rgba(20,18,12,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--rule); border-radius: 10px; min-width: 220px; }
+  .twk[hidden] { display: none; }
   .twk__title { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 4px; }
   .twk__row { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 4px 0; }
   .twk__lbl { font-family: var(--mono); font-size: 0.7rem; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.06em; }
@@ -722,8 +732,93 @@
     .crew__grid { grid-template-columns: 1fr; }
     .ev__grid { grid-template-columns: 1fr; }
     .testimonials { grid-template-columns: 1fr; }
-    .fm__grid2, .ft__cols, .ft__socials { grid-template-columns: 1fr; }
+    .fm__grid2 { grid-template-columns: 1fr; }
   }
+
+  /* ═══════════════ v2 REBUILD — new sections ═══════════════ */
+
+  /* Nav — real logo + social icons */
+  .nav__logo { height: 30px; width: auto; display: block; }
+  .nav__right { display: flex; align-items: center; gap: 18px; }
+  .nav__social { color: var(--ink-soft); display: inline-flex; transition: color .2s ease; }
+  .nav__social:hover { color: var(--gold); }
+  @media (max-width: 860px) { .nav__social { display: none; } }
+
+  /* Upcoming shows */
+  .shows { padding: clamp(56px, 7vw, 96px) 0; border-bottom: 1px solid var(--rule); }
+  .shows__head { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: clamp(28px, 3.5vw, 48px); }
+  .shows__h { font-size: clamp(32px, 4.5vw, 64px); line-height: 0.95; letter-spacing: -0.02em; margin: 8px 0 0; }
+  .shows__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+  .show { display: grid; grid-template-columns: 140px 1fr auto auto; gap: clamp(16px, 2.5vw, 40px); align-items: center; padding: clamp(18px, 2vw, 26px) 0; border-top: 1px solid var(--rule); }
+  .show:last-child { border-bottom: 1px solid var(--rule); }
+  .show__date { display: flex; align-items: baseline; gap: 8px; font-family: var(--display); font-weight: 800; }
+  .show__mon { color: var(--gold); font-size: 0.9rem; letter-spacing: 0.06em; }
+  .show__day { font-size: 1.6rem; line-height: 1; }
+  .show__yr { color: var(--ink-mute); font-family: var(--mono); font-size: 0.7rem; font-weight: 500; }
+  .show__name { font-size: clamp(16px, 1.5vw, 21px); color: var(--ink); font-weight: 500; }
+  .show__city { color: var(--ink-soft); font-size: 0.95rem; }
+  .show__tag { color: var(--ink-mute); font-size: 0.64rem; padding: 4px 10px; border: 1px solid var(--rule); border-radius: 999px; }
+  .shows__foot { margin: clamp(24px, 3vw, 36px) 0 0; color: var(--ink-mute); font-size: 0.78rem; }
+  .shows__foot a { color: var(--gold); }
+  @media (max-width: 700px) {
+    .show { grid-template-columns: 96px 1fr; gap: 6px 16px; }
+    .show__city { grid-column: 2; }
+    .show__tag { display: none; }
+  }
+
+  /* Where we play — tight banner */
+  .where { padding: clamp(48px, 6vw, 80px) 0; border-bottom: 1px solid var(--rule); }
+  .where__inner { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(24px, 4vw, 64px); align-items: center; }
+  .where__h { font-size: clamp(26px, 3vw, 42px); line-height: 1.0; letter-spacing: -0.015em; margin: 10px 0 0; }
+  .where__cities { font-size: clamp(16px, 1.4vw, 21px); line-height: 1.7; color: var(--ink-soft); margin: 0; }
+  @media (max-width: 860px) { .where__inner { grid-template-columns: 1fr; } }
+
+  /* Crew photo (real portraits) */
+  .crew__photo { aspect-ratio: 3 / 4; border-radius: 4px; overflow: hidden; background: var(--bg-elev); }
+  .crew__photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; transition: transform .5s ease, filter .5s ease; filter: grayscale(0.15); }
+  .crew__card:hover .crew__photo img { transform: scale(1.03); filter: grayscale(0); }
+  .crew__role { color: var(--gold); font-size: 0.9rem; margin: 2px 0 8px; }
+
+  /* Page break */
+  .pagebreak { padding: clamp(48px, 7vw, 110px) 0; }
+  .pagebreak__inner { display: flex; align-items: center; gap: clamp(16px, 2vw, 28px); }
+  .pagebreak__label { color: var(--ink-mute); font-size: clamp(18px, 1.8vw, 26px); white-space: nowrap; }
+
+  /* Media — IG feed + listen links */
+  .media__feed { margin-bottom: clamp(40px, 5vw, 64px); }
+  .media__feed-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; text-align: center; padding: clamp(48px, 8vw, 110px) 24px; background: var(--bg-elev); border-radius: 6px; color: var(--ink-mute); }
+  .media__feed-placeholder svg { color: var(--gold); }
+  .media__feed-placeholder p { font-size: 0.74rem; letter-spacing: 0.08em; margin: 0; }
+  .listen { display: flex; align-items: center; gap: clamp(16px, 3vw, 40px); flex-wrap: wrap; padding-top: clamp(28px, 3vw, 40px); border-top: 1px solid var(--rule); }
+  .listen__label { color: var(--ink-mute); }
+  .listen__links { display: flex; gap: 12px; flex-wrap: wrap; }
+  .listen__chip { display: inline-flex; align-items: center; gap: 9px; padding: 11px 18px; background: var(--bg-elev); border-radius: 999px; color: var(--ink); font-size: 0.84rem; transition: background .2s ease, color .2s ease, transform .2s ease; }
+  .listen__chip svg { color: var(--gold); }
+  .listen__chip:hover { background: color-mix(in oklch, var(--gold) 16%, var(--bg-elev)); transform: translateY(-2px); }
+
+  /* Events — simplified (no Greek) */
+  .ev__label { font-size: clamp(22px, 2.2vw, 30px); font-weight: 800; margin: 0 0 8px; }
+  .ev__card .ev__blurb { margin: 0; }
+
+  /* Styles — no Greek heading */
+  .style-row__en { font-family: var(--display); font-weight: 800; text-transform: uppercase; font-size: clamp(22px, 2.4vw, 34px); letter-spacing: -0.01em; color: var(--ink); line-height: 1; }
+  .style-row[open] .style-row__en { color: var(--gold); }
+  .style-row__sum { grid-template-columns: minmax(160px, 1fr) 2fr 32px; }
+  @media (max-width: 760px) {
+    .style-row__sum { grid-template-columns: 1fr 24px; }
+    .style-row__teaser { grid-column: 1 / -1; }
+  }
+
+  /* Footer — simplified */
+  .ft__top { display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; padding-bottom: clamp(32px, 4vw, 56px); }
+  .ft__logo img { height: clamp(36px, 5vw, 56px); width: auto; display: block; }
+  .ft__contact { display: flex; flex-direction: column; gap: 6px; text-align: right; }
+  .ft__big { font-family: var(--display); font-weight: 700; font-size: clamp(20px, 2.2vw, 32px); color: var(--ink); letter-spacing: -0.01em; transition: color .2s ease; }
+  .ft__big:hover { color: var(--gold); }
+  .ft__fine-links { display: inline-flex; gap: 18px; }
+  .ft__fine-links a { color: var(--ink-soft); }
+  .ft__fine-links a:hover { color: var(--gold); }
+  @media (max-width: 640px) { .ft__contact { text-align: left; } }
 </style>
 </head>
 <body id="top">
@@ -790,19 +885,21 @@
   <!-- ═══ NAV ═══ -->
   <nav class="nav">
     <div class="container nav__inner">
-      <a href="#top" class="nav__brand">
-        <span class="nav__mark">◉</span>
-        <span class="display nav__word">Oneiro</span>
-        <span class="mono nav__tag">LIVE GREEK · DETROIT</span>
+      <a href="#top" class="nav__brand" aria-label="Oneiro — home">
+        <img src="/logos/oneiro-white.svg" alt="ONEIRO — The Best in Live Greek Entertainment" class="nav__logo" />
       </a>
       <ul class="nav__list">
-        <li><a href="#styles" class="nav__link">What we play</a></li>
-        <li><a href="#crew" class="nav__link">The crew</a></li>
-        <li><a href="#music" class="nav__link">Listen</a></li>
-        <li><a href="#where" class="nav__link">Where we go</a></li>
-        <li><a href="#hire" class="nav__link">Hire us</a></li>
+        <li><a href="#shows" class="nav__link">Shows</a></li>
+        <li><a href="#where" class="nav__link">Where we play</a></li>
+        <li><a href="#group" class="nav__link">The group</a></li>
+        <li><a href="#media" class="nav__link">Media</a></li>
+        <li><a href="#booking" class="nav__link">Book</a></li>
       </ul>
-      <a href="#hire" class="btn btn--gold">Book a date →</a>
+      <div class="nav__right">
+        <a href="https://www.instagram.com/oneiromusic" target="_blank" rel="noopener" class="nav__social" aria-label="Instagram"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="https://www.youtube.com/channel/UCBuQAA2ZBjqUM-FQss4Z8Mw" target="_blank" rel="noopener" class="nav__social" aria-label="YouTube"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="6" width="19" height="12" rx="3"/><path d="M10 9.5 L15 12 L10 14.5 Z" fill="currentColor" stroke="none"/></svg></a>
+        <a href="#booking" class="btn btn--gold">Book a date →</a>
+      </div>
     </div>
     <div class="rule"></div>
   </nav>
@@ -822,562 +919,383 @@
 
     <div class="container hero-cinematic__content">
       <div class="hero-cinematic__kicker">
-        <span class="mono" style="color: var(--gold);">LIVE GREEK ENTERTAINMENT</span>
-        <span class="mono" style="color: rgba(255,255,255,0.6);">· METRO DETROIT</span>
+        <span class="mono" style="color: var(--gold);">THE BEST IN LIVE GREEK ENTERTAINMENT</span>
       </div>
 
-      <h1 class="hero-cinematic__title display-tight" data-brand-en data-brand-gr="ΟΝΕΙΡΟ">ONEIRO</h1>
+      <h1 class="hero-cinematic__title display-tight">ONEIRO</h1>
 
       <p class="hero-cinematic__sub script-it">
-        Bring us the event. We'll bring you the <em>kefi</em>.
+        Bring us the event — we'll bring you the <em>kefi</em>.
       </p>
 
       <p class="hero-cinematic__lede">
-        Four musicians out of metro Detroit. Weddings, festivals, glendia, baptisms — anywhere your people want to dance.
+        A high-energy Greek band trusted across North America for weddings, festivals, and every night worth celebrating.
       </p>
 
       <div class="hero-cinematic__actions">
-        <a href="#hire" class="btn btn--gold btn--lg">Book us →</a>
-        <a href="#music" class="btn btn--lg" style="border-color: rgba(255,255,255,0.5); color: #fff;">Listen ▸</a>
+        <a href="#booking" class="btn btn--gold btn--lg">Book us →</a>
+        <a href="#media" class="btn btn--lg" style="border-color: rgba(255,255,255,0.5); color: #fff;">Watch &amp; listen ▸</a>
       </div>
     </div>
   </section>
 
-  <!-- ═══ WHAT WE PLAY ═══ -->
-  <section id="styles" class="sec sec--xpad">
+  <!-- ═══ UPCOMING SHOWS ═══ -->
+  <section id="shows" class="shows">
     <div class="container">
-      <header class="head2 head2--13">
-        <div>
-          <span class="sec__kicker"><span class="mono">REPERTOIRE</span> <svg class="sec__icon" aria-hidden="true"><use href="#i-mark"/></svg></span>
-          <h2 class="h2 display-tight">Whatever your night needs — <span style="color: var(--gold);">we know it</span>.</h2>
+      <header class="shows__head" data-reveal>
+        <span class="sec__kicker"><span class="mono">UPCOMING PERFORMANCES</span> <svg class="sec__icon" aria-hidden="true"><use href="#i-mark"/></svg></span>
+        <h2 class="shows__h display-tight">Catch us <span style="color: var(--gold);">live</span>.</h2>
+      </header>
+      <ul class="shows__list" data-reveal>
+        <li class="show">
+          <span class="show__date"><span class="show__mon">SEP</span><span class="show__day">25–27</span><span class="show__yr">2026</span></span>
+          <span class="show__name">Las Vegas Greek Festival</span>
+          <span class="show__city">Las Vegas, NV</span>
+          <span class="show__tag mono">Festival</span>
+        </li>
+        <li class="show">
+          <span class="show__date"><span class="show__mon">NOV</span><span class="show__day">7</span><span class="show__yr">2026</span></span>
+          <span class="show__name">Greek Community of Western Nebraska</span>
+          <span class="show__city">Scottsbluff, NE</span>
+          <span class="show__tag mono">Private</span>
+        </li>
+        <li class="show">
+          <span class="show__date"><span class="show__mon">FEB</span><span class="show__day">6–7</span><span class="show__yr">2027</span></span>
+          <span class="show__name">Bahamas Greek Festival</span>
+          <span class="show__city">Nassau, Bahamas</span>
+          <span class="show__tag mono">Festival</span>
+        </li>
+      </ul>
+      <p class="shows__foot mono" data-reveal>Want us at your event? <a href="#booking">Check our availability →</a></p>
+    </div>
+  </section>
+
+  <!-- ═══ WHERE WE PLAY (tight banner) ═══ -->
+  <section id="where" class="where">
+    <div class="container">
+      <div class="where__inner" data-reveal>
+        <div class="where__lead">
+          <span class="mono" style="color: var(--gold);">WHERE WE PLAY</span>
+          <h2 class="where__h display-tight">Having a wedding out of state? <span style="color: var(--gold);">We travel.</span></h2>
         </div>
-        <p class="intro">Six traditions across one set. We open with kalamatianó, push into laïka by ten, slow it down with the nisiótika after dinner, and close with the dimotika nobody's got the legs for. Tap any style to go deeper.</p>
+        <p class="where__cities">
+          Detroit · Chicago · New York · Astoria · Boston · Tampa · Charlotte · Houston · Pittsburgh · Cleveland · Salt Lake City · Las Vegas · Toronto · Montréal · Nassau · Athens · Mýkonos · Santoríni · Crete · Thessaloníki — <span style="color: var(--gold);">and anywhere your people can fly.</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TESTIMONIALS ═══ -->
+  <section id="testimonials" class="sec sec--deep">
+    <div class="container">
+      <header class="head2" data-reveal>
+        <div>
+          <span class="sec__kicker"><span class="mono">WHAT COUPLES SAY</span> <svg class="sec__icon" aria-hidden="true"><use href="#i-mark"/></svg></span>
+          <h2 class="h2 display-tight">Still not <span style="color: var(--gold);">convinced</span>?</h2>
+        </div>
+        <p class="intro">We have entertained Greek communities across North America and earned a reputation as the best Greek band on the continent. Here is what our clients say.</p>
       </header>
 
-      <div class="styles-list">
-        <details class="style-row">
-          <summary class="style-row__sum">
-            <span class="style-row__gr">ΛΑΪΚΑ</span>
-            <span class="style-row__en script-it">Laïka</span>
-            <span class="style-row__teaser">The big-room stuff. Sweaty bouzouki, tsiftetelia until 4 a.m.</span>
-            <span class="style-row__arrow" aria-hidden="true">+</span>
-          </summary>
-          <div class="style-row__body">
-            <p>The big-room stuff. Sweaty bouzouki, tsiftetelia until 4 a.m., songs everyone in the room knows the words to.</p>
-            <div class="style-row__meta">
-              <span class="mono" style="color: var(--ink-mute);">Instruments</span>
-              <span>Bouzouki · Vocals · Drums · Keys</span>
-            </div>
-            <div class="style-row__meta">
-              <span class="mono" style="color: var(--ink-mute);">We play</span>
-              <span class="script-it">Kazantzidis · Dalaras · Tsaligopoulou · Mitropanos</span>
-            </div>
-          </div>
-        </details>
-
-        <details class="style-row">
-          <summary class="style-row__sum">
-            <span class="style-row__gr">ΔΗΜΟΤΙΚΑ</span>
-            <span class="style-row__en script-it">Dimotiká</span>
-            <span class="style-row__teaser">Mainland folk. Heavy clarino, heavy footwork.</span>
-            <span class="style-row__arrow" aria-hidden="true">+</span>
-          </summary>
-          <div class="style-row__body">
-            <p>Mainland folk. Heavy clarino, heavy footwork. The dances your yiayia taught you — kalamatianó, tsamikó, syrtó.</p>
-            <p class="script-it" style="color: var(--ink); font-size: 1.05rem;"><span class="mono" style="color: var(--gold); letter-spacing: 0.1em; margin-right: 8px;">P.S.</span>Our drummer bounces so hard during a tsamikó you can't tell if he's fucking or getting fucked.</p>
-            <div class="style-row__meta">
-              <span class="mono" style="color: var(--ink-mute);">Instruments</span>
-              <span>Clarino · Laoúto · Violí · Defi</span>
-            </div>
-            <div class="style-row__meta">
-              <span class="mono" style="color: var(--ink-mute);">We play</span>
-              <span class="script-it">Aidonidis · Samiou · Pyrgaki · Chalkias</span>
-            </div>
-          </div>
-        </details>
-
-        <details class="style-row">
-          <summary class="style-row__sum">
-            <span class="style-row__gr">ΝΗΣΙΩΤΙΚΑ</span>
-            <span class="style-row__en script-it">Nisiótika</span>
-            <span class="style-row__teaser">Island music from the Cyclades and Dodecanese.</span>
-            <span class="style-row__arrow" aria-hidden="true">+</span>
-          </summary>
-          <div class="style-row__body">
-            <p>Island music from the Cyclades and Dodecanese. Violin, laoúto, the kind of set that ends with everyone in a circle.</p>
-            <div class="style-row__meta">
-              <span class="mono" style="color: var(--ink-mute);">Instruments</span>
-              <span>Violí · Laoúto · Tsampoúna · Santoúri</span>
-            </div>
-            <div class="style-row__meta">
-              <span class="mono" style="color: var(--ink-mute);">We play</span>
-              <span class="script-it">Parios · Konitopoulou · Mariza Koch · Oikonomidis</span>
-            </div>
-          </div>
-        </details>
-
-        <details class="style-row">
-          <summary class="style-row__sum">
-            <span class="style-row__gr">ΠΑΡΑΔΟΣΙΑΚΑ</span>
-            <span class="style-row__en script-it">Paradosiaká</span>
-            <span class="style-row__teaser">The umbrella. Where every other category on this list comes from.</span>
-            <span class="style-row__arrow" aria-hidden="true">+</span>
-          </summary>
-          <div class="style-row__body">
-            <p>The umbrella. Greek traditional music in the broadest sense — the dimotiká tragoúdia of mainland and islands, dating back to Byzantine times. Where every other category on this list comes from before it had a name.</p>
-            <div class="style-row__meta">
-              <span class="mono" style="color: var(--ink-mute);">Instruments</span>
-              <span>Voice · Laoúto · Outi · Daoúli</span>
-            </div>
-            <div class="style-row__meta">
-              <span class="mono" style="color: var(--ink-mute);">Traditions</span>
-              <span class="script-it">Pontian · Epirote · Mikrasiátiko · Smyrnaiko</span>
-            </div>
-          </div>
-        </details>
-
-        <details class="style-row">
-          <summary class="style-row__sum">
-            <span class="style-row__gr">ΣΚΥΛΑΔΙΚΟ</span>
-            <span class="style-row__en script-it">Skiládiko</span>
-            <span class="style-row__teaser">The decadent branch of laïko. We bring that energy when the night needs to break the rules.</span>
-            <span class="style-row__arrow" aria-hidden="true">+</span>
-          </summary>
-          <div class="style-row__body">
-            <p>The decadent branch of laïko — the music of the cheap, smoky, shady night clubs on the edge of town. Heavily amplified bouzouki and electric guitar on a raised stage. Karras and Pantazis lit it up in the '70s and '80s. We bring that energy to a private room when the night needs to break the rules.</p>
-            <p class="script-it" style="color: var(--ink); font-size: 1.05rem;"><span class="mono" style="color: var(--gold); letter-spacing: 0.1em; margin-right: 8px;">P.S.</span>Keys and lead vocal will burn a cigarette on your μουνί during a solo.</p>
-            <div class="style-row__meta">
-              <span class="mono" style="color: var(--ink-mute);">Instruments</span>
-              <span>Electric Bouzouki · Electric Guitar · Keys · Vocals</span>
-            </div>
-            <div class="style-row__meta">
-              <span class="mono" style="color: var(--ink-mute);">We play</span>
-              <span class="script-it">Karras · Pantazis · Terzís · Makropoulos</span>
-            </div>
-          </div>
-        </details>
-
-        <details class="style-row">
-          <summary class="style-row__sum">
-            <span class="style-row__gr">ΡΕΜΠΕΤΙΚΑ</span>
-            <span class="style-row__en script-it">Rebétika</span>
-            <span class="style-row__teaser">The foundation. We respect the lineage.</span>
-            <span class="style-row__arrow" aria-hidden="true">+</span>
-          </summary>
-          <div class="style-row__body">
-            <p>The foundation. Urban song from the 1920s–1950s — bouzouki and baglamás, smoke and exile. Vamvakaris, Tsitsanis, Bellou, Papaioannou. We respect the lineage; the older bookers know we do.</p>
-            <p class="script-it" style="color: var(--ink); font-size: 1.05rem;"><span class="mono" style="color: var(--gold); letter-spacing: 0.1em; margin-right: 8px;">P.S.</span>Stay after the gig to smoke a joint with the guitar and bouzouki players.</p>
-            <div class="style-row__meta">
-              <span class="mono" style="color: var(--ink-mute);">Instruments</span>
-              <span>Bouzouki · Baglamás · Voice · Guitar</span>
-            </div>
-            <div class="style-row__meta">
-              <span class="mono" style="color: var(--ink-mute);">We play</span>
-              <span class="script-it">Vamvakaris · Tsitsanis · Bellou · Papaioannou</span>
-            </div>
-          </div>
-        </details>
+      <div class="testimonials" data-reveal>
+        <figure class="tcard">
+          <blockquote class="tcard__quote script-it">"They played until the last guest left, and my father asked them to stay longer. Worth every penny."</blockquote>
+          <figcaption class="tcard__cite">
+            <span class="mono">GEORGE &amp; ELENI</span>
+            <span class="mono" style="color: var(--ink-mute);">Wedding · Astoria, NY</span>
+          </figcaption>
+        </figure>
+        <figure class="tcard">
+          <blockquote class="tcard__quote script-it">"The best money we spent on the entire wedding, by a mile. The dance floor never emptied."</blockquote>
+          <figcaption class="tcard__cite">
+            <span class="mono">KOSTAS &amp; MARIA</span>
+            <span class="mono" style="color: var(--ink-mute);">Wedding · Chicago, IL</span>
+          </figcaption>
+        </figure>
+        <figure class="tcard">
+          <blockquote class="tcard__quote script-it">"Professional from the first call to the last song. Our festival committee already rebooked them."</blockquote>
+          <figcaption class="tcard__cite">
+            <span class="mono">FR. STAVROS</span>
+            <span class="mono" style="color: var(--ink-mute);">Parish Festival · Detroit, MI</span>
+          </figcaption>
+        </figure>
       </div>
-
-      <!-- Custom-song callout -->
-      <aside class="custom-song" data-reveal>
-        <svg class="custom-song__mark" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" aria-hidden="true">
-          <!-- Stylized bouzouki line-art -->
-          <ellipse cx="20" cy="44" rx="13" ry="11" />
-          <circle cx="20" cy="44" r="3" />
-          <line x1="30" y1="38" x2="58" y2="12" />
-          <line x1="32" y1="40" x2="60" y2="14" />
-          <path d="M 58 12 L 62 8 L 60 6 L 54 10" stroke-linejoin="round"/>
-          <line x1="20" y1="32" x2="58" y2="9" stroke-width="0.6" opacity="0.55" />
-          <line x1="22" y1="35" x2="60" y2="12" stroke-width="0.6" opacity="0.55" />
-        </svg>
-        <div class="custom-song__body">
-          <span class="mono" style="color: var(--gold);">CUSTOM SONG REQUEST</span>
-          <h3 class="custom-song__h">Don't see the song you want? <span style="color: var(--gold);">Send it.</span></h3>
-          <p class="custom-song__copy">Your mother's first dance, your father's favorite, the one your pappous played on the laoúto every Sunday. Drop a YouTube link, a Spotify track, a cassette we can digitize — we learn it before the date. No extra fee for the live set.</p>
-          <div class="custom-song__actions">
-            <a href="#booking" class="btn btn--gold">Request a song with your booking →</a>
-            <a href="/commission.html" class="custom-song__link">Want it recorded in studio? Commission a cut ↗</a>
-          </div>
-        </div>
-      </aside>
     </div>
   </section>
 
-  <!-- ═══ THE CREW ═══ -->
-  <section id="crew" class="sec sec--xpad sec--deep">
+  <!-- ═══ MEET THE GROUP ═══ -->
+  <section id="group" class="sec sec--xpad">
     <div class="container">
-      <header class="head2">
+      <header class="head2" data-reveal>
         <div>
-          <span class="sec__kicker"><span class="mono">THE CREW</span> <svg class="sec__icon" aria-hidden="true"><use href="#i-mark"/></svg></span>
+          <span class="sec__kicker"><span class="mono">MEET THE GROUP</span> <svg class="sec__icon" aria-hidden="true"><use href="#i-mark"/></svg></span>
           <h2 class="h2 display-tight">The four behind the <span style="color: var(--gold);">kefi</span>.</h2>
         </div>
-        <p class="intro">Two lead vocalists, bouzouki, keys, guitar, drums. They grew up through the church halls, the festivals, and the late nights — and they've been playing rooms together since before any of you were ready to dance.</p>
+        <p class="intro">Two lead vocalists, bouzouki, keyboards, guitar, and drums — and the showmanship, stage presence, and kefi that put Oneiro a level above.</p>
       </header>
 
       <div class="crew__grid">
-        <article class="crew__card">
-          <div class="photo" data-hue="245" style="aspect-ratio: 3 / 4;">
-            <img src="images/andreas.jpg" alt="Andreas Karantsinides — Bouzouki & Vocals" loading="lazy" />
-            <div class="photo__caption">Bouzouki</div>
-          </div>
+        <article class="crew__card" data-reveal>
+          <div class="photo crew__photo"><img src="images/band/yianni.jpg" alt="Yianni — Keyboards &amp; Vocals" loading="lazy" /></div>
           <div class="crew__body">
-            <h3 class="display crew__name">Andreas Karantsinides</h3>
-            <div class="script-it crew__role">Bouzouki · Vocals</div>
-            <p class="crew__bio">Pretty Thessaloniki boy. The face most likely to get followed home from a gig. Trained on classical piano — Chopin, Rachmaninoff, Gershwin — then taught himself bouzouki by ear, with Chiotis and Tsitsanis on repeat. Day job: dentist. He'll polish your mouth out before or after the bouzouki does, depending on what you're into.</p>
-            <dl class="crew__stats">
-              <div class="stat"><dt>Plays</dt><dd>Bouzouki · Vocals</dd></div>
-              <div class="stat"><dt>Day job</dt><dd>Dentist</dd></div>
-              <div class="stat"><dt>Bloodline</dt><dd>Thessaloniki</dd></div>
-            </dl>
+            <h3 class="display crew__name">Yianni</h3>
+            <div class="crew__role">Keyboards · Lead Vocals · Founding Member</div>
+            <p class="crew__bio">Yianni began his musical career at an extremely young age and grew into an exceptional musician, mastering a wide variety of instruments. Though his true love is the piano, he also plays guitar, bouzouki, drums, and percussion. Originally trained in jazz and musical theory, his special fondness for Greek music shaped the group's unique sound. As a founding member, his dedication is matched only by his unbelievable performing and solid lead vocals.</p>
           </div>
         </article>
 
-        <article class="crew__card">
-          <div class="photo" data-hue="245" style="aspect-ratio: 3 / 4;">
-            <img src="images/yianni.jpg" alt="Yianni Shafkalis — Keyboards & Vocals" loading="lazy" />
-            <div class="photo__caption">Keys · Vocals</div>
-          </div>
+        <article class="crew__card" data-reveal>
+          <div class="photo crew__photo"><img src="images/band/andreas.jpg" alt="Andreas — Bouzouki &amp; Vocals" loading="lazy" /></div>
           <div class="crew__body">
-            <h3 class="display crew__name">Yianni Shafkalis</h3>
-            <div class="script-it crew__role">Keyboards · Vocals · Founding member</div>
-            <p class="crew__bio">Cypriot mother, Cretan father — generations of islanders whose family trees forgot to branch out. The trade-off: a couple rare blood disorders, perfect pitch, and the kind of musical recall the gene pool produces when it's small enough to drink from. Theory-grounded, jazz-trained, 150+ students taught. The conservatory inside the band.</p>
-            <dl class="crew__stats">
-              <div class="stat"><dt>Plays</dt><dd>Keys · Vocals</dd></div>
-              <div class="stat"><dt>Bloodline</dt><dd>Cyprus · Crete</dd></div>
-              <div class="stat"><dt>Role</dt><dd>Founding member</dd></div>
-            </dl>
+            <h3 class="display crew__name">Andreas</h3>
+            <div class="crew__role">Bouzouki · Vocals</div>
+            <p class="crew__bio">Originally a classical pianist — mastering Chopin, Rachmaninoff, Gershwin and more — Andreas performed these works in front of many audiences before picking up his first bouzouki at a young age. Self-taught, he favors the great bouzouxithes: Manolis Chiotis, Manolis Karandinis, and of course Tsitsanis. His love and passion for the bouzouki is evident every moment he is on and off the stage, and his interpretations of Greek music are both unique and appealing.</p>
           </div>
         </article>
 
-        <article class="crew__card">
-          <div class="photo" data-hue="245" style="aspect-ratio: 3 / 4;">
-            <img src="images/dimitris.jpg" alt="Dimitris Penz — Acoustic & Electric Guitar" loading="lazy" />
-            <div class="photo__caption">Guitar</div>
-          </div>
+        <article class="crew__card" data-reveal>
+          <div class="photo crew__photo"><img src="images/band/dimitris.jpg" alt="Dimitris — Guitar" loading="lazy" /></div>
           <div class="crew__body">
-            <h3 class="display crew__name">Dimitris Penz</h3>
-            <div class="script-it crew__role">Acoustic · Electric Guitar</div>
-            <p class="crew__bio">Pindus mountain blood. Family line traces back to klephts who taught the Ottomans about ambushes, and grandfathers who measure time in bear maulings. Learned guitar from his father between tsipouro runs across borders that don't exist on any current map. Rhythm-forward style — the silence between the notes is in the genes, too.</p>
-            <dl class="crew__stats">
-              <div class="stat"><dt>Plays</dt><dd>Guitar (acoustic + electric)</dd></div>
-              <div class="stat"><dt>Bloodline</dt><dd>Pindus mountains</dd></div>
-              <div class="stat"><dt>Lineage</dt><dd>Family-taught</dd></div>
-            </dl>
+            <h3 class="display crew__name">Dimitris</h3>
+            <div class="crew__role">Guitar · Founding Member</div>
+            <p class="crew__bio">Dimitris owes much of his skill on the guitar to his father, who started him on the instrument — he essentially grew up with a guitar in his hands. He found his true passion experimenting with blues and rock, and upon co-founding Oneiro he merged those techniques into a lively, smooth style of rhythm guitar. His rhythmic style is the backbone of the group's groove and drive.</p>
           </div>
         </article>
 
-        <article class="crew__card">
-          <div class="photo" data-hue="245" style="aspect-ratio: 3 / 4;">
-            <img src="images/sotirios.jpg" alt="Sotirios Raphtis — Drums & Percussion" loading="lazy" />
-            <div class="photo__caption">Drums</div>
-          </div>
+        <article class="crew__card" data-reveal>
+          <div class="photo crew__photo"><img src="images/band/sotiris.jpg" alt="Sotiris — Drums &amp; Percussion" loading="lazy" /></div>
           <div class="crew__body">
-            <h3 class="display crew__name">Sotirios Raphtis</h3>
-            <div class="script-it crew__role">Drums · Percussion</div>
-            <p class="crew__bio">Newest and youngest. Grew up — unfortunately — with the other three as role models, who groomed him in every direction a Greek band knows how to. But he was conceived for the job: his father is a dimotika guitar player. The pocket was waiting for him.</p>
-            <dl class="crew__stats">
-              <div class="stat"><dt>Plays</dt><dd>Drums · Percussion</dd></div>
-              <div class="stat"><dt>Raised by</dt><dd>The other three (badly)</dd></div>
-              <div class="stat"><dt>Pedigree</dt><dd>Son of a dimotika guitarist</dd></div>
-            </dl>
+            <h3 class="display crew__name">Sotiris</h3>
+            <div class="crew__role">Drums · Percussion</div>
+            <p class="crew__bio">Sotiris began performing at a young age, sitting in with bands throughout his youth and playing live alongside his father and uncle — accomplished dimotiko musicians. More than a decade ago he took charge of his growth and trained under the group's keyboardist, Yianni. After years of practice, dedication, and discipline he became an exceptional musician — a true asset to the group, and the heartbeat of its rhythm and groove.</p>
           </div>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- ═══ MUSIC ═══ -->
-  <section id="music" class="sec sec--xpad">
+  <!-- ═══ BOOKING FORM (conversion point) ═══ -->
+  <section id="booking" class="sec sec--xpad booking">
     <div class="container">
-      <header class="head2 head2--12">
+      <header class="head2 head2--12" data-reveal>
         <div>
-          <span class="sec__kicker"><span class="mono">LISTEN</span> <svg class="sec__icon" aria-hidden="true"><use href="#i-mark"/></svg></span>
-          <h2 class="h2 display-tight">On the <span style="color: var(--gold);">record</span>.</h2>
+          <span class="sec__kicker"><span class="mono">BOOK THE BAND</span> <svg class="sec__icon" aria-hidden="true"><use href="#i-mark"/></svg></span>
+          <h2 class="h2 display-tight">Tell us about <span style="color: var(--gold);">the night</span>.</h2>
         </div>
-        <p class="intro">Two studio albums in the catalog. Tap any cover to listen — available on Apple Music, YouTube, and (soon) Spotify.</p>
+        <p class="intro">Weddings, baptisms, festivals, private events — anywhere from a Detroit hall to a Mýkonos terrace. Send the details and we'll come back within 48 hours.</p>
       </header>
 
-      <div class="discog">
-        <article class="record">
-          <div class="record__cover">
-            <img src="images/album-glendi.jpg" alt="Glendi (2014) — Oneiro" loading="lazy" />
-          </div>
-          <div class="record__body">
-            <span class="mono" style="color: var(--gold);">2014 · STUDIO ALBUM</span>
-            <h3 class="record__title display">Glendi</h3>
-            <p class="record__note">Eleven sides of laïka and dimotika — the songs the room asks for.</p>
-            <iframe class="record__embed" allow="autoplay *; encrypted-media *;" frameborder="0"
-                    sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
-                    src="https://embed.music.apple.com/us/album/glendi/908536784"
-                    title="Glendi on Apple Music"></iframe>
-            <div class="record__links">
-              <a href="https://geo.itunes.apple.com/us/album/glendi/id908536784?mt=1&amp;app=music" target="_blank" rel="noopener" class="record__link">Apple Music ↗</a>
-              <a href="https://www.youtube.com/channel/UCBuQAA2ZBjqUM-FQss4Z8Mw" target="_blank" rel="noopener" class="record__link">YouTube ↗</a>
-              <a href="#" class="record__link">Spotify ↗</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="record">
-          <div class="record__cover">
-            <img src="images/album-kainouria.jpg" alt="Kainouria Epohi (2012) — Oneiro" loading="lazy" />
-          </div>
-          <div class="record__body">
-            <span class="mono" style="color: var(--gold);">2012 · DEBUT ALBUM</span>
-            <h3 class="record__title display">Kainouria Epohi</h3>
-            <p class="record__note"><em class="script-it">"A new era."</em> The record that introduced Oneiro to the diaspora.</p>
-            <iframe class="record__embed" allow="autoplay *; encrypted-media *;" frameborder="0"
-                    sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
-                    src="https://embed.music.apple.com/us/album/kainouria-epohi/663804017"
-                    title="Kainouria Epohi on Apple Music"></iframe>
-            <div class="record__links">
-              <a href="https://geo.itunes.apple.com/us/album/kainouria-epohi/id663804017?mt=1&amp;app=music" target="_blank" rel="noopener" class="record__link">Apple Music ↗</a>
-              <a href="https://www.youtube.com/channel/UCBuQAA2ZBjqUM-FQss4Z8Mw" target="_blank" rel="noopener" class="record__link">YouTube ↗</a>
-              <a href="#" class="record__link">Spotify ↗</a>
-            </div>
-          </div>
-        </article>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ═══ Editorial bouzouki ornament — section breather ═══ -->
-  <section class="ornament-break" aria-hidden="true" data-reveal>
-    <div class="container ornament-break__inner">
-      <svg class="ornament-break__svg"><use href="#i-bouzouki"/></svg>
-      <span class="ornament-break__caption script-it">μέχρι το πρωί</span>
-      <span class="ornament-break__sub mono">until morning</span>
-    </div>
-  </section>
-
-  <!-- ═══ WHERE WE PLAY ═══ -->
-  <section id="where" class="sec sec--xpad sec--deep">
-    <div class="container">
-      <header class="head2 head2--13">
-        <div>
-          <span class="sec__kicker"><span class="mono">TERRITORY</span> <svg class="sec__icon" aria-hidden="true"><use href="#i-mark"/></svg></span>
-          <h2 class="h2 h2--md display-tight">Detroit, then <span style="color: var(--gold);">anywhere</span> your people can fly to.</h2>
-        </div>
-        <p class="intro">Detroit is home. We tour where the diaspora is — and we're in Greece every summer. Off this list? Ask anyway. The answer is usually yes.</p>
-      </header>
-
-      <div class="territory">
-        <p class="territory__sentence">
-          <span class="script-it" style="color: var(--gold); font-size: 1.2em;">Detroit</span>
-          ·  Hamtramck  ·  Dearborn  ·  Birmingham  ·  Ann Arbor
-          ·  Chicago  ·  New York  ·  Astoria  ·  Boston  ·  Charlotte  ·  Tampa  ·  Houston
-          ·  <span class="script-it" style="color: var(--gold); font-size: 1.2em;">Toronto</span>
-          ·  Montréal  ·  Vancouver
-          ·  <span class="script-it" style="color: var(--gold); font-size: 1.2em;">Nassau</span>
-          ·  Paradise Island  ·  Eleuthera
-          ·  <span class="script-it" style="color: var(--gold); font-size: 1.2em;">Athens</span>
-          ·  Mýkonos  ·  Santoríni  ·  Crete  ·  Rhódes  ·  Páros  ·  Thessaloníki
-        </p>
-        <div class="territory__legend">
-          <span class="mono"><span style="color: var(--gold);">●</span> Home base — no travel fee</span>
-          <span class="mono"><span style="color: var(--ink-mute);">●</span> Cross-border &amp; destination — ask for a quote</span>
-          <span class="mono"><span style="color: var(--ink-mute);">●</span> Greek summer — book by January</span>
-        </div>
-      </div>
-
-      <div class="testimonials">
-        <figure class="tcard">
-          <blockquote class="tcard__quote script-it">"They played until 4 a.m. and my dad asked them to stay."</blockquote>
-          <figcaption class="tcard__cite">
-            <span class="mono">— GEORGE &amp; ELENI</span>
-            <span class="mono" style="color: var(--ink-mute);">Astoria, NY · 2025</span>
-          </figcaption>
-        </figure>
-        <figure class="tcard">
-          <blockquote class="tcard__quote script-it">"Best money we spent on the wedding. By a mile."</blockquote>
-          <figcaption class="tcard__cite">
-            <span class="mono">— KOSTAS &amp; MARIA</span>
-            <span class="mono" style="color: var(--ink-mute);">Athens · 2024</span>
-          </figcaption>
-        </figure>
-        <figure class="tcard">
-          <blockquote class="tcard__quote script-it">"Started with the kalamatianó, ended on a table."</blockquote>
-          <figcaption class="tcard__cite">
-            <span class="mono">— NIKO &amp; SOPHIA</span>
-            <span class="mono" style="color: var(--ink-mute);">Toronto · 2024</span>
-          </figcaption>
-        </figure>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ EVENTS ═══ -->
-  <section id="hire" class="sec sec--xpad">
-    <div class="container">
-      <header class="head2 head2--12">
-        <div>
-          <span class="sec__kicker"><span class="mono">EVENTS</span> <svg class="sec__icon" aria-hidden="true"><use href="#i-mark"/></svg></span>
-          <h2 class="h2 display-tight">Any night worth <span style="color: var(--gold);">having</span> a band.</h2>
-        </div>
-        <p class="intro">Weddings, baptisms, glendia, panigíria, taverna residencies, private events — from a Detroit basement to a Mýkonos terrace. Tell us about your night and we'll come back with a plan within 48 hours.</p>
-      </header>
-
-      <div class="ev__grid">
-        <article class="ev__card">
-          <div class="ev__head"><span class="mono" style="color: var(--gold);">Year-round</span></div>
-          <div class="ev__gr">ΓΑΜΟΙ</div>
-          <div class="display ev__label">WEDDINGS</div>
-          <p class="ev__blurb">Ceremony to last call. Koumbáros entrance, first dance, the 4 a.m. circle. Solo, trio, or full band.</p>
-          <ul class="ev__moments">
-            <li class="ev__moment">✦ Ceremony · solo bouzouki</li>
-            <li class="ev__moment">✦ Cocktail · trio set</li>
-            <li class="ev__moment">✦ Reception · full band</li>
-            <li class="ev__moment">✦ After-party · until 4 a.m.</li>
-          </ul>
-        </article>
-
-        <article class="ev__card">
-          <div class="ev__head"><span class="mono" style="color: var(--gold);">Sundays mostly</span></div>
-          <div class="ev__gr">ΒΑΠΤΙΣΕΙΣ</div>
-          <div class="display ev__label">BAPTISMS</div>
-          <p class="ev__blurb">Sunday-afternoon joy. Light set during the meal, dancing after the cake.</p>
-          <ul class="ev__moments">
-            <li class="ev__moment">✦ Reception 3-hr set</li>
-            <li class="ev__moment">✦ Family-friendly volume</li>
-            <li class="ev__moment">✦ Trio or quartet</li>
-            <li class="ev__moment">✦ Ceremony optional</li>
-          </ul>
-        </article>
-
-        <article class="ev__card">
-          <div class="ev__head"><span class="mono" style="color: var(--gold);">Year-round</span></div>
-          <div class="ev__gr">ΓΛΕΝΤΙΑ</div>
-          <div class="display ev__label">GLENDIA</div>
-          <p class="ev__blurb">The Greek party for the sake of the party. House, hall, taverna, backyard. We bring the kefi.</p>
-          <ul class="ev__moments">
-            <li class="ev__moment">✦ Open-bar timing</li>
-            <li class="ev__moment">✦ Heavy laïka</li>
-            <li class="ev__moment">✦ DJ between sets</li>
-            <li class="ev__moment">✦ Late-night extension</li>
-          </ul>
-        </article>
-
-        <article class="ev__card">
-          <div class="ev__head"><span class="mono" style="color: var(--gold);">Summer</span></div>
-          <div class="ev__gr">ΠΑΝΗΓΥΡΙΑ</div>
-          <div class="display ev__label">PANIGÍRIA</div>
-          <p class="ev__blurb">Parish festivals and saint-day outdoor sets. Heavy dimotika, kalamatianó circles, the dances your pappous taught you.</p>
-          <ul class="ev__moments">
-            <li class="ev__moment">✦ Outdoor PA</li>
-            <li class="ev__moment">✦ All-ages set</li>
-            <li class="ev__moment">✦ Dimotika focus</li>
-            <li class="ev__moment">✦ Multi-night runs</li>
-          </ul>
-        </article>
-
-        <article class="ev__card">
-          <div class="ev__head"><span class="mono" style="color: var(--gold);">By contract</span></div>
-          <div class="ev__gr">ΤΑΒΕΡΝΕΣ</div>
-          <div class="display ev__label">TAVERNAS &amp; RESTAURANTS</div>
-          <p class="ev__blurb">Standing nights, weekly residencies, opening weekends. We have done it from Astoria to Mýkonos.</p>
-          <ul class="ev__moments">
-            <li class="ev__moment">✦ Weekly residencies</li>
-            <li class="ev__moment">✦ Opening nights</li>
-            <li class="ev__moment">✦ Holiday programming</li>
-            <li class="ev__moment">✦ Acoustic-friendly</li>
-          </ul>
-        </article>
-
-        <article class="ev__card">
-          <div class="ev__head"><span class="mono" style="color: var(--gold);">Year-round</span></div>
-          <div class="ev__gr">ΙΔΙΩΤΙΚΑ</div>
-          <div class="display ev__label">CORPORATE &amp; PRIVATE</div>
-          <p class="ev__blurb">Anniversaries, retirements, milestone birthdays, brand events with a Greek angle. We tailor the room.</p>
-          <ul class="ev__moments">
-            <li class="ev__moment">✦ Background to centerpiece</li>
-            <li class="ev__moment">✦ Branded staging</li>
-            <li class="ev__moment">✦ NDA okay</li>
-            <li class="ev__moment">✦ Custom programming</li>
-          </ul>
-        </article>
-      </div>
-
-      <div class="ev__cta">
-        <div class="script-it ev__ctaText">
-          Don't see your kind of night?<br/>
-          <span style="color: var(--gold);">Tell us anyway.</span>
-        </div>
-        <a href="#booking" class="btn btn--gold btn--lg">Tell us about your night →</a>
-      </div>
-
-      <!-- Booking form -->
-      <form id="booking" class="fm" data-form="booking">
-        <div class="fm__head">
-          <span class="mono" style="color: var(--gold);">BOOKING INQUIRY · ~2 MIN · NO PRESSURE</span>
-          <h3 class="display fm__h">Tell us about the night.</h3>
-        </div>
-
+      <form id="booking-form" class="fm" data-form="booking" data-reveal>
         <div class="fm__row">
           <span class="mono fm__lbl">What kind of event?</span>
           <div class="fm__pills" data-pills="kind">
-            <button type="button" class="pill" aria-pressed="true">Weddings</button>
-            <button type="button" class="pill" aria-pressed="false">Baptisms</button>
-            <button type="button" class="pill" aria-pressed="false">Glendia</button>
-            <button type="button" class="pill" aria-pressed="false">Panigíria</button>
-            <button type="button" class="pill" aria-pressed="false">Tavernas &amp; Restaurants</button>
-            <button type="button" class="pill" aria-pressed="false">Corporate &amp; Private</button>
+            <button type="button" class="pill" aria-pressed="true">Wedding</button>
+            <button type="button" class="pill" aria-pressed="false">Baptism</button>
+            <button type="button" class="pill" aria-pressed="false">Dance / Gala</button>
+            <button type="button" class="pill" aria-pressed="false">Festival</button>
+            <button type="button" class="pill" aria-pressed="false">Taverna / Restaurant</button>
+            <button type="button" class="pill" aria-pressed="false">Corporate / Private</button>
             <button type="button" class="pill" aria-pressed="false">Other</button>
           </div>
         </div>
 
         <div class="fm__grid2">
-          <label class="fm__field"><span class="mono fm__lbl">Your name</span><input class="fm__input" type="text" placeholder="Yiannis Kostakis" /></label>
+          <label class="fm__field"><span class="mono fm__lbl">Your name</span><input class="fm__input" type="text" placeholder="Yianni Kostakis" /></label>
           <label class="fm__field"><span class="mono fm__lbl">Email</span><input class="fm__input" type="email" placeholder="you@somewhere.com" /></label>
-          <label class="fm__field"><span class="mono fm__lbl">Phone</span><input class="fm__input" type="text" placeholder="+1 313 555 0188" /></label>
-          <label class="fm__field"><span class="mono fm__lbl">Date of event</span><input class="fm__input" type="text" placeholder="June 14, 2026" /></label>
-          <label class="fm__field"><span class="mono fm__lbl">City / venue</span><input class="fm__input" type="text" placeholder="Astoria, NY · St. Demetrios Hall" /></label>
-          <label class="fm__field"><span class="mono fm__lbl">Approx. guests</span><input class="fm__input" type="text" placeholder="150" /></label>
+          <label class="fm__field"><span class="mono fm__lbl">Phone</span><input class="fm__input" type="tel" placeholder="(586) 943-2710" /></label>
+          <label class="fm__field"><span class="mono fm__lbl">Date of event</span><input class="fm__input" type="text" placeholder="June 14, 2027" /></label>
+          <label class="fm__field"><span class="mono fm__lbl">City / venue</span><input class="fm__input" type="text" placeholder="Chicago, IL · Hilton" /></label>
+          <label class="fm__field"><span class="mono fm__lbl">Approx. guests</span><input class="fm__input" type="text" placeholder="200" /></label>
         </div>
 
         <label class="fm__field">
           <span class="mono fm__lbl">Tell us about the night</span>
-          <textarea class="fm__input" rows="3" placeholder="Greek-side wedding · 80% laïka, 20% dimotika · ceremony at 5, reception at 7, please play 'Ah Helidoni' for the koumbara."></textarea>
-        </label>
-
-        <label class="fm__field">
-          <span class="mono fm__lbl">Who sent you?</span>
-          <input class="fm__input" type="text" placeholder="Father Stavros · the Tsoukalas wedding · IG · Google" />
+          <textarea class="fm__input" rows="3" placeholder="Greek-side wedding, ceremony at 5, reception at 7. Mix of laïka and dimotika. A specific song we should learn? Drop it here."></textarea>
         </label>
 
         <div class="fm__submit">
           <button type="submit" class="btn btn--gold btn--lg" data-submit-label="Send the inquiry →">Send the inquiry →</button>
-          <span class="mono" style="color: var(--ink-mute);">Or reach us direct: <a href="tel:+15869432710" style="color: var(--ink); text-decoration: underline; text-decoration-color: var(--rule);">586.943.2710</a> · <a href="mailto:Booking@OneiroMusic.com" style="color: var(--ink); text-decoration: underline; text-decoration-color: var(--rule);">Booking@OneiroMusic.com</a></span>
+          <span class="mono" style="color: var(--ink-mute);">Or reach us direct: <a href="tel:+15869432710">586.943.2710</a> · <a href="mailto:Booking@OneiroMusic.com">Booking@OneiroMusic.com</a></span>
         </div>
       </form>
     </div>
   </section>
 
-  <!-- ═══ FOLLOW ═══ -->
-  <section id="feed" class="follow">
-    <div class="container follow__inner">
-      <div class="follow__left">
-        <span class="mono" style="color: var(--gold);">FOLLOW ALONG</span>
-        <h2 class="follow__h display-tight">Watch us <span style="color: var(--gold);">live</span>.</h2>
-        <p class="follow__lede">Latest sets, festival footage, and the moments that don't make the record — all on Instagram and YouTube.</p>
+  <!-- ═══ PAGE BREAK ═══ -->
+  <section class="pagebreak" aria-hidden="true" data-reveal>
+    <div class="container pagebreak__inner">
+      <div class="divider__line divider__line--rev"></div>
+      <span class="pagebreak__label script-it">even more about us</span>
+      <div class="divider__line"></div>
+    </div>
+  </section>
+
+  <!-- ═══ MEDIA (social feed + listen links) ═══ -->
+  <section id="media" class="sec sec--xpad">
+    <div class="container">
+      <header class="head2 head2--14" data-reveal>
+        <div>
+          <span class="sec__kicker"><span class="mono">WATCH &amp; LISTEN</span> <svg class="sec__icon" aria-hidden="true"><use href="#i-mark"/></svg></span>
+          <h2 class="h2 display-tight">Straight from <span style="color: var(--gold);">the floor</span>.</h2>
+        </div>
+        <p class="intro">Live clips, festival footage, and the moments that don't make the record — pulled from our socials. Tap any post to open it.</p>
+      </header>
+
+      <!-- Instagram feed (Behold.so widget — connect @oneiromusic and paste your feed ID below) -->
+      <div class="media__feed" data-reveal>
+        <div data-behold-id="REPLACE_WITH_BEHOLD_FEED_ID"></div>
+        <noscript><p class="mono" style="color: var(--ink-mute);">Enable JavaScript to see the live feed, or visit <a href="https://www.instagram.com/oneiromusic">@oneiromusic</a>.</p></noscript>
+        <!-- Placeholder shown until the Behold feed ID is configured -->
+        <div class="media__feed-placeholder">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          <p class="mono">Live Instagram feed wires in here once @oneiromusic is connected.</p>
+          <a href="https://www.instagram.com/oneiromusic" target="_blank" rel="noopener" class="btn btn--gold">Follow @oneiromusic →</a>
+        </div>
       </div>
-      <div class="follow__right">
-        <a href="https://www.instagram.com/oneiromusic" target="_blank" rel="noopener" class="follow__btn">
-          <span class="mono follow__platform">INSTAGRAM</span>
-          <span class="follow__handle">@oneiromusic</span>
-          <span class="follow__arrow">→</span>
-        </a>
-        <a href="https://www.youtube.com/channel/UCBuQAA2ZBjqUM-FQss4Z8Mw" target="_blank" rel="noopener" class="follow__btn">
-          <span class="mono follow__platform">YOUTUBE</span>
-          <span class="follow__handle">/OneiroMusicGroup</span>
-          <span class="follow__arrow">→</span>
-        </a>
-        <a href="https://www.facebook.com/OneiroMusicGroup/" target="_blank" rel="noopener" class="follow__btn">
-          <span class="mono follow__platform">FACEBOOK</span>
-          <span class="follow__handle">/OneiroMusicGroup</span>
-          <span class="follow__arrow">→</span>
-        </a>
+
+      <!-- Listen links (de-emphasized icons) -->
+      <div class="listen" data-reveal>
+        <span class="mono listen__label">FIND OUR MUSIC ON</span>
+        <div class="listen__links">
+          <a href="https://music.apple.com/us/artist/oneiro/677017168" target="_blank" rel="noopener" class="listen__chip">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M16 3v11.5a3.5 3.5 0 1 1-2-3.16V6.5l-6 1.2v7.8a3.5 3.5 0 1 1-2-3.16V5l10-2z"/></svg>
+            Apple Music
+          </a>
+          <a href="#" class="listen__chip">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><circle cx="12" cy="12" r="10"/><path d="M7 14.5c3-1 7-0.8 9.5 0.8M7.5 11.5c3.2-1 7.6-0.7 10 1M8 8.5c3.4-1 7.6-0.6 9.5 0.8" stroke="var(--bg)" stroke-width="1.3" fill="none" stroke-linecap="round"/></svg>
+            Spotify
+          </a>
+          <a href="https://www.youtube.com/channel/UCBuQAA2ZBjqUM-FQss4Z8Mw" target="_blank" rel="noopener" class="listen__chip">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2.5" y="6" width="19" height="12" rx="3"/><path d="M10 9.5 L15 12 L10 14.5 Z" fill="currentColor" stroke="none"/></svg>
+            YouTube
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ EVENTS ═══ -->
+  <section id="events" class="sec sec--xpad sec--deep">
+    <div class="container">
+      <header class="head2 head2--12" data-reveal>
+        <div>
+          <span class="sec__kicker"><span class="mono">EVENTS</span> <svg class="sec__icon" aria-hidden="true"><use href="#i-mark"/></svg></span>
+          <h2 class="h2 display-tight">Any night worth <span style="color: var(--gold);">having</span> a band.</h2>
+        </div>
+        <p class="intro">From black-tie weddings to parish festivals, we read the room and program the night — ceremony to last call.</p>
+      </header>
+
+      <div class="ev__grid" data-reveal>
+        <article class="ev__card">
+          <div class="ev__label display">Weddings</div>
+          <p class="ev__blurb">Ceremony to last call — entrance, first dance, and the late-night circle. Solo, trio, or full band.</p>
+        </article>
+        <article class="ev__card">
+          <div class="ev__label display">Baptisms</div>
+          <p class="ev__blurb">A light set during the meal, dancing after the cake. Family-friendly volume, trio or quartet.</p>
+        </article>
+        <article class="ev__card">
+          <div class="ev__label display">Dances &amp; Galas</div>
+          <p class="ev__blurb">Formal nights, organization dances, and black-tie galas. Emcee and high-energy program included.</p>
+        </article>
+        <article class="ev__card">
+          <div class="ev__label display">Festivals &amp; Panigýria</div>
+          <p class="ev__blurb">Parish festivals and saint-day sets. Outdoor PA, all-ages program, multi-night runs.</p>
+        </article>
+        <article class="ev__card">
+          <div class="ev__label display">Tavernas &amp; Restaurants</div>
+          <p class="ev__blurb">Standing nights, weekly residencies, and opening weekends — from Astoria to the islands.</p>
+        </article>
+        <article class="ev__card">
+          <div class="ev__label display">Corporate &amp; Private</div>
+          <p class="ev__blurb">Anniversaries, milestone birthdays, and brand events with a Greek angle. We tailor the room.</p>
+        </article>
+      </div>
+
+      <div class="ev__cta" data-reveal>
+        <div class="script-it ev__ctaText">Don't see your kind of night? <span style="color: var(--gold);">Tell us anyway.</span></div>
+        <a href="#booking" class="btn btn--gold btn--lg">Tell us about your night →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ STYLES WE PLAY ═══ -->
+  <section id="styles" class="sec sec--xpad">
+    <div class="container">
+      <header class="head2 head2--13" data-reveal>
+        <div>
+          <span class="sec__kicker"><span class="mono">THE MUSIC</span> <svg class="sec__icon" aria-hidden="true"><use href="#i-mark"/></svg></span>
+          <h2 class="h2 display-tight">Whatever your night needs — <span style="color: var(--gold);">we know it</span>.</h2>
+        </div>
+        <p class="intro">A vast repertoire across every Greek tradition. We open soft, build through the night, and close on the floor. Tap any style to go deeper.</p>
+      </header>
+
+      <div class="styles-list" data-reveal>
+        <details class="style-row">
+          <summary class="style-row__sum">
+            <span class="style-row__en">Laïka</span>
+            <span class="style-row__teaser">The big-room sound — bouzouki, vocals, and the songs everyone knows.</span>
+            <span class="style-row__arrow" aria-hidden="true">+</span>
+          </summary>
+          <div class="style-row__body">
+            <p>The heart of a Greek night. Sweaty bouzouki, tsifteteli, and the laïka everyone in the room can sing — the songs that keep the floor full until the lights come up.</p>
+            <div class="style-row__meta"><span class="mono" style="color: var(--ink-mute);">We play</span><span>Kazantzidis · Dalaras · Tsaligopoulou · Mitropanos</span></div>
+          </div>
+        </details>
+        <details class="style-row">
+          <summary class="style-row__sum">
+            <span class="style-row__en">Dimotika</span>
+            <span class="style-row__teaser">Mainland folk — heavy clarino, heavy footwork.</span>
+            <span class="style-row__arrow" aria-hidden="true">+</span>
+          </summary>
+          <div class="style-row__body">
+            <p>Mainland folk music: the kalamatianó, tsamikó, and syrtó your family has danced for generations. Driving clarino and a rhythm section built for the circle.</p>
+            <div class="style-row__meta"><span class="mono" style="color: var(--ink-mute);">We play</span><span>Aidonidis · Samiou · Pyrgaki · Chalkias</span></div>
+          </div>
+        </details>
+        <details class="style-row">
+          <summary class="style-row__sum">
+            <span class="style-row__en">Nisiótika</span>
+            <span class="style-row__teaser">Island music from the Cyclades and Dodecanese.</span>
+            <span class="style-row__arrow" aria-hidden="true">+</span>
+          </summary>
+          <div class="style-row__body">
+            <p>Island music from the Cyclades and Dodecanese — violin and laoúto, the kind of set that ends with the whole room in one big circle.</p>
+            <div class="style-row__meta"><span class="mono" style="color: var(--ink-mute);">We play</span><span>Parios · Konitopoulou · Mariza Koch · Oikonomidis</span></div>
+          </div>
+        </details>
+        <details class="style-row">
+          <summary class="style-row__sum">
+            <span class="style-row__en">Paradosiaká</span>
+            <span class="style-row__teaser">Traditional Greek music in its broadest sense.</span>
+            <span class="style-row__arrow" aria-hidden="true">+</span>
+          </summary>
+          <div class="style-row__body">
+            <p>Traditional Greek music in the broadest sense — the regional songs of the mainland and islands, from Pontian to Epirote to Asia-Minor, dating back centuries. Where every other style on this list comes from.</p>
+            <div class="style-row__meta"><span class="mono" style="color: var(--ink-mute);">Regions</span><span>Pontian · Epirote · Asia Minor · Smyrnaic</span></div>
+          </div>
+        </details>
+        <details class="style-row">
+          <summary class="style-row__sum">
+            <span class="style-row__en">Rebétika</span>
+            <span class="style-row__teaser">The urban foundation of it all — bouzouki and baglamás.</span>
+            <span class="style-row__arrow" aria-hidden="true">+</span>
+          </summary>
+          <div class="style-row__body">
+            <p>The foundation: urban song from the 1920s–1950s, bouzouki and baglamás. We respect the lineage, and the older crowd knows it the moment we start.</p>
+            <div class="style-row__meta"><span class="mono" style="color: var(--ink-mute);">We play</span><span>Vamvakaris · Tsitsanis · Bellou · Papaioannou</span></div>
+          </div>
+        </details>
+        <details class="style-row">
+          <summary class="style-row__sum">
+            <span class="style-row__en">Éntehno &amp; Modern</span>
+            <span class="style-row__teaser">Art-song and today's hits — for the younger crowd.</span>
+            <span class="style-row__arrow" aria-hidden="true">+</span>
+          </summary>
+          <div class="style-row__body">
+            <p>From Theodorakis and Hadjidakis to today's chart-toppers — the éntehno and modern Greek pop that keeps the younger guests on the floor right alongside their grandparents.</p>
+            <div class="style-row__meta"><span class="mono" style="color: var(--ink-mute);">We play</span><span>Theodorakis · Hadjidakis · Sfakianakis · current hits</span></div>
+          </div>
+        </details>
       </div>
     </div>
   </section>
@@ -1385,74 +1303,23 @@
   <!-- ═══ FOOTER ═══ -->
   <footer class="ft">
     <div class="container">
-      <div class="ft__socials">
-        <a href="https://www.instagram.com/oneiromusic" target="_blank" rel="noopener" class="ft__social"><span class="ft__sP">INSTAGRAM</span><span class="ft__sH">@oneiromusic</span><span class="ft__sA">→</span></a>
-        <a href="https://www.facebook.com/OneiroMusicGroup/" target="_blank" rel="noopener" class="ft__social"><span class="ft__sP">FACEBOOK</span><span class="ft__sH">/OneiroMusicGroup</span><span class="ft__sA">→</span></a>
-        <a href="https://www.youtube.com/channel/UCBuQAA2ZBjqUM-FQss4Z8Mw" target="_blank" rel="noopener" class="ft__social"><span class="ft__sP">YOUTUBE</span><span class="ft__sH">/OneiroMusicGroup</span><span class="ft__sA">→</span></a>
-        <a href="https://music.apple.com/us/artist/oneiro/677017168" target="_blank" rel="noopener" class="ft__social"><span class="ft__sP">APPLE MUSIC</span><span class="ft__sH">Oneiro</span><span class="ft__sA">→</span></a>
-        <a href="mailto:Booking@OneiroMusic.com" class="ft__social"><span class="ft__sP">EMAIL</span><span class="ft__sH">Booking@OneiroMusic.com</span><span class="ft__sA">→</span></a>
-        <a href="tel:+15869432710" class="ft__social"><span class="ft__sP">PHONE</span><span class="ft__sH">586.943.2710</span><span class="ft__sA">→</span></a>
-      </div>
-
-      <div class="divider" role="separator" aria-hidden="true" style="margin: 60px 0;">
-        <div class="divider__line divider__line--rev"></div>
-        <div class="divider__mark">
-          <svg class="divider__glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
-            <circle cx="12" cy="12" r="5"/>
-            <line x1="1" y1="12" x2="5" y2="12"/>
-            <line x1="19" y1="12" x2="23" y2="12"/>
-            <circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/>
-          </svg>
-          <span class="divider__label">ΟΝΕΙΡΟ</span>
-        </div>
-        <div class="divider__line"></div>
-      </div>
-
-      <div class="ft__huge">ONEIRO</div>
-
-      <div class="ft__cols">
-        <div>
-          <div class="mono" style="margin-bottom: 14px;">BOOK THE BAND</div>
-          <ul class="ft__list">
-            <li class="ft__li"><a href="mailto:Booking@OneiroMusic.com">Booking@OneiroMusic.com</a></li>
-            <li class="ft__li"><a href="tel:+15869432710">+1 (586) 943-2710</a></li>
-            <li class="ft__li">Reply within 48 hours</li>
-            <li class="ft__li">Weddings · Festivals · Glendia</li>
-          </ul>
-        </div>
-        <div>
-          <div class="mono" style="margin-bottom: 14px;">HOMEBASE</div>
-          <ul class="ft__list">
-            <li class="ft__li">Metro Detroit, Michigan</li>
-            <li class="ft__li">North America &amp; beyond</li>
-            <li class="ft__li">Travel-ready quartet</li>
-          </ul>
-        </div>
-        <div>
-          <div class="mono" style="margin-bottom: 14px;">SERVICES</div>
-          <ul class="ft__list">
-            <li class="ft__li">Live Greek entertainment</li>
-            <li class="ft__li">Wedding ceremonies + receptions</li>
-            <li class="ft__li">Greek festivals + glendia</li>
-            <li class="ft__li">Up-lighting for events</li>
-            <li class="ft__li"><a href="/commission.html">Studio commission ↗</a></li>
-          </ul>
-        </div>
-        <div>
-          <div class="mono" style="margin-bottom: 14px;">REPERTOIRE</div>
-          <ul class="ft__list">
-            <li class="ft__li">Laïka</li>
-            <li class="ft__li">Dimotika</li>
-            <li class="ft__li">Nisiótika</li>
-            <li class="ft__li">Paradosiaká</li>
-          </ul>
+      <div class="ft__top" data-reveal>
+        <a href="#top" class="ft__logo" aria-label="Oneiro">
+          <img src="/logos/oneiro-white.svg" alt="ONEIRO — The Best in Live Greek Entertainment" />
+        </a>
+        <div class="ft__contact">
+          <a href="tel:+15869432710" class="ft__big">586.943.2710</a>
+          <a href="mailto:Booking@OneiroMusic.com" class="ft__big">Booking@OneiroMusic.com</a>
         </div>
       </div>
 
       <div class="ft__fine">
-        <span class="mono">© Oneiro Music</span>
-        <span class="mono" data-brand-gr>ΟΝΕΙΡΟ</span>
-        <span class="mono">Live Greek Entertainment · Built in Detroit</span>
+        <span class="mono">© Oneiro Music · The Best in Live Greek Entertainment</span>
+        <span class="mono ft__fine-links">
+          <a href="https://www.instagram.com/oneiromusic" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.youtube.com/channel/UCBuQAA2ZBjqUM-FQss4Z8Mw" target="_blank" rel="noopener">YouTube</a>
+          <a href="https://www.facebook.com/OneiroMusicGroup/" target="_blank" rel="noopener">Facebook</a>
+        </span>
       </div>
     </div>
   </footer>
@@ -1492,6 +1359,22 @@
     </div>
   </aside>
 
+  <!-- Behold.so Instagram feed loader (only activates once a real feed ID is set) -->
+  <script>
+    (function () {
+      var holder = document.querySelector('[data-behold-id]');
+      if (holder && holder.getAttribute('data-behold-id') !== 'REPLACE_WITH_BEHOLD_FEED_ID') {
+        var s = document.createElement('script');
+        s.type = 'module';
+        s.src = 'https://w.behold.so/widget.js';
+        document.head.appendChild(s);
+        // Hide the placeholder once a real feed is configured
+        var ph = document.querySelector('.media__feed-placeholder');
+        if (ph) ph.style.display = 'none';
+      }
+    })();
+  </script>
+
   <script>
     // ─── Pill toggles (form pills) ───
     document.querySelectorAll('[data-pills]').forEach(group => {
@@ -1522,15 +1405,11 @@
       const selectors = [
         '.head2 > div',
         '.head2 > p',
+        '.show',
         '.style-row',
         '.crew__card',
-        '.record',
-        '.territory',
         '.ev__card',
-        '.ev__cta',
-        '.fm',
-        '.follow__inner',
-        '.ft__socials',
+        '.listen__chip',
       ];
       selectors.forEach(sel => {
         document.querySelectorAll(sel).forEach((el, i) => {
