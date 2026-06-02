@@ -269,27 +269,27 @@
   .hero-cinematic__img {
     width: 100%; height: 100%;
     object-fit: cover;
-    object-position: center 22%;
+    object-position: 62% center;
     display: block;
   }
-  /* Bottom-up + left gradient so the type reads over the bright B&W photo */
+  /* Left + bottom gradient: men sit in the open right side, type reads over the alley on the left */
   .hero-cinematic__scrim {
     position: absolute; inset: 0;
     background:
-      linear-gradient(180deg,
-        color-mix(in oklch, var(--bg-deep) 30%, transparent) 0%,
-        color-mix(in oklch, var(--bg-deep) 28%, transparent) 38%,
-        color-mix(in oklch, var(--bg-deep) 70%, transparent) 72%,
-        color-mix(in oklch, var(--bg-deep) 96%, transparent) 100%),
       linear-gradient(90deg,
-        color-mix(in oklch, var(--bg-deep) 78%, transparent) 0%,
-        color-mix(in oklch, var(--bg-deep) 30%, transparent) 45%,
-        transparent 75%);
+        color-mix(in oklch, var(--bg-deep) 72%, transparent) 0%,
+        color-mix(in oklch, var(--bg-deep) 42%, transparent) 38%,
+        transparent 66%),
+      linear-gradient(180deg,
+        transparent 0%,
+        transparent 48%,
+        color-mix(in oklch, var(--bg-deep) 52%, transparent) 80%,
+        color-mix(in oklch, var(--bg-deep) 90%, transparent) 100%);
   }
   /* Subtle vignette for cinema feel */
   .hero-cinematic__vignette {
     position: absolute; inset: 0;
-    background: radial-gradient(120% 90% at 50% 35%, transparent 45%, color-mix(in oklch, var(--bg-deep) 55%, transparent) 100%);
+    background: radial-gradient(130% 95% at 60% 40%, transparent 50%, color-mix(in oklch, var(--bg-deep) 50%, transparent) 100%);
   }
   .hero-cinematic__content {
     position: relative; z-index: 1;
