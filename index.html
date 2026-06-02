@@ -269,27 +269,27 @@
   .hero-cinematic__img {
     width: 100%; height: 100%;
     object-fit: cover;
-    object-position: 62% center;
+    object-position: 50% 24%;   /* keep all four faces high in frame, fully visible */
     display: block;
   }
-  /* Left + bottom gradient: men sit in the open right side, type reads over the alley on the left */
+  /* Bottom-weighted scrim: text sits low over the dark tuxedos/cobblestone, faces stay clear up top */
   .hero-cinematic__scrim {
     position: absolute; inset: 0;
     background:
-      linear-gradient(90deg,
-        color-mix(in oklch, var(--bg-deep) 72%, transparent) 0%,
-        color-mix(in oklch, var(--bg-deep) 42%, transparent) 38%,
-        transparent 66%),
       linear-gradient(180deg,
-        transparent 0%,
-        transparent 48%,
-        color-mix(in oklch, var(--bg-deep) 52%, transparent) 80%,
-        color-mix(in oklch, var(--bg-deep) 90%, transparent) 100%);
+        color-mix(in oklch, var(--bg-deep) 22%, transparent) 0%,
+        transparent 26%,
+        transparent 46%,
+        color-mix(in oklch, var(--bg-deep) 58%, transparent) 74%,
+        color-mix(in oklch, var(--bg-deep) 94%, transparent) 100%),
+      linear-gradient(90deg,
+        color-mix(in oklch, var(--bg-deep) 42%, transparent) 0%,
+        transparent 52%);
   }
   /* Subtle vignette for cinema feel */
   .hero-cinematic__vignette {
     position: absolute; inset: 0;
-    background: radial-gradient(130% 95% at 60% 40%, transparent 50%, color-mix(in oklch, var(--bg-deep) 50%, transparent) 100%);
+    background: radial-gradient(130% 100% at 50% 32%, transparent 55%, color-mix(in oklch, var(--bg-deep) 48%, transparent) 100%);
   }
   .hero-cinematic__content {
     position: relative; z-index: 1;
@@ -560,19 +560,20 @@
   .shows__head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: clamp(28px, 3.5vw, 44px); border-top: 1px solid var(--rule); }
   .shows__avail { color: var(--gold); }
   .shows__list { list-style: none; margin: 18px 0 0; padding: 0; display: flex; flex-direction: column; }
-  .show { display: grid; grid-template-columns: 130px 1fr auto auto; gap: clamp(16px, 2.5vw, 40px); align-items: center; padding: clamp(16px, 1.8vw, 22px) 0; border-top: 1px solid var(--rule); }
+  .show { display: grid; grid-template-columns: 130px 1fr; gap: clamp(16px, 2.5vw, 40px); align-items: center; padding: clamp(18px, 2vw, 24px) 0; border-top: 1px solid var(--rule); }
   .show:first-child { border-top: none; }
   .show__date { display: flex; align-items: baseline; gap: 8px; font-family: var(--display); font-weight: 800; }
   .show__mon { color: var(--gold); font-size: 0.9rem; letter-spacing: 0.06em; }
   .show__day { font-size: 1.6rem; line-height: 1; }
   .show__yr { color: var(--ink-mute); font-family: var(--mono); font-size: 0.7rem; font-weight: 500; }
-  .show__name { font-size: clamp(16px, 1.5vw, 21px); color: var(--ink); font-weight: 500; }
-  .show__city { color: var(--ink-soft); font-size: 0.95rem; }
-  .show__tag { color: var(--ink-mute); font-size: 0.64rem; padding: 4px 10px; border: 1px solid var(--rule); border-radius: 999px; }
+  .show__info { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .show__name { font-size: clamp(17px, 1.6vw, 22px); color: var(--ink); font-weight: 600; letter-spacing: -0.005em; display: inline-flex; align-items: center; gap: 8px; transition: color .2s ease; width: fit-content; }
+  .show__name:hover { color: var(--gold); }
+  .show__ext { font-size: 0.7em; color: var(--ink-mute); transition: color .2s ease; }
+  .show__name:hover .show__ext { color: var(--gold); }
+  .show__venue { color: var(--ink-soft); font-size: 0.92rem; line-height: 1.4; }
   @media (max-width: 700px) {
-    .show { grid-template-columns: 92px 1fr; gap: 4px 16px; }
-    .show__city { grid-column: 2; }
-    .show__tag { display: none; }
+    .show { grid-template-columns: 84px 1fr; gap: 4px 16px; }
   }
 
   /* Tighten a section's top padding so it reads grouped with the block above */
@@ -866,21 +867,24 @@ m-1438 -4511 c0 -42 -57 -111 -83 -101 -30 11 -15 130 21 170 16 18 17 18 39
         <ul class="shows__list">
           <li class="show">
             <span class="show__date"><span class="show__mon">SEP</span><span class="show__day">25–27</span><span class="show__yr">2026</span></span>
-            <span class="show__name">Las Vegas Greek Festival</span>
-            <span class="show__city">Las Vegas, NV</span>
-            <span class="show__tag mono">Festival</span>
+            <span class="show__info">
+              <a class="show__name" href="https://lasvegasgreekfestival.com/" target="_blank" rel="noopener">Las Vegas Greek Festival <span class="show__ext" aria-hidden="true">↗</span></a>
+              <span class="show__venue">St. John the Baptist Greek Orthodox Church · Las Vegas, NV</span>
+            </span>
           </li>
           <li class="show">
             <span class="show__date"><span class="show__mon">NOV</span><span class="show__day">7</span><span class="show__yr">2026</span></span>
-            <span class="show__name">Greek Community of Western Nebraska</span>
-            <span class="show__city">Scottsbluff, NE</span>
-            <span class="show__tag mono">Private</span>
+            <span class="show__info">
+              <a class="show__name" href="https://www.assumption.ne.goarch.org/" target="_blank" rel="noopener">Assumption Greek Orthodox Church <span class="show__ext" aria-hidden="true">↗</span></a>
+              <span class="show__venue">Bayard, NE · Western Nebraska (Scottsbluff area)</span>
+            </span>
           </li>
           <li class="show">
             <span class="show__date"><span class="show__mon">FEB</span><span class="show__day">6–7</span><span class="show__yr">2027</span></span>
-            <span class="show__name">Bahamas Greek Festival</span>
-            <span class="show__city">Nassau, Bahamas</span>
-            <span class="show__tag mono">Festival</span>
+            <span class="show__info">
+              <a class="show__name" href="https://www.annunciationbahamas.goarch.org/" target="_blank" rel="noopener">Bahamas Greek Festival <span class="show__ext" aria-hidden="true">↗</span></a>
+              <span class="show__venue">Annunciation Greek Orthodox Church · Nassau, Bahamas</span>
+            </span>
           </li>
         </ul>
       </div>
