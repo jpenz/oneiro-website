@@ -466,20 +466,37 @@
   .stat dt { color: var(--ink-mute); text-transform: uppercase; letter-spacing: 0.1em; }
   .stat dd { color: var(--ink); margin: 0; font-size: 0.78rem; }
 
-  /* ─── Ratings badges ─── */
-  .ratings { display: flex; flex-direction: column; gap: 12px; }
-  .rating { display: flex; align-items: center; gap: 10px; color: var(--ink-soft); transition: color .2s ease; }
-  .rating:hover { color: var(--ink); }
-  .rating__stars { color: var(--gold); letter-spacing: 2px; font-size: 0.95rem; }
-  .rating__meta { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.04em; }
-  .rating__meta strong { color: var(--ink); font-weight: 700; }
-  .rating__ext { color: var(--ink-mute); }
+  /* ─── Aggregate trust bar ─── */
+  .trustbar {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: clamp(24px, 4vw, 64px); flex-wrap: wrap;
+    margin-top: clamp(32px, 4vw, 56px);
+    padding: clamp(24px, 3vw, 36px) clamp(28px, 3.5vw, 48px);
+    background: var(--bg-elev);
+    border-radius: 6px;
+    border-left: 3px solid var(--gold);
+  }
+  .trustbar__headline { display: flex; align-items: baseline; gap: 16px; }
+  .trustbar__num { font-family: var(--display); font-weight: 900; font-size: clamp(48px, 6vw, 84px); line-height: 0.85; color: var(--ink); letter-spacing: -0.02em; }
+  .trustbar__plus { color: var(--gold); }
+  .trustbar__label { display: flex; flex-direction: column; gap: 4px; font-family: var(--mono); font-size: clamp(0.74rem, 1vw, 0.9rem); letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-soft); }
+  .trustbar__stars { color: var(--gold); letter-spacing: 2px; }
+  .trustbar__platforms { display: flex; gap: clamp(20px, 2.5vw, 40px); flex-wrap: wrap; }
+  .trustbar__plat { display: flex; flex-direction: column; gap: 3px; color: var(--ink-soft); transition: color .2s ease; }
+  .trustbar__plat:hover { color: var(--ink); }
+  .trustbar__platnum { font-family: var(--display); font-weight: 800; font-size: 1.3rem; color: var(--ink); }
+  .trustbar__platstars { color: var(--gold); }
+  .trustbar__platmeta { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; }
+  @media (max-width: 640px) { .trustbar { flex-direction: column; align-items: flex-start; } }
 
   /* ─── Testimonials ─── */
-  .testimonials { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(28px, 3vw, 56px); margin-top: clamp(72px, 9vw, 120px); padding-top: clamp(56px, 7vw, 88px); border-top: 1px solid color-mix(in oklch, var(--ink) 12%, transparent); }
-  .tcard { padding: 0; margin: 0; background: transparent; border-radius: 0; }
-  .tcard__quote { font-size: clamp(20px, 1.9vw, 28px); color: var(--ink); line-height: 1.4; margin: 0 0 22px; }
-  .tcard__cite { display: flex; flex-direction: column; gap: 4px; }
+  .testimonials { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(28px, 3vw, 56px); margin-top: clamp(40px, 5vw, 64px); }
+  .tcard { padding: 0; margin: 0; background: transparent; border-radius: 0; display: flex; flex-direction: column; }
+  .tcard__tag { align-self: flex-start; color: var(--gold); font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; padding: 5px 11px; border: 1px solid color-mix(in oklch, var(--gold) 45%, transparent); border-radius: 999px; margin-bottom: 18px; }
+  .tcard__quote { font-size: clamp(19px, 1.8vw, 26px); color: var(--ink); line-height: 1.4; margin: 0 0 20px; }
+  .tcard__cite { display: flex; flex-direction: column; gap: 4px; margin-top: auto; }
+  .tcard__who { color: var(--ink); font-size: 0.8rem; letter-spacing: 0.04em; }
+  .tcard__src { color: var(--ink-mute); font-size: 0.68rem; letter-spacing: 0.06em; }
 
   /* ─── Events ─── */
   .ev__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 1.6vw, 28px); margin-bottom: clamp(48px, 6vw, 80px); }
@@ -904,38 +921,50 @@ m-1438 -4511 c0 -42 -57 -111 -83 -101 -30 11 -15 130 21 170 16 18 17 18 39
           <span class="sec__kicker"><span class="mono">THE PROOF</span> <svg class="sec__icon" aria-hidden="true"><use href="#i-mark"/></svg></span>
           <h2 class="h2 display-tight">Still not <span style="color: var(--gold);">convinced</span>?</h2>
         </div>
-        <div class="ratings" data-reveal>
-          <a class="rating" href="https://www.google.com/maps/place/ONEIRO+MUSIC+(Greek+Band)" target="_blank" rel="noopener">
-            <span class="rating__stars" aria-hidden="true">★★★★★</span>
-            <span class="rating__meta"><strong>5.0</strong> · 27 Google reviews <span class="rating__ext" aria-hidden="true">↗</span></span>
+        <p class="intro">Sixty-plus five-star reviews across Google and Facebook — from weddings, festivals, and galas across North America and beyond.</p>
+      </header>
+
+      <!-- Aggregate trust bar -->
+      <div class="trustbar" data-reveal>
+        <div class="trustbar__headline">
+          <span class="trustbar__num">60<span class="trustbar__plus">+</span></span>
+          <span class="trustbar__label"><span class="trustbar__stars" aria-hidden="true">★★★★★</span>five-star reviews</span>
+        </div>
+        <div class="trustbar__platforms">
+          <a class="trustbar__plat" href="https://www.google.com/maps/place/ONEIRO+MUSIC+(Greek+Band)" target="_blank" rel="noopener">
+            <span class="trustbar__platnum"><strong>5.0</strong> <span class="trustbar__platstars" aria-hidden="true">★</span></span>
+            <span class="trustbar__platmeta">27 reviews on Google <span aria-hidden="true">↗</span></span>
           </a>
-          <a class="rating" href="https://www.facebook.com/OneiroMusicGroup/reviews" target="_blank" rel="noopener">
-            <span class="rating__stars" aria-hidden="true">★★★★★</span>
-            <span class="rating__meta"><strong>100%</strong> recommend · 33 Facebook reviews <span class="rating__ext" aria-hidden="true">↗</span></span>
+          <a class="trustbar__plat" href="https://www.facebook.com/OneiroMusicGroup/reviews" target="_blank" rel="noopener">
+            <span class="trustbar__platnum"><strong>100%</strong></span>
+            <span class="trustbar__platmeta">recommend · 33 reviews on Facebook <span aria-hidden="true">↗</span></span>
           </a>
         </div>
-      </header>
+      </div>
 
       <div class="testimonials" data-reveal>
         <figure class="tcard">
+          <span class="tcard__tag mono">Wedding</span>
           <blockquote class="tcard__quote script-it">"Oneiro's zeal for life, passion for music, and love of the Greek culture brought everyone to their feet, filling the dance floor with fun all night long — they kept the kefi alive from start to finish."</blockquote>
           <figcaption class="tcard__cite">
-            <span class="mono">GEORGIA</span>
-            <span class="mono" style="color: var(--ink-mute);">Wedding · 2024 · via Google</span>
+            <span class="mono tcard__who">Georgia</span>
+            <span class="mono tcard__src">2024 · Google</span>
           </figcaption>
         </figure>
         <figure class="tcard">
+          <span class="tcard__tag mono">Festival</span>
           <blockquote class="tcard__quote script-it">"I took a chance engaging Oneiro to play our Greek Festival in Nassau, the Bahamas — and WOW, they did not disappoint! They are vibrant and interactive. They brought the festival to life."</blockquote>
           <figcaption class="tcard__cite">
-            <span class="mono">ALEXANDRA GALANTIS</span>
-            <span class="mono" style="color: var(--ink-mute);">Bahamas Greek Festival · via Google</span>
+            <span class="mono tcard__who">Alexandra Galantis</span>
+            <span class="mono tcard__src">Nassau, Bahamas · Google</span>
           </figcaption>
         </figure>
         <figure class="tcard">
+          <span class="tcard__tag mono">Gala</span>
           <blockquote class="tcard__quote script-it">"Oneiro brought professionalism, a fantastic playlist, and a night filled with non-stop dancing. The evening ended with their bouzouki player joining us on the dance floor. We're so glad we found Oneiro!"</blockquote>
           <figcaption class="tcard__cite">
-            <span class="mono">ELAINE ROMAS</span>
-            <span class="mono" style="color: var(--ink-mute);">New Year's Eve Gala · Washington, DC · via Facebook</span>
+            <span class="mono tcard__who">Elaine Romas</span>
+            <span class="mono tcard__src">New Year's Eve Gala · Washington, DC · Facebook</span>
           </figcaption>
         </figure>
       </div>
