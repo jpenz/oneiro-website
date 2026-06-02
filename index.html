@@ -931,7 +931,7 @@ m-1438 -4511 c0 -42 -57 -111 -83 -101 -30 11 -15 130 21 170 16 18 17 18 39
           <span class="trustbar__label"><span class="trustbar__stars" aria-hidden="true">★★★★★</span>five-star reviews</span>
         </div>
         <div class="trustbar__platforms">
-          <a class="trustbar__plat" href="https://www.google.com/maps/place/ONEIRO+MUSIC+(Greek+Band)" target="_blank" rel="noopener">
+          <a class="trustbar__plat" href="https://www.google.com/maps?cid=2645000363356806528" target="_blank" rel="noopener">
             <span class="trustbar__platnum"><strong>5.0</strong> <span class="trustbar__platstars" aria-hidden="true">★</span></span>
             <span class="trustbar__platmeta">27 reviews on Google <span aria-hidden="true">↗</span></span>
           </a>
@@ -1034,15 +1034,15 @@ m-1438 -4511 c0 -42 -57 -111 -83 -101 -30 11 -15 130 21 170 16 18 17 18 39
       </header>
 
       <form id="booking-form" class="fm" data-form="booking" data-reveal
-            action="https://api.web3forms.com/submit" method="POST">
-        <!-- Web3Forms config — submissions are emailed to booking@oneiromusic.com.
-             Replace the access_key value with the key from web3forms.com (created against booking@oneiromusic.com). -->
-        <input type="hidden" name="access_key" value="REPLACE_WITH_WEB3FORMS_ACCESS_KEY" />
-        <input type="hidden" name="subject" value="New booking inquiry — OneiroMusic.com" />
-        <input type="hidden" name="from_name" value="Oneiro Website" />
+            action="https://formsubmit.co/booking@oneiromusic.com" method="POST">
+        <!-- FormSubmit.co — submissions email straight to booking@oneiromusic.com.
+             First submission triggers a one-time activation email to that inbox; click it once to go live. -->
+        <input type="hidden" name="_subject" value="New booking inquiry — OneiroMusic.com" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
         <input type="hidden" name="event_type" id="event_type_field" value="Wedding" />
-        <!-- Honeypot (spam trap — bots fill it, humans don't) -->
-        <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true" />
+        <!-- FormSubmit honeypot (bots fill it, humans don't) -->
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true" />
 
         <div class="fm__row">
           <span class="mono fm__lbl">What kind of event?</span>
@@ -1116,11 +1116,11 @@ m-1438 -4511 c0 -42 -57 -111 -83 -101 -30 11 -15 130 21 170 16 18 17 18 39
       <div class="listen" data-reveal>
         <span class="mono listen__label">FIND OUR MUSIC ON</span>
         <div class="listen__links">
-          <a href="https://music.apple.com/us/artist/oneiro/677017168" target="_blank" rel="noopener" class="listen__chip">
+          <a href="https://music.apple.com/us/artist/oneiro/1751762683" target="_blank" rel="noopener" class="listen__chip">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M16 3v11.5a3.5 3.5 0 1 1-2-3.16V6.5l-6 1.2v7.8a3.5 3.5 0 1 1-2-3.16V5l10-2z"/></svg>
             Apple Music
           </a>
-          <a href="#" class="listen__chip">
+          <a href="https://open.spotify.com/artist/7MYesd8Dr5AszsO2SLCZWm" target="_blank" rel="noopener" class="listen__chip">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><circle cx="12" cy="12" r="10"/><path d="M7 14.5c3-1 7-0.8 9.5 0.8M7.5 11.5c3.2-1 7.6-0.7 10 1M8 8.5c3.4-1 7.6-0.6 9.5 0.8" stroke="var(--bg)" stroke-width="1.3" fill="none" stroke-linecap="round"/></svg>
             Spotify
           </a>
@@ -1350,32 +1350,24 @@ m-1438 -4511 c0 -42 -57 -111 -83 -101 -30 11 -15 130 21 170 16 18 17 18 39
       });
     });
 
-    // ─── Booking form → Web3Forms (emails booking@oneiromusic.com), AJAX submit ───
+    // ─── Booking form → FormSubmit (emails booking@oneiromusic.com), AJAX submit ───
     document.querySelectorAll('form[data-form="booking"]').forEach(form => {
       const btn = form.querySelector('[data-submit-label]');
       const status = form.querySelector('.fm__status');
-      const keyField = form.querySelector('input[name="access_key"]');
+      // POST to FormSubmit's JSON/AJAX endpoint derived from the form action
+      const ajaxAction = form.getAttribute('action').replace('formsubmit.co/', 'formsubmit.co/ajax/');
       form.addEventListener('submit', async e => {
         e.preventDefault();
-        // If the access key hasn't been set yet, fall back to a mailto so nothing is lost.
-        if (!keyField || keyField.value.indexOf('REPLACE_WITH') === 0) {
-          const data = new FormData(form);
-          const body = [...data.entries()]
-            .filter(([k]) => !['access_key','subject','from_name','botcheck'].includes(k))
-            .map(([k, v]) => `${k}: ${v}`).join('%0D%0A');
-          window.location.href = `mailto:Booking@OneiroMusic.com?subject=Booking%20inquiry%20from%20the%20website&body=${body}`;
-          return;
-        }
         const original = btn ? btn.textContent : '';
         if (btn) { btn.textContent = 'Sending…'; btn.disabled = true; }
         try {
-          const res = await fetch(form.action, {
+          const res = await fetch(ajaxAction, {
             method: 'POST',
             headers: { 'Accept': 'application/json' },
             body: new FormData(form),
           });
-          const json = await res.json();
-          if (res.ok && json.success) {
+          const json = await res.json().catch(() => ({}));
+          if (res.ok && (json.success === true || json.success === 'true')) {
             form.reset();
             if (status) { status.hidden = false; status.style.color = 'var(--gold)'; status.textContent = "✓ Sent — we'll reply within 48 hours."; }
             if (btn) btn.textContent = 'Sent ✓';
@@ -1383,7 +1375,7 @@ m-1438 -4511 c0 -42 -57 -111 -83 -101 -30 11 -15 130 21 170 16 18 17 18 39
             throw new Error(json.message || 'Submission failed');
           }
         } catch (err) {
-          if (status) { status.hidden = false; status.style.color = 'var(--red)'; status.textContent = "Something went wrong — email Booking@OneiroMusic.com or call 586.943.2710."; }
+          if (status) { status.hidden = false; status.style.color = 'var(--red)'; status.textContent = "Couldn't send — please email Booking@OneiroMusic.com or call 586.943.2710."; }
           if (btn) { btn.textContent = original; btn.disabled = false; }
         }
       });
