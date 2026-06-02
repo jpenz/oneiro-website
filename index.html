@@ -466,6 +466,15 @@
   .stat dt { color: var(--ink-mute); text-transform: uppercase; letter-spacing: 0.1em; }
   .stat dd { color: var(--ink); margin: 0; font-size: 0.78rem; }
 
+  /* ─── Ratings badges ─── */
+  .ratings { display: flex; flex-direction: column; gap: 12px; }
+  .rating { display: flex; align-items: center; gap: 10px; color: var(--ink-soft); transition: color .2s ease; }
+  .rating:hover { color: var(--ink); }
+  .rating__stars { color: var(--gold); letter-spacing: 2px; font-size: 0.95rem; }
+  .rating__meta { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.04em; }
+  .rating__meta strong { color: var(--ink); font-weight: 700; }
+  .rating__ext { color: var(--ink-mute); }
+
   /* ─── Testimonials ─── */
   .testimonials { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(28px, 3vw, 56px); margin-top: clamp(72px, 9vw, 120px); padding-top: clamp(56px, 7vw, 88px); border-top: 1px solid color-mix(in oklch, var(--ink) 12%, transparent); }
   .tcard { padding: 0; margin: 0; background: transparent; border-radius: 0; }
@@ -895,29 +904,38 @@ m-1438 -4511 c0 -42 -57 -111 -83 -101 -30 11 -15 130 21 170 16 18 17 18 39
           <span class="sec__kicker"><span class="mono">THE PROOF</span> <svg class="sec__icon" aria-hidden="true"><use href="#i-mark"/></svg></span>
           <h2 class="h2 display-tight">Still not <span style="color: var(--gold);">convinced</span>?</h2>
         </div>
-        <p class="intro">We have entertained Greek communities across North America and earned a reputation as the best Greek band on the continent. Here is what our clients say.</p>
+        <div class="ratings" data-reveal>
+          <a class="rating" href="https://www.google.com/maps/place/ONEIRO+MUSIC+(Greek+Band)" target="_blank" rel="noopener">
+            <span class="rating__stars" aria-hidden="true">★★★★★</span>
+            <span class="rating__meta"><strong>5.0</strong> · 27 Google reviews <span class="rating__ext" aria-hidden="true">↗</span></span>
+          </a>
+          <a class="rating" href="https://www.facebook.com/OneiroMusicGroup/reviews" target="_blank" rel="noopener">
+            <span class="rating__stars" aria-hidden="true">★★★★★</span>
+            <span class="rating__meta"><strong>100%</strong> recommend · 33 Facebook reviews <span class="rating__ext" aria-hidden="true">↗</span></span>
+          </a>
+        </div>
       </header>
 
       <div class="testimonials" data-reveal>
         <figure class="tcard">
-          <blockquote class="tcard__quote script-it">"They played until the last guest left, and my father asked them to stay longer. Worth every penny."</blockquote>
+          <blockquote class="tcard__quote script-it">"Oneiro's zeal for life, passion for music, and love of the Greek culture brought everyone to their feet, filling the dance floor with fun all night long — they kept the kefi alive from start to finish."</blockquote>
           <figcaption class="tcard__cite">
-            <span class="mono">GEORGE &amp; ELENI</span>
-            <span class="mono" style="color: var(--ink-mute);">Wedding · Astoria, NY</span>
+            <span class="mono">GEORGIA</span>
+            <span class="mono" style="color: var(--ink-mute);">Wedding · 2024 · via Google</span>
           </figcaption>
         </figure>
         <figure class="tcard">
-          <blockquote class="tcard__quote script-it">"The best money we spent on the entire wedding, by a mile. The dance floor never emptied."</blockquote>
+          <blockquote class="tcard__quote script-it">"I took a chance engaging Oneiro to play our Greek Festival in Nassau, the Bahamas — and WOW, they did not disappoint! They are vibrant and interactive. They brought the festival to life."</blockquote>
           <figcaption class="tcard__cite">
-            <span class="mono">KOSTAS &amp; MARIA</span>
-            <span class="mono" style="color: var(--ink-mute);">Wedding · Chicago, IL</span>
+            <span class="mono">ALEXANDRA GALANTIS</span>
+            <span class="mono" style="color: var(--ink-mute);">Bahamas Greek Festival · via Google</span>
           </figcaption>
         </figure>
         <figure class="tcard">
-          <blockquote class="tcard__quote script-it">"Professional from the first call to the last song. Our festival committee already rebooked them."</blockquote>
+          <blockquote class="tcard__quote script-it">"Oneiro brought professionalism, a fantastic playlist, and a night filled with non-stop dancing. The evening ended with their bouzouki player joining us on the dance floor. We're so glad we found Oneiro!"</blockquote>
           <figcaption class="tcard__cite">
-            <span class="mono">FR. STAVROS</span>
-            <span class="mono" style="color: var(--ink-mute);">Parish Festival · Detroit, MI</span>
+            <span class="mono">ELAINE ROMAS</span>
+            <span class="mono" style="color: var(--ink-mute);">New Year's Eve Gala · Washington, DC · via Facebook</span>
           </figcaption>
         </figure>
       </div>
