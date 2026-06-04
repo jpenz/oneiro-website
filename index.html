@@ -355,8 +355,17 @@
     .hero-cinematic__tagline { white-space: normal; text-align-last: left; letter-spacing: 0.12em; }
   }
   @media (max-width: 760px) {
-    .hero-cinematic { min-height: 80vh; min-height: 80svh; }
-    .hero-cinematic__content { padding-top: 120px; }
+    /* Stacked hero: full photo (all four members) on top, text below — no side-cropping */
+    .hero-cinematic { display: block; min-height: 0; margin-top: 0; overflow: visible; }
+    .hero-cinematic__media { position: relative; inset: auto; }
+    .hero-cinematic__img { height: auto; aspect-ratio: auto; object-fit: contain; object-position: center; }
+    .hero-cinematic__scrim, .hero-cinematic__vignette { display: none; }
+    .hero-cinematic__content {
+      position: relative;
+      padding-top: clamp(24px, 7vw, 36px);
+      padding-bottom: clamp(36px, 9vw, 52px);
+    }
+    .hero-cinematic__title { text-shadow: none; }
   }
 
   /* ─── Section heads ─── */
@@ -436,19 +445,21 @@
     .style-row__arrow { grid-row: 1; grid-column: 2; }
   }
 
-  /* ─── Scroll-reveal animation ─── */
-  [data-reveal] {
+  /* ─── Scroll-reveal animation (progressive enhancement) ─── */
+  /* Content is visible by default. The hidden start-state ONLY applies once JS
+     confirms it's running (html.reveal-ready) AND motion is allowed — so if JS
+     fails or the observer misfires, nothing is ever stuck invisible. */
+  html.reveal-ready [data-reveal] {
     opacity: 0;
     transform: translateY(24px);
     transition: opacity .9s cubic-bezier(.22,.61,.36,1), transform .9s cubic-bezier(.22,.61,.36,1);
     will-change: opacity, transform;
   }
-  [data-reveal].is-revealed { opacity: 1; transform: translateY(0); }
-  /* Respect reduced motion — show everything immediately */
+  html.reveal-ready [data-reveal].is-revealed { opacity: 1; transform: translateY(0); }
   @media (prefers-reduced-motion: reduce) {
-    [data-reveal] { opacity: 1; transform: none; transition: none; }
+    html.reveal-ready [data-reveal] { opacity: 1; transform: none; transition: none; }
   }
-  [data-motion="off"] [data-reveal] { opacity: 1; transform: none; transition: none; }
+  [data-motion="off"] [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
 
   /* ─── Crew ─── */
   .crew__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(16px, 1.8vw, 28px); }
@@ -651,7 +662,11 @@
   .ft__fine-links a { color: var(--ink-soft); display: inline-flex; transition: color .2s ease, transform .2s ease; }
   .ft__fine-links svg { width: 20px; height: 20px; }
   .ft__fine-links a:hover { color: var(--gold); transform: translateY(-2px); }
-  @media (max-width: 640px) { .ft__contact { text-align: left; } }
+  @media (max-width: 640px) {
+    .ft__top { flex-direction: column; align-items: flex-start; gap: 24px; }
+    .ft__contact { text-align: left; align-items: flex-start; }
+    .ft__big { font-size: clamp(18px, 5.5vw, 24px); }
+  }
 </style>
 </head>
 <body id="top">
@@ -1402,20 +1417,31 @@ m-1438 -4511 c0 -42 -57 -111 -83 -101 -30 11 -15 130 21 170 16 18 17 18 39
         });
       });
 
-      if ('IntersectionObserver' in window) {
-        const io = new IntersectionObserver((entries) => {
-          for (const entry of entries) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-revealed');
-              io.unobserve(entry.target);
-            }
+      const all = () => document.querySelectorAll('[data-reveal]');
+      const revealAll = () => all().forEach(el => el.classList.add('is-revealed'));
+
+      // Only NOW opt into the hidden start-state — if this script never ran, content stayed visible.
+      if (!('IntersectionObserver' in window)) { return; } // leave everything visible
+      document.documentElement.classList.add('reveal-ready');
+
+      const io = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            io.unobserve(entry.target);
           }
-        }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
-        document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
-      } else {
-        // Fallback for ancient browsers — reveal everything
-        document.querySelectorAll('[data-reveal]').forEach(el => el.classList.add('is-revealed'));
-      }
+        }
+      }, { rootMargin: '0px 0px -12% 0px', threshold: 0.04 });
+
+      all().forEach(el => {
+        // Anything already in/above the viewport on load: reveal immediately (no fade-in from blank)
+        if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('is-revealed');
+        else io.observe(el);
+      });
+
+      // Safety net: if anything is still hidden after 4s (observer never fired), reveal it
+      // so content can never be permanently stuck invisible.
+      setTimeout(revealAll, 4000);
     })();
 
     // ─── Tweaks toolbar (dev-only) ───
