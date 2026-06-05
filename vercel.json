@@ -3,9 +3,9 @@
   "trailingSlash": false,
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/(.*)",
       "has": [{ "type": "host", "value": "www.oneiromusic.com" }],
-      "destination": "https://oneiromusic.com/:path*",
+      "destination": "https://oneiromusic.com/$1",
       "permanent": true
     }
   ],
