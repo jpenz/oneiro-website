@@ -627,7 +627,13 @@
 
   /* Media — IG feed + listen links */
   .media__feed { margin-bottom: clamp(40px, 5vw, 64px); }
-  .ig-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(6px, 0.9vw, 12px); }
+  .ig-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: clamp(14px, 1.8vw, 22px); }
+  .ig-head__link { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); transition: color .2s ease; }
+  .ig-head__glyph { width: 24px; height: 24px; color: var(--gold); flex-shrink: 0; }
+  .ig-head__handle { font-family: var(--display); font-weight: 700; font-size: 1.1rem; letter-spacing: 0.02em; }
+  .ig-head__link:hover .ig-head__handle { color: var(--gold); }
+  .ig-head__meta { font-size: 0.7rem; letter-spacing: 0.16em; color: var(--ink-mute); }
+  .ig-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(5px, 0.8vw, 12px); }
   .ig-tile { position: relative; aspect-ratio: 1 / 1; overflow: hidden; border-radius: 4px; background: var(--bg-elev); }
   .ig-tile > a { position: absolute; inset: 0; display: block; }
   .ig-tile img { width: 100%; height: 100%; object-fit: cover; object-position: center 32%; display: block; transition: transform .6s cubic-bezier(.22,.61,.36,1); }
@@ -637,7 +643,6 @@
   .ig-tile:hover img, .ig-tile:focus-within img { transform: scale(1.06); }
   .ig-tile:hover .ig-tile__ov, .ig-tile:focus-within .ig-tile__ov { opacity: 1; }
   .ig-tile > a:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
-  @media (max-width: 560px) { .ig-grid { grid-template-columns: repeat(2, 1fr); } }
   .ig-follow { text-align: center; margin-top: clamp(24px, 3vw, 34px); }
   .listen { display: flex; align-items: center; gap: clamp(16px, 3vw, 40px); flex-wrap: wrap; padding-top: clamp(28px, 3vw, 40px); border-top: 1px solid var(--rule); }
   .listen__label { color: var(--ink-mute); }
@@ -1032,11 +1037,18 @@
         <p class="intro">Live clips, festival footage, and the moments that don't make the record — pulled from our socials. Tap any post to open it.</p>
       </header>
 
-      <!-- Instagram — uniform post grid (self-hosted thumbnails, each links to the real post) -->
+      <!-- Instagram — uniform 3x3 post grid (self-hosted thumbnails, each links to the real post) -->
       <div class="media__feed" data-reveal>
+        <div class="ig-head">
+          <a href="https://www.instagram.com/oneiromusic" target="_blank" rel="noopener" class="ig-head__link">
+            <svg class="ig-head__glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            <span class="ig-head__handle">@oneiromusic</span>
+          </a>
+          <span class="ig-head__meta mono">5.8K followers</span>
+        </div>
         <ul class="ig-grid" role="list">
           <li class="ig-tile">
-            <a href="https://www.instagram.com/p/DFd2ZrwOINa/" target="_blank" rel="noopener" aria-label="Oneiro live in Nassau, Bahamas — open on Instagram">
+            <a href="https://www.instagram.com/p/DFd2ZrwOINa/" target="_blank" rel="noopener" aria-label="Oneiro at a Bahamas Greek festival — open on Instagram">
               <img src="images/instagram/ig1.jpg" width="600" height="600" loading="lazy" decoding="async" alt="The four members of Oneiro at a Bahamas Greek festival">
               <span class="ig-tile__ov" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
             </a>
@@ -1054,20 +1066,38 @@
             </a>
           </li>
           <li class="ig-tile">
+            <a href="https://www.instagram.com/p/DA8_HlpOtrn/" target="_blank" rel="noopener" aria-label="Bouzouki and the Greek flag at a party — open on Instagram">
+              <img src="images/instagram/ig4.jpg" width="600" height="600" loading="lazy" decoding="async" alt="Oneiro musician playing bouzouki beside a Greek flag at a party">
+              <span class="ig-tile__ov" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
+            </a>
+          </li>
+          <li class="ig-tile">
             <a href="https://www.instagram.com/p/DBg_X_CgRhy/" target="_blank" rel="noopener" aria-label="On the dance floor — open on Instagram">
-              <img src="images/instagram/ig4.jpg" width="600" height="600" loading="lazy" decoding="async" alt="A guest dancing at an Oneiro event">
+              <img src="images/instagram/ig5.jpg" width="600" height="600" loading="lazy" decoding="async" alt="A guest dancing at an Oneiro event">
               <span class="ig-tile__ov" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
             </a>
           </li>
           <li class="ig-tile">
             <a href="https://www.instagram.com/p/DBB7lYLuVal/" target="_blank" rel="noopener" aria-label="Live set outdoors — open on Instagram">
-              <img src="images/instagram/ig5.jpg" width="600" height="600" loading="lazy" decoding="async" alt="Oneiro musician playing an outdoor set">
+              <img src="images/instagram/ig6.jpg" width="600" height="600" loading="lazy" decoding="async" alt="Oneiro musician playing an outdoor set">
+              <span class="ig-tile__ov" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
+            </a>
+          </li>
+          <li class="ig-tile">
+            <a href="https://www.instagram.com/p/DBMY_cJgo_S/" target="_blank" rel="noopener" aria-label="A black-tie celebration — open on Instagram">
+              <img src="images/instagram/ig7.jpg" width="600" height="600" loading="lazy" decoding="async" alt="A black-tie celebration with Oneiro">
+              <span class="ig-tile__ov" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
+            </a>
+          </li>
+          <li class="ig-tile">
+            <a href="https://www.instagram.com/p/DA3-JdMOjbB/" target="_blank" rel="noopener" aria-label="The keys rig on stage — open on Instagram">
+              <img src="images/instagram/ig8.jpg" width="600" height="600" loading="lazy" decoding="async" alt="Oneiro keyboard rig on stage">
               <span class="ig-tile__ov" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
             </a>
           </li>
           <li class="ig-tile ig-tile--video">
             <a href="https://www.instagram.com/reel/DNtnHM52H8T/" target="_blank" rel="noopener" aria-label="Latest reel — open on Instagram">
-              <img src="images/instagram/ig6.jpg" width="600" height="600" loading="lazy" decoding="async" alt="Oneiro vocalist in a recent live reel">
+              <img src="images/instagram/ig9.jpg" width="600" height="600" loading="lazy" decoding="async" alt="Oneiro vocalist in a recent live reel">
               <span class="ig-tile__ov" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
             </a>
           </li>
