@@ -7,15 +7,16 @@
 <title>Oneiro — Live Greek Entertainment</title>
 <meta name="description" content="Oneiro — four Greek-American musicians out of Detroit. Live Greek entertainment for weddings, festivals, glendia, baptisms, and private events across North America and Greece." />
 <link rel="canonical" href="https://oneiromusic.com/" />
+<link rel="preload" as="image" href="/images/hero-band.webp" type="image/webp" fetchpriority="high" />
 
 <!-- Open Graph / social sharing -->
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Oneiro" />
 <meta property="og:title" content="Oneiro — Live Greek Entertainment" />
 <meta property="og:description" content="Four Greek-American musicians out of Detroit. Weddings, festivals, glendia, baptisms — anywhere your people want to dance." />
-<meta property="og:image" content="https://oneiromusic.com/images/hero-band.jpg" />
-<meta property="og:image:width" content="1280" />
-<meta property="og:image:height" content="720" />
+<meta property="og:image" content="https://oneiromusic.com/images/og-cover.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
 <meta property="og:url" content="https://oneiromusic.com/" />
 <meta property="og:locale" content="en_US" />
 
@@ -23,11 +24,69 @@
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Oneiro — Live Greek Entertainment" />
 <meta name="twitter:description" content="Bring us the event. We'll bring you the kefi." />
-<meta name="twitter:image" content="https://oneiromusic.com/images/hero-band.jpg" />
+<meta name="twitter:image" content="https://oneiromusic.com/images/og-cover.jpg" />
 
 <!-- Favicon — Oneiro 'O' wordmark mark -->
 <link rel="icon" type="image/png" href="/logos/favicon-o.png" />
 <link rel="apple-touch-icon" href="/logos/apple-touch-o.png" />
+
+<!-- Structured data (SEO / rich results) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MusicGroup",
+      "@id": "https://oneiromusic.com/#band",
+      "name": "Oneiro",
+      "alternateName": "Oneiro Music",
+      "url": "https://oneiromusic.com/",
+      "image": "https://oneiromusic.com/images/og-cover.jpg",
+      "description": "Four Greek-American musicians out of Detroit performing live Greek entertainment for weddings, festivals, glendia, baptisms, and private events across North America and Greece.",
+      "genre": ["Greek", "Live Music", "Rebetiko"],
+      "foundingLocation": { "@type": "Place", "name": "Detroit, Michigan, USA" },
+      "email": "Booking@OneiroMusic.com",
+      "telephone": "+1-586-943-2710",
+      "sameAs": [
+        "https://www.instagram.com/oneiromusic",
+        "https://www.facebook.com/OneiroMusicGroup/",
+        "https://www.youtube.com/channel/UCBuQAA2ZBjqUM-FQss4Z8Mw",
+        "https://open.spotify.com/artist/7MYesd8Dr5AszsO2SLCZWm",
+        "https://music.apple.com/us/artist/oneiro/1751762683"
+      ]
+    },
+    {
+      "@type": "MusicEvent",
+      "name": "Las Vegas Greek Festival",
+      "startDate": "2026-09-25",
+      "endDate": "2026-09-27",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "performer": { "@id": "https://oneiromusic.com/#band" },
+      "location": { "@type": "Place", "name": "St. John the Baptist Greek Orthodox Church", "address": { "@type": "PostalAddress", "addressLocality": "Las Vegas", "addressRegion": "NV", "addressCountry": "US" } }
+    },
+    {
+      "@type": "MusicEvent",
+      "name": "Oneiro at Assumption Greek Orthodox Church",
+      "startDate": "2026-11-07",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "performer": { "@id": "https://oneiromusic.com/#band" },
+      "location": { "@type": "Place", "name": "Assumption Greek Orthodox Church", "address": { "@type": "PostalAddress", "addressLocality": "Scottsbluff", "addressRegion": "NE", "addressCountry": "US" } }
+    },
+    {
+      "@type": "MusicEvent",
+      "name": "Bahamas Greek Festival",
+      "startDate": "2027-02-06",
+      "endDate": "2027-02-07",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "performer": { "@id": "https://oneiromusic.com/#band" },
+      "location": { "@type": "Place", "name": "Annunciation Greek Orthodox Church", "address": { "@type": "PostalAddress", "addressLocality": "Nassau", "addressCountry": "BS" } }
+    }
+  ]
+}
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -771,7 +830,10 @@
   <!-- ═══ HERO (full-bleed video) ═══ -->
   <section class="hero-cinematic" data-screen-label="Hero">
     <div class="hero-cinematic__media">
-      <img class="hero-cinematic__img" src="images/hero-band.jpg" alt="Oneiro — the four-piece band" fetchpriority="high" />
+      <picture>
+        <source srcset="images/hero-band.webp" type="image/webp" />
+        <img class="hero-cinematic__img" src="images/hero-band.jpg" alt="Oneiro — the four-piece band" width="2600" height="1451" fetchpriority="high" />
+      </picture>
       <div class="hero-cinematic__scrim"></div>
       <div class="hero-cinematic__vignette"></div>
     </div>
