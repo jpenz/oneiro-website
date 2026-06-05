@@ -627,9 +627,9 @@
 
   /* Media — IG feed + listen links */
   .media__feed { margin-bottom: clamp(40px, 5vw, 64px); }
-  .media__feed-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; text-align: center; padding: clamp(48px, 8vw, 110px) 24px; background: var(--bg-elev); border-radius: 6px; color: var(--ink-mute); }
-  .media__feed-placeholder svg { color: var(--gold); }
-  .media__feed-placeholder p { font-size: 0.74rem; letter-spacing: 0.08em; margin: 0; }
+  .ig-embeds { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; align-items: flex-start; }
+  .ig-embeds .instagram-media { margin: 0 !important; flex: 0 1 auto; }
+  .ig-follow { text-align: center; margin-top: 28px; }
   .listen { display: flex; align-items: center; gap: clamp(16px, 3vw, 40px); flex-wrap: wrap; padding-top: clamp(28px, 3vw, 40px); border-top: 1px solid var(--rule); }
   .listen__label { color: var(--ink-mute); }
   .listen__links { display: flex; gap: 12px; flex-wrap: wrap; }
@@ -1023,14 +1023,15 @@
         <p class="intro">Live clips, festival footage, and the moments that don't make the record — pulled from our socials. Tap any post to open it.</p>
       </header>
 
-      <!-- Instagram feed (Behold.so widget — connect @oneiromusic and paste your feed ID below) -->
+      <!-- Instagram — official post embeds (real @oneiromusic posts). Processed by embed.js below. -->
       <div class="media__feed" data-reveal>
-        <div data-behold-id="REPLACE_WITH_BEHOLD_FEED_ID"></div>
-        <noscript><p class="mono" style="color: var(--ink-mute);">Enable JavaScript to see the live feed, or visit <a href="https://www.instagram.com/oneiromusic">@oneiromusic</a>.</p></noscript>
-        <!-- Placeholder shown until the Behold feed ID is configured -->
-        <div class="media__feed-placeholder">
-          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-          <p class="mono">Live Instagram feed wires in here once @oneiromusic is connected.</p>
+        <div class="ig-embeds">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DNtnHM52H8T/?utm_source=ig_embed" data-instgrm-version="14"><a href="https://www.instagram.com/reel/DNtnHM52H8T/">View on Instagram</a></blockquote>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DFd2ZrwOINa/?utm_source=ig_embed" data-instgrm-version="14"><a href="https://www.instagram.com/p/DFd2ZrwOINa/">View on Instagram</a></blockquote>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DESl5znvYze/?utm_source=ig_embed" data-instgrm-version="14"><a href="https://www.instagram.com/p/DESl5znvYze/">View on Instagram</a></blockquote>
+        </div>
+        <noscript><p class="mono" style="color: var(--ink-mute); text-align:center;">Enable JavaScript to see our posts, or visit <a href="https://www.instagram.com/oneiromusic">@oneiromusic</a>.</p></noscript>
+        <div class="ig-follow">
           <a href="https://www.instagram.com/oneiromusic" target="_blank" rel="noopener" class="btn btn--gold">Follow @oneiromusic →</a>
         </div>
       </div>
@@ -1242,20 +1243,13 @@
     </div>
   </aside>
 
-  <!-- Behold.so Instagram feed loader (only activates once a real feed ID is set) -->
+  <!-- Instagram official embed loader: converts the .instagram-media blockquotes into live post cards -->
+  <script async src="https://www.instagram.com/embed.js"></script>
   <script>
-    (function () {
-      var holder = document.querySelector('[data-behold-id]');
-      if (holder && holder.getAttribute('data-behold-id') !== 'REPLACE_WITH_BEHOLD_FEED_ID') {
-        var s = document.createElement('script');
-        s.type = 'module';
-        s.src = 'https://w.behold.so/widget.js';
-        document.head.appendChild(s);
-        // Hide the placeholder once a real feed is configured
-        var ph = document.querySelector('.media__feed-placeholder');
-        if (ph) ph.style.display = 'none';
-      }
-    })();
+    // Re-run the processor after full load (covers the case where embed.js loaded before the markup)
+    window.addEventListener('load', function () {
+      if (window.instgrm && window.instgrm.Embeds) window.instgrm.Embeds.process();
+    });
   </script>
 
   <script>
