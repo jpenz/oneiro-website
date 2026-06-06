@@ -1489,6 +1489,13 @@
           });
           const json = await res.json().catch(() => ({}));
           if (res.ok && (json.success === true || json.success === 'true')) {
+            // Analytics: count this as a booking lead (GA4 conversion)
+            try {
+              var etField = form.querySelector('[name="event_type"]');
+              var et = etField && etField.value ? etField.value : 'unspecified';
+              if (window.gtag) gtag('event', 'generate_lead', { event_category: 'booking', event_label: et, currency: 'USD', value: 1 });
+              (window.dataLayer = window.dataLayer || []).push({ event: 'booking_submit', event_type: et });
+            } catch (_) {}
             form.reset();
             if (status) { status.hidden = false; status.style.color = 'var(--gold)'; status.textContent = "✓ Sent — we'll reply within 48 hours."; }
             if (btn) btn.textContent = 'Sent ✓';
@@ -1501,6 +1508,25 @@
         }
       });
     });
+
+    // ─── Lightweight engagement events (GA4): music clicks, contact taps, book intent ───
+    (function () {
+      var send = function (name, params) { try { if (window.gtag) gtag('event', name, params || {}); } catch (_) {} };
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest ? e.target.closest('a') : null;
+        if (!a) return;
+        var href = a.getAttribute('href') || '';
+        if (a.closest('.listen')) {
+          send('music_click', { platform: (a.textContent || '').trim(), link_url: href });
+        } else if (href.indexOf('tel:') === 0) {
+          send('contact_click', { method: 'phone' });
+        } else if (href.indexOf('mailto:') === 0) {
+          send('contact_click', { method: 'email' });
+        } else if (href.indexOf('#booking') !== -1) {
+          send('book_click', { location: a.closest('.nav') ? 'nav' : 'page' });
+        }
+      }, { passive: true });
+    })();
 
     // ─── Scroll-reveal: fade up section heads + key cards when they enter viewport ───
     (function () {
@@ -1579,5 +1605,9 @@
 
   <!-- Metricool analytics -->
   <script>function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"bfaaa7e3acf43ed5fbcefb5dd2e00628"})});</script>
+
+  <!-- Vercel Web Analytics + Speed Insights -->
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
 </body>
 </html>
