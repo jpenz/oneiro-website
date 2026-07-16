@@ -14,8 +14,8 @@
   gtag('config', 'G-M18ZZH935P');
 </script>
 
-<title>Oneiro — Live Greek Entertainment</title>
-<meta name="description" content="Oneiro — four Greek-American musicians out of Detroit. Live Greek entertainment for weddings, festivals, glendia, baptisms, and private events across North America and Greece." />
+<title>Oneiro — Greek Band for Weddings, Festivals & Events | Detroit, MI</title>
+<meta name="description" content="Oneiro is a four-piece live Greek band out of Detroit, Michigan — weddings, baptisms, Greek festivals, glendia, and private events across North America. 60+ five-star reviews. Book your date." />
 <link rel="canonical" href="https://oneiromusic.com/" />
 <link rel="preload" as="image" href="/images/hero-band.webp" type="image/webp" fetchpriority="high" />
 
@@ -52,9 +52,18 @@
       "alternateName": "Oneiro Music",
       "url": "https://oneiromusic.com/",
       "image": "https://oneiromusic.com/images/og-cover.jpg",
-      "description": "Four Greek-American musicians out of Detroit performing live Greek entertainment for weddings, festivals, glendia, baptisms, and private events across North America and Greece.",
-      "genre": ["Greek", "Live Music", "Rebetiko"],
+      "description": "Four-piece Greek-American band out of Detroit, Michigan performing live Greek music for weddings, baptisms, Greek festivals, glendia, dances and galas, taverna nights, and corporate and private events across North America and beyond.",
+      "genre": ["Greek", "Laïko", "Dimotika", "Nisiótika", "Rebetiko", "Éntehno"],
       "foundingLocation": { "@type": "Place", "name": "Detroit, Michigan, USA" },
+      "foundingDate": "2007",
+      "areaServed": ["Detroit, Michigan", "Michigan", "United States", "North America", "The Bahamas"],
+      "keywords": "Greek band for weddings, Greek wedding band, live Greek band, Greek festival band, bouzouki band, glendi band, Greek band Detroit Michigan",
+      "member": [
+        { "@type": "Person", "name": "Yianni", "description": "Keyboards, lead vocals — founding member" },
+        { "@type": "Person", "name": "Andreas", "description": "Bouzouki, vocals" },
+        { "@type": "Person", "name": "Dimitris", "description": "Guitar — founding member" },
+        { "@type": "Person", "name": "Sotiris", "description": "Drums, percussion" }
+      ],
       "email": "Booking@OneiroMusic.com",
       "telephone": "+1-586-943-2710",
       "sameAs": [
@@ -126,6 +135,41 @@
       "performer": { "@id": "https://oneiromusic.com/#band" },
       "url": "https://www.michigangreekfestival.com/",
       "location": { "@type": "Place", "name": "Nativity of the Virgin Mary Greek Orthodox Church", "address": { "@type": "PostalAddress", "streetAddress": "39851 Five Mile Rd", "addressLocality": "Plymouth", "addressRegion": "MI", "addressCountry": "US" } }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Where is Oneiro based, and how far will the band travel?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Oneiro is based in Detroit, Michigan and plays across Michigan and the Midwest — and travels anywhere the event is. Recent and upcoming dates include Las Vegas, Nebraska, the Bahamas, Grand Rapids, and Plymouth, Michigan." }
+        },
+        {
+          "@type": "Question",
+          "name": "What kinds of events does Oneiro play?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Weddings, baptisms, Greek festivals and panigýria, dances and galas, taverna and restaurant nights, and corporate or private events — any night worth having a live Greek band." }
+        },
+        {
+          "@type": "Question",
+          "name": "What music does Oneiro play?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A vast repertoire across every Greek tradition — laïka, dimotika, nisiótika, rebetika, and éntehno — plus today's hits. The band reads the room and programs the night from ceremony to last call." }
+        },
+        {
+          "@type": "Question",
+          "name": "How many musicians are in the band?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Oneiro is a four-piece band: Yianni on keyboards and lead vocals, Andreas on bouzouki and vocals, Dimitris on guitar, and Sotiris on drums and percussion. It's always the full band — no solo or trio offering." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Oneiro offer DJ services?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes — DJ service is available by request to keep the floor moving between live sets at weddings and events. It is not offered as a separate stand-alone service." }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I book Oneiro or check if a date is available?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Use the booking form at oneiromusic.com, email Booking@OneiroMusic.com, or call 586-943-2710 with your date, city, and event type. The band replies within 48 hours." }
+        }
+      ]
     }
   ]
 }
@@ -558,6 +602,29 @@
     .style-row__en, .style-row__teaser { grid-column: 1 / -1; }
     .style-row__arrow { grid-row: 1; grid-column: 2; }
   }
+
+  /* ─── FAQ (mirrors the styles accordion) ─── */
+  .faq-list { display: flex; flex-direction: column; }
+  .faq-row { border-bottom: 1px solid color-mix(in oklch, var(--ink) 12%, transparent); }
+  .faq-row:first-child { border-top: 1px solid color-mix(in oklch, var(--ink) 12%, transparent); }
+  .faq-row[open] { background: color-mix(in oklch, var(--ink) 3%, transparent); }
+  .faq-row__sum {
+    display: grid;
+    grid-template-columns: 1fr 32px;
+    gap: clamp(16px, 2.5vw, 36px);
+    align-items: center;
+    padding: clamp(18px, 2.2vw, 28px) clamp(8px, 1vw, 16px);
+    cursor: pointer;
+    list-style: none;
+    transition: background .2s ease;
+  }
+  .faq-row__sum::-webkit-details-marker { display: none; }
+  .faq-row__sum:hover { background: color-mix(in oklch, var(--ink) 4%, transparent); }
+  .faq-row__q { color: var(--ink); font-size: clamp(16px, 1.35vw, 20px); font-weight: 600; line-height: 1.35; }
+  .faq-row__arrow { color: var(--ink-mute); font-family: var(--mono); font-size: 1.2rem; transition: transform .25s ease; justify-self: end; }
+  .faq-row[open] .faq-row__arrow { transform: rotate(45deg); color: var(--gold); }
+  .faq-row__body { padding: 0 clamp(8px, 1vw, 16px) clamp(24px, 2.6vw, 34px); max-width: 720px; }
+  .faq-row__body p { margin: 0; font-size: clamp(15px, 1.1vw, 17px); line-height: 1.65; color: var(--ink); }
 
   /* ─── Scroll-reveal animation (progressive enhancement) ─── */
   /* Content is visible by default. The hidden start-state ONLY applies once JS
@@ -1391,6 +1458,46 @@
             <p>From Theodorakis and Hadjidakis to today's chart-toppers — the éntehno and modern Greek pop that keeps the younger guests on the floor right alongside their grandparents.</p>
             <div class="style-row__meta"><span class="mono" style="color: var(--ink-mute);">We play</span><span>Theodorakis · Hadjidakis · Sfakianakis · current hits</span></div>
           </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FAQ ═══ -->
+  <section id="faq" class="sec sec--xpad sec--deep">
+    <div class="container">
+      <header class="head2 head2--12" data-reveal>
+        <div>
+          <span class="sec__kicker"><span class="mono">GOOD TO KNOW</span> <svg class="sec__icon" aria-hidden="true"><use href="#i-mark"/></svg></span>
+          <h2 class="h2 display-tight">Questions we get <span style="color: var(--gold);">before every booking</span>.</h2>
+        </div>
+        <p class="intro">The short answers. Anything else — ask us directly and we'll reply within 48 hours.</p>
+      </header>
+
+      <div class="faq-list" data-reveal>
+        <details class="faq-row">
+          <summary class="faq-row__sum"><span class="faq-row__q">Where are you based, and how far will you travel?</span><span class="faq-row__arrow" aria-hidden="true">+</span></summary>
+          <div class="faq-row__body"><p>We're based in Detroit, Michigan and play across Michigan and the Midwest — and we travel anywhere the event is. Recent and upcoming dates include Las Vegas, Nebraska, the Bahamas, Grand Rapids, and Plymouth.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary class="faq-row__sum"><span class="faq-row__q">What kinds of events do you play?</span><span class="faq-row__arrow" aria-hidden="true">+</span></summary>
+          <div class="faq-row__body"><p>Weddings, baptisms, Greek festivals and panigýria, dances and galas, taverna and restaurant nights, and corporate or private events — any night worth having a live Greek band.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary class="faq-row__sum"><span class="faq-row__q">What music do you play?</span><span class="faq-row__arrow" aria-hidden="true">+</span></summary>
+          <div class="faq-row__body"><p>A vast repertoire across every Greek tradition — laïka, dimotika, nisiótika, rebetika, éntehno — plus today's hits. We read the room and program the night, ceremony to last call.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary class="faq-row__sum"><span class="faq-row__q">How many musicians are in the band?</span><span class="faq-row__arrow" aria-hidden="true">+</span></summary>
+          <div class="faq-row__body"><p>Four — Yianni on keys and lead vocals, Andreas on bouzouki, Dimitris on guitar, Sotiris on drums. It's always the full band; we don't offer a solo or trio.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary class="faq-row__sum"><span class="faq-row__q">Do you offer DJ services?</span><span class="faq-row__arrow" aria-hidden="true">+</span></summary>
+          <div class="faq-row__body"><p>Yes — by request, to keep the floor moving between live sets at weddings and events. We don't offer DJ as a separate stand-alone service.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary class="faq-row__sum"><span class="faq-row__q">How do I book you or check a date?</span><span class="faq-row__arrow" aria-hidden="true">+</span></summary>
+          <div class="faq-row__body"><p>Use the <a href="#booking" style="color: var(--gold);">booking form</a>, email <a href="mailto:Booking@OneiroMusic.com" style="color: var(--gold);">Booking@OneiroMusic.com</a>, or call <a href="tel:+15869432710" style="color: var(--gold);">586.943.2710</a> with your date, city, and event type. We reply within 48 hours.</p></div>
         </details>
       </div>
     </div>
