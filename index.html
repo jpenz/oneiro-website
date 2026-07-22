@@ -1735,6 +1735,18 @@
     });
 
     // ─── Booking form → FormSubmit (emails booking@oneiromusic.com), AJAX submit ───
+    // Self-healing GA4 event sender: lazily (re)defines gtag exactly as Google's snippet
+    // does, so conversions fire even if window.gtag is absent in the page world.
+    function trackEvent(name, params) {
+      try {
+        window.dataLayer = window.dataLayer || [];
+        if (typeof window.gtag !== 'function') {
+          window.gtag = function () { window.dataLayer.push(arguments); };
+        }
+        window.gtag('event', name, params || {});
+      } catch (_) {}
+    }
+
     document.querySelectorAll('form[data-form="booking"]').forEach(form => {
       const btn = form.querySelector('[data-submit-label]');
       const status = form.querySelector('.fm__status');
@@ -1756,7 +1768,7 @@
             try {
               var etField = form.querySelector('[name="event_type"]');
               var et = etField && etField.value ? etField.value : 'unspecified';
-              if (window.gtag) gtag('event', 'generate_lead', { event_category: 'booking', event_label: et, currency: 'USD', value: 1 });
+              trackEvent('generate_lead', { event_category: 'booking', event_label: et, currency: 'USD', value: 1 });
               (window.dataLayer = window.dataLayer || []).push({ event: 'booking_submit', event_type: et });
             } catch (_) {}
             form.reset();
@@ -1774,7 +1786,7 @@
 
     // ─── Lightweight engagement events (GA4): music clicks, contact taps, book intent ───
     (function () {
-      var send = function (name, params) { try { if (window.gtag) gtag('event', name, params || {}); } catch (_) {} };
+      var send = trackEvent;
       document.addEventListener('click', function (e) {
         var a = e.target.closest ? e.target.closest('a') : null;
         if (!a) return;

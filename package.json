@@ -1,0 +1,8 @@
+{
+  "name": "oneiro-website",
+  "private": true,
+  "scripts": {
+    "ping:indexnow": "python3 scripts/indexnow_ping.py",
+    "monitor:citations": "python3 scripts/citation_monitor.py"
+  }
+}
