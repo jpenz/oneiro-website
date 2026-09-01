@@ -1338,7 +1338,7 @@
             action="https://formsubmit.co/booking@oneiromusic.com" method="POST">
         <!-- FormSubmit.co — submissions email straight to booking@oneiromusic.com.
              First submission triggers a one-time activation email to that inbox; click it once to go live. -->
-        <input type="hidden" name="_subject" value="New booking inquiry — OneiroMusic.com" />
+        <input type="hidden" name="_subject" value="New booking Inquiry - OneiroMusic.com" />
         <input type="hidden" name="_template" value="table" />
         <input type="hidden" name="_captcha" value="false" />
         <input type="hidden" name="event_type" id="event_type_field" value="Wedding" />
@@ -1756,6 +1756,13 @@
         e.preventDefault();
         const original = btn ? btn.textContent : '';
         if (btn) { btn.textContent = 'Sending…'; btn.disabled = true; }
+        // Unique subject per inquiry so inbox threading can't merge separate requests
+        try {
+          const subj = form.querySelector('[name="_subject"]');
+          const etv = (form.querySelector('[name="event_type"]') || {}).value || 'Event';
+          const who = ((form.querySelector('[name="name"]') || {}).value || '').trim() || 'Unknown';
+          if (subj) subj.value = 'New booking Inquiry - ' + etv + ' - ' + who;
+        } catch (_) {}
         try {
           const res = await fetch(ajaxAction, {
             method: 'POST',
