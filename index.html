@@ -1756,12 +1756,14 @@
         e.preventDefault();
         const original = btn ? btn.textContent : '';
         if (btn) { btn.textContent = 'Sending…'; btn.disabled = true; }
-        // Unique subject per inquiry so inbox threading can't merge separate requests
+        // Unique, triage-ready subject: what kind of event, who, and when — so no two
+        // inquiries thread together and the date is visible before opening the email
         try {
           const subj = form.querySelector('[name="_subject"]');
           const etv = (form.querySelector('[name="event_type"]') || {}).value || 'Event';
           const who = ((form.querySelector('[name="name"]') || {}).value || '').trim() || 'Unknown';
-          if (subj) subj.value = 'New booking Inquiry - ' + etv + ' - ' + who;
+          const when = ((form.querySelector('[name="event_date"]') || {}).value || '').trim();
+          if (subj) subj.value = 'New booking Inquiry - ' + etv + ' - ' + who + (when ? ' - ' + when : '');
         } catch (_) {}
         try {
           const res = await fetch(ajaxAction, {
